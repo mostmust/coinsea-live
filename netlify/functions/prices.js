@@ -7,7 +7,12 @@ exports.handler = async () => {
     ]);
 
     const upbit = await upbitRes.json();
-    const binance = await binanceRes.json();
+    
+    // Binance 응답 구조 확인용
+    const binanceText = await binanceRes.text();
+    console.log("Binance raw response:", binanceText); // ✅ 로그 출력
+    
+    const binance = JSON.parse(binanceText);
     const fx = await fxRes.json();
 
     const upbitPrice = upbit[0]?.trade_price;
