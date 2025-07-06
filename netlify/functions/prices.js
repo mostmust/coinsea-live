@@ -10,29 +10,39 @@ exports.handler = async function (event) {
     const rateData = await rateRes.json();
     const usdToKrw = rateData.usdToKrw;
 
-    for (let symbol of symbols) {
-      try {
-        const upbitRes = await fetch(`https://api.upbit.com/v1/ticker?markets=KRW-${symbol}`);
-        const upbitJson = await upbitRes.json();
-        const upbitPrice = upbitJson[0]?.trade_price;
+// 기존 코드 일부 수정
+for (let symbol of symbols) {
+  try {
+    // 업비트 가격 요청
+    const upbitRes = await fetch(`https://api.upbit.com/v1/ticker?markets=KRW-${symbol}`);
+    const upbitJson = await upbitRes.json();
+    const upbitPrice = upbitJson[0].trade_price;
 
-        const binanceRes = await fetch(`https://api.binance.com/api/v3/ticker/price?symbol=${symbol}USDT`);
-        const binanceJson = await binanceRes.json();
-        const binancePrice = parseFloat(binanceJson.price);
+    // 바이낸스 가격 요청 + 디버깅용 로그
+    const binanceRes = await fetch(`https://api.binance.com/api/v3/ticker/price?symbol=${symbol}USDT`);
+    const binanceText = await binanceRes.text(); // 바이낸스 응답 원본(텍스트)
+    console.log(`Binance 응답(${symbol}):`, binanceText); // ✅ 로그 출력
 
-        const binancePriceKrw = binancePrice * usdToKrw;
-        const kimchiPremium = ((upbitPrice - binancePriceKrw) / binancePriceKrw) * 100;
+    // 실제 응답이 JSON이라면 파싱
+    const binanceJson = JSON.parse(binanceText);
+    const binancePrice = parseFloat(binanceJson.price);
 
-        prices[symbol] = {
-          upbit: upbitPrice,
-          binance: binancePrice,
-          binanceKrw: binancePriceKrw,
-          premium: kimchiPremium,
-        };
-      } catch (innerErr) {
-        prices[symbol] = { error: "데이터 로딩 실패" };
-      }
-    }
+    // 김프 계산
+    const binancePriceKrw = binancePrice * usdToKrw;
+    const kimchiPremium = ((upbitPrice - binancePriceKrw) / binancePriceKrw) * 100;
+
+    prices[symbol] = {
+      upbit: upbitPrice,
+      binance: binancePrice,
+      binanceKrw: binancePriceKrw,
+      premium: kimchiPremium,
+    };
+  } catch (innerErr) {
+    console.error(`❌ ${symbol} 처리 중 오류:`, innerErr.message); // ✅ 에러 로그도 추가
+    prices[symbol] = { error: "데이터 로딩 실패" };
+  }
+}
+
 
     return {
       statusCode: 200,
