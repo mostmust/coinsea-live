@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>김치프리미엄 실시간 확인 - CoinSea</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Nanum Gothic', sans-serif;
+      background-color: #ffffff;
+      color: #222;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 24px;
+      margin-bottom: 30px;
+    }
+
+    .data-list {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      background-color: #f9f9f9;
+    }
+
+    .data-list li {
+      margin: 12px 0;
+      font-size: 16px;
+    }
+
+    .highlight {
+      font-weight: bold;
+      color: #007bff;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 14px;
+      color: #666;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🪙 김치프리미엄 실시간 확인</h1>
+
+  <ul class="data-list">
+    <li>업비트 BTC 시세: <span id="upbit-price" class="highlight">-</span></li>
+    <li>코인게코 BTC 시세 (USD): <span id="usd-price" class="highlight">-</span></li>
+    <li>환율 (1 USD → KRW): <span id="krw-rate" class="highlight">-</span></li>
+    <li>코인게코 BTC 시세 (KRW 환산): <span id="binance-price-krw" class="highlight">-</span></li>
+    <li>김치프리미엄: <span id="premium" class="highlight">-</span></li>
+  </ul>
+
+  <footer>
+    © 2025 CoinSea | 실시간 가격 기준으로 제공됩니다.
+  </footer>
+
+  <script>
+    async function fetchData() {
+      try {
+        const res = await fetch("/.netlify/functions/prices");
+        const data = await res.json();
+
+        if (data.error) throw new Error(data.detail);
+
+        document.getElementById("upbit-price").innerText = data.upbitPrice.toLocaleString() + " 원";
+        document.getElementById("usd-price").innerText = "$" + Number(data.usdPrice).toLocaleString();
+        document.getElementById("krw-rate").innerText = Math.round(data.usdToKrw).toLocaleString() + " 원";
+        document.getElementById("binance-price-krw").innerText = data.binancePriceInKrw.toLocaleString() + " 원";
+        document.getElementById("premium").innerText = data.premium;
+      } catch (err) {
+        console.error("❌ 데이터 로딩 실패:", err.message);
+        alert("실시간 데이터를 불러오는 데 실패했습니다.");
+      }
+    }
+
+    fetchData();
+  </script>
+</body>
+</html>
