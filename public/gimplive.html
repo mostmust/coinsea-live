@@ -2,37 +2,42 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>업비트 vs 바이낸스 김치프리미엄</title>
   <style>
     body {
       font-family: 'Nanum Gothic', sans-serif;
-      background-color: #f7f7f7;
+      background-color: #f5f5f5;
       margin: 0;
       padding: 20px;
+      text-align: center;
     }
     h1 {
-      text-align: center;
+      font-size: 24px;
       margin-bottom: 20px;
     }
     table {
-      width: 100%;
-      max-width: 900px;
       margin: 0 auto;
       border-collapse: collapse;
-      background-color: white;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
     }
     th, td {
+      padding: 12px 16px;
       border: 1px solid #ddd;
-      padding: 10px;
-      text-align: center;
+      font-size: 14px;
     }
     th {
       background-color: #eee;
     }
     .error {
       color: red;
+    }
+    .success {
+      color: green;
+      font-weight: bold;
     }
   </style>
 </head>
@@ -49,30 +54,22 @@
         <th>김프 (%)</th>
       </tr>
     </thead>
-    <tbody id="exchange-rate-row">
-      <tr><td colspan="6">⏳ 데이터 불러오는 중...</td></tr>
-    </tbody>
+    <tbody id="priceTable"></tbody>
   </table>
 
   <script>
-    const coins = ['BTC', 'ETH', 'XRP', 'ADA', 'SOL'];
+    const symbols = ['BTC', 'ETH', 'XRP', 'ADA', 'SOL'];
 
-    async function fetchUsdToKrw() {
-      try {
-        const res = await fetch('/.netlify/functions/exchangeRate');
-        const data = await res.json();
-        if (!data.usdToKrw) throw new Error('환율 없음');
-        return data.usdToKrw;
-      } catch (err) {
-        console.error('환율 오류:', err);
-        throw err;
-      }
+    async function fetchExchangeRate() {
+      const res = await fetch('/.netlify/functions/exchangeRate');
+      const data = await res.json();
+      return data.usdToKrw;
     }
 
     async function fetchUpbitPrice(symbol) {
       const res = await fetch(`/.netlify/functions/upbitPrice?symbol=${symbol}`);
       const data = await res.json();
-      return data[0]?.trade_price || null;
+      return data.price;
     }
 
     async function fetchBinancePrice(symbol) {
@@ -82,51 +79,40 @@
     }
 
     async function updateTable() {
-      const tbody = document.getElementById('exchange-rate-row');
-      tbody.innerHTML = '';
+      const table = document.getElementById('priceTable');
+      const rate = await fetchExchangeRate();
 
-      let usdToKrw = 0;
-      try {
-        usdToKrw = await fetchUsdToKrw();
-      } catch {
-        tbody.innerHTML = `<tr><td colspan="6" class="error">❌ 환율 불러오기 실패</td></tr>`;
-        return;
-      }
+      for (const symbol of symbols) {
+        const row = document.createElement('tr');
+        const tdSymbol = document.createElement('td');
+        tdSymbol.textContent = symbol;
+        row.appendChild(tdSymbol);
 
-      for (const symbol of coins) {
         try {
-          const [upbit, binance] = await Promise.all([
+          const [upbitPrice, binancePrice] = await Promise.all([
             fetchUpbitPrice(symbol),
             fetchBinancePrice(symbol)
           ]);
-          const binanceKrw = binance * usdToKrw;
-          const kimchi = ((upbit - binanceKrw) / binanceKrw) * 100;
 
-          const row = `
-            <tr>
-              <td>${symbol}</td>
-              <td>${upbit.toLocaleString()} KRW</td>
-              <td>${binance.toFixed(2)} USD</td>
-              <td>${usdToKrw.toFixed(2)} KRW</td>
-              <td>${binanceKrw.toLocaleString(undefined, {maximumFractionDigits: 0})} KRW</td>
-              <td>${kimchi.toFixed(2)}%</td>
-            </tr>
+          const binanceKrw = (binancePrice * rate).toLocaleString();
+          const kimchiPremium = (((upbitPrice - binancePrice * rate) / (binancePrice * rate)) * 100).toFixed(2);
+
+          row.innerHTML += `
+            <td>${upbitPrice.toLocaleString()} KRW</td>
+            <td>${binancePrice.toLocaleString()} USD</td>
+            <td>${rate.toLocaleString()} KRW</td>
+            <td>${binanceKrw} KRW</td>
+            <td>${kimchiPremium}%</td>
           `;
-          tbody.innerHTML += row;
-        } catch (err) {
-          console.error(`${symbol} 에러:`, err);
-          tbody.innerHTML += `
-            <tr>
-              <td>${symbol}</td>
-              <td colspan="5" class="error">❌ 데이터 로딩 실패</td>
-            </tr>
-          `;
+        } catch (e) {
+          row.innerHTML += `<td colspan="5" class="error">❌ 데이터 로딩 실패</td>`;
         }
+
+        table.appendChild(row);
       }
     }
 
     updateTable();
-    setInterval(updateTable, 30000); // 30초마다 자동 갱신
   </script>
 </body>
 </html>
