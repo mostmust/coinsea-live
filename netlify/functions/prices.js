@@ -1,26 +1,25 @@
 const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
-const coingecko = require('./coingecko');
+const { getExchangeRate, getBTCPrice } = require("./coingecko");
 
-exports.handler = async () => {
+exports.handler = async function () {
   try {
     // 1. 업비트 가격
-    const upbitRes = await fetch('https://api.upbit.com/v1/ticker?markets=KRW-BTC');
+    const upbitRes = await fetch("https://api.upbit.com/v1/ticker?markets=KRW-BTC");
     const upbitData = await upbitRes.json();
-    const upbitPrice = upbitData?.[0]?.trade_price;
-    if (!upbitPrice) throw new Error("업비트 가격 데이터 없음");
+    const upbitPrice = upbitData[0]?.trade_price;
+    if (!upbitPrice) {
+      throw new Error("업비트 가격 정보 없음");
+    }
 
-    // 2. Coingecko 가격 (USD)
-    const binancePrice = await coingecko.getBTCPrice();
-    if (!binancePrice) throw new Error("Binance 가격 데이터 없음");
+    // 2. 환율
+    const fx = await getExchangeRate();
+    const usdToKrw = fx.rates.KRW;
 
-    // 3. 환율 USD → KRW
-    const fxRes = await fetch('https://api.exchangerate.host/latest?base=USD&symbols=KRW');
-    const fx = await fxRes.json();
-    const usdToKrw = fx?.rates?.KRW;
-    if (!usdToKrw) throw new Error("환율 정보 없음 (fx.rates.KRW)");
-
-    // 4. 계산
+    // 3. 바이낸스(코인게코) 가격
+    const binancePrice = await getBTCPrice();
     const binancePriceInKrw = binancePrice * usdToKrw;
+
+    // 4. 김프 계산
     const premium = ((upbitPrice - binancePriceInKrw) / binancePriceInKrw) * 100;
 
     return {
@@ -29,17 +28,14 @@ exports.handler = async () => {
         upbitPrice,
         binancePrice,
         usdToKrw,
-        binancePriceInKrw: Math.round(binancePriceInKrw),
+        binancePriceInKrw,
         premium: premium.toFixed(2)
-      })
+      }),
     };
-  } catch (error) {
+  } catch (err) {
     return {
       statusCode: 500,
-      body: JSON.stringify({
-        error: "데이터 로딩 실패",
-        detail: error.message
-      })
+      body: JSON.stringify({ error: "데이터 로딩 실패", detail: err.message }),
     };
   }
 };
