@@ -1,64 +1,82 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>김치프리미엄 실시간 비교</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>김치 프리미엄 실시간 비교</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet" />
   <style>
     body {
       font-family: 'Nanum Gothic', sans-serif;
+      background-color: #f8f9fa;
+      margin: 0;
       padding: 20px;
-      background: #fff;
+      color: #333;
     }
     h1 {
-      font-size: 22px;
       text-align: center;
-      margin-bottom: 20px;
+      margin-bottom: 30px;
     }
-    .price-box {
-      max-width: 400px;
+    .card {
+      background: white;
+      max-width: 500px;
       margin: 0 auto;
-      border: 1px solid #ccc;
       padding: 20px;
-      border-radius: 10px;
-      background: #f9f9f9;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
     }
-    .price-item {
+    .data-row {
+      display: flex;
+      justify-content: space-between;
       margin: 10px 0;
+      font-size: 18px;
     }
     .label {
       font-weight: bold;
     }
+    .error {
+      color: red;
+      text-align: center;
+      margin-top: 20px;
+    }
   </style>
 </head>
 <body>
-  <h1>실시간 김치프리미엄 비교</h1>
-  <div class="price-box">
-    <div class="price-item"><span class="label">업비트 가격:</span> <span id="upbit"></span> 원</div>
-    <div class="price-item"><span class="label">Binance 가격:</span> <span id="binance"></span> USD</div>
-    <div class="price-item"><span class="label">환율:</span> <span id="rate"></span> KRW/USD</div>
-    <div class="price-item"><span class="label">Binance 원화 환산:</span> <span id="converted"></span> 원</div>
-    <div class="price-item"><span class="label">김치프리미엄:</span> <span id="premium"></span> %</div>
+
+  <h1>🧮 김치 프리미엄 실시간 계산</h1>
+
+  <div class="card" id="priceCard">
+    <div class="data-row"><div class="label">업비트 시세</div><div id="upbitPrice">-</div></div>
+    <div class="data-row"><div class="label">바이낸스 시세</div><div id="binancePrice">-</div></div>
+    <div class="data-row"><div class="label">환율 (USD→KRW)</div><div id="fxRate">-</div></div>
+    <div class="data-row"><div class="label">김치 프리미엄</div><div id="premium">-</div></div>
   </div>
 
+  <div class="error" id="errorBox" style="display: none;"></div>
+
   <script>
-    async function loadData() {
+    async function loadPrices() {
       try {
         const res = await fetch('/.netlify/functions/prices');
         const data = await res.json();
 
-        if (data.error) throw new Error(data.detail);
+        if (data.error) {
+          throw new Error(data.detail || data.error);
+        }
 
-        document.getElementById('upbit').textContent = data.upbitPrice.toLocaleString();
-        document.getElementById('binance').textContent = data.binancePrice.toFixed(2);
-        document.getElementById('rate').textContent = data.usdToKrw.toFixed(2);
-        document.getElementById('converted').textContent = Math.round(data.binancePriceInKrw).toLocaleString();
-        document.getElementById('premium').textContent = data.premium;
-      } catch (e) {
-        alert("데이터 로딩 실패: " + e.message);
+        document.getElementById('upbitPrice').textContent = data.upbitPrice.toLocaleString() + ' 원';
+        document.getElementById('binancePrice').textContent = data.binancePrice.toLocaleString() + ' USD';
+        document.getElementById('fxRate').textContent = data.usdToKrw.toFixed(2) + ' 원';
+        document.getElementById('premium').textContent = data.premium + ' %';
+      } catch (err) {
+        document.getElementById('errorBox').style.display = 'block';
+        document.getElementById('errorBox').textContent = '❌ 데이터 로딩 실패: ' + err.message;
       }
     }
-    loadData();
+
+    loadPrices();
   </script>
+
 </body>
 </html>
