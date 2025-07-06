@@ -5,8 +5,6 @@ exports.handler = async () => {
     const res = await fetch('https://api.exchangerate.host/latest?base=USD&symbols=KRW');
     const fx = await res.json();
 
-    console.log("API 응답:", fx);
-
     if (!fx.rates || !fx.rates.KRW) {
       throw new Error("환율 정보 없음 (fx.rates.KRW)");
     }
