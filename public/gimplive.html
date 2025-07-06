@@ -2,47 +2,45 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>업비트 vs 바이낸스 김치프리미엄</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>김치프리미엄 계산기 - 업비트 vs 바이낸스</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
   <style>
     body {
       font-family: 'Nanum Gothic', sans-serif;
-      background-color: #f5f5f5;
+      background-color: #f4f4f4;
       margin: 0;
-      padding: 20px;
+      padding: 40px 10px;
       text-align: center;
     }
-    h1 {
-      font-size: 24px;
-      margin-bottom: 20px;
+    h2 {
+      margin-bottom: 30px;
     }
     table {
+      width: 100%;
+      max-width: 1000px;
       margin: 0 auto;
       border-collapse: collapse;
       background: white;
       border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
       overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
     th, td {
-      padding: 12px 16px;
-      border: 1px solid #ddd;
-      font-size: 14px;
+      padding: 10px;
+      border: 1px solid #ccc;
     }
     th {
-      background-color: #eee;
+      background-color: #f0f0f0;
     }
     .error {
       color: red;
-    }
-    .success {
-      color: green;
       font-weight: bold;
     }
   </style>
 </head>
 <body>
-  <h1>업비트 vs 바이낸스 김치프리미엄</h1>
+  <h2>💱 업비트 vs 바이낸스 김치프리미엄</h2>
   <table>
     <thead>
       <tr>
@@ -58,55 +56,52 @@
   </table>
 
   <script>
-    const symbols = ['BTC', 'ETH', 'XRP', 'ADA', 'SOL'];
+    const coins = ["BTC", "ETH", "XRP", "ADA", "SOL", "DOGE", "DOT", "TRX", "AVAX", "MATIC", "LINK", "BCH", "LTC", "NEAR", "ATOM", "SAND", "AXS", "CHZ", "APT", "ETC", "EOS", "STX", "XLM", "IMX", "WAVES", "AAVE", "1INCH", "FLOW", "ZIL", "ALGO"];
 
     async function fetchExchangeRate() {
-      const res = await fetch('/.netlify/functions/exchangeRate');
-      const data = await res.json();
-      return data.usdToKrw;
+      try {
+        const res = await fetch("/.netlify/functions/exchangeRate");
+        const data = await res.json();
+        return data.usdToKrw;
+      } catch {
+        return null;
+      }
     }
 
-    async function fetchUpbitPrice(symbol) {
-      const res = await fetch(`/.netlify/functions/upbitPrice?symbol=${symbol}`);
-      const data = await res.json();
-      return data.price;
-    }
-
-    async function fetchBinancePrice(symbol) {
-      const res = await fetch(`https://api.binance.com/api/v3/ticker/price?symbol=${symbol}USDT`);
-      const data = await res.json();
-      return parseFloat(data.price);
+    async function fetchPrice(exchange, symbol) {
+      const urls = {
+        upbit: `https://corsproxy.io/?https://api.upbit.com/v1/ticker?markets=KRW-${symbol}`,
+        binance: `https://api.binance.com/api/v3/ticker/price?symbol=${symbol}USDT`
+      };
+      try {
+        const res = await fetch(urls[exchange]);
+        const json = await res.json();
+        return exchange === 'upbit' ? json[0].trade_price : parseFloat(json.price);
+      } catch {
+        return null;
+      }
     }
 
     async function updateTable() {
-      const table = document.getElementById('priceTable');
-      const rate = await fetchExchangeRate();
+      const table = document.getElementById("priceTable");
+      const exchangeRate = await fetchExchangeRate();
 
-      for (const symbol of symbols) {
-        const row = document.createElement('tr');
-        const tdSymbol = document.createElement('td');
-        tdSymbol.textContent = symbol;
-        row.appendChild(tdSymbol);
+      for (const coin of coins) {
+        const row = document.createElement("tr");
 
-        try {
-          const [upbitPrice, binancePrice] = await Promise.all([
-            fetchUpbitPrice(symbol),
-            fetchBinancePrice(symbol)
-          ]);
+        const upbitPrice = await fetchPrice("upbit", coin);
+        const binancePrice = await fetchPrice("binance", coin);
+        const binanceToKRW = exchangeRate && binancePrice ? binancePrice * exchangeRate : null;
+        const kimchi = (upbitPrice && binanceToKRW) ? (((upbitPrice - binanceToKRW) / binanceToKRW) * 100).toFixed(2) : null;
 
-          const binanceKrw = (binancePrice * rate).toLocaleString();
-          const kimchiPremium = (((upbitPrice - binancePrice * rate) / (binancePrice * rate)) * 100).toFixed(2);
-
-          row.innerHTML += `
-            <td>${upbitPrice.toLocaleString()} KRW</td>
-            <td>${binancePrice.toLocaleString()} USD</td>
-            <td>${rate.toLocaleString()} KRW</td>
-            <td>${binanceKrw} KRW</td>
-            <td>${kimchiPremium}%</td>
-          `;
-        } catch (e) {
-          row.innerHTML += `<td colspan="5" class="error">❌ 데이터 로딩 실패</td>`;
-        }
+        row.innerHTML = `
+          <td>${coin}</td>
+          <td>${upbitPrice ? upbitPrice.toLocaleString()} KRW : ''}</td>
+          <td>${binancePrice ? binancePrice.toLocaleString()} USD : ''}</td>
+          <td>${exchangeRate ? exchangeRate.toLocaleString() + ' KRW' : '<span class="error">환율 오류</span>'}</td>
+          <td>${binanceToKRW ? binanceToKRW.toLocaleString() + ' KRW' : '<span class="error">환산 실패</span>'}</td>
+          <td>${kimchi ? kimchi + ' %' : '<span class="error">계산 오류</span>'}</td>
+        `;
 
         table.appendChild(row);
       }
