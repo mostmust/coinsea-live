@@ -2,45 +2,59 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>김치프리미엄 계산기 - 업비트 vs 바이낸스</title>
-  <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>김치프리미엄 계산기</title>
   <style>
     body {
       font-family: 'Nanum Gothic', sans-serif;
-      background-color: #f4f4f4;
+      background-color: #f8f8f8;
       margin: 0;
-      padding: 40px 10px;
+      padding: 30px;
       text-align: center;
     }
-    h2 {
-      margin-bottom: 30px;
+    h1 {
+      font-size: 24px;
+      margin-bottom: 5px;
+    }
+    .subtitle {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 20px;
     }
     table {
-      width: 100%;
-      max-width: 1000px;
       margin: 0 auto;
       border-collapse: collapse;
       background: white;
       border-radius: 8px;
       overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      min-width: 90%;
+      max-width: 960px;
     }
     th, td {
-      padding: 10px;
-      border: 1px solid #ccc;
+      padding: 10px 12px;
+      border: 1px solid #ddd;
     }
     th {
-      background-color: #f0f0f0;
+      background-color: #eee;
     }
     .error {
       color: red;
       font-weight: bold;
     }
+    .updated-time {
+      font-size: 13px;
+      color: #444;
+    }
   </style>
 </head>
 <body>
-  <h2>💱 업비트 vs 바이낸스 김치프리미엄</h2>
+  <h1>업비트 vs 바이낸스 김치프리미엄</h1>
+  <div class="subtitle">
+    <div id="update-time" class="updated-time">⏱ 마지막 업데이트: -</div>
+    <div class="updated-time">🔄 30초마다 자동 업데이트됩니다.</div>
+  </div>
+
   <table>
     <thead>
       <tr>
@@ -52,62 +66,97 @@
         <th>김프 (%)</th>
       </tr>
     </thead>
-    <tbody id="priceTable"></tbody>
+    <tbody id="table-body">
+      <!-- 데이터가 여기에 표시됨 -->
+    </tbody>
   </table>
 
   <script>
-    const coins = ["BTC", "ETH", "XRP", "ADA", "SOL", "DOGE", "DOT", "TRX", "AVAX", "MATIC", "LINK", "BCH", "LTC", "NEAR", "ATOM", "SAND", "AXS", "CHZ", "APT", "ETC", "EOS", "STX", "XLM", "IMX", "WAVES", "AAVE", "1INCH", "FLOW", "ZIL", "ALGO"];
+    const coins = [
+      'BTC','ETH','XRP','ADA','SOL','DOGE','DOT','AVAX','TRX','BCH',
+      'LINK','LTC','MATIC','ETC','XLM','SAND','EOS','APT','ATOM','NEAR',
+      'AAVE','STX','IMX','ZIL','WAVES','CHZ','FTM','ARPA','RUNE','GALA'
+    ];
 
     async function fetchExchangeRate() {
       try {
         const res = await fetch("/.netlify/functions/exchangeRate");
-        const data = await res.json();
-        return data.usdToKrw;
-      } catch {
+        const json = await res.json();
+        return json.usdToKrw;
+      } catch (e) {
         return null;
       }
     }
 
-    async function fetchPrice(exchange, symbol) {
-      const urls = {
-        upbit: `https://corsproxy.io/?https://api.upbit.com/v1/ticker?markets=KRW-${symbol}`,
-        binance: `https://api.binance.com/api/v3/ticker/price?symbol=${symbol}USDT`
-      };
+    async function fetchBinancePrice(symbol) {
       try {
-        const res = await fetch(urls[exchange]);
+        const res = await fetch(`https://api.binance.com/api/v3/ticker/price?symbol=${symbol}USDT`);
         const json = await res.json();
-        return exchange === 'upbit' ? json[0].trade_price : parseFloat(json.price);
-      } catch {
+        return parseFloat(json.price);
+      } catch (e) {
         return null;
       }
+    }
+
+    async function fetchUpbitPrice(symbol) {
+      try {
+        const res = await fetch(`https://corsproxy.io/?https://api.upbit.com/v1/ticker?markets=KRW-${symbol}`);
+        const json = await res.json();
+        return json[0].trade_price;
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function updateTimeText() {
+      const now = new Date();
+      const formatted = now.toLocaleString("ko-KR", {
+        year: "numeric", month: "2-digit", day: "2-digit",
+        hour: "2-digit", minute: "2-digit", second: "2-digit"
+      });
+      document.getElementById('update-time').textContent = `⏱ 마지막 업데이트: ${formatted}`;
     }
 
     async function updateTable() {
-      const table = document.getElementById("priceTable");
+      const tbody = document.getElementById("table-body");
+      tbody.innerHTML = "";
+      updateTimeText();
+
       const exchangeRate = await fetchExchangeRate();
+      if (!exchangeRate) {
+        tbody.innerHTML = `<tr><td colspan="6" class="error">❌ 환율 불러오기 실패</td></tr>`;
+        return;
+      }
 
       for (const coin of coins) {
-        const row = document.createElement("tr");
+        const [upbit, binance] = await Promise.all([
+          fetchUpbitPrice(coin),
+          fetchBinancePrice(coin)
+        ]);
 
-        const upbitPrice = await fetchPrice("upbit", coin);
-        const binancePrice = await fetchPrice("binance", coin);
-        const binanceToKRW = exchangeRate && binancePrice ? binancePrice * exchangeRate : null;
-        const kimchi = (upbitPrice && binanceToKRW) ? (((upbitPrice - binanceToKRW) / binanceToKRW) * 100).toFixed(2) : null;
+        let row = "<tr>";
+        row += `<td>${coin}</td>`;
 
-        row.innerHTML = `
-          <td>${coin}</td>
-          <td>${upbitPrice ? upbitPrice.toLocaleString()} KRW : ''}</td>
-          <td>${binancePrice ? binancePrice.toLocaleString()} USD : ''}</td>
-          <td>${exchangeRate ? exchangeRate.toLocaleString() + ' KRW' : '<span class="error">환율 오류</span>'}</td>
-          <td>${binanceToKRW ? binanceToKRW.toLocaleString() + ' KRW' : '<span class="error">환산 실패</span>'}</td>
-          <td>${kimchi ? kimchi + ' %' : '<span class="error">계산 오류</span>'}</td>
-        `;
+        if (upbit && binance) {
+          const binanceToKrw = binance * exchangeRate;
+          const kimchi = ((upbit - binanceToKrw) / binanceToKrw) * 100;
 
-        table.appendChild(row);
+          row += `<td>${upbit.toLocaleString()} KRW</td>`;
+          row += `<td>${binance.toLocaleString()} USD</td>`;
+          row += `<td>${exchangeRate.toLocaleString()} KRW</td>`;
+          row += `<td>${binanceToKrw.toLocaleString()} KRW</td>`;
+          row += `<td>${kimchi.toFixed(2)}%</td>`;
+        } else {
+          row += `<td colspan="5" class="error">❌ 데이터 로딩 실패</td>`;
+        }
+
+        row += "</tr>";
+        tbody.innerHTML += row;
       }
     }
 
     updateTable();
+    setInterval(updateTable, 30000);
   </script>
 </body>
 </html>
