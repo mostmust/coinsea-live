@@ -1,17 +1,14 @@
-export async function handler() {
-  try {
-    const res = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd");
-    const data = await res.json();
-    const price = data.bitcoin.usd;
+const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
 
-    return {
-      statusCode: 200,
-      body: JSON.stringify({ price }),
-    };
-  } catch (e) {
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ error: "Coingecko API 실패", detail: e.message }),
-    };
+exports.getBTCPrice = async () => {
+  try {
+    const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd');
+    const data = await response.json();
+    if (!data.bitcoin || !data.bitcoin.usd) {
+      throw new Error("Coingecko 응답에 USD 가격 정보 없음");
+    }
+    return data.bitcoin.usd;
+  } catch (error) {
+    throw new Error("Coingecko API 실패: " + error.message);
   }
-}
+};
