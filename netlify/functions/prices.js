@@ -1,10 +1,5 @@
 const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
 
-exports.handler = async () => {
-  try {
-    const symbols = ['BTC', 'ETH', 'XRP', 'ADA', 'SOL', 'DOGE', 'AVAX', 'MATIC', 'TRX', 'LTC'];
-
-    // CoinGecko ID 매핑
 const coinGeckoIds = {
   BTC: "bitcoin",
   ETH: "ethereum",
@@ -13,41 +8,50 @@ const coinGeckoIds = {
   DOGE: "dogecoin",
   SOL: "solana",
   AVAX: "avalanche-2",
-  MATIC: "matic-network",   // ✅ 추가
-  TRX: "tron",              // ✅ 추가
-  LTC: "litecoin",          // ✅ 추가
+  MATIC: "matic-network",
+  TRX: "tron",
+  LTC: "litecoin"
 };
 
-    // 환율 (USD to KRW)
-    const exchangeRes = await fetch('https://open.er-api.com/v6/latest/USD');
-    const exchangeJson = await exchangeRes.json();
-    const usdToKrw = exchangeJson.rates.KRW;
+exports.handler = async function (event) {
+  try {
+    const symbols = Object.keys(coinGeckoIds);
+    const prices = {};
 
-    const result = {};
+    // ✅ 환율 API 호출
+    const rateRes = await fetch("https://timely-jalebi-4e5640.netlify.app/.netlify/functions/exchangeRate");
+    const rateData = await rateRes.json();
+    const usdToKrw = rateData.usdToKrw;
 
-    for (const symbol of symbols) {
+    for (let symbol of symbols) {
       try {
-        const [upbitRes, cgRes] = await Promise.all([
-          fetch(`https://api.upbit.com/v1/ticker?markets=KRW-${symbol}`),
-          fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${coingeckoMap[symbol]}&vs_currencies=usd`)
-        ]);
+        // ✅ 업비트 가격
+        const upbitRes = await fetch(`https://api.upbit.com/v1/ticker?markets=KRW-${symbol}`);
+        const upbitJson = await upbitRes.json();
+        const upbitPrice = upbitJson[0]?.trade_price;
 
-        const upbitData = await upbitRes.json();
-        const cgData = await cgRes.json();
+        // ✅ CoinGecko 가격
+        const id = coinGeckoIds[symbol];
+        const geckoRes = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${id}&vs_currencies=usd`);
+        const geckoJson = await geckoRes.json();
+        const binancePrice = geckoJson[id]?.usd;
 
-        const upbit = upbitData[0]?.trade_price || null;
-        const binance = cgData[coingeckoMap[symbol]]?.usd || null;
-        const binanceKrw = binance ? binance * usdToKrw : null;
-        const premium = upbit && binanceKrw ? ((upbit - binanceKrw) / binanceKrw) * 100 : null;
+        if (!upbitPrice || !binancePrice) throw new Error("가격 정보 없음");
 
-        result[symbol] = {
-          upbit,
-          binance,
-          binanceKrw,
-          premium: premium !== null ? Number(premium.toFixed(2)) : null
+        const binanceKrw = binancePrice * usdToKrw;
+        const premium = ((upbitPrice - binanceKrw) / binanceKrw) * 100;
+
+        prices[symbol] = {
+          upbit: upbitPrice,
+          binance: binancePrice,
+          binanceKrw: parseFloat(binanceKrw.toFixed(2)),
+          premium: parseFloat(premium.toFixed(2))
         };
       } catch (err) {
-        result[symbol] = { error: '데이터 로딩 실패', detail: err.message };
+        prices[symbol] = {
+          error: "데이터 로딩 실패",
+          detail: err.message
+        };
       }
     }
 
@@ -56,13 +60,16 @@ const coinGeckoIds = {
       body: JSON.stringify({
         timestamp: new Date().toISOString(),
         usdToKrw,
-        data: result
+        data: prices
       })
     };
-  } catch (error) {
+  } catch (err) {
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: '데이터 로딩 실패', detail: error.message })
+      body: JSON.stringify({
+        error: "전체 처리 실패",
+        detail: err.message
+      })
     };
   }
 };
