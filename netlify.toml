@@ -3,3 +3,4 @@ node_bundler = "esbuild"
 
 [build]
 functions = "netlify/functions"
+publish = "public"
