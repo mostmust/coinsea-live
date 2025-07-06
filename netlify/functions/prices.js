@@ -1,64 +1,68 @@
 const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
 
-exports.handler = async function (event) {
+exports.handler = async () => {
   try {
-    const symbols = ["BTC", "ETH", "XRP", "ADA", "SOL", "DOGE", "AVAX", "MATIC", "TRX", "LTC"];
-    const prices = {};
+    const symbols = ['BTC', 'ETH', 'XRP', 'ADA', 'SOL', 'DOGE', 'AVAX', 'MATIC', 'TRX', 'LTC'];
 
-    // 🔧 환율 호출 - fetch 사용 (오타 수정됨)
-    const rateRes = await fetch("https://timely-jalebi-4e5640.netlify.app/.netlify/functions/exchangeRate");
-    const rateData = await rateRes.json();
-    const usdToKrw = rateData.usdToKrw;
-
-// 기존 코드 일부 수정
-for (let symbol of symbols) {
-  try {
-    // 업비트 가격 요청
-    const upbitRes = await fetch(`https://api.upbit.com/v1/ticker?markets=KRW-${symbol}`);
-    const upbitJson = await upbitRes.json();
-    const upbitPrice = upbitJson[0].trade_price;
-
-    // 바이낸스 가격 요청 + 디버깅용 로그
-    const binanceRes = await fetch(`https://api.binance.com/api/v3/ticker/price?symbol=${symbol}USDT`);
-    const binanceText = await binanceRes.text(); // 바이낸스 응답 원본(텍스트)
-    console.log(`Binance 응답(${symbol}):`, binanceText); // ✅ 로그 출력
-
-    // 실제 응답이 JSON이라면 파싱
-    const binanceJson = JSON.parse(binanceText);
-    const binancePrice = parseFloat(binanceJson.price);
-
-    // 김프 계산
-    const binancePriceKrw = binancePrice * usdToKrw;
-    const kimchiPremium = ((upbitPrice - binancePriceKrw) / binancePriceKrw) * 100;
-
-    prices[symbol] = {
-      upbit: upbitPrice,
-      binance: binancePrice,
-      binanceKrw: binancePriceKrw,
-      premium: kimchiPremium,
+    // CoinGecko ID 매핑
+    const coingeckoMap = {
+      BTC: 'bitcoin',
+      ETH: 'ethereum',
+      XRP: 'ripple',
+      ADA: 'cardano',
+      SOL: 'solana',
+      DOGE: 'dogecoin',
+      AVAX: 'avalanche-2',
+      MATIC: 'matic-network',
+      TRX: 'tron',
+      LTC: 'litecoin'
     };
-  } catch (innerErr) {
-    console.error(`❌ ${symbol} 처리 중 오류:`, innerErr.message); // ✅ 에러 로그도 추가
-    prices[symbol] = { error: "데이터 로딩 실패" };
-  }
-}
 
+    // 환율 (USD to KRW)
+    const exchangeRes = await fetch('https://open.er-api.com/v6/latest/USD');
+    const exchangeJson = await exchangeRes.json();
+    const usdToKrw = exchangeJson.rates.KRW;
+
+    const result = {};
+
+    for (const symbol of symbols) {
+      try {
+        const [upbitRes, cgRes] = await Promise.all([
+          fetch(`https://api.upbit.com/v1/ticker?markets=KRW-${symbol}`),
+          fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${coingeckoMap[symbol]}&vs_currencies=usd`)
+        ]);
+
+        const upbitData = await upbitRes.json();
+        const cgData = await cgRes.json();
+
+        const upbit = upbitData[0]?.trade_price || null;
+        const binance = cgData[coingeckoMap[symbol]]?.usd || null;
+        const binanceKrw = binance ? binance * usdToKrw : null;
+        const premium = upbit && binanceKrw ? ((upbit - binanceKrw) / binanceKrw) * 100 : null;
+
+        result[symbol] = {
+          upbit,
+          binance,
+          binanceKrw,
+          premium: premium !== null ? Number(premium.toFixed(2)) : null
+        };
+      } catch (err) {
+        result[symbol] = { error: '데이터 로딩 실패', detail: err.message };
+      }
+    }
 
     return {
       statusCode: 200,
       body: JSON.stringify({
         timestamp: new Date().toISOString(),
         usdToKrw,
-        data: prices,
-      }),
+        data: result
+      })
     };
-  } catch (err) {
+  } catch (error) {
     return {
       statusCode: 500,
-      body: JSON.stringify({
-        error: "데이터 로딩 실패",
-        detail: err.message,
-      }),
+      body: JSON.stringify({ error: '데이터 로딩 실패', detail: error.message })
     };
   }
 };
