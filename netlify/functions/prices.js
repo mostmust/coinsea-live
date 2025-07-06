@@ -10,6 +10,11 @@ exports.handler = async () => {
     const binance = await binanceRes.json();
     const fx = await fxRes.json();
 
+    // 🛡 rates가 없을 경우 대비
+    if (!fx || !fx.rates || !fx.rates.KRW) {
+      throw new Error("환율 정보 없음 (fx.rates.KRW)");
+    }
+
     const upbitPrice = upbit[0].trade_price;
     const binancePrice = parseFloat(binance.price);
     const usdToKrw = fx.rates.KRW;
