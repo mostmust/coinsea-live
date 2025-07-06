@@ -2,120 +2,104 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>실시간 김치 프리미엄 비교</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>김프 실시간 조회 - 코인씨</title>
+  <meta name="description" content="업비트와 바이낸스 가격 차이를 실시간으로 확인하고 김프(프리미엄)를 계산합니다.">
   <style>
     body {
       font-family: 'Nanum Gothic', sans-serif;
-      background-color: #f5f5f5;
-      margin: 0;
-      padding: 20px;
+      margin: 20px;
+      background: #f7f7f7;
+      color: #333;
     }
-
     h1 {
       text-align: center;
-      color: #222;
+      font-size: 24px;
+      margin-bottom: 20px;
     }
-
-    .update-time {
-      text-align: center;
-      font-size: 14px;
-      color: #777;
-      margin-bottom: 10px;
-    }
-
     table {
       width: 100%;
       max-width: 800px;
       margin: 0 auto;
       border-collapse: collapse;
       background: #fff;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     }
-
     th, td {
+      border: 1px solid #ddd;
       padding: 10px;
       text-align: center;
-      border-bottom: 1px solid #ddd;
     }
-
     th {
-      background-color: #f2f2f2;
+      background-color: #eee;
     }
-
     .positive {
+      color: green;
+    }
+    .negative {
       color: red;
     }
-
-    .negative {
-      color: blue;
-    }
-
-    .hidden {
-      display: none;
+    .timestamp {
+      text-align: center;
+      margin-top: 10px;
+      color: #666;
+      font-size: 14px;
     }
   </style>
 </head>
 <body>
-  <h1>실시간 김치 프리미엄 비교</h1>
-  <div class="update-time" id="updateTime">업데이트 중...</div>
-
+  <h1>김프 실시간 조회</h1>
+  <div class="timestamp" id="timestamp">데이터 불러오는 중...</div>
   <table>
     <thead>
       <tr>
         <th>코인</th>
-        <th>업비트 가격 (KRW)</th>
-        <th>바이낸스 가격 (KRW 환산)</th>
+        <th>업비트 (KRW)</th>
+        <th>바이낸스 (USD)</th>
+        <th>환산가 (KRW)</th>
         <th>김프 (%)</th>
       </tr>
     </thead>
-    <tbody id="coinTableBody">
-      <!-- 코인 데이터 동적 삽입 -->
-    </tbody>
+    <tbody id="priceTable"></tbody>
   </table>
 
   <script>
-    const updateTimeEl = document.getElementById("updateTime");
-    const tableBody = document.getElementById("coinTableBody");
-
-    async function updateTable() {
+    async function fetchData() {
       try {
         const res = await fetch('/.netlify/functions/prices');
-        const result = await res.json();
+        const json = await res.json();
 
-        if (!result || !result.data) throw new Error("Invalid data format");
+        const { timestamp, usdToKrw, data } = json;
+        const tbody = document.getElementById('priceTable');
+        const time = document.getElementById('timestamp');
 
-        const now = new Date();
-        updateTimeEl.textContent = `마지막 업데이트: ${now.toLocaleString()} (60초 간격 자동 갱신)`;
+        tbody.innerHTML = ''; // 초기화
+        time.textContent = `업데이트 시각: ${new Date(timestamp).toLocaleString()} (USD→KRW: ${usdToKrw.toFixed(2)})`;
 
-        tableBody.innerHTML = "";
+        for (const symbol in data) {
+          const { upbit, binance, binanceKrw, premium } = data[symbol];
 
-        result.data.forEach(coin => {
-          if (!coin.upbitPrice || !coin.binancePriceInKrw) return;
-
-          const row = document.createElement("tr");
-
-          const premium = coin.premium;
-          const premiumClass = premium > 0 ? "positive" : (premium < 0 ? "negative" : "");
+          const row = document.createElement('tr');
 
           row.innerHTML = `
-            <td>${coin.symbol}</td>
-            <td>${Number(coin.upbitPrice).toLocaleString()} KRW</td>
-            <td>${Number(coin.binancePriceInKrw).toLocaleString()} KRW</td>
-            <td class="${premiumClass}">${premium}%</td>
+            <td>${symbol}</td>
+            <td>${upbit ? upbit.toLocaleString() : '-'}</td>
+            <td>${binance ? binance.toFixed(3) : '-'}</td>
+            <td>${binanceKrw ? binanceKrw.toLocaleString(undefined, { maximumFractionDigits: 0 }) : '-'}</td>
+            <td class="${premium > 0 ? 'positive' : 'negative'}">
+              ${premium !== null ? premium + '%' : '-'}
+            </td>
           `;
 
-          tableBody.appendChild(row);
-        });
-
+          tbody.appendChild(row);
+        }
       } catch (err) {
-        updateTimeEl.textContent = "❌ 데이터 로딩 실패";
-        console.error("로드 실패", err);
+        document.getElementById('timestamp').textContent = '데이터 로딩 오류: ' + err.message;
       }
     }
 
-    updateTable();                 // 첫 실행
-    setInterval(updateTable, 60000); // 60초 간격 업데이트
+    fetchData();
+    setInterval(fetchData, 60 * 1000); // 1분마다 자동 업데이트
   </script>
 </body>
 </html>
