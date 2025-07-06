@@ -2,19 +2,17 @@ const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fet
 
 exports.handler = async () => {
   try {
-    // 환율 API
+    // 환율 가져오기
     const fxRes = await fetch('https://api.exchangerate.host/latest?base=USD&symbols=KRW');
     const fx = await fxRes.json();
     const usdToKrw = fx.rates?.KRW;
-
     if (!usdToKrw) throw new Error("환율 정보 없음 (fx.rates.KRW)");
 
-    // 코인게코에서 BTC 가격(USD 기준)
-    const cgRes = await fetch(`${process.env.URL}/.netlify/functions/coingecko`);
+    // Coingecko에서 BTC 가격 가져오기
+    const cgRes = await fetch('https://timely-jalebi-4e5640.netlify.app/.netlify/functions/coingecko');
     const cgData = await cgRes.json();
-
     const binancePrice = cgData.price;
-    const upbitPrice = 147787000; // 임시 고정값
+    const upbitPrice = 147787000; // 예시 고정값
 
     if (!binancePrice || !upbitPrice) {
       throw new Error("가격 데이터 누락");
