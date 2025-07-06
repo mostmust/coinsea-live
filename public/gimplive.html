@@ -2,76 +2,136 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>실시간 환율 정보 | 코인씨</title>
-  <meta name="description" content="USD/KRW 환율 정보를 실시간으로 제공합니다.">
-  <meta name="robots" content="index, follow" />
-  <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>김치프리미엄 실시간 보기 | CoinSea</title>
   <style>
     body {
       font-family: 'Nanum Gothic', sans-serif;
-      background-color: #f9f9f9;
-      margin: 0;
-      padding: 20px;
+      margin: 20px;
+      background: #f9f9f9;
       color: #333;
     }
-
-    .container {
-      max-width: 600px;
-      margin: auto;
-      background: #fff;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    }
-
     h1 {
-      font-size: 22px;
+      text-align: center;
       margin-bottom: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+    }
+    th, td {
+      padding: 10px;
+      border: 1px solid #ddd;
       text-align: center;
     }
-
-    #exchangeRate {
-      font-size: 18px;
-      line-height: 1.6;
-      background: #eef6ff;
-      padding: 15px;
-      border-left: 4px solid #007acc;
-      border-radius: 6px;
+    th {
+      background: #f1f1f1;
     }
-
-    small {
-      color: #666;
-    }
+    .positive { color: red; }
+    .negative { color: blue; }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>💱 실시간 환율 정보</h1>
-    <div id="exchangeRate">환율 정보를 불러오는 중입니다...</div>
-  </div>
+  <h1>업비트 vs 바이낸스 김치프리미엄</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>코인</th>
+        <th>업비트 (KRW)</th>
+        <th>바이낸스 (USD)</th>
+        <th>환율 (KRW)</th>
+        <th>바이낸스 (KRW 환산)</th>
+        <th>김프 (%)</th>
+      </tr>
+    </thead>
+    <tbody id="priceTable"></tbody>
+  </table>
 
   <script>
-    async function loadExchangeRate() {
+    const coins = [
+      { upbit: 'BTC', cg: 'bitcoin' },
+      { upbit: 'ETH', cg: 'ethereum' },
+      { upbit: 'XRP', cg: 'ripple' },
+      { upbit: 'ADA', cg: 'cardano' },
+      { upbit: 'SOL', cg: 'solana' },
+      { upbit: 'DOGE', cg: 'dogecoin' },
+      { upbit: 'AVAX', cg: 'avalanche-2' },
+      { upbit: 'MATIC', cg: 'matic-network' },
+      { upbit: 'LINK', cg: 'chainlink' },
+      { upbit: 'DOT', cg: 'polkadot' }
+    ];
+
+    async function fetchUpbitPrice(symbol) {
       try {
-        const response = await fetch('/.netlify/functions/exchangeRate');
-        const data = await response.json();
-
-        const rate = Number(data.usdToKrw).toFixed(2);
-        const date = new Date(data.date).toLocaleString('ko-KR', {
-          timeZone: 'Asia/Seoul'
-        });
-
-        document.getElementById('exchangeRate').innerHTML =
-          `1 USD = <b>${rate} KRW</b><br><small>기준 시각: ${date}</small>`;
+        const res = await fetch(`https://api.upbit.com/v1/ticker?markets=KRW-${symbol}`);
+        const data = await res.json();
+        return data[0]?.trade_price || null;
       } catch (e) {
-        document.getElementById('exchangeRate').innerText =
-          '❌ 환율 정보를 불러오지 못했습니다.';
+        return null;
       }
     }
 
-    loadExchangeRate();
+    async function fetchBinancePrice(id) {
+      try {
+        const res = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${id}&vs_currencies=usd`);
+        const data = await res.json();
+        return data[id]?.usd || null;
+      } catch (e) {
+        return null;
+      }
+    }
+
+    async function fetchExchangeRate() {
+      try {
+        const res = await fetch('/.netlify/functions/exchangeRate');
+        const data = await res.json();
+        return data.KRW;
+      } catch (e) {
+        return null;
+      }
+    }
+
+    async function updateTable() {
+      const table = document.getElementById('priceTable');
+      table.innerHTML = '<tr><td colspan="6">⏳ 로딩 중...</td></tr>';
+
+      const rate = await fetchExchangeRate();
+      if (!rate) {
+        table.innerHTML = '<tr><td colspan="6">❌ 환율 불러오기 실패</td></tr>';
+        return;
+      }
+
+      let rows = '';
+      for (const coin of coins) {
+        const [upbit, binance] = await Promise.all([
+          fetchUpbitPrice(coin.upbit),
+          fetchBinancePrice(coin.cg)
+        ]);
+
+        if (!upbit || !binance) continue;
+
+        const binanceInKRW = binance * rate;
+        const premium = ((upbit - binanceInKRW) / binanceInKRW) * 100;
+        const premiumClass = premium > 0 ? 'positive' : 'negative';
+
+        rows += `
+          <tr>
+            <td>${coin.upbit}</td>
+            <td>${upbit.toLocaleString()}</td>
+            <td>$${binance.toLocaleString()}</td>
+            <td>${rate.toFixed(2)}</td>
+            <td>${binanceInKRW.toLocaleString(undefined, { maximumFractionDigits: 0 })}</td>
+            <td class="${premiumClass}">${premium.toFixed(2)}%</td>
+          </tr>
+        `;
+      }
+
+      table.innerHTML = rows || '<tr><td colspan="6">❌ 가격 데이터를 불러올 수 없습니다.</td></tr>';
+    }
+
+    updateTable();
+    setInterval(updateTable, 10000); // 10초마다 자동 업데이트
   </script>
 </body>
 </html>
