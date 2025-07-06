@@ -1,15 +1,55 @@
 const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
 
-exports.getBTCPrice = async () => {
-  const url = 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd';
+exports.handler = async (event) => {
+  const coinGeckoIds = {
+    BTC: "bitcoin",
+    ETH: "ethereum",
+    XRP: "ripple",
+    ADA: "cardano",
+    DOGE: "dogecoin",
+    SOL: "solana",
+    AVAX: "avalanche-2",
+    MATIC: "polygon",
+    TRX: "tron",
+    LTC: "litecoin"
+  };
+
+  const symbols = Object.keys(coinGeckoIds);
+  const query = symbols.map(sym => coinGeckoIds[sym]).join(',');
+
   try {
-    const response = await fetch(url);
-    const data = await response.json();
-    if (!data.bitcoin || !data.bitcoin.usd) {
-      throw new Error("Coingecko 응답에 USD 가격 정보 없음");
+    const res = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${query}&vs_currencies=usd`);
+    const data = await res.json();
+
+    const result = {};
+
+    for (const symbol of symbols) {
+      const id = coinGeckoIds[symbol];
+      const usd = data[id]?.usd;
+
+      if (usd === undefined) {
+        result[symbol] = {
+          error: "데이터 로딩 실패",
+          detail: "가격 정보 없음",
+        };
+      } else {
+        result[symbol] = {
+          usd: usd,
+        };
+      }
     }
-    return data.bitcoin.usd;
+
+    return {
+      statusCode: 200,
+      body: JSON.stringify(result),
+    };
   } catch (error) {
-    throw new Error("Coingecko API 실패: " + error.message);
+    return {
+      statusCode: 500,
+      body: JSON.stringify({
+        error: "CoinGecko API 실패",
+        detail: error.message,
+      }),
+    };
   }
 };
