@@ -3,132 +3,88 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>업비트 vs 바이낸스 김치프리미엄</title>
+  <title>김치 프리미엄 실시간 비교</title>
   <style>
     body {
       font-family: 'Nanum Gothic', sans-serif;
-      background-color: #f8f8f8;
+      background-color: #fff;
+      color: #333;
       padding: 20px;
-      text-align: center;
     }
     h1 {
-      margin-bottom: 4px;
+      text-align: center;
+      font-size: 24px;
     }
-    #update-time {
-      font-size: 14px;
-      color: #666;
+    .update-info {
+      text-align: center;
+      font-size: 13px;
+      color: #777;
       margin-bottom: 20px;
     }
     table {
-      width: 90%;
-      max-width: 900px;
-      margin: 0 auto;
+      width: 100%;
       border-collapse: collapse;
-      background: #fff;
-      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+      margin: 0 auto;
     }
     th, td {
+      border: 1px solid #ccc;
       padding: 10px;
-      border: 1px solid #ddd;
-      font-size: 15px;
+      text-align: center;
     }
     th {
-      background-color: #f0f0f0;
+      background-color: #f5f5f5;
     }
-    .error {
-      color: red;
-    }
+    .positive { color: red; }
+    .negative { color: blue; }
   </style>
 </head>
 <body>
-  <h1>업비트 vs 바이낸스 김치프리미엄</h1>
-  <div id="update-time">⏳ 업데이트 중...</div>
+  <h1>실시간 김치 프리미엄 비교</h1>
+  <div class="update-info">마지막 업데이트: <span id="lastUpdated"></span> (60초 간격 자동 갱신)</div>
   <table>
     <thead>
       <tr>
         <th>코인</th>
-        <th>업비트 (KRW)</th>
-        <th>바이낸스 (USD)</th>
-        <th>환율 (KRW)</th>
-        <th>바이낸스 (KRW 환산)</th>
-        <th>김프 (%)</th>
+        <th>업비트 가격 (KRW)</th>
+        <th>바이낸스 가격 (KRW)</th>
+        <th>김치 프리미엄</th>
       </tr>
     </thead>
-    <tbody id="price-table"></tbody>
+    <tbody id="priceTableBody"></tbody>
   </table>
 
   <script>
-    const coins = ["BTC", "ETH", "XRP", "ADA", "SOL", "DOGE", "TRX", "DOT", "AVAX", "BCH", "LINK", "LTC", "MATIC", "ETC", "XLM", "SAND", "EOS", "APT", "ATOM", "NEAR", "AAVE", "STX", "IMX", "ZIL", "WAVES", "CHZ", "FTM", "ARPA", "RUNE", "GALA"];
-    const fetchInterval = 300; // 초 단위
+    const coins = ['BTC', 'ETH', 'XRP', 'SOL', 'ADA', 'DOGE', 'DOT', 'AVAX', 'MATIC', 'TRX', 'LTC', 'BCH', 'ETC', 'APT', 'ATOM'];
 
-    async function fetchExchangeRate() {
-      const res = await fetch("/.netlify/functions/exchangeRate");
-      const json = await res.json();
-      return json.usdToKrw;
-    }
+    async function fetchData() {
+      const tableBody = document.getElementById("priceTableBody");
+      tableBody.innerHTML = "";
 
-    async function fetchPrices() {
-      const res = await fetch("/.netlify/functions/prices");
-      return await res.json();
-    }
+      for (const coin of coins) {
+        try {
+          const res = await fetch(`/.netlify/functions/prices?symbol=${coin}`);
+          const data = await res.json();
 
-    function formatKRW(value) {
-      return Number(value).toLocaleString("ko-KR") + " KRW";
-    }
+          if (!data.upbitPrice || !data.binancePriceInKrw || isNaN(data.premium)) continue;
 
-    function formatUSD(value) {
-      return Number(value).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " USD";
-    }
-
-    function formatPremium(p) {
-      return (p > 0 ? "+" : "") + p.toFixed(2) + " %";
-    }
-
-    async function updateTable() {
-      try {
-        const [exchangeRate, prices] = await Promise.all([
-          fetchExchangeRate(),
-          fetchPrices()
-        ]);
-
-        const table = document.getElementById("price-table");
-        table.innerHTML = "";
-
-        let now = new Date();
-        document.getElementById("update-time").innerText =
-          `📅 마지막 업데이트: ${now.toLocaleString()} (⟳ ${fetchInterval}초마다 자동 업데이트됨)`;
-
-        coins.forEach(symbol => {
-          const upbit = prices.upbit[symbol];
-          const binance = prices.binance[symbol];
-
-          if (!upbit || !binance) return; // 데이터 없는 경우 표시 안함
-
-          const priceUpbit = upbit.trade_price;
-          const priceBinance = binance;
-          const binanceKRW = priceBinance * exchangeRate;
-          const premium = ((priceUpbit - binanceKRW) / binanceKRW) * 100;
-
-          const row = `
-            <tr>
-              <td>${symbol}</td>
-              <td>${formatKRW(priceUpbit)}</td>
-              <td>${formatUSD(priceBinance)}</td>
-              <td>${formatKRW(exchangeRate)}</td>
-              <td>${formatKRW(binanceKRW)}</td>
-              <td>${formatPremium(premium)}</td>
-            </tr>
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td>${coin}</td>
+            <td>${data.upbitPrice.toLocaleString()}₩</td>
+            <td>${data.binancePriceInKrw.toLocaleString()}₩</td>
+            <td class="${data.premium > 0 ? 'positive' : 'negative'}">${data.premium.toFixed(2)}%</td>
           `;
-          table.insertAdjacentHTML("beforeend", row);
-        });
-      } catch (e) {
-        document.getElementById("update-time").innerText = "❌ 데이터 로딩 실패";
-        console.error(e);
+          tableBody.appendChild(row);
+        } catch (error) {
+          console.error("데이터 로딩 오류:", coin, error);
+        }
       }
+
+      document.getElementById("lastUpdated").textContent = new Date().toLocaleString();
     }
 
-    updateTable();
-    setInterval(updateTable, fetchInterval * 1000);
+    fetchData();
+    setInterval(fetchData, 60000); // 60초마다 자동 업데이트
   </script>
 </body>
 </html>
