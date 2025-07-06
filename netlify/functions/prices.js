@@ -1,21 +1,27 @@
-const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
+const fetch = require('node-fetch');
+const { getBTCPrice } = require('./coingecko');
 
 exports.handler = async () => {
   try {
-    // 환율 가져오기
-    const fxRes = await fetch('https://api.exchangerate.host/latest?base=USD&symbols=KRW');
-    const fx = await fxRes.json();
-    const usdToKrw = fx.rates?.KRW;
-    if (!usdToKrw) throw new Error("환율 정보 없음 (fx.rates.KRW)");
+    const upbitResponse = await fetch("https://api.upbit.com/v1/ticker?markets=KRW-BTC");
+    const upbitData = await upbitResponse.json();
+    const upbitPrice = upbitData[0].trade_price;
 
-    // Coingecko에서 BTC 가격 가져오기
-    const cgRes = await fetch('https://timely-jalebi-4e5640.netlify.app/.netlify/functions/coingecko');
-    const cgData = await cgRes.json();
-    const binancePrice = cgData.price;
-    const upbitPrice = 147787000; // 예시 고정값
+    // 환율 API
+    const usdToKrwResponse = await fetch("https://api.exchangerate.host/latest?base=USD&symbols=KRW");
+    const fx = await usdToKrwResponse.json();
+    
+    if (!fx || !fx.rates || !fx.rates.KRW) {
+      throw new Error("환율 정보 없음 (fx.rates.KRW)");
+    }
 
-    if (!binancePrice || !upbitPrice) {
-      throw new Error("가격 데이터 누락");
+    const usdToKrw = fx.rates.KRW;
+
+    // 바이낸스(코인게코) 가격
+    const binancePrice = await getBTCPrice();
+
+    if (!binancePrice) {
+      throw new Error("Binance(Coingecko) 가격 정보 없음");
     }
 
     const binancePriceInKrw = binancePrice * usdToKrw;
@@ -29,15 +35,12 @@ exports.handler = async () => {
         usdToKrw,
         binancePriceInKrw,
         premium: premium.toFixed(2)
-      })
+      }),
     };
   } catch (error) {
     return {
       statusCode: 500,
-      body: JSON.stringify({
-        error: "데이터 로딩 실패",
-        detail: error.message
-      })
+      body: JSON.stringify({ error: "데이터 로딩 실패", detail: error.message }),
     };
   }
 };
