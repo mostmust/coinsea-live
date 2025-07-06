@@ -1,42 +1,25 @@
 const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
 
-exports.handler = async (event) => {
-  const coinGeckoIds = {
-    BTC: "bitcoin",
-    ETH: "ethereum",
-    XRP: "ripple",
-    ADA: "cardano",
-    DOGE: "dogecoin",
-    SOL: "solana",
-    AVAX: "avalanche-2",
-    MATIC: "polygon",
-    TRX: "tron",
-    LTC: "litecoin"
-  };
+const coingeckoMap = {
+  XRP: 'ripple',
+  ADA: 'cardano',
+  DOGE: 'dogecoin',
+  SOL: 'solana',
+  AVAX: 'avalanche-2',
+  MATIC: 'matic-network',
+  TRX: 'tron',
+  LTC: 'litecoin',
+};
 
-  const symbols = Object.keys(coinGeckoIds);
-  const query = symbols.map(sym => coinGeckoIds[sym]).join(',');
-
+exports.handler = async () => {
   try {
-    const res = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${query}&vs_currencies=usd`);
-    const data = await res.json();
+    const ids = Object.values(coingeckoMap).join(',');
+    const res = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd`);
+    const json = await res.json();
 
     const result = {};
-
-    for (const symbol of symbols) {
-      const id = coinGeckoIds[symbol];
-      const usd = data[id]?.usd;
-
-      if (usd === undefined) {
-        result[symbol] = {
-          error: "데이터 로딩 실패",
-          detail: "가격 정보 없음",
-        };
-      } else {
-        result[symbol] = {
-          usd: usd,
-        };
-      }
+    for (const [symbol, id] of Object.entries(coingeckoMap)) {
+      result[symbol] = json[id]?.usd || null;
     }
 
     return {
@@ -47,7 +30,7 @@ exports.handler = async (event) => {
     return {
       statusCode: 500,
       body: JSON.stringify({
-        error: "CoinGecko API 실패",
+        error: 'CoinGecko 데이터 로딩 실패',
         detail: error.message,
       }),
     };
