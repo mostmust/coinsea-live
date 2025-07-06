@@ -5,18 +5,18 @@ exports.handler = async () => {
     const symbols = ['BTC', 'ETH', 'XRP', 'ADA', 'SOL', 'DOGE', 'AVAX', 'MATIC', 'TRX', 'LTC'];
 
     // CoinGecko ID 매핑
-    const coingeckoMap = {
-      BTC: 'bitcoin',
-      ETH: 'ethereum',
-      XRP: 'ripple',
-      ADA: 'cardano',
-      SOL: 'solana',
-      DOGE: 'dogecoin',
-      AVAX: 'avalanche-2',
-      MATIC: 'matic-network',
-      TRX: 'tron',
-      LTC: 'litecoin'
-    };
+const coinGeckoIds = {
+  BTC: "bitcoin",
+  ETH: "ethereum",
+  XRP: "ripple",
+  ADA: "cardano",
+  DOGE: "dogecoin",
+  SOL: "solana",
+  AVAX: "avalanche-2",
+  MATIC: "matic-network",   // ✅ 추가
+  TRX: "tron",              // ✅ 추가
+  LTC: "litecoin",          // ✅ 추가
+};
 
     // 환율 (USD to KRW)
     const exchangeRes = await fetch('https://open.er-api.com/v6/latest/USD');
