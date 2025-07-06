@@ -1,27 +1,14 @@
-const fetch = require('node-fetch');
-const { getBTCPrice } = require('./coingecko');
+const { getBTCPrice } = require("./coingecko");
+const { getExchangeRate } = require("./exchangeRate");
 
 exports.handler = async () => {
   try {
-    const upbitResponse = await fetch("https://api.upbit.com/v1/ticker?markets=KRW-BTC");
-    const upbitData = await upbitResponse.json();
-    const upbitPrice = upbitData[0].trade_price;
-
-    // 환율 API
-    const usdToKrwResponse = await fetch("https://api.exchangerate.host/latest?base=USD&symbols=KRW");
-    const fx = await usdToKrwResponse.json();
-    
-    if (!fx || !fx.rates || !fx.rates.KRW) {
-      throw new Error("환율 정보 없음 (fx.rates.KRW)");
-    }
-
-    const usdToKrw = fx.rates.KRW;
-
-    // 바이낸스(코인게코) 가격
+    const upbitPrice = 147000000; // 예시로 고정. 실제로는 업비트 API 연동 필요
     const binancePrice = await getBTCPrice();
+    const usdToKrw = await getExchangeRate();
 
-    if (!binancePrice) {
-      throw new Error("Binance(Coingecko) 가격 정보 없음");
+    if (!binancePrice || !usdToKrw) {
+      throw new Error("가격 데이터 누락");
     }
 
     const binancePriceInKrw = binancePrice * usdToKrw;
@@ -34,7 +21,7 @@ exports.handler = async () => {
         binancePrice,
         usdToKrw,
         binancePriceInKrw,
-        premium: premium.toFixed(2)
+        premium: premium.toFixed(2),
       }),
     };
   } catch (error) {
