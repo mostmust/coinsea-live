@@ -2,7 +2,7 @@ exports.handler = async () => {
   try {
     const [upbitRes, binanceRes, fxRes] = await Promise.all([
       fetch("https://api.upbit.com/v1/ticker?markets=KRW-BTC"),
-      fetch("https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT"),
+      fetch("https://api.allorigins.win/raw?url=https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT"),
       fetch("https://open.er-api.com/v6/latest/USD")
     ]);
 
