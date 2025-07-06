@@ -1,4 +1,4 @@
-const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
+const fetch = require("node-fetch");
 
 exports.handler = async function (event) {
   try {
@@ -15,14 +15,19 @@ exports.handler = async function (event) {
         // 업비트 가격
         const upbitRes = await fetch(`https://api.upbit.com/v1/ticker?markets=KRW-${symbol}`);
         const upbitJson = await upbitRes.json();
-        const upbitPrice = upbitJson[0].trade_price;
+        const upbitPrice = upbitJson[0]?.trade_price;
 
         // 바이낸스 가격
         const binanceRes = await fetch(`https://api.binance.com/api/v3/ticker/price?symbol=${symbol}USDT`);
-        const binanceJson = await binanceRes.json();
-        const binancePrice = parseFloat(binanceJson.price);
+        
+        if (!binanceRes.ok) {
+          throw new Error(`Binance API Error for ${symbol}: ${binanceRes.status}`);
+        }
 
-        // 김프 계산
+        const binanceJson = await binanceRes.json();
+        console.log(`✅ Binance ${symbol} →`, binanceJson); // ✅ 로그 확인용
+        
+        const binancePrice = parseFloat(binanceJson.price);
         const binancePriceKrw = binancePrice * usdToKrw;
         const kimchiPremium = ((upbitPrice - binancePriceKrw) / binancePriceKrw) * 100;
 
@@ -33,6 +38,7 @@ exports.handler = async function (event) {
           premium: kimchiPremium,
         };
       } catch (innerErr) {
+        console.error(`❌ ${symbol} 오류:`, innerErr.message);
         prices[symbol] = { error: "데이터 로딩 실패" };
       }
     }
@@ -46,6 +52,7 @@ exports.handler = async function (event) {
       }),
     };
   } catch (err) {
+    console.error("🔥 전체 오류:", err.message);
     return {
       statusCode: 500,
       body: JSON.stringify({
