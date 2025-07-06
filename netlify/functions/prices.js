@@ -1,45 +1,42 @@
-exports.handler = async () => {
+export async function handler() {
   try {
-    const [upbitRes, binanceRes, fxRes] = await Promise.all([
-      fetch("https://api.upbit.com/v1/ticker?markets=KRW-BTC"),
-      fetch("https://api.allorigins.win/raw?url=https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT"),
-      fetch("https://open.er-api.com/v6/latest/USD")
-    ]);
+    // 업비트 가격 가져오기
+    const upbitRes = await fetch("https://api.upbit.com/v1/ticker?markets=KRW-BTC");
+    const upbitData = await upbitRes.json();
+    const upbitPrice = upbitData[0].trade_price;
 
-    const upbit = await upbitRes.json();
-    
-    // Binance 응답 구조 확인용
-    const binanceText = await binanceRes.text();
-    console.log("Binance raw response:", binanceText); // ✅ 로그 출력
-    
-    const binance = JSON.parse(binanceText);
+    // 환율 가져오기
+    const fxRes = await fetch("https://api.exchangerate.host/latest?base=USD&symbols=KRW");
     const fx = await fxRes.json();
+    const usdToKrw = fx.rates.KRW;
 
-    const upbitPrice = upbit[0]?.trade_price;
-    const binancePrice = binance?.price ? parseFloat(binance.price) : null;
-    const usdToKrw = fx?.conversion_rates?.KRW;
+    // 코인게코 가격 가져오기
+    const coingeckoRes = await fetch(`${process.env.URL}/.netlify/functions/coingecko`);
+    const coingeckoData = await coingeckoRes.json();
+    const usdPrice = coingeckoData.price;
 
-    if (!binancePrice || !usdToKrw || !upbitPrice) {
+    if (!upbitPrice || !usdToKrw || !usdPrice) {
       throw new Error("가격 데이터 누락");
     }
 
-    const binancePriceInKrw = binancePrice * usdToKrw;
-    const premium = ((upbitPrice - binancePriceInKrw) / binancePriceInKrw) * 100;
+    // 김프 계산
+    const binancePriceInKrw = usdPrice * usdToKrw;
+    const premium = (((upbitPrice - binancePriceInKrw) / binancePriceInKrw) * 100).toFixed(2);
 
     return {
       statusCode: 200,
       body: JSON.stringify({
-        upbitPrice,
-        binancePrice,
+        upbitPrice: Math.round(upbitPrice),
+        usdPrice,
         usdToKrw,
         binancePriceInKrw: Math.round(binancePriceInKrw),
-        premium: premium.toFixed(2)
-      })
+        premium: premium + "%",
+      }),
     };
   } catch (e) {
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: "데이터 로딩 실패", detail: e.message })
+      body: JSON.stringify({ error: "데이터 로딩 실패", detail: e.message }),
     };
   }
-};
+}
