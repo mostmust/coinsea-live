@@ -2,89 +2,120 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>김치 프리미엄 실시간 비교</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>실시간 김치 프리미엄 비교</title>
   <style>
     body {
       font-family: 'Nanum Gothic', sans-serif;
-      background-color: #fff;
-      color: #333;
+      background-color: #f5f5f5;
+      margin: 0;
       padding: 20px;
     }
+
     h1 {
       text-align: center;
-      font-size: 24px;
+      color: #222;
     }
-    .update-info {
+
+    .update-time {
       text-align: center;
-      font-size: 13px;
+      font-size: 14px;
       color: #777;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
     }
+
     table {
       width: 100%;
-      border-collapse: collapse;
+      max-width: 800px;
       margin: 0 auto;
+      border-collapse: collapse;
+      background: #fff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     }
+
     th, td {
-      border: 1px solid #ccc;
       padding: 10px;
       text-align: center;
+      border-bottom: 1px solid #ddd;
     }
+
     th {
-      background-color: #f5f5f5;
+      background-color: #f2f2f2;
     }
-    .positive { color: red; }
-    .negative { color: blue; }
+
+    .positive {
+      color: red;
+    }
+
+    .negative {
+      color: blue;
+    }
+
+    .hidden {
+      display: none;
+    }
   </style>
 </head>
 <body>
   <h1>실시간 김치 프리미엄 비교</h1>
-  <div class="update-info">마지막 업데이트: <span id="lastUpdated"></span> (60초 간격 자동 갱신)</div>
+  <div class="update-time" id="updateTime">업데이트 중...</div>
+
   <table>
     <thead>
       <tr>
         <th>코인</th>
         <th>업비트 가격 (KRW)</th>
-        <th>바이낸스 가격 (KRW)</th>
-        <th>김치 프리미엄</th>
+        <th>바이낸스 가격 (KRW 환산)</th>
+        <th>김프 (%)</th>
       </tr>
     </thead>
-    <tbody id="priceTableBody"></tbody>
+    <tbody id="coinTableBody">
+      <!-- 코인 데이터 동적 삽입 -->
+    </tbody>
   </table>
 
   <script>
-    const coins = ['BTC', 'ETH', 'XRP', 'SOL', 'ADA', 'DOGE', 'DOT', 'AVAX', 'MATIC', 'TRX', 'LTC', 'BCH', 'ETC', 'APT', 'ATOM'];
+    const updateTimeEl = document.getElementById("updateTime");
+    const tableBody = document.getElementById("coinTableBody");
 
-    async function fetchData() {
-      const tableBody = document.getElementById("priceTableBody");
-      tableBody.innerHTML = "";
+    async function updateTable() {
+      try {
+        const res = await fetch('/.netlify/functions/prices');
+        const result = await res.json();
 
-      for (const coin of coins) {
-        try {
-          const res = await fetch(`/.netlify/functions/prices?symbol=${coin}`);
-          const data = await res.json();
+        if (!result || !result.data) throw new Error("Invalid data format");
 
-          if (!data.upbitPrice || !data.binancePriceInKrw || isNaN(data.premium)) continue;
+        const now = new Date();
+        updateTimeEl.textContent = `마지막 업데이트: ${now.toLocaleString()} (60초 간격 자동 갱신)`;
+
+        tableBody.innerHTML = "";
+
+        result.data.forEach(coin => {
+          if (!coin.upbitPrice || !coin.binancePriceInKrw) return;
 
           const row = document.createElement("tr");
-          row.innerHTML = `
-            <td>${coin}</td>
-            <td>${data.upbitPrice.toLocaleString()}₩</td>
-            <td>${data.binancePriceInKrw.toLocaleString()}₩</td>
-            <td class="${data.premium > 0 ? 'positive' : 'negative'}">${data.premium.toFixed(2)}%</td>
-          `;
-          tableBody.appendChild(row);
-        } catch (error) {
-          console.error("데이터 로딩 오류:", coin, error);
-        }
-      }
 
-      document.getElementById("lastUpdated").textContent = new Date().toLocaleString();
+          const premium = coin.premium;
+          const premiumClass = premium > 0 ? "positive" : (premium < 0 ? "negative" : "");
+
+          row.innerHTML = `
+            <td>${coin.symbol}</td>
+            <td>${Number(coin.upbitPrice).toLocaleString()} KRW</td>
+            <td>${Number(coin.binancePriceInKrw).toLocaleString()} KRW</td>
+            <td class="${premiumClass}">${premium}%</td>
+          `;
+
+          tableBody.appendChild(row);
+        });
+
+      } catch (err) {
+        updateTimeEl.textContent = "❌ 데이터 로딩 실패";
+        console.error("로드 실패", err);
+      }
     }
 
-    fetchData();
-    setInterval(fetchData, 60000); // 60초마다 자동 업데이트
+    updateTable();                 // 첫 실행
+    setInterval(updateTable, 60000); // 60초 간격 업데이트
   </script>
 </body>
 </html>
