@@ -8,11 +8,13 @@ exports.handler = async () => {
 
     const upbit = await upbitRes.json();
     const binance = await binanceRes.json();
-    const fx = await fxRes.json();
+    let fx = await fxRes.json();
 
-    // 🛡 rates가 없을 경우 대비
+    // Backup 환율 API 사용 (if fx.rates.KRW가 없을 경우)
     if (!fx || !fx.rates || !fx.rates.KRW) {
-      throw new Error("환율 정보 없음 (fx.rates.KRW)");
+      const backupFxRes = await fetch("https://open.er-api.com/v6/latest/USD");
+      const backupFx = await backupFxRes.json();
+      fx.rates = { KRW: backupFx.rates.KRW };
     }
 
     const upbitPrice = upbit[0].trade_price;
