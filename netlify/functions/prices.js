@@ -10,9 +10,13 @@ exports.handler = async () => {
     const binance = await binanceRes.json();
     const fx = await fxRes.json();
 
-    const upbitPrice = upbit[0].trade_price;
-    const binancePrice = parseFloat(binance.price);
-    const usdToKrw = fx.conversion_rates.KRW;
+    const upbitPrice = upbit[0]?.trade_price;
+    const binancePrice = binance?.price ? parseFloat(binance.price) : null;
+    const usdToKrw = fx?.conversion_rates?.KRW;
+
+    if (!binancePrice || !usdToKrw || !upbitPrice) {
+      throw new Error("가격 데이터 누락");
+    }
 
     const binancePriceInKrw = binancePrice * usdToKrw;
     const premium = ((upbitPrice - binancePriceInKrw) / binancePriceInKrw) * 100;
