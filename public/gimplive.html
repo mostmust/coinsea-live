@@ -70,7 +70,7 @@
     }
 
     async function fetchUpbitPrice(symbol) {
-      const res = await fetch(`https://api.upbit.com/v1/ticker?markets=KRW-${symbol}`);
+      const res = await fetch(`/.netlify/functions/upbitPrice?symbol=${symbol}`);
       const data = await res.json();
       return data[0]?.trade_price || null;
     }
