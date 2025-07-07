@@ -1,46 +1,84 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <title>김치 프리미엄 계산기</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BTC 김치프리미엄 실시간 확인</title>
+
+  <!-- ✅ 폰트 및 기본 스타일 -->
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet" />
   <style>
     body {
       font-family: 'Nanum Gothic', sans-serif;
-      text-align: center;
-      padding: 20px;
+      margin: 20px;
+      background-color: #fff;
+      color: #333;
     }
-    .result {
-      margin-top: 30px;
+    .container {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    h1 {
+      font-size: 20px;
+      margin-bottom: 16px;
+      text-align: center;
+      color: #222;
+    }
+    .item {
+      font-size: 16px;
+      margin: 8px 0;
+    }
+    .label {
+      font-weight: bold;
+    }
+    .premium {
       font-size: 18px;
+      margin-top: 12px;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
-  <h1>🥢 김치 프리미엄 계산기</h1>
-  <div class="result" id="output">데이터 불러오는 중...</div>
+
+  <div class="container">
+    <h1>비트코인 김치 프리미엄</h1>
+    <div class="item"><span class="label">🇰🇷 업비트 가격:</span> <span id="upbitPrice">불러오는 중...</span></div>
+    <div class="item"><span class="label">🌍 해외 가격 (USD):</span> <span id="usdPrice">-</span></div>
+    <div class="item"><span class="label">💱 환율 (₩):</span> <span id="exchangeRate">-</span></div>
+    <div class="item"><span class="label">🌎 해외 가격 (KRW):</span> <span id="globalPrice">-</span></div>
+    <div class="premium" id="kimchiPremium">-</div>
+  </div>
 
   <script>
-    async function fetchKimchi() {
-      try {
-        const res = await fetch("/.netlify/functions/kimchiBTC");
-        const data = await res.json();
+    fetch('/.netlify/functions/kimchiBTC')
+      .then(res => res.json())
+      .then(data => {
+        if (!data || !data.upbitPriceKRW || !data.btcPriceUSD || !data.exchangeRate) {
+          throw new Error("불완전한 데이터");
+        }
 
-        const output = `
-          <p>업비트 시세: <strong>${data.upbitPriceKRW.toLocaleString()} 원</strong></p>
-          <p>바이낸스 시세: <strong>${data.binancePriceUSDT.toLocaleString()} USDT</strong></p>
-          <p>환율: <strong>${data.exchangeRate.toLocaleString()} 원/USD</strong></p>
-          <p>바이낸스 환산 시세: <strong>${data.binancePriceKRW.toLocaleString()} 원</strong></p>
-          <p>📈 김치 프리미엄: <strong>${data.kimchiPremium}%</strong></p>
-        `;
+        const upbit = parseFloat(data.upbitPriceKRW).toLocaleString();
+        const usd = parseFloat(data.btcPriceUSD).toLocaleString();
+        const rate = parseFloat(data.exchangeRate).toLocaleString();
+        const global = parseFloat(data.btcPriceKRW).toLocaleString();
+        const premium = data.kimchiPremium;
 
-        document.getElementById("output").innerHTML = output;
-      } catch (err) {
-        document.getElementById("output").innerText = "데이터를 불러오지 못했습니다.";
-      }
-    }
-
-    fetchKimchi();
+        document.getElementById("upbitPrice").textContent = `₩${upbit}`;
+        document.getElementById("usdPrice").textContent = `$${usd}`;
+        document.getElementById("exchangeRate").textContent = `₩${rate}`;
+        document.getElementById("globalPrice").textContent = `₩${global}`;
+        document.getElementById("kimchiPremium").innerHTML =
+          `🥬 김치 프리미엄: <span style="color:${parseFloat(premium) > 0 ? 'red' : 'blue'}">${premium}</span>`;
+      })
+      .catch(err => {
+        document.querySelector('.container').innerHTML = "<h1>데이터 불러오기 실패</h1><p>잠시 후 다시 시도해주세요.</p>";
+        console.error(err);
+      });
   </script>
+
 </body>
 </html>
