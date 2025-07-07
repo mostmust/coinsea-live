@@ -2,40 +2,33 @@ const fetch = require("node-fetch");
 
 exports.handler = async function () {
   try {
-    const response = await fetch("https://api.upbit.com/v1/ticker?markets=KRW-BTC");
-    const data = await response.json();
+    // 1. 업비트에서 원화 BTC 시세 가져오기
+    const upbitResponse = await fetch("https://api.upbit.com/v1/ticker?markets=KRW-BTC");
+    const upbitData = await upbitResponse.json();
+    const priceKRW = upbitData[0]?.trade_price;
 
-    if (Array.isArray(data) && data.length > 0 && data[0].trade_price) {
-      return {
-        statusCode: 200,
-        headers: {
-          "Access-Control-Allow-Origin": "*", // ✅ CORS 해결
-        },
-        body: JSON.stringify({ price: data[0].trade_price }),
-      };
-    } else {
+    // 2. exchangerate.host에서 USD/KRW 환율 가져오기
+    const exchangeResponse = await fetch("https://api.exchangerate.host/live?access_key=d900b09afec85ec2f5f506a607dbb958&currencies=KRW&source=USD&format=1");
+    const exchangeData = await exchangeResponse.json();
+    const usdToKrw = exchangeData?.quotes?.USDKRW;
+
+    if (!priceKRW || !usdToKrw) {
       return {
         statusCode: 500,
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-        },
-        body: JSON.stringify({
-          error: "업비트 데이터 없음",
-          message: "KRW-BTC 시세 데이터가 존재하지 않습니다.",
-          raw: data,
-        }),
+        body: JSON.stringify({ error: "데이터 부족" }),
       };
     }
-  } catch (error) {
+
+    const priceUSD = priceKRW / usdToKrw;
+
+    return {
+      statusCode: 200,
+      body: JSON.stringify({ price: priceUSD }), // ✅ 이제 달러 기준
+    };
+  } catch (err) {
     return {
       statusCode: 500,
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-      },
-      body: JSON.stringify({
-        error: "서버 오류",
-        message: error.message,
-      }),
+      body: JSON.stringify({ error: err.message }),
     };
   }
 };
