@@ -5,22 +5,20 @@ exports.handler = async function () {
     // ✅ 업비트 BTC/KRW
     const upbitRes = await fetch("https://api.upbit.com/v1/ticker?markets=KRW-BTC");
     const upbitData = await upbitRes.json();
-
-    if (!Array.isArray(upbitData) || upbitData.length === 0) {
-      throw new Error("업비트 응답이 비어 있음");
-    }
-
-    const upbitPrice = upbitData[0].trade_price;
+    const upbitPrice = upbitData[0]?.trade_price;
+    if (!upbitPrice) throw new Error("업비트 가격을 가져오지 못했습니다");
 
     // ✅ 코인게코 BTC/USD
     const cgRes = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd");
     const cgData = await cgRes.json();
-    const binancePrice = cgData.bitcoin.usd;
+    const binancePrice = cgData.bitcoin?.usd;
+    if (!binancePrice) throw new Error("코인게코 가격을 가져오지 못했습니다");
 
-    // ✅ 환율
+    // ✅ 환율 (USD → KRW)
     const fxRes = await fetch("https://api.exchangerate.host/latest?base=USD&symbols=KRW");
     const fxData = await fxRes.json();
-    const krwRate = fxData.rates.KRW;
+    const krwRate = fxData?.rates?.KRW;
+    if (!krwRate) throw new Error("환율(KRW) 데이터를 가져오지 못했습니다");
 
     // ✅ 김치프리미엄 계산
     const globalPriceKRW = binancePrice * krwRate;
