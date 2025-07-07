@@ -2,16 +2,15 @@ const fetch = require("node-fetch");
 
 exports.handler = async function () {
   try {
-    const url = "https://api.exchangerate.host/latest?base=USD&symbols=KRW";
-
+    const url = "https://open.er-api.com/v6/latest/USD";
     const response = await fetch(url);
     const data = await response.json();
 
-    if (data && data.rates && data.rates.KRW) {
+    if (data && data.result === "success" && data.rates && data.rates.KRW) {
       return {
         statusCode: 200,
         headers: {
-          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Origin": "*", // ✅ CORS 허용
         },
         body: JSON.stringify({ krw: data.rates.KRW }),
       };
