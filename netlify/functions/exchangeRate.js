@@ -1,8 +1,9 @@
 const fetch = require("node-fetch");
 
-exports.handler = async function () {
+exports.handler = async function (event, context) {
   try {
-    const url = "https://api.exchangerate.host/latest?base=USD&symbols=KRW";
+    const url = `https://api.exchangerate.host/latest?base=USD&symbols=KRW`;
+
     const response = await fetch(url);
     const data = await response.json();
 
@@ -10,7 +11,7 @@ exports.handler = async function () {
       return {
         statusCode: 200,
         headers: {
-          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Origin": "*", // ✅ CORS 해결
         },
         body: JSON.stringify({ krw: data.rates.KRW }),
       };
@@ -22,6 +23,7 @@ exports.handler = async function () {
         },
         body: JSON.stringify({
           error: "환율 정보 없음",
+          message: "KRW 환율 데이터가 존재하지 않습니다.",
           raw: data,
         }),
       };
