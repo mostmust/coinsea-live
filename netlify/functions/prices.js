@@ -2,37 +2,63 @@ const fetch = require("node-fetch");
 
 exports.handler = async function () {
   try {
-    // 바이낸스 BTC/USDT 가격
-    const binanceRes = await fetch("https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT");
-    const binanceData = await binanceRes.json();
-    const btcPriceInUSDT = parseFloat(binanceData.price);
+    // 1. BTC → USD (CoinGecko)
+    const cgUrl = "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd";
+    const cgRes = await fetch(cgUrl);
+    const cgData = await cgRes.json();
 
-    // exchangerate.host에서 USD → KRW 환율 (access_key 제거됨)
-    const fxRes = await fetch("https://api.exchangerate.host/latest?base=USD&symbols=KRW");
-    const fxData = await fxRes.json();
+    const btcUsd = cgData?.bitcoin?.usd;
 
-    if (!fxData.rates || !fxData.rates.KRW) {
+    if (!btcUsd) {
       return {
         statusCode: 500,
-        body: JSON.stringify({ error: "환율 정보 없음", message: "KRW 환율 데이터가 존재하지 않습니다." })
+        body: JSON.stringify({
+          error: "BTC 시세 정보 없음",
+          message: "CoinGecko에서 BTC 시세를 가져올 수 없습니다.",
+          raw: cgData
+        })
       };
     }
 
-    const usdToKrw = fxData.rates.KRW;
-    const btcPriceInKRW = btcPriceInUSDT * usdToKrw;
+    // 2. USD → KRW (exchangerate.host)
+    const ACCESS_KEY = "d900b09afec85ec2f5f506a607dbb958";
+    const fxUrl = `https://api.exchangerate.host/latest?base=USD&symbols=KRW&access_key=${ACCESS_KEY}`;
+    const fxRes = await fetch(fxUrl);
+    const fxData = await fxRes.json();
+
+    const usdKrw = fxData?.rates?.KRW;
+
+    if (!usdKrw) {
+      return {
+        statusCode: 500,
+        body: JSON.stringify({
+          error: "환율 정보 없음",
+          message: "KRW 환율 데이터가 존재하지 않습니다.",
+          raw: fxData
+        })
+      };
+    }
+
+    // 3. BTC → KRW 계산
+    const btcKrw = btcUsd * usdKrw;
 
     return {
       statusCode: 200,
       body: JSON.stringify({
-        btc: btcPriceInUSDT,
-        krw: usdToKrw,
-        btc_krw: btcPriceInKRW
+        price: {
+          BTC_USD: btcUsd,
+          USD_KRW: usdKrw,
+          BTC_KRW: btcKrw
+        }
       })
     };
-  } catch (error) {
+  } catch (err) {
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: "업데이트 실패", message: error.message })
+      body: JSON.stringify({
+        error: "API 처리 중 오류 발생",
+        message: err.message
+      })
     };
   }
 };
