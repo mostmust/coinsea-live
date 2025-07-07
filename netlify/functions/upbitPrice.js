@@ -1,34 +1,19 @@
-const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
+const fetch = require("node-fetch");
 
-const symbolList = ['BTC', 'ETH', 'XRP', 'ADA', 'DOGE', 'SOL', 'AVAX', 'MATIC', 'TRX', 'LTC'];
-
-exports.handler = async () => {
+exports.handler = async function () {
   try {
-    const markets = symbolList.map(sym => `KRW-${sym}`).join(',');
-    const res = await fetch(`https://api.upbit.com/v1/ticker?markets=${markets}`);
-    const json = await res.json();
-
-    if (!Array.isArray(json)) {
-      throw new Error('Upbit 응답 형식 오류');
-    }
-
-    const map = {};
-    json.forEach(item => {
-      const symbol = item.market.replace('KRW-', '');
-      map[symbol] = item.trade_price;
-    });
+    const response = await fetch("https://api.upbit.com/v1/ticker?markets=USDT-BTC");
+    const data = await response.json();
 
     return {
       statusCode: 200,
-      body: JSON.stringify(map),
+      headers: { "Access-Control-Allow-Origin": "*" },
+      body: JSON.stringify({ price: data[0].trade_price })
     };
   } catch (error) {
     return {
       statusCode: 500,
-      body: JSON.stringify({
-        error: '업비트 데이터 로딩 실패',
-        detail: error.message,
-      }),
+      body: JSON.stringify({ error: "업비트 시세를 불러오지 못했습니다." })
     };
   }
 };
