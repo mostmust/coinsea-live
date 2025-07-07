@@ -1,64 +1,40 @@
-async function fetchPrices() {
-  const priceInfo = {
-    btcusd: null,
-    usdkrw: null
-  };
+const fetch = require("node-fetch");
 
+exports.handler = async function () {
   try {
-    const btcRes = await fetch("https://timely-jalebi-4e5640.netlify.app/.netlify/functions/upbitPrice");
-    const btcJson = await btcRes.json();
-    priceInfo.btcusd = btcJson.price;
+    // 1. 바이낸스에서 BTC/USDT 가격
+    const binanceRes = await fetch("https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT");
+    const binanceData = await binanceRes.json();
+    const btcPriceInUSDT = parseFloat(binanceData.price);
 
-    const fxRes = await fetch("https://timely-jalebi-4e5640.netlify.app/.netlify/functions/exchangeRate");
-    const fxJson = await fxRes.json();
-    priceInfo.usdkrw = fxJson.krw;
+    // 2. exchangerate.host에서 USD→KRW 환율 (access_key 포함)
+    const accessKey = "d900b09afec85ec2f5f506a607dbb958"; // 사용자의 API 키
+    const fxRes = await fetch(`https://api.exchangerate.host/latest?base=USD&symbols=KRW&access_key=${accessKey}`);
+    const fxData = await fxRes.json();
 
-    document.getElementById("price-info").innerHTML =
-      `BTC/USD 시세: ${priceInfo.btcusd.toLocaleString()} · USD<br>USD/KRW 환율: ${priceInfo.usdkrw.toLocaleString()} · KRW`;
-  } catch (err) {
-    document.getElementById("price-info").innerHTML =
-      "업데이트 실패";
+    if (!fxData.rates || !fxData.rates.KRW) {
+      return {
+        statusCode: 500,
+        body: JSON.stringify({ error: "환율 정보 없음", message: "KRW 환율 데이터가 존재하지 않습니다." })
+      };
+    }
+
+    const usdToKrw = fxData.rates.KRW;
+    const btcPriceInKRW = btcPriceInUSDT * usdToKrw;
+
+    // 3. 결과 반환
+    return {
+      statusCode: 200,
+      body: JSON.stringify({
+        btc: btcPriceInUSDT,
+        krw: usdToKrw,
+        btc_krw: btcPriceInKRW
+      })
+    };
+  } catch (error) {
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: "업데이트 실패", message: error.message })
+    };
   }
-
-  return priceInfo;
-}
-
-async function setupConverter() {
-  const { btcusd, usdkrw } = await fetchPrices();
-
-  if (!btcusd || !usdkrw) return;
-
-  const btcInput = document.getElementById("btc");
-  const usdInput = document.getElementById("usd");
-  const krwInput = document.getElementById("krw");
-
-  function convertFromBTC() {
-    const btc = parseFloat(btcInput.value) || 0;
-    const usd = btc * btcusd;
-    const krw = usd * usdkrw;
-    usdInput.value = usd.toFixed(2);
-    krwInput.value = Math.round(krw);
-  }
-
-  function convertFromUSD() {
-    const usd = parseFloat(usdInput.value) || 0;
-    const btc = usd / btcusd;
-    const krw = usd * usdkrw;
-    btcInput.value = btc.toFixed(8);
-    krwInput.value = Math.round(krw);
-  }
-
-  function convertFromKRW() {
-    const krw = parseFloat(krwInput.value) || 0;
-    const usd = krw / usdkrw;
-    const btc = usd / btcusd;
-    usdInput.value = usd.toFixed(2);
-    btcInput.value = btc.toFixed(8);
-  }
-
-  btcInput.addEventListener("input", convertFromBTC);
-  usdInput.addEventListener("input", convertFromUSD);
-  krwInput.addEventListener("input", convertFromKRW);
-}
-
-window.addEventListener("DOMContentLoaded", setupConverter);
+};
