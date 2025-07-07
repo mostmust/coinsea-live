@@ -2,10 +2,10 @@ const fetch = require("node-fetch");
 
 exports.handler = async function () {
   try {
-    const res = await fetch("https://api.exchangerate.host/latest?base=USD&symbols=KRW");
+    const ACCESS_KEY = "d900b09afec85ec2f5f506a607dbb958"; // ← 꼭 필요!
+    const url = `https://api.exchangerate.host/latest?base=USD&symbols=KRW&access_key=${ACCESS_KEY}`;
+    const res = await fetch(url);
     const data = await res.json();
-
-    console.log("API 응답 전체:", data); // ✅ 디버깅 로그
 
     const rate = data?.rates?.KRW;
 
@@ -15,7 +15,7 @@ exports.handler = async function () {
         body: JSON.stringify({
           error: "환율 정보 없음",
           message: "KRW 환율 데이터가 존재하지 않습니다.",
-          raw: data // ← 원본 응답 같이 보내기 (디버깅용)
+          raw: data // ✅ 원본 응답 확인용
         })
       };
     }
