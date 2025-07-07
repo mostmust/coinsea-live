@@ -2,20 +2,22 @@ const fetch = require("node-fetch");
 
 exports.handler = async function () {
   try {
-    // 1. 업비트 시세 (KRW)
+    // 업비트 BTC 가격 (KRW)
     const upbitRes = await fetch("https://api.upbit.com/v1/ticker?markets=KRW-BTC");
     const upbitData = await upbitRes.json();
     const upbitPriceKRW = upbitData[0].trade_price;
 
-    // 2. 바이낸스 시세 (USDT)
+    // 바이낸스 BTC 가격 (USDT)
     const binanceRes = await fetch("https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT");
     const binanceData = await binanceRes.json();
     const binancePriceUSDT = parseFloat(binanceData.price);
 
-    // 3. 환율 (USD → KRW) — 직접 고정하거나, 일일 환율 API 사용 가능
-    const exchangeRate = 1390; // ✅ 고정값 또는 API 사용 가능
+    // 환율 (USD → KRW)
+    const fxRes = await fetch("https://api.exchangerate-api.com/v4/latest/USD");
+    const fxData = await fxRes.json();
+    const exchangeRate = fxData.rates.KRW;
 
-    // 4. 김치 프리미엄 계산
+    // 김치 프리미엄 계산
     const binancePriceKRW = binancePriceUSDT * exchangeRate;
     const kimchiPremium = ((upbitPriceKRW - binancePriceKRW) / binancePriceKRW) * 100;
 
