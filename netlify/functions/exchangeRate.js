@@ -1,28 +1,20 @@
-const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
+import fetch from 'node-fetch';
 
-exports.handler = async () => {
+export default async function handler(req, res) {
   try {
-    const res = await fetch('https://open.er-api.com/v6/latest/USD');
-    const data = await res.json();
+    const response = await fetch("https://api.exchangerate.host/latest?base=USD&symbols=KRW");
+    const data = await response.json();
+    const krw = data.rates.KRW;
 
-    if (!data || !data.rates || !data.rates.KRW) {
-      throw new Error('환율 정보 없음 (data.rates.KRW)');
-    }
-
-    return {
-      statusCode: 200,
-      body: JSON.stringify({
-        usdToKrw: data.rates.KRW,
-        date: data.time_last_update_utc
-      })
-    };
+    return res.status(200).json({
+      krw,
+      updatedAt: new Date().toISOString()
+    });
   } catch (error) {
-    return {
-      statusCode: 500,
-      body: JSON.stringify({
-        error: '데이터 로딩 실패',
-        detail: error.message
-      })
-    };
+    console.error("환율 API 오류:", error);
+    return res.status(500).json({
+      error: "업데이트 실패",
+      message: error.message
+    });
   }
-};
+}
