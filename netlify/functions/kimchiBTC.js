@@ -1,4 +1,4 @@
-const fetch = require('node-fetch');
+const fetch = require("node-fetch");
 
 exports.handler = async function () {
   try {
@@ -8,13 +8,13 @@ exports.handler = async function () {
       fetch("https://api.exchangerate.host/latest?base=USD&symbols=KRW")
     ]);
 
-    console.log("✅ API 요청 완료");
-
     const upbitData = await upbitRes.json();
     const binanceData = await binanceRes.json();
     const fxData = await fxRes.json();
 
-    console.log("🔄 API 응답 파싱 완료", { upbitData, binanceData, fxData });
+    console.log("📦 Upbit 응답:", upbitData);
+    console.log("📦 Binance 응답:", binanceData);
+    console.log("📦 환율 응답:", fxData);
 
     const upbitPrice = upbitData[0].trade_price;
     const binancePrice = parseFloat(binanceData.price);
@@ -29,7 +29,7 @@ exports.handler = async function () {
         upbitPrice,
         binancePrice,
         usdToKrw,
-        kimchiPremium: kimchiPremium.toFixed(2),
+        kimchiPremium: kimchiPremium.toFixed(2)
       })
     };
   } catch (err) {
