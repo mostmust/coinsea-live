@@ -1,24 +1,27 @@
 const fetch = require("node-fetch");
 
-exports.handler = async function (event, context) {
+exports.handler = async function () {
   try {
-    const res = await fetch("https://timely-jalebi-4e5640.netlify.app/.netlify/functions/exchangeRate");
-    const data = await res.json();
+    const response = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd");
+    const data = await response.json();
 
-    if (data.krw) {
+    if (data.bitcoin && data.bitcoin.usd) {
       return {
         statusCode: 200,
-        body: JSON.stringify({
-          usd: 1,
-          krw: data.krw,
-        }),
+        headers: {
+          "Access-Control-Allow-Origin": "*", // ✅ CORS 해결
+        },
+        body: JSON.stringify({ price: data.bitcoin.usd }),
       };
     } else {
       return {
         statusCode: 500,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+        },
         body: JSON.stringify({
-          error: "환율 없음",
-          message: "KRW 환율을 가져오지 못했습니다.",
+          error: "가격 정보 없음",
+          message: "BTC 가격 데이터가 존재하지 않습니다.",
           raw: data,
         }),
       };
@@ -26,6 +29,9 @@ exports.handler = async function (event, context) {
   } catch (error) {
     return {
       statusCode: 500,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
       body: JSON.stringify({
         error: "서버 오류",
         message: error.message,
