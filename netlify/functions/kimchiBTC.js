@@ -2,22 +2,34 @@ const fetch = require("node-fetch");
 
 exports.handler = async function () {
   try {
-    // 업비트 BTC 가격 (KRW)
+    // 1. 업비트 시세 (KRW)
     const upbitRes = await fetch("https://api.upbit.com/v1/ticker?markets=KRW-BTC");
     const upbitData = await upbitRes.json();
-    const upbitPriceKRW = upbitData[0].trade_price;
+    const upbitPriceKRW = upbitData[0]?.trade_price;
 
-    // 바이낸스 BTC 가격 (USDT)
+    if (!upbitPriceKRW) {
+      throw new Error("업비트 시세를 불러오지 못했습니다.");
+    }
+
+    // 2. 바이낸스 시세 (USDT)
     const binanceRes = await fetch("https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT");
     const binanceData = await binanceRes.json();
-    const binancePriceUSDT = parseFloat(binanceData.price);
+    const binancePriceUSDT = parseFloat(binanceData?.price);
 
-    // 환율 (USD → KRW)
+    if (!binancePriceUSDT) {
+      throw new Error("Binance 시세를 불러오지 못했습니다.");
+    }
+
+    // 3. 환율 (USD → KRW)
     const fxRes = await fetch("https://api.exchangerate-api.com/v4/latest/USD");
     const fxData = await fxRes.json();
-    const exchangeRate = fxData.rates.KRW;
+    const exchangeRate = fxData?.rates?.KRW;
 
-    // 김치 프리미엄 계산
+    if (!exchangeRate) {
+      throw new Error("환율 데이터를 불러오지 못했습니다.");
+    }
+
+    // 4. 김치 프리미엄 계산
     const binancePriceKRW = binancePriceUSDT * exchangeRate;
     const kimchiPremium = ((upbitPriceKRW - binancePriceKRW) / binancePriceKRW) * 100;
 
@@ -28,7 +40,7 @@ exports.handler = async function () {
         upbitPriceKRW,
         binancePriceUSDT,
         exchangeRate,
-        binancePriceKRW,
+        binancePriceKRW: parseInt(binancePriceKRW),
         kimchiPremium: kimchiPremium.toFixed(2)
       })
     };
