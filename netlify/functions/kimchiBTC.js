@@ -12,9 +12,16 @@ exports.handler = async function () {
     const binanceData = await binanceRes.json();
     const fxData = await fxRes.json();
 
-    console.log("📦 Upbit 응답:", upbitData);
-    console.log("📦 Binance 응답:", binanceData);
-    console.log("📦 환율 응답:", fxData);
+    // ⚠️ 응답 검증
+    if (!Array.isArray(upbitData) || !upbitData[0]?.trade_price) {
+      throw new Error("Invalid Upbit response: " + JSON.stringify(upbitData));
+    }
+    if (!binanceData?.price) {
+      throw new Error("Invalid Binance response: " + JSON.stringify(binanceData));
+    }
+    if (!fxData?.rates?.KRW) {
+      throw new Error("Invalid FX response: " + JSON.stringify(fxData));
+    }
 
     const upbitPrice = upbitData[0].trade_price;
     const binancePrice = parseFloat(binanceData.price);
@@ -33,7 +40,7 @@ exports.handler = async function () {
       })
     };
   } catch (err) {
-    console.error("❌ 에러 발생:", err.message);
+    console.error("❌ API 처리 중 에러:", err.message);
     return {
       statusCode: 500,
       body: JSON.stringify({
