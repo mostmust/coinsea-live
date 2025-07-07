@@ -3,103 +3,103 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>김프 실시간 조회 - 코인씨</title>
-  <meta name="description" content="업비트와 바이낸스 가격 차이를 실시간으로 확인하고 김프(프리미엄)를 계산합니다.">
+  <title>비트코인 김치프리미엄</title>
+  <meta name="description" content="실시간 비트코인 김치프리미엄 계산기 | 업비트, 바이낸스, 환율 데이터 기반 자동 계산">
+  <meta property="og:title" content="비트코인 김치프리미엄 실시간 계산기" />
+  <meta property="og:description" content="업비트와 바이낸스 시세, 환율을 비교하여 실시간으로 김프를 확인하세요." />
+  <meta property="og:image" content="https://coinsea.co.kr/img/og-kimchi-btc.png" />
+  <meta property="og:type" content="website" />
+
   <style>
     body {
       font-family: 'Nanum Gothic', sans-serif;
-      margin: 20px;
-      background: #f7f7f7;
+      padding: 20px;
+      background: #fff;
       color: #333;
-    }
-    h1 {
       text-align: center;
-      font-size: 24px;
-      margin-bottom: 20px;
     }
+
+    h1 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .desc {
+      font-size: 14px;
+      margin-bottom: 20px;
+      color: #666;
+    }
+
     table {
-      width: 100%;
-      max-width: 800px;
       margin: 0 auto;
       border-collapse: collapse;
-      background: #fff;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      width: 100%;
+      max-width: 400px;
     }
+
     th, td {
-      border: 1px solid #ddd;
+      border: 1px solid #ccc;
       padding: 10px;
-      text-align: center;
     }
+
     th {
-      background-color: #eee;
+      background-color: #f8f8f8;
     }
-    .positive {
-      color: green;
-    }
-    .negative {
+
+    .error {
       color: red;
+      margin-top: 20px;
     }
-    .timestamp {
-      text-align: center;
-      margin-top: 10px;
-      color: #666;
-      font-size: 14px;
+
+    @media (max-width: 600px) {
+      h1 { font-size: 20px; }
+      .desc { font-size: 13px; }
     }
   </style>
 </head>
 <body>
-  <h1>김프 실시간 조회</h1>
-  <div class="timestamp" id="timestamp">데이터 불러오는 중...</div>
+
+  <h1>📊 비트코인 김치프리미엄</h1>
+  <div class="desc">실시간 기준 · 30초 자동 갱신</div>
+
   <table>
-    <thead>
-      <tr>
-        <th>코인</th>
-        <th>업비트 (KRW)</th>
-        <th>바이낸스 (USD)</th>
-        <th>환산가 (KRW)</th>
-        <th>김프 (%)</th>
-      </tr>
-    </thead>
-    <tbody id="priceTable"></tbody>
+    <tr><th>항목</th><th>값</th></tr>
+    <tr><td>국내가 (Upbit KRW)</td><td id="upbitPrice">-</td></tr>
+    <tr><td>해외가 (Binance USDT)</td><td id="binancePrice">-</td></tr>
+    <tr><td>환율 (1달러 → 원)</td><td id="rate">-</td></tr>
+    <tr><td><strong>김치프리미엄 (%)</strong></td><td id="premium">-</td></tr>
   </table>
 
+  <div class="error" id="error"></div>
+
   <script>
-    async function fetchData() {
+    async function loadKimchiBTC() {
       try {
-        const res = await fetch('/.netlify/functions/prices');
-        const json = await res.json();
+        const res = await fetch("/.netlify/functions/kimchiBTC");
+        const data = await res.json();
 
-        const { timestamp, usdToKrw, data } = json;
-        const tbody = document.getElementById('priceTable');
-        const time = document.getElementById('timestamp');
+        if (data.error) throw new Error(data.error);
 
-        tbody.innerHTML = ''; // 초기화
-        time.textContent = `업데이트 시각: ${new Date(timestamp).toLocaleString()} (USD→KRW: ${usdToKrw.toFixed(2)})`;
+        document.getElementById("upbitPrice").textContent =
+          parseFloat(data.upbitPrice).toLocaleString() + " 원";
 
-        for (const symbol in data) {
-          const { upbit, binance, binanceKrw, premium } = data[symbol];
+        document.getElementById("binancePrice").textContent =
+          parseFloat(data.binancePrice).toLocaleString() + " USDT";
 
-          const row = document.createElement('tr');
+        document.getElementById("rate").textContent =
+          parseFloat(data.usdToKrw).toFixed(2) + " 원";
 
-          row.innerHTML = `
-            <td>${symbol}</td>
-            <td>${upbit ? upbit.toLocaleString() : '-'}</td>
-            <td>${binance ? binance.toFixed(3) : '-'}</td>
-            <td>${binanceKrw ? binanceKrw.toLocaleString(undefined, { maximumFractionDigits: 0 }) : '-'}</td>
-            <td class="${premium > 0 ? 'positive' : 'negative'}">
-              ${premium !== null ? premium + '%' : '-'}
-            </td>
-          `;
-
-          tbody.appendChild(row);
-        }
+        document.getElementById("premium").textContent =
+          parseFloat(data.kimchiPremium).toFixed(2) + " %";
       } catch (err) {
-        document.getElementById('timestamp').textContent = '데이터 로딩 오류: ' + err.message;
+        document.getElementById("error").textContent =
+          "❌ 데이터를 불러오는 데 실패했습니다.";
       }
     }
 
-    fetchData();
-    setInterval(fetchData, 60 * 1000); // 1분마다 자동 업데이트
+    loadKimchiBTC();
+    setInterval(loadKimchiBTC, 30000); // 30초마다 갱신
   </script>
+
 </body>
 </html>
