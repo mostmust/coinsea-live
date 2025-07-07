@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>김치 프리미엄 계산기</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Nanum Gothic', sans-serif;
+      text-align: center;
+      padding: 20px;
+    }
+    .result {
+      margin-top: 30px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🥢 김치 프리미엄 계산기</h1>
+  <div class="result" id="output">데이터 불러오는 중...</div>
+
+  <script>
+    async function fetchKimchi() {
+      try {
+        const res = await fetch("/.netlify/functions/kimchiBTC");
+        const data = await res.json();
+
+        const output = `
+          <p>업비트 시세: <strong>${data.upbitPriceKRW.toLocaleString()} 원</strong></p>
+          <p>바이낸스 시세: <strong>${data.binancePriceUSDT.toLocaleString()} USDT</strong></p>
+          <p>환율: <strong>${data.exchangeRate.toLocaleString()} 원/USD</strong></p>
+          <p>바이낸스 환산 시세: <strong>${data.binancePriceKRW.toLocaleString()} 원</strong></p>
+          <p>📈 김치 프리미엄: <strong>${data.kimchiPremium}%</strong></p>
+        `;
+
+        document.getElementById("output").innerHTML = output;
+      } catch (err) {
+        document.getElementById("output").innerText = "데이터를 불러오지 못했습니다.";
+      }
+    }
+
+    fetchKimchi();
+  </script>
+</body>
+</html>
