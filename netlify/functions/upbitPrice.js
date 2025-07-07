@@ -1,12 +1,9 @@
 export async function handler(event, context) {
   try {
-    // node-fetch를 동적으로 import (ESM 호환 방식)
-    const fetch = (await import('node-fetch')).default;
-
     const response = await fetch("https://api.upbit.com/v1/ticker?markets=USDT-BTC");
 
     if (!response.ok) {
-      throw new Error(`HTTP 오류 상태: ${response.status}`);
+      throw new Error(`HTTP 상태 오류: ${response.status}`);
     }
 
     const data = await response.json();
