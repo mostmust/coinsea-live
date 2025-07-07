@@ -2,15 +2,21 @@ const fetch = require("node-fetch");
 
 exports.handler = async function () {
   try {
+    // 업비트 KRW-BTC 시세
     const resUpbit = await fetch("https://api.upbit.com/v1/ticker?markets=KRW-BTC");
     const upbitData = await resUpbit.json();
     const upbitPrice = upbitData[0].trade_price;
 
-    const resBybit = await fetch("https://api.bybit.com/v5/market/tickers?category=linear&symbol=BTCUSDT");
+    // 바이비트 BTCUSDT 시세 (User-Agent 헤더 추가)
+    const resBybit = await fetch("https://api.bybit.com/v5/market/tickers?category=linear&symbol=BTCUSDT", {
+      headers: {
+        "User-Agent": "Mozilla/5.0"
+      }
+    });
     const bybitJson = await resBybit.json();
-
     const bybitPrice = parseFloat(bybitJson.result.list[0].lastPrice);
 
+    // 환율
     const exchangeRes = await fetch("https://api.exchangerate-api.com/v4/latest/USD");
     const exchangeData = await exchangeRes.json();
     const rate = exchangeData.rates.KRW;
