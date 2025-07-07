@@ -2,39 +2,41 @@ const fetch = require("node-fetch");
 
 exports.handler = async function () {
   try {
-    // ✅ 업비트 가격 가져오기 (KRW)
+    // ✅ 업비트 시세 (KRW)
     const upbitRes = await fetch("https://api.upbit.com/v1/ticker?markets=KRW-BTC");
     const upbitData = await upbitRes.json();
     const upbitPriceKRW = upbitData[0]?.trade_price;
 
-    // ✅ 바이낸스 가격 가져오기 (USDT)
-    const binanceRes = await fetch("https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT", {
-      headers: {
-        "User-Agent": "Mozilla/5.0",
-        "Accept": "*/*"
-      }
-    });
-    const binanceData = await binanceRes.json();
-    const binancePriceUSDT = parseFloat(binanceData.price);
+    // ✅ 바이비트 시세 (USDT)
+    const bybitRes = await fetch("https://api.bybit.com/v2/public/tickers?symbol=BTCUSDT");
+    const bybitData = await bybitRes.json();
 
-    // ✅ 환율 가져오기 (USD → KRW)
+    const bybitPriceUSDT = parseFloat(bybitData?.result?.[0]?.last_price);
+
+    if (!bybitPriceUSDT || isNaN(bybitPriceUSDT)) {
+      throw new Error("Bybit 시세를 불러오지 못했습니다.");
+    }
+
+    // ✅ 환율 (USD → KRW)
     const rateRes = await fetch("https://api.exchangerate-api.com/v4/latest/USD");
     const rateData = await rateRes.json();
     const exchangeRate = rateData.rates.KRW;
 
-    // ✅ 계산: Binance 가격(KRW) = USDT × 환율
-    const binancePriceKRW = binancePriceUSDT * exchangeRate;
+    if (!exchangeRate || isNaN(exchangeRate)) {
+      throw new Error("환율 데이터를 불러오지 못했습니다.");
+    }
 
-    // ✅ 김치 프리미엄 계산 (%)
-    const kimchiPremium = ((upbitPriceKRW - binancePriceKRW) / binancePriceKRW) * 100;
+    // ✅ 계산
+    const bybitPriceKRW = bybitPriceUSDT * exchangeRate;
+    const kimchiPremium = ((upbitPriceKRW - bybitPriceKRW) / bybitPriceKRW) * 100;
 
     return {
       statusCode: 200,
       body: JSON.stringify({
         upbitPriceKRW: Math.round(upbitPriceKRW),
-        binancePriceUSDT: binancePriceUSDT.toFixed(2),
+        bybitPriceUSDT: bybitPriceUSDT.toFixed(2),
         exchangeRate: exchangeRate.toFixed(2),
-        binancePriceKRW: Math.round(binancePriceKRW),
+        bybitPriceKRW: Math.round(bybitPriceKRW),
         kimchiPremium: kimchiPremium.toFixed(2)
       })
     };
