@@ -2,16 +2,30 @@ const fetch = require("node-fetch");
 
 exports.handler = async function () {
   try {
-    const response = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd");
-    const data = await response.json();
+    // 1. 업비트 BTC/KRW 가격
+    const upbitRes = await fetch("https://api.upbit.com/v1/ticker?markets=KRW-BTC");
+    const upbitData = await upbitRes.json();
+    const krwPrice = upbitData?.[0]?.trade_price;
 
-    if (data.bitcoin && data.bitcoin.usd) {
+    // 2. 환율 API (무료 endpoint)
+    const exchangeRes = await fetch("https://api.exchangerate.host/latest?base=USD&symbols=KRW");
+    const exchangeData = await exchangeRes.json();
+    const usdToKrw = exchangeData?.rates?.KRW;
+
+    // 3. 계산
+    if (krwPrice && usdToKrw) {
+      const btcToUsd = krwPrice / usdToKrw;
+
       return {
         statusCode: 200,
         headers: {
-          "Access-Control-Allow-Origin": "*", // ✅ CORS 해결
+          "Access-Control-Allow-Origin": "*",
         },
-        body: JSON.stringify({ price: data.bitcoin.usd }),
+        body: JSON.stringify({
+          btc_krw: krwPrice,
+          usd_krw: usdToKrw,
+          btc_usd: btcToUsd,
+        }),
       };
     } else {
       return {
@@ -20,21 +34,21 @@ exports.handler = async function () {
           "Access-Control-Allow-Origin": "*",
         },
         body: JSON.stringify({
-          error: "가격 정보 없음",
-          message: "BTC 가격 데이터가 존재하지 않습니다.",
-          raw: data,
+          error: "시세 또는 환율 데이터 누락",
+          krwPrice,
+          usdToKrw,
         }),
       };
     }
-  } catch (error) {
+  } catch (err) {
     return {
       statusCode: 500,
       headers: {
         "Access-Control-Allow-Origin": "*",
       },
       body: JSON.stringify({
-        error: "서버 오류",
-        message: error.message,
+        error: "API 처리 오류",
+        message: err.message,
       }),
     };
   }
