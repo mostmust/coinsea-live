@@ -11,11 +11,17 @@ exports.handler = async function (event, context) {
     if (data.success && data.quotes && data.quotes.USDKRW) {
       return {
         statusCode: 200,
+        headers: {
+          "Access-Control-Allow-Origin": "*", // ✅ CORS 해결
+        },
         body: JSON.stringify({ krw: data.quotes.USDKRW }),
       };
     } else {
       return {
         statusCode: 500,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+        },
         body: JSON.stringify({
           error: "환율 정보 없음",
           message: "KRW 환율 데이터가 존재하지 않습니다.",
@@ -26,6 +32,9 @@ exports.handler = async function (event, context) {
   } catch (error) {
     return {
       statusCode: 500,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
       body: JSON.stringify({
         error: "서버 오류",
         message: error.message,
