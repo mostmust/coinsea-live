@@ -2,33 +2,50 @@ const fetch = require("node-fetch");
 
 exports.handler = async function () {
   try {
-    // 1. 업비트에서 원화 BTC 시세 가져오기
-    const upbitResponse = await fetch("https://api.upbit.com/v1/ticker?markets=KRW-BTC");
-    const upbitData = await upbitResponse.json();
-    const priceKRW = upbitData[0]?.trade_price;
+    // 업비트에서 BTC/KRW 시세 가져오기
+    const response = await fetch("https://api.upbit.com/v1/ticker?markets=KRW-BTC");
+    const data = await response.json();
 
-    // 2. exchangerate.host에서 USD/KRW 환율 가져오기
-    const exchangeResponse = await fetch("https://api.exchangerate.host/live?access_key=d900b09afec85ec2f5f506a607dbb958&currencies=KRW&source=USD&format=1");
-    const exchangeData = await exchangeResponse.json();
+    // 환율 가져오기 (USD → KRW)
+    const exchangeRes = await fetch("https://api.exchangerate.host/live?access_key=d900b09afec85ec2f5f506a607dbb958&currencies=KRW&source=USD&format=1");
+    const exchangeData = await exchangeRes.json();
+
+    const krwPrice = data?.[0]?.trade_price;
     const usdToKrw = exchangeData?.quotes?.USDKRW;
 
-    if (!priceKRW || !usdToKrw) {
+    if (krwPrice && usdToKrw) {
+      const usdPrice = krwPrice / usdToKrw;
+
+      return {
+        statusCode: 200,
+        headers: {
+          "Access-Control-Allow-Origin": "*", // ✅ CORS 허용
+        },
+        body: JSON.stringify({ price: usdPrice }),
+      };
+    } else {
       return {
         statusCode: 500,
-        body: JSON.stringify({ error: "데이터 부족" }),
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+        },
+        body: JSON.stringify({
+          error: "시세 또는 환율 정보 부족",
+          krwPrice,
+          usdToKrw,
+        }),
       };
     }
-
-    const priceUSD = priceKRW / usdToKrw;
-
-    return {
-      statusCode: 200,
-      body: JSON.stringify({ price: priceUSD }), // ✅ 이제 달러 기준
-    };
-  } catch (err) {
+  } catch (error) {
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: err.message }),
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
+      body: JSON.stringify({
+        error: "서버 오류",
+        message: error.message,
+      }),
     };
   }
 };
