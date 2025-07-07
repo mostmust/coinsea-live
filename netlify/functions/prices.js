@@ -2,12 +2,12 @@ const fetch = require("node-fetch");
 
 exports.handler = async function () {
   try {
-    // BTC/USD 시세 from CoinGecko
+    // ✅ BTC/USD 시세 가져오기 (CoinGecko)
     const btcRes = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd");
     const btcData = await btcRes.json();
     const btc = btcData.bitcoin.usd;
 
-    // 환율 (Netlify Function)
+    // ✅ USD/KRW 환율 (Netlify Functions)
     const rateRes = await fetch("https://timely-jalebi-4e5640.netlify.app/.netlify/functions/exchangeRate");
     const rateData = await rateRes.json();
     const rate = rateData.krw;
