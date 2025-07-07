@@ -1,6 +1,8 @@
 export async function handler(event, context) {
   try {
+    // node-fetch를 동적으로 import (ESM 호환 방식)
     const fetch = (await import('node-fetch')).default;
+
     const response = await fetch("https://api.upbit.com/v1/ticker?markets=USDT-BTC");
 
     if (!response.ok) {
@@ -21,7 +23,10 @@ export async function handler(event, context) {
   } catch (error) {
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: "업데이트 실패", message: error.message })
+      body: JSON.stringify({
+        error: "업데이트 실패",
+        message: error.message
+      })
     };
   }
 }
