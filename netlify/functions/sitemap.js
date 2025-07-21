@@ -18,9 +18,21 @@ exports.handler = async () => {
   }
 
   const urls = htmlFiles.map(file => {
+    const fullPath = path.join(publicDir, file);
+
+    // 파일의 최종 수정일 가져오기
+    let lastmod = '';
+    try {
+      const stats = fs.statSync(fullPath);
+      lastmod = stats.mtime.toISOString().split('T')[0]; // YYYY-MM-DD 형식
+    } catch (err) {
+      lastmod = new Date().toISOString().split('T')[0]; // 에러 시 오늘 날짜
+    }
+
     return `
   <url>
     <loc>${baseUrl}/${file}</loc>
+    <lastmod>${lastmod}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>`;
