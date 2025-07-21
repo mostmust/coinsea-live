@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BTC 계산기 ↗코인씨</title>
+
+  <!-- SEO 메타태그 -->
+  <meta name="description" content="실시간 비트코인 시세를 기반으로 BTC 수량을 원화(KRW)로 계산하는 간편한 계산기입니다.">
+  <meta name="keywords" content="비트코인 계산기, BTC 계산기, BTC KRW 환산, 비트코인 원화">
+  <meta property="og:title" content="BTC 계산기 - 실시간 비트코인 환산기" />
+  <meta property="og:description" content="실시간 BTC 시세를 기준으로 입력한 비트코인 수량을 자동으로 원화로 환산해주는 계산기입니다." />
+  <meta property="og:image" content="https://coinsea.co.kr/img/og-cal-bitcoin.webp" />
+  <meta property="og:url" content="https://coinsea.co.kr/cal-bitcoin.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="코인씨 CoinSea" />
+
+
+
+<!-- ✅ Google Fonts 최적화 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet"></noscript>
+
+<!-- ✅ Font Awesome 최적화 -->
+<link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"></noscript>
+
+
+<!-- 가장 일반적인 파비콘 -->
+<link rel="icon" href="/favicon.ico" />
+
+<!-- 고해상도 디바이스 대응 -->
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon/android-icon-192x192.png" />
+
+<!-- 애플 터치용 최소 하나 -->
+<link rel="apple-touch-icon" href="/favicon/apple-icon-180x180.png" />
+
+  <style>
+    body {
+      font-family: 'Nanum Gothic', sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #fff;
+      color: #111;
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .rate-info {
+      text-align: center;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .converter {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 480px;
+      margin: 0 auto 20px;
+      
+    }
+.input-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 10px 15px;
+  margin-bottom: 12px;
+  background: #fff;
+  gap: 8px;
+  flex-wrap: nowrap;
+}
+
+.input-group span {
+  font-weight: bold;
+  font-size: 18px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+input#btcField {
+  flex: 1;
+  font-size: 20px;
+  border: none;
+  background: transparent;
+  text-align: right;
+  outline: none;
+  min-width: 0;
+}
+
+    .krw-output {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 20px;
+      padding: 10px 15px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      background: #fff;
+    }
+
+.keypad {
+  display: flex;
+  justify-content: center;
+  margin-top: 12px;
+}
+
+.keypad-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);  /* ✅ 3 → 4열로 변경 */
+  gap: 12px; /* 간격을 더 넓게 */
+}
+
+.keypad-grid button {
+  width: 90px;
+  height: 90px;
+  font-size: 24px;
+  font-weight: bold;
+  border: none;
+  border-radius: 50%;
+  background-color: #f2f2f5;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.keypad-grid button:hover {
+  background-color: #e0e0e5;
+}
+
+@media (max-width: 480px) {
+  .keypad-grid button {
+    width: 70px;
+    height: 70px;
+    font-size: 22px;
+  }
+}
+
+.coupang-banner-wrapper {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.coupang-banner-wrapper iframe,
+.coupang-banner-wrapper div {
+  max-width: 100% !important;
+  height: auto !important;
+}
+
+    .note {
+      font-size: 14px;
+      color: #555;
+      margin-top: 12px;
+    }
+  .content-wrapper {
+  max-width: 800px;       /* 최대 너비 설정 */
+  margin: 0 auto;         /* 가운데 정렬 */
+  padding: 5px;
+  text-align: left;       /* 내용은 좌측 정렬 */
+    }
+
+
+  </style>
+</head>
+<body>
+<div class="content-wrapper">
+  <h2>BTC 계산기</h2>
+
+  <div class="rate-info">
+    <strong>BTC/KRW:</strong> <span id="btcRate">-</span> 원<br/>
+    <small id="updateTime">업데이트 중...</small>
+  </div>
+
+  <div class="converter">
+    <div class="input-group">
+      <span>₿</span>
+      <input type="text" id="btcField" placeholder="0" inputmode="decimal" />
+      <span>BTC</span>
+    </div>
+    <div class="krw-output">
+      <span>₩</span>
+      <span id="krwOutput">0</span>
+      <span>KRW</span>
+    </div>
+  </div>
+
+ <div class="keypad">
+  <div class="keypad-grid">
+    <button onclick="appendValue('0')">0</button>
+    <button onclick="appendValue('1')">1</button>
+    <button onclick="appendValue('2')">2</button>
+    <button onclick="appendValue('3')">3</button>
+
+    <button onclick="appendValue('4')">4</button>
+    <button onclick="appendValue('5')">5</button>
+    <button onclick="appendValue('6')">6</button>
+    <button onclick="appendValue('7')">7</button>
+
+    <button onclick="appendValue('8')">8</button>
+    <button onclick="appendValue('9')">9</button>
+    <button onclick="appendValue('.')">.</button>
+    <button onclick="backspace()">⌫</button>
+  </div>
+</div>
+
+
+<script>
+  let btcRate = 0;
+  const btcField = document.getElementById('btcField');
+  const krwOutput = document.getElementById('krwOutput');
+  const btcRateEl = document.getElementById('btcRate');
+  const updateTimeEl = document.getElementById('updateTime');
+
+  function updateOutput() {
+    const btc = parseFloat(btcField.value) || 0;
+    const krw = btc * btcRate;
+    krwOutput.textContent = krw.toLocaleString(undefined, { maximumFractionDigits: 0 });
+  }
+
+  function appendValue(val) {
+    if (val === '.' && btcField.value.includes('.')) return;
+    btcField.value += val;
+    updateOutput();
+  }
+
+  function backspace() {
+    btcField.value = btcField.value.slice(0, -1);
+    updateOutput();
+  }
+
+  btcField.addEventListener('input', updateOutput);
+
+  async function fetchBTCRate() {
+    btcRateEl.textContent = '로딩 중...';
+    updateTimeEl.textContent = '';
+
+    const timeout = new Promise((_, reject) =>
+      setTimeout(() => reject(new Error('timeout')), 5000)
+    );
+
+    try {
+      const res = await Promise.race([
+        fetch("https://api.upbit.com/v1/ticker?markets=KRW-BTC"),
+        timeout
+      ]);
+      const data = await res.json();
+      btcRate = data[0].trade_price;
+      const now = new Date();
+      btcRateEl.textContent = btcRate.toLocaleString();
+      updateTimeEl.textContent = now.toLocaleDateString() + ' ' + now.toLocaleTimeString();
+      updateOutput();
+    } catch (upbitError) {
+      console.warn("업비트 시세 실패, 빗썸으로 시도:", upbitError);
+
+      try {
+        const res2 = await fetch("https://api.bithumb.com/public/ticker/BTC_KRW");
+        const data2 = await res2.json();
+        btcRate = parseFloat(data2.data.closing_price);
+        const now = new Date();
+        btcRateEl.textContent = btcRate.toLocaleString();
+        updateTimeEl.textContent = now.toLocaleDateString() + ' ' + now.toLocaleTimeString();
+        updateOutput();
+      } catch (bithumbError) {
+        btcRateEl.textContent = '시세 로드 실패';
+        console.error("빗썸 시세도 실패:", bithumbError);
+      }
+    }
+  }
+
+  fetchBTCRate();
+  setInterval(fetchBTCRate, 10000); // 10초마다 갱신
+</script>
+
+
+<br>
+<br>
+<!-- ✅ URL 복사 아이콘 버튼 시작 -->
+<div style="text-align: center; margin-top: 20px;">
+  <div id="copyUrlBtn" title="이 페이지 URL 복사" style="cursor: pointer; display: inline-block;">
+
+<svg height="75px" width="75px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 427.479 427.479" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path style="fill:#51CAF4;" d="M214.396,427.479h-11c0-22.658,5.655-34.109,11.124-45.183c5.137-10.399,9.987-20.222,9.987-40.311 c0-20.089-4.852-29.912-9.987-40.311c-5.469-11.074-11.124-22.524-11.124-45.182c0-22.658,5.655-34.109,11.124-45.183 c5.136-10.399,9.987-20.222,9.987-40.312c0-20.091-4.852-29.914-9.987-40.314c-5.469-11.075-11.124-22.526-11.124-45.185 s5.655-34.11,11.124-45.185c5.136-10.4,9.987-20.223,9.987-40.313h11c0,22.659-5.655,34.11-11.124,45.184 c-5.136,10.4-9.987,20.224-9.987,40.314s4.852,29.914,9.987,40.314c5.469,11.075,11.124,22.526,11.124,45.185 c0,22.658-5.655,34.109-11.124,45.183c-5.136,10.399-9.987,20.222-9.987,40.312c0,20.089,4.852,29.912,9.987,40.311 c5.469,11.074,11.124,22.524,11.124,45.182s-5.655,34.108-11.124,45.182C219.248,397.566,214.396,407.389,214.396,427.479z"></path> <path style="fill:#51CAF4;" d="M208.91,76.496L208.91,76.496c-29.822,0-53.997-24.175-53.997-53.997v0h0 C184.734,22.499,208.91,46.674,208.91,76.496L208.91,76.496z"></path> <path style="fill:#51CAF4;" d="M208.91,239.238L208.91,239.238c-29.822,0-53.997-24.175-53.997-53.997v0h0 C184.734,185.241,208.91,209.416,208.91,239.238L208.91,239.238z"></path> <path style="fill:#51CAF4;" d="M226.909,371.981L226.909,371.981c-29.822,0-53.997-24.175-53.997-53.997v0h0 C202.734,317.984,226.909,342.159,226.909,371.981L226.909,371.981z"></path> <path style="fill:#51CAF4;" d="M217.909,122.994L217.909,122.994c29.822,0,53.997-24.175,53.997-53.997v0h0 C242.085,68.996,217.909,93.172,217.909,122.994L217.909,122.994z"></path> <path style="fill:#51CAF4;" d="M217.909,285.736L217.909,285.736c29.822,0,53.997-24.175,53.997-53.997v0h0 C242.085,231.738,217.909,255.914,217.909,285.736L217.909,285.736z"></path> <path style="fill:#51CAF4;" d="M78.562,427.479h-11c0-22.658,5.655-34.108,11.124-45.183c5.136-10.399,9.987-20.222,9.987-40.311 c0-20.089-4.852-29.911-9.987-40.311c-5.469-11.074-11.124-22.524-11.124-45.182c0-22.658,5.655-34.109,11.124-45.183 c5.136-10.399,9.987-20.222,9.987-40.312c0-20.091-4.852-29.914-9.987-40.314c-5.469-11.075-11.124-22.526-11.124-45.185h11 c0,20.091,4.852,29.914,9.987,40.314c5.469,11.075,11.124,22.526,11.124,45.185c0,22.658-5.655,34.109-11.124,45.183 c-5.136,10.399-9.987,20.222-9.987,40.312c0,20.089,4.852,29.911,9.987,40.311c5.469,11.074,11.124,22.524,11.124,45.182 s-5.655,34.108-11.124,45.182C83.414,397.566,78.562,407.389,78.562,427.479z"></path> <path style="fill:#51CAF4;" d="M73.076,239.238L73.076,239.238c-29.822,0-53.997-24.175-53.997-53.997v0h0 C48.901,185.241,73.076,209.416,73.076,239.238L73.076,239.238z"></path> <path style="fill:#51CAF4;" d="M91.898,368.981L91.898,368.981c-29.822,0-53.997-24.175-53.997-53.997v0h0 C67.723,314.984,91.898,339.159,91.898,368.981L91.898,368.981z"></path> <path style="fill:#51CAF4;" d="M82.076,122.994L82.076,122.994c29.822,0,53.997-24.175,53.997-53.997v0h0 C106.251,68.996,82.076,93.172,82.076,122.994L82.076,122.994z"></path> <path style="fill:#51CAF4;" d="M82.076,285.736L82.076,285.736c29.822,0,53.997-24.175,53.997-53.997v0h0 C106.251,231.738,82.076,255.914,82.076,285.736L82.076,285.736z"></path> <path style="fill:#51CAF4;" d="M347.889,427.479h-11c0-22.658,5.655-34.108,11.124-45.183c5.137-10.399,9.987-20.222,9.987-40.311 c0-20.089-4.852-29.912-9.987-40.311c-5.469-11.074-11.124-22.524-11.124-45.182c0-22.658,5.655-34.109,11.124-45.183 c5.136-10.399,9.987-20.222,9.987-40.312h11c0,22.658-5.655,34.109-11.124,45.183c-5.136,10.399-9.987,20.222-9.987,40.312 c0,20.089,4.852,29.912,9.987,40.311c5.469,11.074,11.124,22.524,11.124,45.182s-5.655,34.108-11.124,45.182 C352.741,397.566,347.889,407.389,347.889,427.479z"></path> <path style="fill:#51CAF4;" d="M342.403,239.238L342.403,239.238c-29.822,0-53.997-24.175-53.997-53.997v0h0 C318.228,185.241,342.403,209.416,342.403,239.238L342.403,239.238z"></path> <path style="fill:#51CAF4;" d="M355.902,373.481L355.902,373.481c-29.822,0-53.997-24.175-53.997-53.997v0h0 C331.727,319.484,355.902,343.659,355.902,373.481L355.902,373.481z"></path> <path style="fill:#51CAF4;" d="M354.403,302.235L354.403,302.235c29.822,0,53.997-24.175,53.997-53.997v0h0 C378.578,248.237,354.403,272.413,354.403,302.235L354.403,302.235z"></path> </g> </g></svg>
+
+  </div>
+</div>
+
+<script>
+  document.getElementById('copyUrlBtn').addEventListener('click', function () {
+    const url = window.location.href;
+    navigator.clipboard.writeText(url).then(function () {
+      alert('✅ 페이지 URL이 복사되었습니다!');
+    }, function () {
+      alert('❌ URL 복사에 실패했습니다. 브라우저를 확인해주세요.');
+    });
+  });
+</script>
+
+<div class="note" style="text-align: center; margin-top: 0;">
+URL 복사
+</div>
+<!-- ✅ URL 복사 아이콘 버튼 종료 -->
+
+<br>
+
+</div>
+
+<script> <!-- ■ 하단 일괄 공지 -->
+  document.addEventListener("DOMContentLoaded", function () {
+    fetch("notice-bottom.html")
+      .then(res => res.text())
+      .then(html => {
+        const tempDiv = document.createElement("div");
+        tempDiv.innerHTML = html;
+        document.body.appendChild(tempDiv); // ✅ body 맨 끝에 삽입
+      });
+  });
+</script>
+</body>
+</html>

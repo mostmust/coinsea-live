@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>코인 현물거래 따라하기 | 업비트 완전 가이드</title>
+
+<!-- ✅ 검색엔진용 설명 -->
+<meta name="description" content="업비트를 포함한 주요 거래소에서 코인을 입금, 거래, 출금하는 모든 과정을 따라하는 가이드입니다. 초보자도 쉽게 따라할 수 있는 현물거래 방법을 단계별로 안내합니다.">
+
+<!-- ✅ 검색 로봇 허용 -->
+<meta name="robots" content="index, follow" />
+
+<!-- ✅ Open Graph (카카오톡, 네이버 블로그, 페이스북 등 공유 시) -->
+<meta property="og:title" content="코인 현물거래 따라하기 | 업비트 완전 가이드" />
+<meta property="og:description" content="회원가입부터 신분인증, 입출금, 코인거래까지 단계별 설명! 초보자도 쉽게 따라하는 업비트 현물거래 방법" />
+<meta property="og:image" content="https://coinsea.co.kr/img/og-trade.webp" />
+<meta property="og:url" content="https://coinsea.co.kr/trade.html" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="ko_KR" />
+
+<!-- ✅ Twitter 카드 미리보기 -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="코인 현물거래 따라하기 | 초보자 가이드" />
+<meta name="twitter:description" content="업비트에서 회원가입, 입금, 거래, 출금까지 모든 과정 따라하기. 누구나 쉽게 시작할 수 있는 코인 거래 가이드" />
+<meta name="twitter:image" content="https://coinsea.co.kr/img/og-trade.webp" />
+
+
+<!-- ✅ Google Fonts 최적화 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet"></noscript>
+
+<!-- ✅ Font Awesome 최적화 -->
+<link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"></noscript>
+
+
+ <!-- 가장 일반적인 파비콘 -->
+<link rel="icon" href="/favicon.ico" />
+
+<!-- 고해상도 디바이스 대응 -->
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon/android-icon-192x192.png" />
+
+<!-- 애플 터치용 최소 하나 -->
+<link rel="apple-touch-icon" href="/favicon/apple-icon-180x180.png" />
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Nanum Gothic', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      background: #fff;
+      color: #333;
+      overflow-x: hidden;
+    }
+
+  .content-wrapper {
+  max-width: 800px;       /* 최대 너비 설정 */
+  margin: 0 auto;         /* 가운데 정렬 */
+  padding: 20px;
+  text-align: left;       /* 내용은 좌측 정렬 */
+    }
+
+    .main-title {
+      font-size: 26px;
+      font-weight: bold;
+      margin-bottom: 25px;
+      position: relative;
+      display: inline-block;
+      z-index: 0;
+    }
+
+    .main-title::after {
+      content: '';
+      position: absolute;
+      left: -7.5%;
+      right: -7.5%;
+      bottom: 1px;
+      height: 39%;
+      background-color: #f8cf26;
+      z-index: -1;
+    }
+
+    .sub-title-box {
+      font-size: 20px;
+      font-weight: bold;
+      margin-top: 30px;
+      margin-bottom: 10px;
+      color: #222;
+      padding-left: 12px;
+      border-left: 6px solid #546382;
+    }
+
+    .small-text {
+      font-size: 13px;
+      color: #777;
+      margin-top: 20px;
+    }
+
+    .link-list {
+      list-style: none;
+      padding: 0;
+      margin: 20px 0;
+    }
+
+    .link-list li {
+      margin-bottom: 10px;
+    }
+
+    .link-list a {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: inherit;
+      background-color: #f9f9f9;
+      padding: 10px 14px;
+      border-radius: 6px;
+      transition: background-color 0.2s ease, transform 0.1s ease;
+    }
+
+    .link-list a:hover,
+    .link-list a:focus {
+      background-color: #fff9cc;
+    }
+
+    .link-list a:active {
+      background-color: #fff176;
+      transform: scale(0.97);
+    }
+
+    .link-list span.number {
+      font-weight: bold;
+      margin-right: 10px;
+      color: #546382;
+      width: 24px;
+      text-align: right;
+    }
+
+    .link-list span.text {
+      flex: 1;
+    }
+
+   .note {
+      font-size: 14px;
+      color: #555;
+      margin-top: -20px;
+    }
+
+    .coupang-banner-wrapper {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: auto;
+      display: flex;
+      justify-content: center;
+      margin-top: 30px;
+    }
+
+    .coupang-banner-wrapper iframe,
+    .coupang-banner-wrapper div {
+      max-width: 100% !important;
+      height: auto !important;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="content-wrapper">
+    <div class="main-title">코인 현물거래 방법</div>
+
+    <p>국내 1위 거래소인 업비트 거래소의 이용 방법이니 천천히 따라해 보시기 바랍니다.</p>
+
+    <div class="sub-title-box">업비트 거래소(앱) 이용 방법</div>
+
+    <ul class="link-list">
+      <li><a href="https://blog.naver.com/coinjob/223150460618" target="_blank"><span class="number">1.</span><span class="text">회원 가입 따라하기</span></a></li>
+      <li><a href="https://blog.naver.com/coinjob/223150484376" target="_blank"><span class="number">2.</span><span class="text">신분 인증 따라하기</span></a></li>
+      <li><a href="https://blog.naver.com/coinjob/223150490294" target="_blank"><span class="number">3.</span><span class="text">K뱅크 등록 따라하기</span></a></li>
+      <li><a href="https://blog.naver.com/coinjob/223150553099" target="_blank"><span class="number">4.</span><span class="text">원화 입금 따라하기</span></a></li>
+      <li><a href="https://blog.naver.com/coinjob/223150559454" target="_blank"><span class="number">5.</span><span class="text">코인 거래 따라하기</span></a></li>
+      <li><a href="https://blog.naver.com/coinjob/223765274077" target="_blank"><span class="number">6.</span><span class="text">출금주소 등록 방법</span></a></li>
+      <li><a href="https://blog.naver.com/coinjob/223765489305" target="_blank"><span class="number">7.</span><span class="text">코인 출금 따라하기 (USDT)</span></a></li>
+      <li><a href="https://blog.naver.com/coinjob/223766714848" target="_blank"><span class="number">8.</span><span class="text">코인 입금 따라하기 (USDT)</span></a></li>
+      <li><a href="https://blog.naver.com/coinjob/223150576323" target="_blank"><span class="number">9.</span><span class="text">원화 출금 따라하기</span></a></li>
+      <li><a href="https://blog.naver.com/coinjob/223382458746" target="_blank"><span class="number">10.</span><span class="text">개인지갑 주소등록</span></a></li>
+      <li><a href="https://blog.naver.com/coinjob/223151485934" target="_blank"><span class="number">11.</span><span class="text">현금영수증 발급받기</span></a></li>
+    </ul>
+
+    <div class="small-text">
+      * 거래소만 다를 뿐 진행방식은 타 거래소도 동일하니 천천히 따라해 보시기 바랍니다.
+    </div>
+<br><br>
+<!-- ✅ URL 복사 아이콘 버튼 시작 -->
+<div style="text-align: center; margin-top: 20px;">
+  <div id="copyUrlBtn" title="이 페이지 URL 복사" style="cursor: pointer; display: inline-block;">
+
+<svg height="75px" width="75px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 427.479 427.479" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path style="fill:#51CAF4;" d="M214.396,427.479h-11c0-22.658,5.655-34.109,11.124-45.183c5.137-10.399,9.987-20.222,9.987-40.311 c0-20.089-4.852-29.912-9.987-40.311c-5.469-11.074-11.124-22.524-11.124-45.182c0-22.658,5.655-34.109,11.124-45.183 c5.136-10.399,9.987-20.222,9.987-40.312c0-20.091-4.852-29.914-9.987-40.314c-5.469-11.075-11.124-22.526-11.124-45.185 s5.655-34.11,11.124-45.185c5.136-10.4,9.987-20.223,9.987-40.313h11c0,22.659-5.655,34.11-11.124,45.184 c-5.136,10.4-9.987,20.224-9.987,40.314s4.852,29.914,9.987,40.314c5.469,11.075,11.124,22.526,11.124,45.185 c0,22.658-5.655,34.109-11.124,45.183c-5.136,10.399-9.987,20.222-9.987,40.312c0,20.089,4.852,29.912,9.987,40.311 c5.469,11.074,11.124,22.524,11.124,45.182s-5.655,34.108-11.124,45.182C219.248,397.566,214.396,407.389,214.396,427.479z"></path> <path style="fill:#51CAF4;" d="M208.91,76.496L208.91,76.496c-29.822,0-53.997-24.175-53.997-53.997v0h0 C184.734,22.499,208.91,46.674,208.91,76.496L208.91,76.496z"></path> <path style="fill:#51CAF4;" d="M208.91,239.238L208.91,239.238c-29.822,0-53.997-24.175-53.997-53.997v0h0 C184.734,185.241,208.91,209.416,208.91,239.238L208.91,239.238z"></path> <path style="fill:#51CAF4;" d="M226.909,371.981L226.909,371.981c-29.822,0-53.997-24.175-53.997-53.997v0h0 C202.734,317.984,226.909,342.159,226.909,371.981L226.909,371.981z"></path> <path style="fill:#51CAF4;" d="M217.909,122.994L217.909,122.994c29.822,0,53.997-24.175,53.997-53.997v0h0 C242.085,68.996,217.909,93.172,217.909,122.994L217.909,122.994z"></path> <path style="fill:#51CAF4;" d="M217.909,285.736L217.909,285.736c29.822,0,53.997-24.175,53.997-53.997v0h0 C242.085,231.738,217.909,255.914,217.909,285.736L217.909,285.736z"></path> <path style="fill:#51CAF4;" d="M78.562,427.479h-11c0-22.658,5.655-34.108,11.124-45.183c5.136-10.399,9.987-20.222,9.987-40.311 c0-20.089-4.852-29.911-9.987-40.311c-5.469-11.074-11.124-22.524-11.124-45.182c0-22.658,5.655-34.109,11.124-45.183 c5.136-10.399,9.987-20.222,9.987-40.312c0-20.091-4.852-29.914-9.987-40.314c-5.469-11.075-11.124-22.526-11.124-45.185h11 c0,20.091,4.852,29.914,9.987,40.314c5.469,11.075,11.124,22.526,11.124,45.185c0,22.658-5.655,34.109-11.124,45.183 c-5.136,10.399-9.987,20.222-9.987,40.312c0,20.089,4.852,29.911,9.987,40.311c5.469,11.074,11.124,22.524,11.124,45.182 s-5.655,34.108-11.124,45.182C83.414,397.566,78.562,407.389,78.562,427.479z"></path> <path style="fill:#51CAF4;" d="M73.076,239.238L73.076,239.238c-29.822,0-53.997-24.175-53.997-53.997v0h0 C48.901,185.241,73.076,209.416,73.076,239.238L73.076,239.238z"></path> <path style="fill:#51CAF4;" d="M91.898,368.981L91.898,368.981c-29.822,0-53.997-24.175-53.997-53.997v0h0 C67.723,314.984,91.898,339.159,91.898,368.981L91.898,368.981z"></path> <path style="fill:#51CAF4;" d="M82.076,122.994L82.076,122.994c29.822,0,53.997-24.175,53.997-53.997v0h0 C106.251,68.996,82.076,93.172,82.076,122.994L82.076,122.994z"></path> <path style="fill:#51CAF4;" d="M82.076,285.736L82.076,285.736c29.822,0,53.997-24.175,53.997-53.997v0h0 C106.251,231.738,82.076,255.914,82.076,285.736L82.076,285.736z"></path> <path style="fill:#51CAF4;" d="M347.889,427.479h-11c0-22.658,5.655-34.108,11.124-45.183c5.137-10.399,9.987-20.222,9.987-40.311 c0-20.089-4.852-29.912-9.987-40.311c-5.469-11.074-11.124-22.524-11.124-45.182c0-22.658,5.655-34.109,11.124-45.183 c5.136-10.399,9.987-20.222,9.987-40.312h11c0,22.658-5.655,34.109-11.124,45.183c-5.136,10.399-9.987,20.222-9.987,40.312 c0,20.089,4.852,29.912,9.987,40.311c5.469,11.074,11.124,22.524,11.124,45.182s-5.655,34.108-11.124,45.182 C352.741,397.566,347.889,407.389,347.889,427.479z"></path> <path style="fill:#51CAF4;" d="M342.403,239.238L342.403,239.238c-29.822,0-53.997-24.175-53.997-53.997v0h0 C318.228,185.241,342.403,209.416,342.403,239.238L342.403,239.238z"></path> <path style="fill:#51CAF4;" d="M355.902,373.481L355.902,373.481c-29.822,0-53.997-24.175-53.997-53.997v0h0 C331.727,319.484,355.902,343.659,355.902,373.481L355.902,373.481z"></path> <path style="fill:#51CAF4;" d="M354.403,302.235L354.403,302.235c29.822,0,53.997-24.175,53.997-53.997v0h0 C378.578,248.237,354.403,272.413,354.403,302.235L354.403,302.235z"></path> </g> </g></svg>
+
+  </div>
+</div>
+
+<script>
+  document.getElementById('copyUrlBtn').addEventListener('click', function () {
+    const url = window.location.href;
+    navigator.clipboard.writeText(url).then(function () {
+      alert('✅ 페이지 URL이 복사되었습니다!');
+    }, function () {
+      alert('❌ URL 복사에 실패했습니다. 브라우저를 확인해주세요.');
+    });
+  });
+</script>
+
+<div class="note" style="text-align: center; margin-top: 0;">
+URL 복사
+</div>
+<!-- ✅ URL 복사 아이콘 버튼 종료 -->
+
+
+ <br>
+<script> <!-- ■ 하단 일괄 공지 -->
+  document.addEventListener("DOMContentLoaded", function () {
+    fetch("notice-bottom.html")
+      .then(res => res.text())
+      .then(html => {
+        const tempDiv = document.createElement("div");
+        tempDiv.innerHTML = html;
+        document.body.appendChild(tempDiv); // ✅ body 맨 끝에 삽입
+      });
+  });
+</script>
+</body>
+</html>

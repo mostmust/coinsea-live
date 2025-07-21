@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>파일명 일괄변경기</title>
+
+
+<!-- ✅ SEO 및 Open Graph + Twitter 메타태그 -->
+<meta name="title" content="파일명 일괄변경기" />
+<meta name="description" content="파일 이름에 접두사/접미사 추가, 특정 문자열 제거 등 파일명을 일괄적으로 쉽게 수정할 수 있는 도구입니다." />
+<meta name="keywords" content="파일명 일괄변경, 파일명 일괄수정, 파일 이름 변경, 일괄이름변경기, rename tool, 코인씨, 파일명 편집" />
+<meta name="author" content="CoinSea" />
+<meta name="robots" content="index, follow" />
+
+<!-- ✅ Open Graph (SNS 공유용) -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="파일명 일괄변경기" />
+<meta property="og:description" content="텍스트 추가, 제거를 통해 여러 파일명을 한번에 바꿔보세요." />
+<meta property="og:url" content="https://coinsea.co.kr/util-filename-exchange.html" />
+<meta property="og:image" content="https://coinsea.co.kr/img/og-util-filename-exchange.webp" />
+<meta property="og:site_name" content="코인씨" />
+<meta property="og:locale" content="ko_KR" />
+
+<!-- ✅ Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="파일명 일괄변경기" />
+<meta name="twitter:description" content="파일 이름을 한꺼번에 변경할 수 있는 간편한 도구입니다." />
+<meta name="twitter:image" content="https://coinsea.co.kr/img/og-util-filename-exchange.webp" />
+
+
+<!-- ✅ Google Fonts 최적화 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet"></noscript>
+
+<!-- ✅ Font Awesome 최적화 -->
+<link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"></noscript>
+
+
+<!-- 가장 일반적인 파비콘 -->
+<link rel="icon" href="/favicon.ico" />
+
+<!-- 고해상도 디바이스 대응 -->
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon/android-icon-192x192.png" />
+
+<!-- 애플 터치용 최소 하나 -->
+<link rel="apple-touch-icon" href="/favicon/apple-icon-180x180.png" />
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Nanum Gothic', sans-serif;
+      background: #ffffff;
+      margin: 0;
+      padding: 20px;
+      color: #333;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 22px;
+    }
+    textarea {
+      width: 100%;
+      height: 180px;
+      padding: 10px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      resize: vertical;
+    }
+    input[type="file"],
+    input[type="text"],
+    button {
+      width: 100%;
+      padding: 10px;
+      font-size: 14px;
+      margin-top: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .controls {
+      margin-top: 20px;
+    }
+    .label {
+      font-weight: bold;
+      margin-top: 15px;
+      display: block;
+    }
+    #result {
+      margin-top: 20px;
+      background: #fff;
+      padding: 10px;
+      border: 1px solid #ddd;
+      white-space: pre-wrap;
+      min-height: 100px;
+      font-size: 14px;
+    }
+    .footer {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      margin-top: 10px;
+    }
+    .notice {
+      font-size: 13px;
+      color: #e67e22;
+      margin-bottom: 10px;
+    }
+    button.copy {
+      background: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button.copy:hover {
+      background: #45a049;
+    }
+
+    @media (min-width: 500px) {
+      .footer {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+
+.coupang-banner-wrapper {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.coupang-banner-wrapper iframe,
+.coupang-banner-wrapper div {
+  max-width: 100% !important;
+  height: auto !important;
+}
+  .content-wrapper {
+  max-width: 800px;       /* 최대 너비 설정 */
+  margin: 0 auto;         /* 가운데 정렬 */
+  padding: 0px;
+  text-align: left;       /* 내용은 좌측 정렬 */
+    }
+
+
+  </style>
+</head>
+<body>
+<div class="content-wrapper"> <!-- ■ 전체를 감싸는 DIV 시작 -->
+
+  <div class="container">
+    <h1>📁 파일명 일괄변경기</h1>
+
+    <label class="label">파일 선택 (파일 이름 자동 불러오기):</label>
+    <input type="file" id="fileInput" multiple>
+
+    <label class="label">선택된 파일명 목록:</label>
+    <textarea id="inputNames" placeholder="파일을 선택하면 자동 입력됩니다."></textarea>
+
+    <div class="controls">
+      <label class="label">추가할 텍스트:</label>
+      <input type="text" id="prefix" placeholder="앞에 추가: 예) new_">
+      <input type="text" id="suffix" placeholder="뒤에 추가 (확장자 앞): 예) _v2">
+
+      <label class="label">제거할 텍스트:</label>
+      <input type="text" id="removeText" placeholder="예: copy">
+
+      <button onclick="processFilenames()">변경하기</button>
+      <button onclick="resetAll()">초기화</button>
+    </div>
+
+    <h3>📝 변경 결과:</h3>
+    <div id="result"></div>
+
+    <div class="footer">
+      <div class="notice">
+        *실제 파일명을 변경하는 것이 아니라 변경된 이름을 일괄 복사하는 기능입니다.
+      </div>
+      <button class="copy" onclick="copyResult()">📋 결과 복사</button>
+    </div>
+  </div>
+
+  <script>
+    const fileInput = document.getElementById('fileInput');
+    const inputNames = document.getElementById('inputNames');
+
+    fileInput.addEventListener('change', () => {
+      const files = Array.from(fileInput.files);
+      const names = files.map(file => file.name);
+      inputNames.value = names.join('\n');
+    });
+
+    function processFilenames() {
+      const input = inputNames.value.trim();
+      const prefix = document.getElementById('prefix').value;
+      const suffix = document.getElementById('suffix').value;
+      const removeText = document.getElementById('removeText').value;
+      const lines = input.split(/\r?\n/);
+
+      const result = lines.map(line => {
+        let name = line.trim();
+        if (!name) return '';
+
+        if (removeText) {
+          name = name.split(removeText).join('');
+        }
+
+        const dotIndex = name.lastIndexOf('.');
+        let baseName = name;
+        let ext = '';
+
+        if (dotIndex !== -1) {
+          baseName = name.substring(0, dotIndex);
+          ext = name.substring(dotIndex);
+        }
+
+        return prefix + baseName + suffix + ext;
+      });
+
+      document.getElementById('result').innerText = result.join('\n');
+    }
+
+    function resetAll() {
+      fileInput.value = '';
+      inputNames.value = '';
+      document.getElementById('prefix').value = '';
+      document.getElementById('suffix').value = '';
+      document.getElementById('removeText').value = '';
+      document.getElementById('result').innerText = '';
+    }
+
+    function copyResult() {
+      const resultText = document.getElementById('result').innerText;
+      navigator.clipboard.writeText(resultText).then(() => {
+        alert('복사되었습니다!');
+      });
+    }
+  </script>
+
+
+</div> <!-- ■ 전체를 감싸는 DIV 종료 -->
+</body>
+</html>

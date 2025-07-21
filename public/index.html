@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="naver-site-verification" content="a9af929a1a005875c6d2ff671f2c17bbf03ef28d" />
+<meta name="google-adsense-account" content="ca-pub-7475413627635820">
+
+  <title>코인씨 | 코인초보 가이드북</title>
+
+<!-- 사이트 설명 (네이버/구글 검색에 노출될 설명) -->
+  <meta name="description" content="코인씨(CoinSea)는 초보자에게 업비트, 바이낸스, 바이비트 등 국내외 거래소를 쉽게 이용할 수 있는 정보을 제공합니다.">
+
+  <!-- 로봇 메타태그 (검색 노출 허용) -->
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph (SNS 공유용) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://coinsea.co.kr/" />
+  <meta property="og:title" content="코인씨 | 코인초보 가이드북" />
+  <meta property="og:description" content="비트코인 거래소 비교, 할인코드, 선물거래 방법, 펀딩비, 롱숏비율, 트래블룰 등 암호화폐 정보를 쉽게 정리한 코인씨(CoinSea)" />
+  <meta property="og:image" content="https://coinsea.co.kr/img/og-index.webp" />
+  <meta property="og:locale" content="ko_KR" />
+
+  <!-- Twitter 카드 -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="코인씨 | 코인초보 가이드북" />
+  <meta name="twitter:description" content="비트코인 거래소 비교, 할인코드, 선물거래 방법, 펀딩비, 롱숏비율, 트래블룰 등 암호화폐 정보를 쉽게 정리한 코인씨(CoinSea)" />
+  <meta name="twitter:image" content="https://coinsea.co.kr/img/og-index.webp" />
+
+<!-- ✅ Font Awesome 최적화 -->
+<link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"></noscript>
+
+
+<!-- 가장 일반적인 파비콘 -->
+<link rel="icon" href="/favicon.ico" />
+
+<!-- 고해상도 디바이스 대응 -->
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon/android-icon-192x192.png" />
+
+<!-- 애플 터치용 최소 하나 -->
+<link rel="apple-touch-icon" href="/favicon/apple-icon-180x180.png" />
+
+
+
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  @font-face {
+    font-family: 'Nanum Gothic';
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+    src: url('/font/NanumGothic-Regular.woff2') format('woff2'),
+         url('/font/NanumGothic-Regular.woff') format('woff');
+  }
+
+  @font-face {
+    font-family: 'Nanum Gothic';
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+    src: url('/font/NanumGothic-Bold.woff2') format('woff2'),
+         url('/font/NanumGothic-Bold.woff') format('woff');
+  }
+
+  @font-face {
+    font-family: 'Nanum Gothic';
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap;
+    src: url('/font/NanumGothic-ExtraBold.woff2') format('woff2'),
+         url('/font/NanumGothic-ExtraBold.woff') format('woff');
+  }
+
+  html, body {
+    font-family: 'Nanum Gothic', sans-serif;
+    height: 100%;
+    overflow: hidden;
+    scroll-behavior: smooth;
+  }
+
+.top-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: #fff;
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;         /* ✅ 좌우 패딩을 넓게 조정 */
+  column-gap: 8px;
+  z-index: 1002;
+  transition: top 0.3s ease;
+}
+
+  .menu-btn {
+    width: 18px;
+    height: 20px;
+    margin-right: 10px;
+    margin-left: 5px;
+    cursor: pointer;
+  }
+
+  .menu-btn span {
+    display: block;
+    height: 2px;
+    background: #333;
+    margin: 5px 0;
+    border-radius: 2px;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+    font-size: 18px;
+  }
+ .logo-img {
+    width: 115px;
+    height: auto;
+  }
+  .logo i {
+    color: #f2a900;
+    margin-right: 6px;
+    font-size: 16px;
+  }
+
+  .logo span {
+    font-weight: bold;
+    color: #333;
+    font-size: 16px;
+  }
+
+  .pc-menu { display: none; }
+
+.top-icons {
+  display: flex;
+  gap: 10px;
+  margin-left: auto;
+  flex-wrap: nowrap;       /* ✅ 줄바꿈 방지 */
+}
+
+.top-icons .icon-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 12px;
+  color: #151515;
+  cursor: pointer;
+  transition: color 0.3s;
+  width: 50px;             /* ✅ 기존보다 살짝 너비 축소 */
+  min-height: 60px;
+  flex-shrink: 0;          /* ✅ 줄어들지 않게 고정 */
+}
+
+  .top-icons .icon-block i {
+    font-size: 18px;
+    margin-bottom: 2px;
+  }
+
+  .top-icons .icon-block:hover { color: #318bff; }
+  .top-icons .icon-block.code { color: #ff2b01; }
+  .top-icons .icon-block.code:hover { color: #318bff; }
+
+ .side-menu {
+  position: fixed;
+  top: 0;
+  left: -250px;
+  width: 250px;
+  height: 100%;
+  background: #fff;
+  color: #000;
+  padding: 60px 20px;
+  transition: left 0.3s ease;
+  z-index: 1001; /* 오버레이보다 크도록 설정 */
+  overflow-y: auto;
+}
+
+  .side-menu a {
+    display: block;
+    color: #000;
+    text-decoration: none;
+    margin: 15px 0;
+    font-size: 17px;
+  }
+
+  .overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: none;
+  z-index: 999; /* 낮은 값으로 설정 */
+}
+
+  .side-menu.open { left: 0; }
+  .overlay.show { display: block; }
+
+  .content-container {
+    position: fixed;
+    top: 60px;
+    bottom: 60px;
+    left: 0;
+    right: 0;
+    transition: none;
+  }
+
+  .content-frame {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  .bottom-tab {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 65px;
+    background: #fff;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-top: 1px solid #ccc;
+    z-index: 1002;
+  }
+
+  .tab-item {
+    flex: 1;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: #151515;
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+
+  .tab-item svg { margin-bottom: 4px; }
+
+  .tab-item i {
+    font-size: 20px;
+    margin-bottom: 4px;
+  }
+
+  .tab-item.active,
+  .tab-item:hover {
+    color: #318bff;
+  }
+
+  .logo-img {
+    height: 40px;
+    max-width: 135px;
+    width: auto;
+    display: block;
+  }
+
+  @media (min-width: 769px) {
+    .pc-menu {
+      display: flex;
+      gap: 20px;
+      margin-left: 20px;
+    }
+
+    .pc-menu a {
+      text-decoration: none;
+      color: #333;
+      font-size: 16px;
+      transition: color 0.3s;
+    }
+
+    .pc-menu a:hover { color: #f67821; }
+    .pc-menu a.active { color: #f77821; }
+    .menu-btn { display: none; }
+  }
+
+  .menu-divider {
+    border: none;
+    border-top: 1px solid #ccc;
+    margin: 12px 0;
+  }
+
+  .side-menu .submenu {
+    display: none;
+    margin-left: 10px;
+  }
+
+  /* ✅ 모바일 서브 메뉴 */
+@media (max-width: 768px) {
+  .side-menu .menu-parent {
+    position: relative;
+  }
+
+  .side-menu .menu-parent > a::after {
+    content: "∨";
+    float: right;
+  }
+
+  .side-menu .submenu {
+    display: none;
+    background: #f9f9f9;
+    border-left: 3px solid #ff7a01;
+    padding-left: 12px;
+    padding-top: 3px;       /* ✅ 맨 위 여백 추가 */
+    padding-bottom: 3px;    /* ✅ 맨 아래 여백 추가 */
+    margin-top: 8px;
+    z-index: 10001;
+    position: static; /* ✅ 고정 위치: side-menu 안에 자연스럽게 펼쳐짐 */
+  }
+
+  .side-menu .submenu a {
+    display: block;
+    padding: 3px 12px;
+    color: #000;
+    font-size: 15px;
+    text-decoration: none;
+  }
+
+  .side-menu .submenu a:hover {
+    background-color: #f0f0f0;
+  }
+
+  .side-menu .menu-parent.active > .submenu {
+    display: block;
+  }
+}
+
+  /* ✅ PC 서브 메뉴 */
+  @media (min-width: 769px) {
+    .pc-menu-item {
+      position: relative;
+    }
+
+    .pc-submenu {
+      display: none;
+      position: absolute;
+      top: calc(100% + 1px);
+      left: 0;
+      background: #fff;
+      border: 0px solid #151515;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      white-space: nowrap;
+      z-index: 9999;
+    }
+
+    .pc-submenu a {
+      display: block;
+      padding: 10px 14px;
+      white-space: nowrap;
+      font-size: 14px;
+      color: #333;
+    }
+
+    .pc-menu-item:hover .pc-submenu {
+      display: block;
+    }
+  }
+</style>
+
+
+
+
+</head>
+<body>
+
+  <div class="top-bar" id="topBar">
+    <div class="menu-btn" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+
+<div class="logo" onclick="loadFromTab('home.html', this)" style="cursor: pointer;">
+  <img src="img/coinsea.svg" alt="CoinSea 로고" class="logo-img" fetchpriority="high" />
+</div>
+
+
+        <div class="pc-menu">  <!-- ✅ PC 메뉴 전체 시작 -->
+
+      <a href="#" onclick="loadFromTab('gimp.html', this)">김프</a>
+      <a href="#" onclick="loadFromTab('fundingfees.html', this)">펀딩비</a>
+      <a href="#" onclick="loadFromTab('liq.html', this)">강제청산</a>
+      <a href="#" onclick="loadFromTab('travelrule.html', this)">트래블룰</a>
+      <a href="#" onclick="loadFromTab('word.html', this)">용어 정리</a>
+      <a href="#" onclick="loadFromTab('longshort.html', this)">롱/숏 비율</a>
+      <a href="#" onclick="loadFromTab('fees.html', this)">거래수수료</a>
+
+<div class="pc-menu-item">
+<a href="#">계산기 ∨</a>
+<div class="pc-submenu">
+      <a href="#" onclick="loadFromTab('cal-koreafees.html', this)">국내수수료 계산기</a>
+      <a href="#" onclick="loadFromTab('cal-futuresfees.html', this)">선물수수료 계산기</a>
+      <a href="#" onclick="loadFromTab('cal-kimchi.html', this)">BTC 김프 계산기</a>
+      <a href="#" onclick="loadFromTab('cal-bitcoin.html', this)">비트코인 계산기</a>
+      <a href="#" onclick="loadFromTab('cal-avgprice.html', this)">평단가 계산기</a>
+      <a href="#" onclick="loadFromTab('cal-averagebuy.html', this)">물타기 계산기</a>
+      <a href="#" onclick="loadFromTab('cal-fundingfees.html', this)">펀딩비 계산기</a>
+      <a href="#" onclick="loadFromTab('cal-futuresliq.html', this)">청산가 계산기</a>
+      <a href="#" onclick="loadFromTab('cal-koreaprofit.html', this)">현물 수익률 계산기</a>
+      <a href="#" onclick="loadFromTab('cal-futuresprofit.html', this)">선물 수익률 계산기</a>
+</div>
+</div>
+
+<div class="pc-menu-item">
+<a href="#">초보팁 ∨</a>
+<div class="pc-submenu">
+      <a href="#" onclick="loadFromTab('mainposting-exjoin.html', this)">거래소 가입조건</a>
+      <a href="#" onclick="loadFromTab('mainposting-withdraw-notice.html', this)">입출금 주의사항</a>
+      <a href="#" onclick="loadFromTab('point.html', this)">해외거래소 이용절차</a>      
+      <a href="#" onclick="loadFromTab('qna.html', this)">자주 묻는 질문들</a>
+      <a href="#" onclick="loadFromTab('notice.html', this)">거래소 공지 모음</a>
+      <a href="#" onclick="loadFromTab('mainposting-dominance.html', this)">비트코인 도미넌스</a>
+      <a href="#" onclick="loadFromTab('chart.html', this)">차트 입문자 가이드</a>
+      <a href="#" onclick="loadFromTab('mainposting-coin-scam-warning.html', this)">코인사기 예방캠페인</a>
+      <a href="#" onclick="loadFromTab('exchange-korea.html', this)">국내거래소 이용가이드</a>
+</div>
+</div>
+
+<div class="pc-menu-item">
+<a href="#">앱테크 ∨</a>
+<div class="pc-submenu">
+      <a href="#" onclick="loadFromTab('bitbunny.html', this)">비트버니</a>
+      <a href="#" onclick="loadFromTab('luckies.html', this)">럭키즈</a>
+</div>
+</div>
+
+<div class="pc-menu-item">
+<a href="#">Ai 트레이딩 ∨</a>
+<div class="pc-submenu">
+      <a href="#" onclick="loadFromTab('auto-trading.html', this)">코빗 오토 트레이딩</a>
+      <a href="#" onclick="loadFromTab('bithumb-auto.html', this)">빗썸 오토 트레이딩</a>
+      <a href="#" onclick="loadFromTab('smart-trading.html', this)">코인원 스마트 트레이딩</a>
+</div>
+</div>
+
+ 
+
+    </div> <!-- ✅ PC 메뉴 전체 종료 -->
+
+
+    <div class="top-icons">
+
+      <div class="icon-block code" onclick="loadFromIcon('code.html')">
+<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8571428571428571" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-ticket-percent-icon lucide-ticket-percent"><path d="M2 9a3 3 0 1 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 1 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M9 9h.01"/><path d="m15 9-6 6"/><path d="M15 15h.01"/></svg>
+        <span>할인코드</span>
+      </div>
+
+    <div class="icon-block" onclick="loadFromIcon('news.html')">
+<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8571428571428571" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bird-icon lucide-bird"><path d="M16 7h.01"/><path d="M3.4 18H12a8 8 0 0 0 8-8V7a4 4 0 0 0-7.28-2.3L2 20"/><path d="m20 7 2 .5-2 .5"/><path d="M10 18v3"/><path d="M14 17.75V21"/><path d="M7 18a6 6 0 0 0 3.84-10.61"/></svg>
+  <span>코인뉴스</span>
+</div>
+
+      <div class="icon-block" onclick="loadFromIcon('qna.html')">
+<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8571428571428571" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-badge-question-mark-icon lucide-badge-question-mark"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" x2="12.01" y1="17" y2="17"/></svg>
+<span>질문답변</span>
+</div>
+
+    </div>
+  </div>
+
+  <div class="side-menu" id="sideMenu">  <!-- ✅ 모바일 메뉴 전체 시작 -->
+
+    <a href="#" onclick="loadFromMenu('gimp.html')">김프</a>
+    <a href="#" onclick="loadFromMenu('fundingfees.html')">펀딩비</a>
+    <a href="#" onclick="loadFromMenu('liq.html')">강제청산</a>
+    <a href="#" onclick="loadFromMenu('travelrule.html')">트래블룰</a>
+    <a href="#" onclick="loadFromMenu('word.html')">용어 정리</a>
+    <a href="#" onclick="loadFromMenu('longshort.html')">롱/숏 비율</a>
+    <a href="#" onclick="loadFromMenu('fees.html')">거래수수료</a>
+
+
+ <hr class="menu-divider"> <!-- 구분선 -->
+
+<div class="menu-parent">
+<a href="#">계산기</a>
+<div class="submenu">
+    <a href="#" onclick="loadFromMenu('cal-koreafees.html')">국내수수료 계산기</a>
+    <a href="#" onclick="loadFromMenu('cal-futuresfees.html')">선물수수료 계산기</a>
+    <a href="#" onclick="loadFromMenu('cal-kimchi.html.html')">BTC 김프 계산기</a>
+    <a href="#" onclick="loadFromMenu('cal-bitcoin.html')">비트코인 계산기</a>
+    <a href="#" onclick="loadFromMenu('cal-avgprice.html')">평단가 계산기</a>
+    <a href="#" onclick="loadFromMenu('cal-averagebuy.html')">물타기 계산기</a>
+    <a href="#" onclick="loadFromMenu('cal-fundingfees.html')">펀딩비 계산기</a>
+    <a href="#" onclick="loadFromMenu('cal-futuresliq.html')">청산가 계산기</a>
+    <a href="#" onclick="loadFromMenu('cal-koreaprofit.html')">현물 수익률 계산기</a>
+    <a href="#" onclick="loadFromMenu('cal-futuresprofit.html')">선물 수익률 계산기</a>
+</div>
+</div>
+
+ <hr class="menu-divider"> <!-- 구분선 -->
+
+<div class="menu-parent">
+<a href="#">초보팁</a>
+<div class="submenu">
+    <a href="#" onclick="loadFromMenu('mainposting-exjoin.html')">거래소 가입조건</a>
+    <a href="#" onclick="loadFromMenu('mainposting-withdraw-notice.html')">입출금 주의사항</a>
+    <a href="#" onclick="loadFromMenu('point.html')">해외거래소 이용절차</a>
+    <a href="#" onclick="loadFromMenu('qna.html')">자주 묻는 질문들</a>
+    <a href="#" onclick="loadFromMenu('notice.html')">거래소 공지 모음</a>
+    <a href="#" onclick="loadFromMenu('mainposting-dominance.html')">비트코인 도미넌스</a>
+    <a href="#" onclick="loadFromMenu('chart.html')">차트 입문자 가이드</a>
+    <a href="#" onclick="loadFromMenu('mainposting-coin-scam-warning.html')">코인사기 예방캠페인</a>
+    <a href="#" onclick="loadFromMenu('exchange-korea.html')">국내거래소 이용가이드</a>
+</div>
+</div>
+
+ <hr class="menu-divider"> <!-- 구분선 -->
+
+<div class="menu-parent">
+<a href="#">앱테크</a>
+<div class="submenu">
+    <a href="#" onclick="loadFromMenu('bitbunny.html')">비트버니</a>
+    <a href="#" onclick="loadFromMenu('luckies.html')">럭키즈</a>
+</div>
+</div>
+
+
+<hr class="menu-divider"> <!-- 구분선 -->
+
+<div class="menu-parent">
+<a href="#">Ai 트레이딩</a>
+<div class="submenu">
+    <a href="#" onclick="loadFromMenu('auto-trading.html')">코빗 오토 트레이딩</a>
+    <a href="#" onclick="loadFromMenu('bithumb-auto.html')">빗썸 오토 트레이딩</a>
+    <a href="#" onclick="loadFromMenu('smart-trading.html')">코인원 스마트 트레이딩</a>
+</div>
+</div>
+
+ <hr class="menu-divider"> <!-- 구분선 -->
+    <a href="#" onclick="loadFromMenu('terms.html')">이용약관</a>
+
+  </div> <!-- ✅ 모바일 메뉴 전체 종료 -->
+
+  <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
+  <div class="content-container" id="contentContainer">
+    <iframe src="home.html" class="content-frame" id="contentFrame" title="코인씨 메인 콘텐츠 프레임"></iframe>
+  </div>
+
+  <div class="bottom-tab">
+  <div class="tab-item active" onclick="loadFromTab('home.html', this)">
+<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8571428571428571" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-house-icon lucide-house"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Home
+  </div>
+
+  <div class="tab-item" onclick="loadFromTab('price.html', this)">
+<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8571428571428571" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-badge-dollar-sign-icon lucide-badge-dollar-sign"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></svg>코인시세
+  </div>
+
+  <div class="tab-item" onclick="loadFromTab('trade.html', this)">
+<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8571428571428571" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chart-candlestick-icon lucide-chart-candlestick"><path d="M9 5v4"/><rect width="4" height="6" x="7" y="9" rx="1"/><path d="M9 15v2"/><path d="M17 3v2"/><rect width="4" height="8" x="15" y="5" rx="1"/><path d="M17 13v3"/><path d="M3 3v16a2 2 0 0 0 2 2h16"/></svg>현물강좌
+  </div>
+
+  <div class="tab-item" onclick="loadFromTab('futures.html', this)">
+<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8571428571428571" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chart-line-icon lucide-chart-line"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="m19 9-5 5-4-4-3 3"/></svg>선물강좌
+  </div>
+
+  <div class="tab-item" onclick="loadFromTab('more.html', this)">
+<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8571428571428571" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-ellipsis-icon lucide-ellipsis"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>더보기
+  </div>
+</div>
+
+
+ <script>
+  function toggleMenu() {
+    const menu = document.getElementById('sideMenu');
+    const overlay = document.getElementById('overlay');
+    menu.classList.toggle('open');
+    overlay.classList.toggle('show');
+  }
+
+  function loadFromMenu(pageUrl) {
+    document.getElementById('contentFrame').src = pageUrl;
+    toggleMenu();
+    resetTopBar();
+  }
+
+  function loadFromTab(pageUrl, tab) {
+    document.getElementById('contentFrame').src = pageUrl;
+    document.querySelectorAll('.tab-item').forEach(item => item.classList.remove('active'));
+    if (tab) tab.classList.add('active');
+
+    document.querySelectorAll('.pc-menu a').forEach(item => item.classList.remove('active'));
+    if (tab && tab.textContent) {
+      const matching = Array.from(document.querySelectorAll('.pc-menu a'))
+        .find(a => a.textContent === tab.textContent);
+      if (matching) matching.classList.add('active');
+    }
+
+    resetTopBar();
+  }
+
+  function loadFromIcon(pageUrl) {
+    document.getElementById('contentFrame').src = pageUrl;
+    document.querySelectorAll('.tab-item').forEach(item => item.classList.remove('active'));
+    document.querySelectorAll('.pc-menu a').forEach(item => item.classList.remove('active'));
+    resetTopBar();
+  }
+
+  // ✅ 스크롤에 따라 상단바 숨김/표시 (rAF 최적화)
+ let lastScrollTop = 0;
+const topBar = document.getElementById('topBar');
+const contentFrame = document.getElementById('contentFrame');
+
+contentFrame.addEventListener('load', () => {
+  const iframeDoc = contentFrame.contentDocument || contentFrame.contentWindow.document;
+
+  let ticking = false;
+  iframeDoc.addEventListener('scroll', () => {
+    const scrollTop = iframeDoc.documentElement.scrollTop || iframeDoc.body.scrollTop;
+
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        if (scrollTop > lastScrollTop + 3) {
+          topBar.style.top = "-60px";   // ✅ 스크롤 내릴 때 숨김
+        } else if (scrollTop < lastScrollTop - 3) {
+          topBar.style.top = "0";       // ✅ 스크롤 올릴 때 다시 보임
+        }
+        lastScrollTop = scrollTop;
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
+});
+
+
+  function resetTopBar() {
+    requestAnimationFrame(() => {
+      topBar.style.top = "0";
+      contentContainer.style.top = "60px";
+    });
+  }
+</script>
+
+<script>
+  // ✅ 사이드 메뉴 드롭다운
+  document.querySelectorAll('.side-menu .menu-parent > a').forEach(link => {
+    link.addEventListener('click', function (e) {
+      const parent = this.parentElement;
+
+      if (parent.classList.contains('active')) {
+        parent.classList.remove('active');
+      } else {
+        document.querySelectorAll('.side-menu .menu-parent').forEach(item => {
+          item.classList.remove('active');
+        });
+        parent.classList.add('active');
+      }
+
+      e.preventDefault(); // 기본 a태그 동작 막기
+    });
+  });
+</script>
+
+
+
+<div class="overlay" id="overlay" onclick="closeMenu()"></div>
+</body>
+</html>

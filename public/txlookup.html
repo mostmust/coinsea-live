@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>주소 또는 TxID 조회 - 코인씨</title>
+
+<!-- ✅ SEO 및 Open Graph + Twitter 메타태그 -->
+<meta name="title" content="주소 또는 TxID 조회 - 코인씨" />
+<meta name="description" content="비트코인, 이더리움, 트론 등 주요 블록체인의 주소나 트랜잭션ID(TxID)를 실시간으로 조회해보세요. 블록체인 탐색기를 통해 정확한 정보를 확인할 수 있습니다." />
+<meta name="keywords" content="주소조회, TxID조회, 트랜잭션조회, 비트코인 주소, 이더리움 탐색기, 트론 블록체인, 블록체인 검색기, 코인씨, txid, 블록체인 조회" />
+<meta name="author" content="CoinSea" />
+<meta name="robots" content="index, follow" />
+
+<!-- ✅ Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="주소 또는 TxID 조회 - 코인씨" />
+<meta property="og:description" content="비트코인, 이더리움, 트론 등 블록체인 주소 또는 TxID를 입력하면 실시간으로 확인할 수 있습니다." />
+<meta property="og:url" content="https://coinsea.co.kr/txlookup.html" />
+<meta property="og:image" content="https://coinsea.co.kr/img/og-txlookup.webp" />
+<meta property="og:site_name" content="코인씨" />
+<meta property="og:locale" content="ko_KR" />
+
+<!-- ✅ Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="주소 또는 TxID 조회 - 코인씨" />
+<meta name="twitter:description" content="블록체인 주소 또는 트랜잭션 ID를 입력하고 실시간으로 탐색기에서 확인하세요." />
+<meta name="twitter:image" content="https://coinsea.co.kr/img/og-txlookup.webp" />
+
+
+<!-- ✅ Google Fonts 최적화 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet"></noscript>
+
+<!-- ✅ Font Awesome 최적화 -->
+<link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"></noscript>
+
+
+<!-- 가장 일반적인 파비콘 -->
+<link rel="icon" href="/favicon.ico" />
+
+<!-- 고해상도 디바이스 대응 -->
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon/android-icon-192x192.png" />
+
+<!-- 애플 터치용 최소 하나 -->
+<link rel="apple-touch-icon" href="/favicon/apple-icon-180x180.png" />
+
+
+  <style>
+    body {
+      font-family: 'Nanum Gothic', sans-serif;
+      background-color: #fff;
+      margin: 0;
+      padding: 20px;
+      color: #333;
+    }
+
+    h1 {
+      font-size: 22px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .wrapper {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .box {
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      background-color: #fafafa;
+      margin-bottom: 40px;
+    }
+
+    select, input, button {
+      font-size: 16px;
+      padding: 10px;
+      margin-bottom: 12px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #2d8cf0;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    button:hover {
+      background-color: #1c6fc5;
+    }
+
+    .note {
+      font-size: 14px;
+      color: #666;
+      text-align: center;
+      margin-top: 16px;
+    }
+
+    .coin-links h2 {
+      font-size: 20px;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    .coin-item {
+      margin-bottom: 20px;
+    }
+
+    .coin-item strong {
+      font-size: 16px;
+    }
+
+    .coin-item a {
+      color: #2d8cf0;
+      text-decoration: none;
+      word-break: break-word;
+    }
+
+    .coin-item a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h1>블록체인 주소 또는 TxID 조회</h1>
+
+  <div class="wrapper">
+    <!-- ✅ TXID 입력폼 박스 -->
+    <div class="box">
+      <form onsubmit="searchBlockchain(); return false;">
+        <select id="coin">
+          <option value="btc">비트코인 (BTC)</option>
+          <option value="eth">이더리움 (ETH)</option>
+          <option value="trx">트론 (TRX)</option>
+          <option value="matic">폴리곤 (Polygon)</option>
+          <option value="avax">아발란체 (Avalanche)</option>
+          <option value="arb">아비트럼 (Arbitrum)</option>
+        </select>
+
+        <input type="text" id="inputValue" placeholder="주소 또는 TxID를 입력하세요" required />
+
+        <button type="submit">🔍 조회하기</button>
+      </form>
+
+      <div class="note">
+        입력하신 주소 또는 TxID를 해당 블록체인 탐색기에서 새창으로 확인합니다.
+      </div>
+    </div>
+
+    <!-- ✅ 코인 공식 홈페이지 박스 -->
+    <div class="box coin-links">
+      <h2>주요 코인 공식 홈페이지</h2>
+
+      <div class="coin-item">
+        <strong>Bitcoin (비트코인)</strong><br>
+        공식 웹사이트: <a href="https://bitcoin.org" target="_blank">https://bitcoin.org</a><br>
+        비트코인 백서, 지갑 다운로드, 개발자 문서 등을 포함.
+      </div>
+
+      <div class="coin-item">
+        <strong>Ethereum (이더리움)</strong><br>
+        공식 웹사이트: <a href="https://ethereum.org" target="_blank">https://ethereum.org</a><br>
+        스마트 컨트랙트 플랫폼, 개발자 리소스 등 제공.
+      </div>
+
+      <div class="coin-item">
+        <strong>XRP (리플)</strong><br>
+        공식 홈페이지: <a href="https://ripple.com" target="_blank">https://ripple.com</a><br>
+        XRP 기반의 결제 솔루션 및 네트워크 관련 정보 제공.
+      </div>
+
+      <div class="coin-item">
+        <strong>Tether (테더 / USDT)</strong><br>
+        공식 웹사이트: <a href="https://tether.to" target="_blank">https://tether.to</a><br>
+        미국 달러 연동 스테이블 코인. 실시간 발행량, 감사 리포트 제공.
+      </div>
+
+      <div class="coin-item">
+        <strong>Solana (솔라나)</strong><br>
+        공식 웹사이트: <a href="https://solana.com" target="_blank">https://solana.com</a><br>
+        고속 퍼블릭 블록체인. DeFi 및 NFT 생태계 중심.
+      </div>
+
+      <div class="coin-item">
+        <strong>Dogecoin (도지코인)</strong><br>
+        공식 웹사이트: <a href="https://dogecoin.com" target="_blank">https://dogecoin.com</a><br>
+        밈 기반 P2P 결제용 코인. 빠르고 저렴한 송금 지원.
+      </div>
+
+      <div class="coin-item">
+        <strong>Sui (수이)</strong><br>
+        공식 웹사이트: <a href="https://sui.io" target="_blank">https://sui.io</a><br>
+        Move 언어 기반 고성능 블록체인. 빠른 거래 처리 제공.
+      </div>
+
+      <div class="coin-item">
+        <strong>Cardano (에이다 / ADA)</strong><br>
+        공식 웹사이트: <a href="https://cardano.org" target="_blank">https://cardano.org</a><br>
+        학술 기반 PoS 블록체인. 에너지 효율 강조.
+      </div>
+
+      <div class="coin-item">
+        <strong>Uniswap (유니스왑 / UNI)</strong><br>
+        공식 웹사이트: <a href="https://uniswap.org" target="_blank">https://uniswap.org</a><br>
+        탈중앙화 거래소 프로토콜. 자동 유동성 메커니즘 제공.
+      </div>
+
+      <div class="coin-item">
+        <strong>Tron (트론 / TRX)</strong><br>
+        공식 웹사이트: <a href="https://tron.network" target="_blank">https://tron.network</a><br>
+        콘텐츠 공유 중심의 퍼블릭 블록체인. 빠른 트랜잭션 제공.
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function searchBlockchain() {
+      const coin = document.getElementById('coin').value;
+      const input = document.getElementById('inputValue').value.trim();
+
+      if (!input) {
+        alert("주소 또는 TxID를 입력해주세요.");
+        return;
+      }
+
+      const isTxid = /^[a-fA-F0-9]{64}$/;
+      let url = '';
+
+      switch (coin) {
+        case 'btc':
+          url = isTxid.test(input)
+            ? `https://www.blockchain.com/btc/tx/${input}`
+            : `https://www.blockchain.com/btc/address/${input}`;
+          break;
+        case 'eth':
+          url = isTxid.test(input)
+            ? `https://etherscan.io/tx/${input}`
+            : `https://etherscan.io/address/${input}`;
+          break;
+        case 'trx':
+          url = isTxid.test(input)
+            ? `https://tronscan.org/#/transaction/${input}`
+            : `https://tronscan.org/#/address/${input}`;
+          break;
+        case 'matic':
+          url = isTxid.test(input)
+            ? `https://polygonscan.com/tx/${input}`
+            : `https://polygonscan.com/address/${input}`;
+          break;
+        case 'avax':
+          url = isTxid.test(input)
+            ? `https://snowtrace.io/tx/${input}`
+            : `https://snowtrace.io/address/${input}`;
+          break;
+        case 'arb':
+          url = isTxid.test(input)
+            ? `https://arbiscan.io/tx/${input}`
+            : `https://arbiscan.io/address/${input}`;
+          break;
+        default:
+          alert("지원하지 않는 코인입니다.");
+          return;
+      }
+
+      window.open(url, '_blank');
+    }
+  </script>
+</body>
+</html>

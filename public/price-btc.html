@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>비트코인 시세 | 코인씨</title>
+  
+<!-- ✅ 메타태그: SEO 기본 -->
+<meta name="description" content="비트코인 실시간 시세를 확인하세요. BINANCE BTCUSDT 차트를 제공하며, 국내외 시세 분석에 유용한 정보를 담고 있습니다.">
+<meta name="keywords" content="비트코인, BTC, 비트코인 시세, 암호화폐, 가상화폐, BTCUSDT, 코인씨, BINANCE, 트레이딩뷰">
+<meta name="robots" content="index, follow">
+<meta name="author" content="코인씨">
+
+<!-- ✅ Open Graph (페이스북, 카카오톡 등) -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="비트코인 시세 | 코인씨">
+<meta property="og:description" content="실시간 비트코인 시세 확인 및 트레이딩뷰 차트 제공">
+<meta property="og:url" content="https://coinsea.co.kr/price-btc.html">
+<meta property="og:image" content="https://coinsea.co.kr/img/og-price-btc.webp">
+
+<!-- ✅ Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="비트코인 시세 | 코인씨">
+<meta name="twitter:description" content="실시간 BTCUSDT 차트로 비트코인 시세를 빠르게 확인하세요.">
+<meta name="twitter:image" content="https://coinsea.co.kr/img/og-price-btc.webp">
+<meta name="twitter:site" content="@your_twitter_id"> <!-- 필요 시 본인의 트위터 계정으로 수정 -->
+
+<!-- ✅ Canonical URL -->
+<link rel="canonical" href="https://coinsea.co.kr/price-btc.html">
+
+
+<!-- ✅ Google Fonts 최적화 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet"></noscript>
+
+<!-- ✅ Font Awesome 최적화 -->
+<link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"></noscript>
+
+
+<!-- 가장 일반적인 파비콘 -->
+<link rel="icon" href="/favicon.ico" />
+
+<!-- 고해상도 디바이스 대응 -->
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon/android-icon-192x192.png" />
+
+<!-- 애플 터치용 최소 하나 -->
+<link rel="apple-touch-icon" href="/favicon/apple-icon-180x180.png" />
+
+  <style>
+    body {
+      font-family: 'Nanum Gothic', sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #fff;
+      color: #222;
+    }
+    h1 {
+      font-size: 20px;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    .price-box {
+      font-size: 24px;
+      font-weight: bold;
+      text-align: center;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background: #f9f9f9;
+      max-width: 300px;
+      margin: 0 auto;
+    }
+    .updated {
+      font-size: 13px;
+      color: #666;
+      text-align: center;
+      margin-top: 6px;
+    }
+  .content-wrapper {
+  max-width: 800px;       /* 최대 너비 설정 */
+  margin: 0 auto;         /* 가운데 정렬 */
+  padding: 0px;
+  text-align: left;       /* 내용은 좌측 정렬 */
+    }
+
+  </style>
+</head>
+<body>
+<div class="content-wrapper"> <!-- ■ 전체를 감싸는 DIV 시작 -->
+
+
+<!-- ✅ 비트코인 라인 차트 삽입 코드 (초기화면 라인 설정) -->
+<div class="btc-chart-wrapper">
+  <div class="tradingview-widget-container">
+    <div id="tradingview_btc_line"></div>
+  </div>
+</div>
+
+<!-- ✅ PC 최대 640px, 모바일 대응 -->
+<style>
+  .btc-chart-wrapper {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0 10px;
+  }
+</style>
+
+<!-- ✅ tv.js는 맨 마지막에 불러오도록 -->
+<script type="text/javascript">
+  function loadBTCLineChart() {
+    new TradingView.widget({
+      "container_id": "tradingview_btc_line",
+      "width": "100%",
+      "height": 400,
+      "symbol": "BINANCE:BTCUSDT",
+      "interval": "D",
+      "timezone": "Asia/Seoul",
+      "theme": "light",
+      "style": 9,  // ✅ 반드시 숫자형 9 (라인 차트)
+      "locale": "ko",
+      "toolbar_bg": "#fff",
+      "hide_top_toolbar": false,
+      "hide_legend": true,
+      "hide_volume": true,
+      "hide_side_toolbar": true,
+      "withdateranges": false,
+      "details": false,
+      "enable_publishing": false,
+    });
+  }
+</script>
+<script src="https://s3.tradingview.com/tv.js" onload="loadBTCLineChart();"></script>
+
+
+
+  
+</div> <!-- ■ 전체를 감싸는 DIV 종료 -->
+</body>
+</html>

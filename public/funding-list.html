@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>펀딩비 실시간 리스트 - 코인씨</title>
+
+
+  <!-- ✅ SEO 메타태그 -->
+  <meta name="description" content="비트코인, 이더리움 등 주요 코인들의 실시간 펀딩비와 시세를 확인하세요. 30초마다 자동 갱신됩니다. - 코인씨">
+  <meta name="keywords" content="펀딩비, 실시간 펀딩비, 비트코인 펀딩비, 바이낸스 펀딩비, 코인 선물거래, 코인씨, BTC funding fee, ETH funding rate">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://coinsea.co.kr/funding-list.html" />
+
+  <!-- ✅ Open Graph (페이스북, 카카오 등 SNS 공유용) -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="펀딩비 실시간 리스트 - 코인씨">
+  <meta property="og:description" content="주요 코인의 펀딩비와 시세를 실시간으로 확인하세요. 매 30초 자동 업데이트.">
+  <meta property="og:image" content="https://coinsea.co.kr/img/og-funding-list.webp">
+  <meta property="og:url" content="https://coinsea.co.kr/funding-list.html">
+  <meta property="og:site_name" content="코인씨">
+
+  <!-- ✅ Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="펀딩비 실시간 리스트 - 코인씨">
+  <meta name="twitter:description" content="BTC, ETH 등 주요 종목의 펀딩비를 실시간 확인하세요. 30초마다 자동 업데이트.">
+  <meta name="twitter:image" content="https://coinsea.co.kr/img/og-funding-list.webp">
+
+  <!-- ✅ Favicon & Font / CSS 최적화는 기존 그대로 유지 -->
+  <!-- 이하 생략 (이미 입력하신 Google Fonts, FontAwesome, Favicon, Style 등) -->
+
+
+
+<!-- ✅ Google Fonts 최적화 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet"></noscript>
+
+<!-- ✅ Font Awesome 최적화 -->
+<link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"></noscript>
+
+
+<!-- 가장 일반적인 파비콘 -->
+<link rel="icon" href="/favicon.ico" />
+
+<!-- 고해상도 디바이스 대응 -->
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon/android-icon-192x192.png" />
+
+<!-- 애플 터치용 최소 하나 -->
+<link rel="apple-touch-icon" href="/favicon/apple-icon-180x180.png" />
+
+  <style>
+    body {
+      font-family: 'Nanum Gothic', sans-serif;
+      margin:20px;
+      background:#fff;
+      color:#222;
+    }
+    h1 { text-align:center; font-size:20px; margin-bottom:10px; }
+    table {
+      width:100%;
+      max-width:640px;
+      margin:0 auto;
+      border-collapse:collapse;
+    }
+    th, td {
+      padding:8px;
+      border:1px solid #ccc;
+      text-align:center;
+    }
+    th {
+      background:#f5f5f5;
+    }
+    .small {
+      font-size:13px;
+      text-align:center;
+      margin-bottom:10px;
+      color:#666;
+    }
+  .content-wrapper {
+  max-width: 800px;       /* 최대 너비 설정 */
+  margin: 0 auto;         /* 가운데 정렬 */
+  padding: 0px;
+  text-align: left;       /* 내용은 좌측 정렬 */
+    }
+
+  </style>
+</head>
+<body>
+<div class="content-wrapper"> <!-- ■ 전체를 감싸는 DIV 시작 -->
+
+  <h1>🧮 펀딩비 & 시세 상위 10종목</h1>
+  <div class="small">30초마다 자동 갱신 (USDⓢ‑M Futures 기준)</div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>심볼</th>
+        <th>현재 시세 (USDT)</th>
+        <th>펀딩비 (%)</th>
+      </tr>
+    </thead>
+    <tbody id="funding-table">
+      <!-- JS가 채웁니다 -->
+    </tbody>
+  </table>
+
+  <script>
+    // 상위 10개 종목 리스트
+    const symbols = ['BTCUSDT','ETHUSDT','BNBUSDT','SOLUSDT','XRPUSDT','ADAUSDT','DOGEUSDT','DOTUSDT','LTCUSDT','LINKUSDT'];
+
+    async function fetchFundingAndPrice(sym) {
+      const u = new URL('https://fapi.binance.com/fapi/v1/fundingRate');
+      u.searchParams.set('symbol', sym);
+      u.searchParams.set('limit', '1');
+      const fr = await fetch(u).then(r => r.json());
+      const fundRate = fr[0]?.fundingRate || 0;
+
+      const price = await fetch(`https://fapi.binance.com/fapi/v1/ticker/price?symbol=${sym}`)
+        .then(r => r.json()).then(o => o.price);
+
+      return { symbol: sym, price, fundingRate: fundRate };
+    }
+
+    async function refreshTable() {
+      const tbody = document.getElementById('funding-table');
+      tbody.innerHTML = '<tr><td colspan="3">로딩 중...</td></tr>';
+      try {
+        const arr = await Promise.all(symbols.map(s => fetchFundingAndPrice(s)));
+        tbody.innerHTML = arr.map(o => `
+          <tr>
+            <td>${o.symbol.replace('USDT','')}</td>
+            <td>${parseFloat(o.price).toFixed(2)}</td>
+            <td>${(parseFloat(o.fundingRate)*100).toFixed(4)}</td>
+          </tr>
+        `).join('');
+      } catch (e) {
+        tbody.innerHTML = `<tr><td colspan="3">오류 발생: ${e.message}</td></tr>`;
+      }
+    }
+
+    refreshTable();
+    setInterval(refreshTable, 30000);
+  </script>
+
+</div> <!-- ■ 전체를 감싸는 DIV 종료 -->
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>도로명 주소 → 영문 주소 변환</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      font-family: 'Nanum Gothic', sans-serif;
+      margin: 30px;
+      background-color: #fff;
+      color: #333;
+    }
+    h1 {
+      font-size: 20px;
+    }
+    #searchBtn {
+      padding: 10px 20px;
+      background-color: #2979ff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 15px;
+      cursor: pointer;
+    }
+    .result {
+      margin-top: 20px;
+      background: #f5f5f5;
+      padding: 15px;
+      border-radius: 8px;
+    }
+  .content-wrapper {
+  max-width: 800px;       /* 최대 너비 설정 */
+  margin: 0 auto;         /* 가운데 정렬 */
+  padding: 0px;
+  text-align: left;       /* 내용은 좌측 정렬 */
+    }
+
+  </style>
+</head>
+<body>
+<div class="content-wrapper"> <!-- ■ 전체를 감싸는 DIV 시작 -->
+
+  <h1>도로명 주소 → 영문 주소 변환</h1>
+  <button id="searchBtn">📍 주소 검색</button>
+
+  <div class="result" id="resultBox">
+    <p>한글 주소: -</p>
+    <p>영문 주소: -</p>
+  </div>
+
+  <script>
+    document.getElementById('searchBtn').addEventListener('click', function() {
+      const pop = window.open(
+        "https://business.juso.go.kr/addrlink/addrLinkUrl.do?confmKey=U01TX0FVVEgyMDcwODIxMTUyNDExNTkyNDg=&returnUrl=https://coinsea.co.kr/juso_return.html",
+        "pop",
+        "width=570,height=420, scrollbars=yes, resizable=yes"
+      );
+    });
+
+    // 결과를 전달받아 처리하는 로직은 juso_return.html 파일에 있어야 합니다
+  </script>
+
+</div> <!-- ■ 전체를 감싸는 DIV 종료 -->
+</body>
+</html>

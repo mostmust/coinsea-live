@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>수수료 및 펀딩비 계산</title>
+
+  <meta property="og:image" content="https://coinsea.co.kr/img/og-fees.webp" />
+  <meta property="og:url" content="https://coinsea.co.kr/fees.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="ko_KR" />
+  <meta name="twitter:image" content="https://coinsea.co.kr/img/og-fees.webp" />
+<!-- SEO 메타태그 -->
+<meta name="title" content="수수료 및 펀딩비 계산기 | 선물거래 수수료 계산 방법 안내 | CoinSea" />
+<meta name="description" content="선물거래 수수료와 펀딩비 계산 방법을 예시와 함께 설명합니다. 레버리지, 시장가/지정가, 발생 시간까지 쉽게 이해할 수 있도록 안내합니다." />
+<meta name="keywords" content="거래소 수수료, 펀딩비 계산, 선물거래 수수료, 펀딩비 시간, 레버리지 수수료, 코인 수수료 계산기, 바이낸스 펀딩비, 바이비트 수수료" />
+<meta name="author" content="CoinSea" />
+<meta name="robots" content="index, follow" />
+
+<!-- Open Graph (페이스북, 카카오톡 등) -->
+<meta property="og:title" content="수수료 및 펀딩비 계산기 | 선물거래 수수료 계산 방법 안내" />
+<meta property="og:description" content="레버리지, 시장가/지정가에 따른 수수료 및 펀딩비 계산 방법을 쉽고 정확하게 정리한 페이지입니다." />
+<meta property="og:site_name" content="CoinSea" />
+
+<!-- Twitter 카드 -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="수수료 및 펀딩비 계산기 | 선물거래 수수료 계산 방법 안내" />
+<meta name="twitter:description" content="선물거래 수수료와 펀딩비 계산 원리를 구체적인 예시로 쉽게 확인하세요." />
+
+
+<!-- ✅ Google Fonts 최적화 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet"></noscript>
+
+<!-- ✅ Font Awesome 최적화 -->
+<link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"></noscript>
+
+
+<!-- 가장 일반적인 파비콘 -->
+<link rel="icon" href="/favicon.ico" />
+
+<!-- 고해상도 디바이스 대응 -->
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon/android-icon-192x192.png" />
+
+<!-- 애플 터치용 최소 하나 -->
+<link rel="apple-touch-icon" href="/favicon/apple-icon-180x180.png" />
+
+<!-- ✅ 공통 스타일 -->
+<link rel="stylesheet" href="/css/common.css" />
+
+  <style>
+  .content-wrapper {
+  max-width: 800px;       /* 최대 너비 설정 */
+  margin: 0 auto;         /* 가운데 정렬 */
+  padding: 20px;
+  text-align: left;       /* 내용은 좌측 정렬 */
+    }
+
+    .icon-grid {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: repeat(4, 1fr); /* 기본: 모바일 4개 */
+    }
+
+    @media (min-width: 768px) {
+      .icon-grid {
+        grid-template-columns: repeat(6, 1fr); /* PC 6개 */
+      }
+    }
+
+    .icon-item {
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .icon-item img {
+      width: 36px;
+      height: 36px;
+      margin-bottom: 6px;
+border-radius: 8px; /* ← 사각형 모서리를 둥글게 */
+    }
+
+  .icon-item:hover {
+    color: orange;
+  }
+
+  .icon-item:hover svg {
+    stroke: orange;
+  }
+
+html {
+  scroll-behavior: smooth;
+}
+
+  </style>
+
+</head>
+<body>
+
+  <div class="content-wrapper">
+
+    <div class="main-title">수수료 및 펀딩비 계산</div>
+
+    <div class="body-text">
+선물거래에서 거래수수료와 펀딩비는 <strong>레버리지에 비례해서 부과</strong>됩니다.
+    </div>
+
+    <div class="icon-grid">
+
+<a href="cal-koreafees.html" style="text-decoration: none; color: inherit;">
+      <div class="icon-item">
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-earth-icon lucide-earth"><path d="M21.54 15H17a2 2 0 0 0-2 2v4.54"/><path d="M7 3.34V5a3 3 0 0 0 3 3a2 2 0 0 1 2 2c0 1.1.9 2 2 2a2 2 0 0 0 2-2c0-1.1.9-2 2-2h3.17"/><path d="M11 21.95V18a2 2 0 0 0-2-2a2 2 0 0 1-2-2v-1a2 2 0 0 0-2-2H2.05"/><circle cx="12" cy="12" r="10"/></svg>
+          <div>국내수수료 계산</div>
+      </div></a>
+
+<a href="cal-futuresfees.html" style="text-decoration: none; color: inherit;">
+      <div class="icon-item">
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-atom-icon lucide-atom"><circle cx="12" cy="12" r="1"/><path d="M20.2 20.2c2.04-2.03.02-7.36-4.5-11.9-4.54-4.52-9.87-6.54-11.9-4.5-2.04 2.03-.02 7.36 4.5 11.9 4.54 4.52 9.87 6.54 11.9 4.5Z"/><path d="M15.7 15.7c4.52-4.54 6.54-9.87 4.5-11.9-2.03-2.04-7.36-.02-11.9 4.5-4.52 4.54-6.54 9.87-4.5 11.9 2.03 2.04 7.36.02 11.9-4.5Z"/></svg>
+          <div>선물수수료 계산</div>
+      </div></a>
+
+
+<a href="cal-fundingfees.html" style="text-decoration: none; color: inherit;">
+      <div class="icon-item">
+ <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-radical-icon lucide-square-radical"><path d="M7 12h2l2 5 2-10h4"/><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+          <div>펀딩비 계산</div>
+      </div></a>
+
+
+<a href="cal-averagebuy.html" style="text-decoration: none; color: inherit;">
+      <div class="icon-item">
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-droplets-icon lucide-droplets"><path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z"/><path d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97"/></svg>
+          <div>물타기 계산</div>
+      </div></a>
+
+   </div>
+<br>
+
+
+    <div class="sub-title-box">거래방식에 따른 거래 수수료</div>
+    <div class="body-text">
+      바이낸스 기준으로 지정가 거래수수료는 0.02%, 시장가 거래수수료는 0.05%입니다. <br>
+<div style="height: 0.8em;"></div>바이비트 지정가 0.02%, 시장가 0.055%, 비트겟 지정가 0.02%, 시장가 0.06%
+    </div>
+
+    <div class="small-text">
+      * 대부분의 선물거래소 수수료는 비슷한 수준이며, 시장가 수수료는 0.04%~0.06% 입니다.
+    </div>
+<br>
+
+    <div class="sub-title-box">거래수수료 계산 방법</div>
+    <div class="body-text">
+      <span style="color:#56b014;"><strong>거래수수료 = 증거금 × 레버리지 × 수수료율(%)</strong></span><br><br>
+만약 100만원으로 10배 레버리지, 시장가(0.05%) 거래를 한다면<br>
+<strong>100만원 × 10배 × 0.05% =5,000원</strong><br>
+따라서 <strong>거래수수료는 5,000원</strong>입니다.<br><br>
+그리고 포지션을 잡을 때 1번,<br>
+포지션을 정리시 1번으로<br>
+<strong>총 2번의 수수료가 부과</strong>됩니다.<br>
+따라서 <strong>5,000원 × 2번 = 10,000원이 최종 수수료</strong>입니다.
+    </div>
+
+<br>
+
+
+    <div class="sub-title-box">펀딩비 계산 방법</div>
+ <div class="body-text">
+      <span style="color:#ffb311;"><strong>펀딩비 = 증거금 × 레버리지 × 펀딩비율(%)</strong></span><br><br>
+만약 100만원으로 10배 레버리지, 펀딩비가 0.01%라고 한다면<br>
+<strong>100만원 × 10배 × 0.01% =1,000원</strong><br>
+따라서 펀딩비는 1,000원입니다.<br><br>
+<strong>펀딩비는 하루에 3번 발생</strong>하고, <strong>01시, 09시, 17시에 발생</strong>합니다.<br><br>
+만약 하루동안 계속해서 펀딩비를 지불했다면,<br>
+<strong>펀딩비는 1,000원 × 3번 = 3,000원</strong>입니다.<br><br>
+
+펀딩비는 증거금에서 빠져나가고, 증거금으로 들어옵니다.<br>
+만약 <strong>계속해서 펀딩비가 빠져나가면 증거금이 줄어들어서 강제청산 가격에 가까워</strong>지게 됩니다.
+</div>
+
+<br><br>
+
+<svg height="64px" width="64px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 431.601 431.601" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <polygon style="fill:#976EC4;" points="215.8,0 224.008,153.457 260.586,48.659 239.864,157.706 323.7,28.912 254.08,165.913 338.156,93.444 265.687,177.521 402.689,107.9 273.895,191.737 382.942,171.015 278.143,207.593 431.601,215.8 278.143,224.008 382.942,260.586 273.895,239.864 402.689,323.7 265.687,254.08 338.156,338.156 254.08,265.687 323.7,402.689 239.864,273.895 260.586,382.942 224.008,278.143 215.8,431.601 207.593,278.143 171.015,382.942 191.737,273.895 107.9,402.689 177.521,265.687 93.444,338.156 165.913,254.08 28.912,323.7 157.706,239.864 48.659,260.586 153.457,224.008 0,215.8 153.457,207.593 48.659,171.015 157.706,191.737 28.912,107.9 165.913,177.521 93.444,93.444 177.521,165.913 107.9,28.912 191.737,157.706 171.015,48.659 207.593,153.457 "></polygon> <path style="fill:#815FB7;" d="M304.467,215.8c0-2.292-0.087-4.565-0.258-6.813l-26.066-1.394l24.72-8.628 c-0.798-4.149-1.883-8.196-3.237-12.117l-25.732,4.89l21.889-14.248c-1.976-4.118-4.264-8.057-6.827-11.793l-23.269,11.825 l17.088-19.825c-2.745-3.161-5.709-6.126-8.87-8.871l-19.825,17.088l11.825-23.27c-3.736-2.563-7.675-4.851-11.793-6.827 l-14.248,21.889l4.89-25.732c-3.922-1.354-7.968-2.439-12.118-3.237l-8.628,24.72l-1.394-26.066 c-2.249-0.171-4.521-0.258-6.813-0.258s-4.565,0.087-6.813,0.258l-1.394,26.066l-8.628-24.72 c-4.149,0.798-8.196,1.883-12.118,3.237l4.89,25.732l-14.248-21.889c-4.118,1.976-8.057,4.264-11.793,6.827l11.825,23.27 l-19.825-17.088c-3.161,2.745-6.125,5.709-8.87,8.871l17.088,19.825l-23.269-11.825c-2.563,3.736-4.851,7.675-6.827,11.793 l21.889,14.248l-25.732-4.89c-1.354,3.922-2.439,7.968-3.237,12.117l24.72,8.628l-26.066,1.394 c-0.171,2.249-0.258,4.521-0.258,6.813s0.087,4.565,0.258,6.813l26.066,1.394l-24.72,8.628c0.798,4.149,1.883,8.196,3.237,12.117 l25.732-4.89l-21.889,14.248c1.976,4.118,4.264,8.057,6.827,11.793l23.269-11.825l-17.088,19.825 c2.745,3.161,5.709,6.126,8.87,8.87l19.825-17.088l-11.825,23.27c3.736,2.563,7.675,4.851,11.793,6.827l14.248-21.889l-4.89,25.732 c3.922,1.354,7.968,2.439,12.118,3.237l8.628-24.72l1.394,26.065c2.249,0.171,4.521,0.258,6.813,0.258s4.565-0.087,6.813-0.258 l1.394-26.065l8.628,24.72c4.149-0.798,8.196-1.883,12.118-3.237l-4.89-25.732l14.248,21.889c4.118-1.976,8.057-4.264,11.793-6.827 l-11.825-23.27l19.825,17.088c3.161-2.745,6.125-5.709,8.87-8.87l-17.088-19.825l23.269,11.825 c2.563-3.735,4.851-7.675,6.827-11.793l-21.889-14.248l25.732,4.89c1.354-3.922,2.439-7.968,3.237-12.117l-24.72-8.628 l26.066-1.394C304.38,220.365,304.467,218.093,304.467,215.8z"></path> <g> <g> <circle style="fill:#FFFFFF;" cx="245.151" cy="215.8" r="12.173"></circle> <circle style="fill:#4D4D4D;" cx="245.151" cy="215.8" r="7.448"></circle> </g> <g> <circle style="fill:#FFFFFF;" cx="186.449" cy="215.8" r="12.173"></circle> <circle style="fill:#4D4D4D;" cx="186.449" cy="215.8" r="7.448"></circle> </g> </g> </g> </g></svg>
+
+<!-- ✅ URL 복사 아이콘 버튼 시작 -->
+<div style="text-align: center; margin-top: 20px;">
+  <div id="copyUrlBtn" title="이 페이지 URL 복사" style="cursor: pointer; display: inline-block;">
+
+<svg height="75px" width="75px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 427.479 427.479" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path style="fill:#51CAF4;" d="M214.396,427.479h-11c0-22.658,5.655-34.109,11.124-45.183c5.137-10.399,9.987-20.222,9.987-40.311 c0-20.089-4.852-29.912-9.987-40.311c-5.469-11.074-11.124-22.524-11.124-45.182c0-22.658,5.655-34.109,11.124-45.183 c5.136-10.399,9.987-20.222,9.987-40.312c0-20.091-4.852-29.914-9.987-40.314c-5.469-11.075-11.124-22.526-11.124-45.185 s5.655-34.11,11.124-45.185c5.136-10.4,9.987-20.223,9.987-40.313h11c0,22.659-5.655,34.11-11.124,45.184 c-5.136,10.4-9.987,20.224-9.987,40.314s4.852,29.914,9.987,40.314c5.469,11.075,11.124,22.526,11.124,45.185 c0,22.658-5.655,34.109-11.124,45.183c-5.136,10.399-9.987,20.222-9.987,40.312c0,20.089,4.852,29.912,9.987,40.311 c5.469,11.074,11.124,22.524,11.124,45.182s-5.655,34.108-11.124,45.182C219.248,397.566,214.396,407.389,214.396,427.479z"></path> <path style="fill:#51CAF4;" d="M208.91,76.496L208.91,76.496c-29.822,0-53.997-24.175-53.997-53.997v0h0 C184.734,22.499,208.91,46.674,208.91,76.496L208.91,76.496z"></path> <path style="fill:#51CAF4;" d="M208.91,239.238L208.91,239.238c-29.822,0-53.997-24.175-53.997-53.997v0h0 C184.734,185.241,208.91,209.416,208.91,239.238L208.91,239.238z"></path> <path style="fill:#51CAF4;" d="M226.909,371.981L226.909,371.981c-29.822,0-53.997-24.175-53.997-53.997v0h0 C202.734,317.984,226.909,342.159,226.909,371.981L226.909,371.981z"></path> <path style="fill:#51CAF4;" d="M217.909,122.994L217.909,122.994c29.822,0,53.997-24.175,53.997-53.997v0h0 C242.085,68.996,217.909,93.172,217.909,122.994L217.909,122.994z"></path> <path style="fill:#51CAF4;" d="M217.909,285.736L217.909,285.736c29.822,0,53.997-24.175,53.997-53.997v0h0 C242.085,231.738,217.909,255.914,217.909,285.736L217.909,285.736z"></path> <path style="fill:#51CAF4;" d="M78.562,427.479h-11c0-22.658,5.655-34.108,11.124-45.183c5.136-10.399,9.987-20.222,9.987-40.311 c0-20.089-4.852-29.911-9.987-40.311c-5.469-11.074-11.124-22.524-11.124-45.182c0-22.658,5.655-34.109,11.124-45.183 c5.136-10.399,9.987-20.222,9.987-40.312c0-20.091-4.852-29.914-9.987-40.314c-5.469-11.075-11.124-22.526-11.124-45.185h11 c0,20.091,4.852,29.914,9.987,40.314c5.469,11.075,11.124,22.526,11.124,45.185c0,22.658-5.655,34.109-11.124,45.183 c-5.136,10.399-9.987,20.222-9.987,40.312c0,20.089,4.852,29.911,9.987,40.311c5.469,11.074,11.124,22.524,11.124,45.182 s-5.655,34.108-11.124,45.182C83.414,397.566,78.562,407.389,78.562,427.479z"></path> <path style="fill:#51CAF4;" d="M73.076,239.238L73.076,239.238c-29.822,0-53.997-24.175-53.997-53.997v0h0 C48.901,185.241,73.076,209.416,73.076,239.238L73.076,239.238z"></path> <path style="fill:#51CAF4;" d="M91.898,368.981L91.898,368.981c-29.822,0-53.997-24.175-53.997-53.997v0h0 C67.723,314.984,91.898,339.159,91.898,368.981L91.898,368.981z"></path> <path style="fill:#51CAF4;" d="M82.076,122.994L82.076,122.994c29.822,0,53.997-24.175,53.997-53.997v0h0 C106.251,68.996,82.076,93.172,82.076,122.994L82.076,122.994z"></path> <path style="fill:#51CAF4;" d="M82.076,285.736L82.076,285.736c29.822,0,53.997-24.175,53.997-53.997v0h0 C106.251,231.738,82.076,255.914,82.076,285.736L82.076,285.736z"></path> <path style="fill:#51CAF4;" d="M347.889,427.479h-11c0-22.658,5.655-34.108,11.124-45.183c5.137-10.399,9.987-20.222,9.987-40.311 c0-20.089-4.852-29.912-9.987-40.311c-5.469-11.074-11.124-22.524-11.124-45.182c0-22.658,5.655-34.109,11.124-45.183 c5.136-10.399,9.987-20.222,9.987-40.312h11c0,22.658-5.655,34.109-11.124,45.183c-5.136,10.399-9.987,20.222-9.987,40.312 c0,20.089,4.852,29.912,9.987,40.311c5.469,11.074,11.124,22.524,11.124,45.182s-5.655,34.108-11.124,45.182 C352.741,397.566,347.889,407.389,347.889,427.479z"></path> <path style="fill:#51CAF4;" d="M342.403,239.238L342.403,239.238c-29.822,0-53.997-24.175-53.997-53.997v0h0 C318.228,185.241,342.403,209.416,342.403,239.238L342.403,239.238z"></path> <path style="fill:#51CAF4;" d="M355.902,373.481L355.902,373.481c-29.822,0-53.997-24.175-53.997-53.997v0h0 C331.727,319.484,355.902,343.659,355.902,373.481L355.902,373.481z"></path> <path style="fill:#51CAF4;" d="M354.403,302.235L354.403,302.235c29.822,0,53.997-24.175,53.997-53.997v0h0 C378.578,248.237,354.403,272.413,354.403,302.235L354.403,302.235z"></path> </g> </g></svg>
+
+  </div>
+</div>
+
+<script>
+  document.getElementById('copyUrlBtn').addEventListener('click', function () {
+    const url = window.location.href;
+    navigator.clipboard.writeText(url).then(function () {
+      alert('✅ 페이지 URL이 복사되었습니다!');
+    }, function () {
+      alert('❌ URL 복사에 실패했습니다. 브라우저를 확인해주세요.');
+    });
+  });
+</script>
+
+<div class="note" style="text-align: center; margin-top: 0;">
+URL 복사
+</div>
+<!-- ✅ URL 복사 아이콘 버튼 종료 -->
+
+
+
+<br>
+<script> <!-- ■ 하단 일괄 공지 -->
+  document.addEventListener("DOMContentLoaded", function () {
+    fetch("notice-bottom.html")
+      .then(res => res.text())
+      .then(html => {
+        const tempDiv = document.createElement("div");
+        tempDiv.innerHTML = html;
+        document.body.appendChild(tempDiv); // ✅ body 맨 끝에 삽입
+      });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>제곱미터/평수 변환기 ↗코인씨</title>
+
+<!-- ✅ SEO 및 Open Graph + Twitter 메타태그 -->
+<meta name="title" content="제곱미터/평수 변환기 ↗코인씨" />
+<meta name="description" content="㎡(제곱미터) ↔ 평수 변환 계산기. 땅이나 집을 살 때 면적을 빠르게 변환해보세요." />
+<meta name="keywords" content="제곱미터, 평수, 평 변환, ㎡ 변환, 부동산 면적 계산, 평 계산기, m2 계산기, 코인씨" />
+<meta name="author" content="CoinSea" />
+<meta name="robots" content="index, follow" />
+
+<!-- ✅ Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="제곱미터/평수 변환기 ↗코인씨" />
+<meta property="og:description" content="㎡(제곱미터) ↔ 평수 변환 계산기. 부동산 면적을 간편하게 계산해보세요." />
+<meta property="og:url" content="https://coinsea.co.kr/util-meter.html" />
+<meta property="og:image" content="https://coinsea.co.kr/img/og-util-meter.webp" />
+<meta property="og:site_name" content="코인씨" />
+<meta property="og:locale" content="ko_KR" />
+
+<!-- ✅ Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="제곱미터/평수 변환기 ↗코인씨" />
+<meta name="twitter:description" content="㎡를 평으로, 평을 ㎡로 간단하게 계산하는 도구입니다. 부동산 면적 확인에 유용합니다." />
+<meta name="twitter:image" content="https://coinsea.co.kr/img/og-util-meter.webp" />
+
+
+<!-- ✅ Google Fonts 최적화 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet"></noscript>
+
+<!-- ✅ Font Awesome 최적화 -->
+<link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"></noscript>
+
+
+<!-- 가장 일반적인 파비콘 -->
+<link rel="icon" href="/favicon.ico" />
+
+<!-- 고해상도 디바이스 대응 -->
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon/android-icon-192x192.png" />
+
+<!-- 애플 터치용 최소 하나 -->
+<link rel="apple-touch-icon" href="/favicon/apple-icon-180x180.png" />
+
+
+    <style>
+        body {
+            font-family: 'Nanum Square', sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 70vh;
+            background-color: #ffffff;
+        }
+        .container {
+            flex: 1;
+            text-align: center;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            margin: 20px;
+            max-width: 360px; /* 컨테이너의 최대 너비 설정 */
+        }
+        .converter {
+            margin-bottom: 20px;
+        }
+        input, button {
+            padding: 10px;
+            margin-top: 5px;
+            width: 100%; /* 버튼과 입력 필드의 너비를 컨테이너에 맞춤 */
+            box-sizing: border-box; /* 패딩 포함하여 너비 계산 */
+        }
+        .banner {
+            width: 100%;
+            background-color: #ffffff;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+.coupang-banner-wrapper {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.coupang-banner-wrapper iframe,
+.coupang-banner-wrapper div {
+  max-width: 100% !important;
+  height: auto !important;
+}
+  .content-wrapper {
+  max-width: 800px;       /* 최대 너비 설정 */
+  margin: 0 auto;         /* 가운데 정렬 */
+  padding: 0px;
+  text-align: left;       /* 내용은 좌측 정렬 */
+    }
+
+
+    </style>
+</head>
+<body>
+<div class="content-wrapper"> <!-- ■ 전체를 감싸는 DIV 시작 -->
+
+    <div class="container">
+
+        <div class="converter">
+        <h2>평수를 제곱미터로 변환</h2>
+            <input type="number" id="pyeongInput" placeholder="평수를 입력하세요">
+            <button onclick="convertToSquareMeters()">변환</button>
+            <p id="squareMetersOutput"></p>
+        </div>
+
+        <div class="converter">
+            <h2>제곱미터를 평수로 변환</h2>
+            <input type="number" id="squareMeterInput" placeholder="제곱미터를 입력하세요">
+            <button onclick="convertToPyeong()">변환</button>
+            <p id="pyeongOutput"></p>
+        </div>
+    </div>
+
+
+    <script>
+        function convertToSquareMeters() {
+            const pyeong = document.getElementById('pyeongInput').value;
+            const squareMeters = pyeong * 3.3058;
+            document.getElementById('squareMetersOutput').innerText = `${pyeong} 평은 ${squareMeters.toFixed(2)} 제곱미터입니다.`;
+        }
+
+        function convertToPyeong() {
+            const squareMeters = document.getElementById('squareMeterInput').value;
+            const pyeong = squareMeters / 3.3058;
+            document.getElementById('pyeongOutput').innerText = `${squareMeters} 제곱미터는 ${pyeong.toFixed(2)} 평입니다.`;
+        }
+    </script>
+</p>
+
+</div> <!-- ■ 전체를 감싸는 DIV 종료 -->
+</body>
+</html>

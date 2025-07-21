@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>코인 선물 수익률 계산기</title>
+
+<!-- ✅ SEO 메타태그 -->
+<meta name="description" content="진입가, 마감가, 수량, 레버리지를 입력하면 수익률(ROE), 수익(USDT), 증거금이 자동 계산되는 선물 수익률 계산기입니다.">
+<meta name="keywords" content="코인 수익률 계산기, 선물 수익 계산, ROE 계산기, 마진 거래 계산기, 코인 선물 수익률, 코인 수익 자동계산기, 암호화폐 수익 계산, 레버리지 수익률 계산기">
+<meta name="author" content="코인씨(CoinSea)">
+<meta name="robots" content="index, follow">
+
+<!-- ✅ Open Graph (SNS 공유용) -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="코인 선물 수익률 계산기 - ROE 자동 계산 | 코인씨">
+<meta property="og:description" content="롱/숏 포지션을 선택하고 진입가, 마감가, 수량, 레버리지를 입력하면 수익률과 수익금이 바로 계산됩니다. 직관적인 선물 수익 계산기.">
+<meta property="og:image" content="https://coinsea.co.kr/img/og-cal-futuresprofit.webp">
+<meta property="og:url" content="https://coinsea.co.kr/cal-futuresprofit.html">
+<meta property="og:site_name" content="코인씨">
+
+<!-- ✅ Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="코인 선물 수익률 계산기 - ROE 자동 계산 | 코인씨">
+<meta name="twitter:description" content="진입가와 종료가만 입력하면 실시간 수익률 계산! 마진, 수익, ROE까지 한눈에 확인해보세요.">
+<meta name="twitter:image" content="https://coinsea.co.kr/img/og-cal-futuresprofit.webp">
+
+
+ 
+<!-- ✅ Google Fonts 최적화 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet"></noscript>
+
+<!-- ✅ Font Awesome 최적화 -->
+<link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"></noscript>
+
+
+<!-- 가장 일반적인 파비콘 -->
+<link rel="icon" href="/favicon.ico" />
+
+<!-- 고해상도 디바이스 대응 -->
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon/android-icon-192x192.png" />
+
+<!-- 애플 터치용 최소 하나 -->
+<link rel="apple-touch-icon" href="/favicon/apple-icon-180x180.png" />
+
+
+  <style>
+    body {
+      font-family: 'Nanum Gothic', sans-serif;
+      background: #fff;
+      margin: 0;
+      padding: 10px;
+      color: #333;
+    }
+    h1 {
+      font-size: 22px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .calculator-box {
+      border: 1px solid #ccc;
+      padding: 25px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    .btn-group {
+      display: flex;
+      margin-bottom: 20px;
+    }
+    .btn-group button {
+      flex: 1;
+      padding: 10px;
+      font-size: 15px;
+      cursor: pointer;
+      border: none;
+      color: #fff;
+      opacity: 0.5;
+      transition: opacity 0.3s;
+    }
+    .btn-group .active {
+      opacity: 1 !important;
+    }
+    .btn-long {
+      background-color: #00c18c;
+    }
+    .btn-short {
+      background-color: #d93a3a;
+    }
+    .leverage-range {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .leverage-range input {
+      margin-left: 10px;
+      width: 100px;
+    }
+    .input-group {
+      margin-bottom: 12px;
+    }
+    .input-group input {
+      width: 100%;
+      padding: 10px;
+      font-size: 15px;
+      box-sizing: border-box;
+    }
+    label {
+      display: block;
+      margin-bottom: 4px;
+      font-weight: bold;
+    }
+    .calculate-btn {
+      background-color: #468aee;
+      color: #fff;
+      font-size: 18px;
+      padding: 14px;
+      width: 100%;
+      border: none;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    .results {
+      border: 1px solid #ccc;
+      padding: 15px;
+      background: #eee;
+      margin-top: 20px;
+    }
+    .results h3 {
+      margin-top: 0;
+    }
+    .result-line {
+      display: flex;
+      justify-content: space-between;
+      margin: 6px 0;
+    }
+    .result-line b {
+      font-weight: bold;
+      color: #000;
+    }
+    .small-note {
+      font-size: 12px;
+      color: #888;
+      margin-top: 10px;
+    }
+
+    .note {
+      font-size: 14px;
+      color: #555;
+      margin-top: -20px;
+    }
+
+.coupang-banner-wrapper {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.coupang-banner-wrapper iframe,
+.coupang-banner-wrapper div {
+  max-width: 100% !important;
+  height: auto !important;
+}
+  .content-wrapper {
+  max-width: 800px;       /* 최대 너비 설정 */
+  margin: 0 auto;         /* 가운데 정렬 */
+  padding: 5px;
+  text-align: left;       /* 내용은 좌측 정렬 */
+    }
+
+  </style>
+</head>
+<body>
+<div class="content-wrapper"> <!-- ■ 전체를 감싸는 DIV 시작 -->
+
+  <h1>✅ 선물 수익률 계산기</h1>
+  <div class="calculator-box">
+    <div class="btn-group">
+      <button id="btn-long" class="btn-long">Open long</button>
+      <button id="btn-short" class="btn-short">Open short</button>
+    </div>
+
+    <div class="leverage-range">
+      <label>Leverage: <span id="leverageValue">50</span>x</label>
+      <input type="range" id="leverage" min="1" max="125" value="50" />
+    </div>
+
+    <div class="input-group">
+      <label>Entry price (USDT) : 진입가</label>
+      <input type="text" id="entry" class="commas" />
+    </div>
+
+    <div class="input-group">
+      <label>Close price (USDT) : 마감가</label>
+      <input type="text" id="close" class="commas" />
+    </div>
+
+    <div class="input-group">
+      <label>Filled quantity (수량) : 전체 사이즈</label>
+      <input type="text" id="quantity" class="commas" />
+    </div>
+
+    <button class="calculate-btn" onclick="calculate()">Calculate</button>
+
+    <div class="results" id="resultsBox">
+      <h3>Results</h3>
+      <div class="result-line" id="line1"></div>
+      <div class="result-line" id="line2"></div>
+      <div class="result-line" id="line3"></div>
+    </div>
+
+    <div class="small-note">
+      수익률 계산식:<br>
+      마진 = (진입가 × 수량) ÷ 레버리지<br>
+      손익 = (종료가 - 진입가) × 수량<br>
+      ROE = (손익 ÷ 마진) × 100
+    </div>
+  </div>
+
+  <script>
+    let isLong = true;
+
+    document.getElementById("btn-long").onclick = () => {
+      isLong = true;
+      updateMode();
+    };
+
+    document.getElementById("btn-short").onclick = () => {
+      isLong = false;
+      updateMode();
+    };
+
+    function updateMode() {
+      const btnLong = document.getElementById("btn-long");
+      const btnShort = document.getElementById("btn-short");
+      btnLong.classList.toggle("active", isLong);
+      btnShort.classList.toggle("active", !isLong);
+    }
+
+    document.getElementById("leverage").oninput = (e) => {
+      document.getElementById("leverageValue").innerText = e.target.value;
+    };
+
+    document.querySelectorAll('.commas').forEach(input => {
+      input.addEventListener('keyup', () => {
+        const val = input.value.replace(/[^0-9.]/g, '');
+        if (val.includes('.')) {
+          const parts = val.split('.');
+          input.value = Number(parts[0]).toLocaleString() + '.' + parts[1].slice(0, 8);
+        } else {
+          input.value = Number(val).toLocaleString();
+        }
+      });
+    });
+
+    function parseNumber(str) {
+      return parseFloat(str.replace(/,/g, '')) || 0;
+    }
+
+    function calculate() {
+      const entry = parseNumber(document.getElementById("entry").value);
+      const close = parseNumber(document.getElementById("close").value);
+      const qty = parseNumber(document.getElementById("quantity").value);
+      const lev = parseFloat(document.getElementById("leverage").value);
+
+      const line1 = document.getElementById("line1");
+      const line2 = document.getElementById("line2");
+      const line3 = document.getElementById("line3");
+
+      if (isNaN(entry) || isNaN(close) || isNaN(qty) || isNaN(lev)) return;
+
+      const margin = (entry * qty) / lev;
+      const pnl = (isLong ? (close - entry) : (entry - close)) * qty;
+      const roe = (pnl / margin) * 100;
+
+      line1.innerHTML = `Initial margin(증거금) <b>${margin.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})} USDT</b>`;
+      line2.innerHTML = `Profit(수익) <b><span style="color:red">${pnl.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})} USDT</span></b>`;
+      line3.innerHTML = `ROE(수익률) <b>${roe.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}%</b>`;
+    }
+
+    // 초기 모드 설정
+    updateMode();
+  </script>
+
+
+<br><br>
+<!-- ✅ URL 복사 아이콘 버튼 시작 -->
+<div style="text-align: center; margin-top: 20px;">
+  <div id="copyUrlBtn" title="이 페이지 URL 복사" style="cursor: pointer; display: inline-block;">
+
+<svg height="75px" width="75px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 427.479 427.479" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path style="fill:#51CAF4;" d="M214.396,427.479h-11c0-22.658,5.655-34.109,11.124-45.183c5.137-10.399,9.987-20.222,9.987-40.311 c0-20.089-4.852-29.912-9.987-40.311c-5.469-11.074-11.124-22.524-11.124-45.182c0-22.658,5.655-34.109,11.124-45.183 c5.136-10.399,9.987-20.222,9.987-40.312c0-20.091-4.852-29.914-9.987-40.314c-5.469-11.075-11.124-22.526-11.124-45.185 s5.655-34.11,11.124-45.185c5.136-10.4,9.987-20.223,9.987-40.313h11c0,22.659-5.655,34.11-11.124,45.184 c-5.136,10.4-9.987,20.224-9.987,40.314s4.852,29.914,9.987,40.314c5.469,11.075,11.124,22.526,11.124,45.185 c0,22.658-5.655,34.109-11.124,45.183c-5.136,10.399-9.987,20.222-9.987,40.312c0,20.089,4.852,29.912,9.987,40.311 c5.469,11.074,11.124,22.524,11.124,45.182s-5.655,34.108-11.124,45.182C219.248,397.566,214.396,407.389,214.396,427.479z"></path> <path style="fill:#51CAF4;" d="M208.91,76.496L208.91,76.496c-29.822,0-53.997-24.175-53.997-53.997v0h0 C184.734,22.499,208.91,46.674,208.91,76.496L208.91,76.496z"></path> <path style="fill:#51CAF4;" d="M208.91,239.238L208.91,239.238c-29.822,0-53.997-24.175-53.997-53.997v0h0 C184.734,185.241,208.91,209.416,208.91,239.238L208.91,239.238z"></path> <path style="fill:#51CAF4;" d="M226.909,371.981L226.909,371.981c-29.822,0-53.997-24.175-53.997-53.997v0h0 C202.734,317.984,226.909,342.159,226.909,371.981L226.909,371.981z"></path> <path style="fill:#51CAF4;" d="M217.909,122.994L217.909,122.994c29.822,0,53.997-24.175,53.997-53.997v0h0 C242.085,68.996,217.909,93.172,217.909,122.994L217.909,122.994z"></path> <path style="fill:#51CAF4;" d="M217.909,285.736L217.909,285.736c29.822,0,53.997-24.175,53.997-53.997v0h0 C242.085,231.738,217.909,255.914,217.909,285.736L217.909,285.736z"></path> <path style="fill:#51CAF4;" d="M78.562,427.479h-11c0-22.658,5.655-34.108,11.124-45.183c5.136-10.399,9.987-20.222,9.987-40.311 c0-20.089-4.852-29.911-9.987-40.311c-5.469-11.074-11.124-22.524-11.124-45.182c0-22.658,5.655-34.109,11.124-45.183 c5.136-10.399,9.987-20.222,9.987-40.312c0-20.091-4.852-29.914-9.987-40.314c-5.469-11.075-11.124-22.526-11.124-45.185h11 c0,20.091,4.852,29.914,9.987,40.314c5.469,11.075,11.124,22.526,11.124,45.185c0,22.658-5.655,34.109-11.124,45.183 c-5.136,10.399-9.987,20.222-9.987,40.312c0,20.089,4.852,29.911,9.987,40.311c5.469,11.074,11.124,22.524,11.124,45.182 s-5.655,34.108-11.124,45.182C83.414,397.566,78.562,407.389,78.562,427.479z"></path> <path style="fill:#51CAF4;" d="M73.076,239.238L73.076,239.238c-29.822,0-53.997-24.175-53.997-53.997v0h0 C48.901,185.241,73.076,209.416,73.076,239.238L73.076,239.238z"></path> <path style="fill:#51CAF4;" d="M91.898,368.981L91.898,368.981c-29.822,0-53.997-24.175-53.997-53.997v0h0 C67.723,314.984,91.898,339.159,91.898,368.981L91.898,368.981z"></path> <path style="fill:#51CAF4;" d="M82.076,122.994L82.076,122.994c29.822,0,53.997-24.175,53.997-53.997v0h0 C106.251,68.996,82.076,93.172,82.076,122.994L82.076,122.994z"></path> <path style="fill:#51CAF4;" d="M82.076,285.736L82.076,285.736c29.822,0,53.997-24.175,53.997-53.997v0h0 C106.251,231.738,82.076,255.914,82.076,285.736L82.076,285.736z"></path> <path style="fill:#51CAF4;" d="M347.889,427.479h-11c0-22.658,5.655-34.108,11.124-45.183c5.137-10.399,9.987-20.222,9.987-40.311 c0-20.089-4.852-29.912-9.987-40.311c-5.469-11.074-11.124-22.524-11.124-45.182c0-22.658,5.655-34.109,11.124-45.183 c5.136-10.399,9.987-20.222,9.987-40.312h11c0,22.658-5.655,34.109-11.124,45.183c-5.136,10.399-9.987,20.222-9.987,40.312 c0,20.089,4.852,29.912,9.987,40.311c5.469,11.074,11.124,22.524,11.124,45.182s-5.655,34.108-11.124,45.182 C352.741,397.566,347.889,407.389,347.889,427.479z"></path> <path style="fill:#51CAF4;" d="M342.403,239.238L342.403,239.238c-29.822,0-53.997-24.175-53.997-53.997v0h0 C318.228,185.241,342.403,209.416,342.403,239.238L342.403,239.238z"></path> <path style="fill:#51CAF4;" d="M355.902,373.481L355.902,373.481c-29.822,0-53.997-24.175-53.997-53.997v0h0 C331.727,319.484,355.902,343.659,355.902,373.481L355.902,373.481z"></path> <path style="fill:#51CAF4;" d="M354.403,302.235L354.403,302.235c29.822,0,53.997-24.175,53.997-53.997v0h0 C378.578,248.237,354.403,272.413,354.403,302.235L354.403,302.235z"></path> </g> </g></svg>
+
+  </div>
+</div>
+
+<script>
+  document.getElementById('copyUrlBtn').addEventListener('click', function () {
+    const url = window.location.href;
+    navigator.clipboard.writeText(url).then(function () {
+      alert('✅ 페이지 URL이 복사되었습니다!');
+    }, function () {
+      alert('❌ URL 복사에 실패했습니다. 브라우저를 확인해주세요.');
+    });
+  });
+</script>
+
+<div class="note" style="text-align: center; margin-top: 0;">
+URL 복사
+</div>
+<!-- ✅ URL 복사 아이콘 버튼 종료 -->
+
+<br>
+
+
+
+
+</div> <!-- ■ 전체를 감싸는 DIV 종료 -->
+
+<script> <!-- ■ 하단 일괄 공지 -->
+  document.addEventListener("DOMContentLoaded", function () {
+    fetch("notice-bottom.html")
+      .then(res => res.text())
+      .then(html => {
+        const tempDiv = document.createElement("div");
+        tempDiv.innerHTML = html;
+        document.body.appendChild(tempDiv); // ✅ body 맨 끝에 삽입
+      });
+  });
+</script>
+</body>
+</html>

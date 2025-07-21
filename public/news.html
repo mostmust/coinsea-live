@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TokenPost 최신 뉴스</title>
+
+<!-- ✅ SEO 및 Open Graph + Twitter 메타태그 -->
+<meta name="description" content="TokenPost와 블록미디어 등에서 제공하는 코인 실시간 뉴스를 한눈에 확인하세요. 암호화폐 시장의 최신 동향을 빠르게 파악할 수 있습니다.">
+<meta name="keywords" content="코인 뉴스, 실시간 뉴스, TokenPost, 블록미디어, 암호화폐 뉴스, 비트코인 뉴스, 가상자산 뉴스">
+<meta name="author" content="코인씨(CoinSea)">
+<meta name="robots" content="index, follow">
+
+<!-- ✅ Open Graph (SNS 공유용) -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="TokenPost 최신 뉴스 - 코인씨">
+<meta property="og:description" content="TokenPost, 블록미디어의 암호화폐 뉴스를 실시간으로 제공합니다. 비트코인, 이더리움 등 시장 동향을 지금 바로 확인해보세요.">
+<meta property="og:image" content="https://coinsea.co.kr/img/og-news.webp">
+<meta property="og:url" content="https://coinsea.co.kr/news.html">
+<meta property="og:site_name" content="코인씨">
+
+<!-- ✅ Twitter 카드 -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="TokenPost 최신 뉴스 - 코인씨">
+<meta name="twitter:description" content="실시간 코인 뉴스를 확인하고 시장 흐름을 빠르게 파악해보세요.">
+<meta name="twitter:image" content="https://coinsea.co.kr/img/og-news.webp">
+
+
+  <!-- 폰트 및 아이콘 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet"></noscript>
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"></noscript>
+
+  <!-- 파비콘 -->
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon/android-icon-192x192.png" />
+  <link rel="apple-touch-icon" href="/favicon/apple-icon-180x180.png" />
+
+  <!-- 스타일 -->
+  <link rel="stylesheet" href="css/loading.css" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      font-family: 'Nanum Gothic', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      background-color: #fff;
+      color: #333;
+      overflow-x: hidden;
+    }
+    .content-wrapper {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      text-align: left;
+    }
+    h1 { font-size: 24px; margin-bottom: 15px; }
+    p { margin-bottom: 15px; }
+    .main-title {
+      font-size: 26px;
+      font-weight: bold;
+      margin-bottom: 25px;
+      position: relative;
+      display: inline-block;
+      z-index: 0;
+    }
+    .main-title::after {
+      content: '';
+      position: absolute;
+      margin-left: 8px;
+      left: -7.5%;
+      right: -7.5%;
+      bottom: 1px;
+      height: 39%;
+      background-color: #f8cf26;
+      z-index: -1;
+    }
+    .sub-title-box {
+      font-size: 20px;
+      font-weight: bold;
+      margin-top: 30px;
+      margin-bottom: 10px;
+      color: #222;
+      padding-left: 12px;
+      border-left: 6px solid #b30000;
+    }
+    .news-title {
+      font-size: 16px;
+      color: #363636;
+      text-decoration: none;
+      display: block;
+    }
+    .news-title:hover {
+      text-decoration: underline;
+    }
+    .news-date {
+      font-size: 13px;
+      color: #aaaaaa;
+      margin-top: 4px;
+    }
+    .loading {
+      text-align: center;
+      color: #888;
+      font-style: italic;
+    }
+
+
+    @media screen and (max-width: 600px) {
+      html, body { font-size: 15px; }
+      h1 { font-size: 22px; }
+    }
+.news-item {
+  padding: 12px 0;
+  border-bottom: 1px solid #ddd; /* ✅ 각 뉴스 항목 밑줄 */
+  list-style: none;
+}
+#news-list {
+  padding: 0;
+  margin: 0;
+}
+  </style>
+</head>
+<body>
+
+<!-- ✅ 로딩 애니메이션 -->
+<div id="loading-screen">
+  <div class="loading-container">
+    <img src="/img/wave.png" alt="로딩 중" class="dolphin-splash">
+    <div class="loading-text">뉴스를 불러오는 중입니다...</div>
+  </div>
+</div>
+
+<!-- ✅ 뉴스 리스트 -->
+<div class="content-wrapper">
+  <div id="news-list-container">
+    <p class="loading">뉴스를 불러오는 중입니다...</p>
+  </div>
+</div>
+
+<script>
+ let loadingShown = false;
+const loadingScreen = document.getElementById('loading-screen');
+
+// 2초 후 로딩화면 표시
+const loadingTimer = setTimeout(() => {
+  if (loadingScreen) {
+    loadingScreen.classList.add('active');  // ✅ flex 표시
+    loadingShown = true;
+  }
+}, 2000);
+
+// 로딩 종료 감지
+function hideLoading() {
+  clearTimeout(loadingTimer);
+  if (loadingScreen && loadingShown) {
+    loadingScreen.classList.remove('active');  // ✅ 숨김 처리
+  }
+}
+
+document.addEventListener('DOMContentLoaded', hideLoading);
+window.addEventListener('load', hideLoading);
+
+// 실패 대비: 7초 후 강제 제거
+setTimeout(() => {
+  if (loadingScreen) loadingScreen.classList.remove('active');
+}, 7000);
+
+</script>
+
+
+<!-- ✅ 뉴스 API 처리 -->
+<script>
+  function formatDate(dateStr) {
+    const date = new Date(dateStr);
+    const y = date.getFullYear();
+    const m = ('0' + (date.getMonth() + 1)).slice(-2);
+    const d = ('0' + date.getDate()).slice(-2);
+    const h = ('0' + date.getHours()).slice(-2);
+    const min = ('0' + date.getMinutes()).slice(-2);
+    return `${y}년 ${m}월 ${d}일 ${['일','월','화','수','목','금','토'][date.getDay()]}요일 ${h}:${min}`;
+  }
+
+  function fetchNews(rssUrl) {
+    const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
+    return fetch(apiUrl)
+      .then(res => res.json())
+      .then(data => data.items.slice(0, 10))
+      .catch(err => {
+        console.error(`뉴스 로딩 오류 (${rssUrl}):`, err);
+        return [];
+      });
+  }
+
+  async function loadCombinedNews() {
+    const tokenpostRss = 'https://www.tokenpost.kr/rss';
+    const blockmediaRss = 'https://www.blockmedia.co.kr/rss';
+    const [tokenNews, blockNews] = await Promise.all([
+      fetchNews(tokenpostRss),
+      fetchNews(blockmediaRss)
+    ]);
+    const combinedNews = [...tokenNews, ...blockNews];
+    const newsListHtml = combinedNews.map(item => `
+      <li class="news-item">
+        <a href="${item.link}" target="_blank" rel="noopener noreferrer" class="news-title">${item.title}</a>
+        <span class="news-date">${formatDate(item.pubDate)}</span>
+      </li>
+    `).join('');
+    document.getElementById('news-list-container').innerHTML = `<ul id="news-list">${newsListHtml}</ul>`;
+  }
+
+  loadCombinedNews();
+</script>
+
+</body>
+</html>

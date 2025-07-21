@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+   <title>코인 용어 정리 - CoinSea</title>
+
+<!-- SEO 메타태그 -->
+<meta name="description" content="비트코인, 이더리움, NFT 등 코인 초보자들을 위한 필수 암호화폐 용어 정리. 간단하고 쉽게 이해할 수 있는 설명 수록." />
+<meta name="keywords" content="코인 용어, 암호화폐 용어, 비트코인, 이더리움, NFT, USDT, 김프, 거래소, 가상화폐 기초, 초보자 코인" />
+<meta name="author" content="CoinSea" />
+
+<!-- Open Graph (OG) 메타태그 -->
+<meta property="og:title" content="코인 용어 정리 - CoinSea" />
+<meta property="og:description" content="비트코인부터 NFT까지, 암호화폐 초보자를 위한 기초 용어 100여 개를 쉽게 설명한 가이드입니다." />
+<meta property="og:image" content="https://coinsea.co.kr/img/og-word.webp" />
+<meta property="og:url" content="https://coinsea.co.kr/word.html" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="ko_KR" />
+
+<!-- Twitter 메타태그 -->
+<meta name="twitter:title" content="코인 용어 정리 - CoinSea" />
+<meta name="twitter:description" content="코인 초보자를 위한 쉽고 간단한 암호화폐 용어 해설 페이지입니다." />
+<meta name="twitter:image" content="https://coinsea.co.kr/img/og-word.webp" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<!-- ✅ Google Fonts 최적화 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet"></noscript>
+
+<!-- ✅ Font Awesome 최적화 -->
+<link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"></noscript>
+
+
+<!-- 가장 일반적인 파비콘 -->
+<link rel="icon" href="/favicon.ico" />
+
+<!-- 고해상도 디바이스 대응 -->
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon/android-icon-192x192.png" />
+
+<!-- 애플 터치용 최소 하나 -->
+<link rel="apple-touch-icon" href="/favicon/apple-icon-180x180.png" />
+
+  <style>
+
+    body {
+      font-family: 'Nanum Gothic', sans-serif;
+      font-size: 16px;
+      color: #333;
+      background-color: #fff;
+      margin: 0;
+    }
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+
+    .content-wrapper {
+    max-width: 800px;       /* 최대 너비 설정 */
+  margin: 0 auto;         /* 가운데 정렬 */
+  padding: 0px;
+  text-align: left;       /* 내용은 좌측 정렬 */
+    }
+
+.menu-tabs {
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;      /* ✅ 중앙 정렬 */
+  gap: 3px;                    /* ✅ 항목 간 간격 */
+  padding: 15px 0 4px;          /* ✅ 위 여백 줄이기 (기존: 12px 0) */
+  font-weight: bold;
+  border-bottom: 2px solid #000;
+  width: 100%;
+  margin: 0;                    /* ✅ 좌우 여백 제거 */
+  box-sizing: border-box;
+  letter-spacing: -0.3px; /* ✅ 글자 간격 좁히기 */
+
+}
+
+  .menu-tabs a {
+    font-size: 14px;       /* ✅ 글자 크기도 약간 줄이면 더 조화로움 */
+    padding: 0px 4px;      /* ✅ 좌우 패딩 간소화 (기존보다 좁게) */
+    color: #999;
+    text-decoration: none;
+    padding-bottom: 6px;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s ease;
+  }
+
+  .menu-tabs a.active {
+    color: #000; /* 선택된 탭의 색상 */
+    border-bottom: 3px solid #000; /* 두꺼운 밑줄 */
+  }
+
+.menu-tabs a:hover {
+  color: #000;
+}
+
+.section {
+  border: none;
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 0 auto 40px auto;
+  max-width: 800px;
+  width: 100%;
+  box-sizing: border-box;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+    .section h2 {
+      font-size: 18px;
+      margin-top: 0;       /* 위 여백 제거 */
+      margin-bottom: 16px; /* 아래 여백만 적절히 유지 */
+padding-bottom: 6px;
+  border-bottom: 1px solid #000; /* ✅ 검정 가로선 */
+scroll-margin-top: 85px; /* ✅ 고정된 메뉴 높이만큼 여유 공간 확보 */
+    }
+
+h2 {
+  scroll-margin-top: 85px;
+}
+
+    .icon-grid {
+      display: block;
+  flex-wrap: wrap;
+  gap: 16px 24px;
+  justify-content: flex-start;
+
+    }
+
+    @media (min-width: 768px) {
+      .icon-grid {
+
+      }
+    }
+
+.term {
+  font-size: 15px;
+  margin-bottom: 12px; /* ✅ 줄 간격 확보 */
+  line-height: 1.6;
+}
+    .icon-item {
+     width: auto;
+      text-align: left;
+      font-size: 14px;
+    }
+
+    .icon-item img {
+      width: 36px;
+      height: 36px;
+      margin-bottom: 6px;
+border-radius: 8px; /* ← 사각형 모서리를 둥글게 */
+    }
+
+  .icon-item:hover {
+    color: orange;
+  }
+
+  .icon-item:hover svg {
+    stroke: orange;
+  }
+
+html {
+  scroll-behavior: smooth;
+}
+
+
+
+    /* ✅ 본문용 텍스트 스타일 */
+    .main-title {
+      font-size: 26px;
+      font-weight: bold;
+      margin-top: 20px;       /* ✅ 상단 여백 추가 */
+      margin-left: 10px;      /* ✅ 좌측 여백 추가 */
+      margin-bottom: 25px;
+      position: relative;
+      display: inline-block;
+      z-index: 0;
+    }
+
+    .main-title::after {
+      content: '';
+      position: absolute;
+      left: -7.5%;
+      right: -7.5%;
+      bottom: 1px;
+      height: 39%;
+      background-color: #f8cf26;
+      z-index: -1;
+    }
+
+    .sub-title {
+      font-size: 20px;
+      font-weight: bold;
+      margin-top: 30px;
+      margin-bottom: 10px;
+      color: #222;
+    }
+
+    .body-text {
+      font-size: 16px;
+      line-height: 1.7;
+      margin-bottom: 15px;
+     padding-left: 10px;
+    }
+
+    .small-text {
+      font-size: 13px;
+      color: #777;
+    }
+
+    .note {
+      font-size: 14px;
+      color: #555;
+      margin-top: -20px;
+    }
+
+.coupang-banner-wrapper {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.coupang-banner-wrapper iframe,
+.coupang-banner-wrapper div {
+  max-width: 100% !important;
+  height: auto !important;
+}
+
+
+</style>
+
+</head>
+<body>
+
+  <div class="content-wrapper">
+
+
+    <div class="main-title">코인 용어 정리</div>
+
+    <div class="body-text">
+      코인 초보자분들을 위한 코인 관련 용어 해설이니 이용에 참고하시기 바랍니다.
+    </div>
+<br>
+
+<!-- 탭 메뉴 -->
+<div class="menu-tabs">
+  <a href="#section1" class="active">A</a>
+  <a href="#section2">가</a>
+  <a href="#section3">나</a>
+  <a href="#section4">다</a>
+  <a href="#section5">라</a>
+  <a href="#section6">마</a>
+  <a href="#section7">바</a>
+  <a href="#section8">사</a>
+  <a href="#section9">아</a>
+  <a href="#section10">자</a>
+  <a href="#section11">차</a>
+  <a href="#section12">카</a>
+  <a href="#section13">타</a>
+  <a href="#section14">파</a>
+  <a href="#section15">하</a>
+</div>
+
+<div class="content-wrapper">
+
+<br>
+<!-- 섹션들 -->
+<div class="section">
+  <h2 id="section1">A</h2><div style="height: 0.8em;"></div>
+  <div class="icon-grid">
+    <div class="term"><b>51% 공격</b> 특정세력이 블록체인 네트워크의 51% 이상을 점유하여 조작하는 공격</div>
+    <div class="term"><b>AMM</b> 유동성을 자동으로 조정하는 탈중앙화 거래방식(예: 유니스왑)</div>
+    <div class="term"><b>CEX</b> 운영 주체가 존재하는 거래소(예: 업비트)</div>
+    <div class="term"><b>DAO</b> 탈중앙화 자율 조직</div>
+    <div class="term"><b>DEPIN</b> 블록체인으로 물리 인프라를 분산 운영하고 보상하는 네트워크</div>
+    <div class="term"><b>DEX</b> 블록체인 스마트 컨트랙트를 이용한 P2P 거래소(예: 유니스왑)</div>
+    <div class="term"><b>EVM</b> 이더리움 스마트 계약 실행 환경</div>
+    <div class="term"><b>FTX</b> 파산한 대형 글로벌 거래소</div>
+    <div class="term"><b>IDO</b> DEX를 통한 코인 모집 방식</div>
+    <div class="term"><b>IEO</b> 거래소가 주관하는 투자</div>
+    <div class="term"><b>ICO</b> 암호화폐 기반의 초기 자금 조달 방식</div>
+    <div class="term"><b>IDO</b> 탈중앙화 거래소에서 진행하는 토큰 세일</div>
+    <div class="term"><b>IEO</b> 거래소가 직접 주관하는 토큰 세일</div>
+    <div class="term"><b>MACD</b> 이동 평균 기반 추세 분석 지표</div>
+    <div class="term"><b>NFT</b> 대체 불가능한 토큰, 고유성을 가지는 디지털 자산</div>
+    <div class="term"><b>POS</b> 코인을 예치한 사용자에게 블록검증 권한을 주는 방식(예: 이더리움 2.0)</div>
+    <div class="term"><b>POW</b> 연산 작업을 통해 블록을 생성하는 방식(예: 비트코인)</div>
+    <div class="term"><b>RSI</b> 자산이 과매수 혹은 과매도 상태인지를 보여주는 지표</div>
+    <div class="term"><b>USDT</b> 테더의 대표 심볼</div>
+</div>
+</div>
+
+
+<br>
+<div class="section">
+  <h2 id="section2">가</h2><div style="height: 0.8em;"></div>
+  <div class="icon-grid">
+     <div class="term"><b>가스비</b> 블록체인에서 트랜잭션을 처리하기 위한 수수료</div>
+      <div class="term"><b>가두리</b> 입출금이 막힌 상태에서 비정상적 가격 변동이 생긴 현상</div>
+      <div class="term"><b>가즈아</b> 코인 가격이 크게 오르기를 기대하며 외치는 구호</div>
+      <div class="term"><b>개미</b> 소액을 운용하는 일반 투자자</div>
+      <div class="term"><b>개미털기</b> 세력이 개미를 손절하게 만든 뒤 가격을 다시 올리는 전략</div>
+      <div class="term"><b>고래</b> 대규모 자산을 보유한 투자자</div>
+      <div class="term"><b>공매수</b> 거래소에서 빌려 추가 매수하고 나중에 빌린만큼 되갚고 차익을 남기는 매매 방식</div>
+      <div class="term"><b>공매도</b> 거래소에서 빌려 먼저 매도하고 나중에 빌린만큼 되갚고 차익을 남기는 매매 방식</div>
+    <div class="term"><b>공포탐욕지수</b> 시장 심리를 수치화한 지표</div>
+      <div class="term"><b>구조대</b> 폭락장에서 가격을 끌어올리는 큰손 세력</div>
+    <div class="term"><b>거래량</b> 일정 시간 내 거래된 수량</div>
+    <div class="term"><b>거래소</b> 코인을 사고파는 플랫폼</div>
+    <div class="term"><b>거래쌍</b> 교환 가능한 두 코인 조합</div>
+      <div class="term"><b>기영이 차트</b> 급격한 급등과 급락을 반복하는 차트</div>
+  <div class="term"><b>김치 프리미엄</b> 한국 거래소가 해외보다 비싼 가격에 거래되는 현상</div>
+    <div class="term"><b>김치코인</b> 한국에서만 인기 있는 코인</div>
+    <div class="term"><b>김프</b> 김치 프리미엄의 줄인로 국내가격이 해외가격보다 높을때 쓰는 말</div>
+</div>
+</div>
+
+
+<br>
+<div class="section">
+  <h2 id="section3">나</h2><div style="height: 0.8em;"></div>
+  <div class="icon-grid">
+      <div class="term"><b>노드</b> 블록체인 네트워크에 참여하는 컴퓨터 또는 장치</div>
+      <div class="term"><b>뇌피셜</b> 자신의 뇌로 소설을써서 호재를 퍼트리는 행위</div>
+</div>
+</div>
+
+
+<br>
+<div class="section">
+  <h2 id="section4">다</h2><div style="height: 0.8em;"></div>
+  <div class="icon-grid">
+    <div class="term"><b>단타</b> 짧은 시간 내 매매 전략</div>
+     <div class="term"><b>디앱(DApp)</b> 블록체인 기반의 분산형 애플리케이션</div>
+      <div class="term"><b>디파이(DeFi)</b> 탈중앙화 금융, 블록체인 기술을 이용한 금융 서비스</div>
+    <div class="term"><b>덤핑</b> 가격이 급락하는 현상</div>
+    <div class="term"><b>떡락</b> 미친듯이 코인가격이 하락할 때</div>
+    <div class="term"><b>떡상</b> 미친듯이 코인가격이 상승할 때</div>
+    <div class="term"><b>떡락충, 떡락무새</b> 코인 가격이 떨어지기 시작하면 어김없이 나타나는 하락 지지자들</div>
+    <div class="term"><b>디지털화폐</b> 온라인에서 거래되는 디지털 자산으로, 비트코인과 이더리움 등</div>
+
+
+</div>
+</div>
+
+
+<br>
+<div class="section">
+  <h2 id="section5">라</h2><div style="height: 0.8em;"></div>
+  <div class="icon-grid">
+      <div class="term"><b>레이어 1</b> 블록체인의 기본 네트워크</div>
+      <div class="term"><b>레이어 2</b> 블록체인의 확장성을 높이기 위한 별도 구조</div>
+    <div class="term"><b>레버리지</b> 자금보다 크게 투자하는 방식</div>
+    <div class="term"><b>렌딩</b> 암호화폐를 예치하고 이자를 받거나 대출하는 서비스</div>
+      <div class="term"><b>로켓</b> 급등을 표현하는 용어</div>
+    <div class="term"><b>루나</b> 폭락해 유명해진 코인</div>
+    <div class="term"><b>롱(Long)</b> 가격 상승을 예상하고 매수하는 전략</div>
+      <div class="term"><b>리또속</b> '리플에 또 속았다'의 줄임말</div>
+    <div class="term"><b>리스크</b> 투자 시 발생 가능한 위험</div>
+</div>
+</div>
+
+
+<br>
+<div class="section">
+  <h2 id="section6">마</h2><div style="height: 0.8em;"></div>
+  <div class="icon-grid">
+    <div class="term"><b>마스터노드</b> 마스터노드(POS)란 특정 코인의 일정 지분을 가지고 코인을 채굴하는 방식</div>
+    <div class="term"><b>메타마스크</b> 대표적인 코인 지갑</div>
+    <div class="term"><b>메인넷</b> 자신만의 플랫폼을 가지면서 토큰이 아닌 정식 코인으로 인정받는 것</div>
+    <div class="term"><b>미체결</b> 주문이 아직 안된 상태</div>
+      <div class="term"><b>마진 거래</b> 레버리지를 사용한 거래 방식</div>
+      <div class="term"><b>매도</b> 코인을 판매하는 행위</div>
+      <div class="term"><b>매수</b> 코인을 구매하는 행위</div>
+      <div class="term"><b>매도벽</b> 세력, 혹은 봇이 호가창에 어마어마하게 매도물량을 내놓는 것</div>
+      <div class="term"><b>매수벽</b> 세력, 혹은 봇이 호가창에 어마어마하게 매수물량을 내놓는 것</div>
+      <div class="term"><b>메로나</b> 차트에서 강한 상승을 나타내는 초록색 봉</div>
+      <div class="term"><b>메타버스</b> 현실과 가상이 결합된 디지털 세계</div>
+      <div class="term"><b>물림</b> 고점에 매수하여 하락 후 매도하지 못한 상태</div>
+      <div class="term"><b>물타기</b> 손실 회복을 위해 추가 매수하여 평균 단가를 낮추는 전략</div>
+</div>
+</div>
+
+
+<br>
+<div class="section">
+  <h2 id="section7">바</h2><div style="height: 0.8em;"></div>
+  <div class="icon-grid">
+   <div class="term"><b>바이낸스</b> 세계 최대 규모의 거래소</div>
+      <div class="term"><b>반등</b> 하락 후 다시 상승하는 움직임</div>
+    <div class="term"><b>빅샷</b> 큰 자금을 가진 투자자</div>
+    <div class="term"><b>빗썸</b> 한국 주요 암호화폐 거래소</div>
+    <div class="term"><b>백서</b> 프로젝트의 공식 설명서</div>
+    <div class="term"><b>보합</b> 시세가 크게 변하지 않음</div>
+      <div class="term"><b>불장</b> 시장 전체가 활발히 상승하는 상황</div>
+      <div class="term"><b>불타기</b> 더 오를거라 생각하여 수익중에 추가 매수하는 전략</div>
+    <div class="term"><b>블록체인</b> 거래정보를 담은 연결 구조</div>
+    <div class="term"><b>비트코인</b> 최초의 대표적인 암호화폐</div>
+    <div class="term"><b>분산투자</b> 다양한 자산에 나눠 투자</div>
+</div>
+</div>
+
+
+<br>
+<div class="section">
+  <h2 id="section8">사</h2><div style="height: 0.8em;"></div>
+  <div class="icon-grid">
+     <div class="term"><b>사토시</b> 비트코인 개발자로, 비트코인의 수량을 세는 단위로도 사용.  0.00000001 BTC = 1 사토시</div>
+     <div class="term"><b>상승장</b> 가격이 지속적으로 상승하는 시장</div>
+    <div class="term"><b>상장</b> 코인이 거래소에 등록됨</div>
+    <div class="term"><b>상폐</b> 거래소에서 코인이 퇴출됨</div>
+      <div class="term"><b>샤딩</b> 블록체인의 처리 속도를 높이기 위한 데이터 분할 기술</div>
+      <div class="term"><b>선동충</b> 코인이 오른다고 매수를 외치거나, 내린다고 매도를 외치는 선동하는 투자자들</div>
+      <div class="term"><b>선물거래</b> 레버리지를 이용하여 상승과 하락, 양방향 무기한 투자가 가능한 거래</div>
+      <div class="term"><b>성투</b> 성공적인 투자의 줄임말</div>
+      <div class="term"><b>세력</b> 코인 가격을 인위적으로 조작하는 자본력</div>
+      <div class="term"><b>손절</b> 손해를 감수하고 매도하여 더 큰 손실을 피하는 행위</div>
+      <div class="term"><b>소각</b> 암호화폐 공급을 줄이기 위한 영구 제거</div>
+      <div class="term"><b>소프트포크</b> 기존 체인과 호환되는 블록체인 업그레이드</div>
+      <div class="term"><b>스냅샵</b> 에어드랍할 때 정해진 시간</div>
+    <div class="term"><b>스캠</b> 사기성 프로젝트 또는 코인</div>
+      <div class="term"><b>스마트 컨트랙트</b> 조건이 충족되면 자동 실행되는 계약</div>
+      <div class="term"><b>스탑로스</b> 손실을 제한하기 위한 자동 매도 주문</div>
+    <div class="term"><b>스테이킹</b> 코인을 맡기고 이자 받는 방식</div>
+      <div class="term"><b>스테이블 코인</b> 법정화폐에 연동된 안정적인 암호화폐</div>
+      <div class="term"><b>스테이킹</b> 코인을 예치하고 검증에 참여하여 보상을 받는 방식</div>
+      <div class="term"><b>스프레드</b> 매수가와 매도가의 가격 차이</div>
+    <div class="term"><b>스윙</b> 며칠 단위의 단기 매매</div>
+    <div class="term"><b>승차감</b> 자신이 탄 코인이 안정적으로 우상향 하고 있을때 "승차감 좋네요" 이렇게 표현</div>
+    <div class="term"><b>슬리피지</b> 예상과 실제 체결 가격 차이</div>
+    <div class="term"><b>심볼</b> 코인의 고유 약어</div>
+    <div class="term"><b>숏(Short)</b> 가격 하락을 예상하고 공매도하는 전략</div>
+      <div class="term"><b>숏 포지션</b> 가격 하락에 베팅하는 거래 전략</div>
+      <div class="term"><b>시장가 주문</b> 현재 시장 가격에 즉시 체결되는 주문</div>
+    <div class="term"><b>시총</b> 전체 코인 가치의 합계</div>
+</div>
+</div>
+
+<br>
+
+
+<div class="section">
+  <h2 id="section9">아</h2><div style="height: 0.8em;"></div>
+  <div class="icon-grid">
+    <div class="term"><b>악재</b> 나쁜 소식</div>
+    <div class="term"><b>알트코인</b> 비트코인을 제외한 모든 코인</div>
+    <div class="term"><b>암호화</b> 데이터를 안전하게 보호하기 위한 변환</div>
+    <div class="term"><b>암호화폐</b> 블록체인 기술을 기반으로 한 디지털 화폐</div>
+    <div class="term"><b>업비트</b> 국내 1위 가상화폐 거래소</div>
+    <div class="term"><b>에어드랍</b> 코인을 무상으로 배포함</div>
+    <div class="term"><b>예치</b> 코인을 지갑에 보관함</div>
+      <div class="term"><b>역추세매매</b> 추세와 반대로 매매하는 전략</div>
+      <div class="term"><b>역프</b> 해외가격이 국내 가격보다 높을때 쓰는 말</div>
+      <div class="term"><b>오피셜</b> 뇌피셜의 반대말로 팩트인 사실</div>
+    <div class="term"><b>올인</b> 모든 자산을 한 곳에 투자</div>
+    <div class="term"><b>운전수</b> 해당 코인의 가격을 조작/조종하여 장을 이끄는 세력</div>
+    <div class="term"><b>유동성 공급자(LP)</b> 거래소에 자산을 예치하여 유동성을 제공하는 투자자</div>
+    <div class="term"><b>이더리움</b> 스마트계약 가능한 블록체인</div>
+      <div class="term"><b>이동 평균선</b> 일정 기간 동안의 평균 가격을 나타내는 지표</div>
+      <div class="term"><b>익절</b> 이익 실현을 위해 설정한 가격에 매도하는 행위</div>
+    <div class="term"><b>입금완료</b> 코인이 지갑에 도착함</div>
+    <div class="term"><b>입금지갑</b> 코인을 받는 지갑 주소</div>
+</div>
+</div>
+
+
+<br>
+<div class="section">
+  <h2 id="section10">자</h2><div style="height: 0.8em;"></div>
+  <div class="icon-grid">
+    <div class="term"><b>장투</b> 장기적으로 보유하는 투자</div>
+    <div class="term"><b>잡코인</b> 시총이 순위권안에 못드는 낮은 코인들</div>
+      <div class="term"><b>저항선</b> 가격이 상승할 때 저항을 받을 것으로 예상되는 가격선</div>
+    <div class="term"><b>전송</b> 코인을 지갑으로 보내는 행위</div>
+    <div class="term"><b>재정거래</b> 코인을 이동하여 거래소마다의 시세차익을 통해 이득을 보는 거래방법</div>
+     <div class="term"><b>존버</b> '존나게 버틴다'의 줄임말로서 물려서 장투한다는 말</div>
+     <div class="term"><b>지갑(월렛)</b> 암호화폐를 저장하고 거래를 관리하는 도구</div>
+      <div class="term"><b>지정가 주문</b> 설정한 가격에 도달하면 체결되는 주문</div>
+      <div class="term"><b>지지선</b> 가격이 하락할 때 지지를 받을 것으로 예상되는 가격선</div>
+</div>
+</div>
+
+
+<br>
+<div class="section">
+  <h2 id="section11">차</h2><div style="height: 0.8em;"></div>
+  <div class="icon-grid">
+      <div class="term"><b>차익거래</b> 거래소 간 가격 차이를 이용한 무위험 수익 추구</div>
+    <div class="term"><b>차트</b> 시세 흐름을 보는 그래프</div>
+    <div class="term"><b>차트쟁이</b> 기술적 분석만 집중하는 사람</div>
+    <div class="term"><b>채굴</b> 컴퓨터 연산으로 코인 생성</div>
+    <div class="term"><b>채굴자</b> 채굴로 코인을 얻는 사람</div>
+     <div class="term"><b>청산</b> 포지션이 유지 증거금을 충족하지 못해 강제로 종료되는 것</div>
+    <div class="term"><b>체결</b> 주문이 성사되는 것</div>
+    <div class="term"><b>추매</b> 추가로 매수를 더하는 것</div>
+      <div class="term"><b>추세매매</b> 가격 흐름의 방향에 따라 매매하는 전략</div>
+    <div class="term"><b>출금대기</b> 출금 요청 후 처리 전 상태</div>
+    <div class="term"><b>출금지갑</b> 코인을 보내는 지갑 주소</div>
+</div>
+</div>
+
+
+<br>
+<div class="section">
+  <h2 id="section12">카</h2><div style="height: 0.8em;"></div>
+  <div class="icon-grid">
+      <div class="term"><b>캔들 차트</b> 시가, 고가, 저가, 종가를 시각화한 차트</div>
+      <div class="term"><b>커스터디</b> 제 3자가 자산을 대신 보관하고 관리하는 서비스</div>
+      <div class="term"><b>코인</b> 독자적인 블록체인을 가진 암호화폐</div>
+    <div class="term"><b>콜드월렛</b> 오프라인에서 코인을 보관하는 지갑</div>
+    <div class="term"><b>클레이튼</b> 카카오가 만든 블록체인</div>
+</div>
+</div>
+
+
+<br>
+<div class="section">
+  <h2 id="section13">타</h2><div style="height: 0.8em;"></div>
+  <div class="icon-grid">
+   <div class="term"><b>테더</b> 달러에 연동된 안정적인 코인</div>
+      <div class="term"><b>토큰</b> 기존 블록체인을 활용하여 발행된 암호화폐</div>
+    <div class="term"><b>탑승</b> 해당 코인을 매수함</div>
+    <div class="term"><b>트레이딩</b> 사고팔며 차익을 노리는 활동</div>
+      <div class="term"><b>트랜잭션</b> 블록체인 네트워크 내 거래 또는 데이터 기록</div>
+</div>
+</div>
+
+
+<br>
+<div class="section">
+  <h2 id="section14">파</h2><div style="height: 0.8em;"></div>
+  <div class="icon-grid">
+     <div class="term"><b>평단</b> 코인을 구매한 평균 단가의 줄임말</div>
+      <div class="term"><b>패러렐 패널</b> 지지선과 저항선이 평행하게 형성된 채널</div>
+      <div class="term"><b>포크(Fork)</b> 기존 블록체인에서 새로운 체인이 분리되는 것</div>
+      <div class="term"><b>펌핑</b> 가격이 급등하는 현상</div>
+      <div class="term"><b>퍼블릭 키(공개키)</b> 암호화폐 주소를 생성하는 키</div>
+      <div class="term"><b>프라이빗 키(개인키)</b> 암호화폐 지갑을 관리하는 비밀 키</div>
+      <div class="term"><b>플로어 프라이스(Floor Price)</b> 특정 NFT 컬렉션 중 최저 판매가</div>
+    <div class="term"><b>피어</b> 네트워크를 구성하는 참여자</div>
+    <div class="term"><b>피싱(Phishing)</b> 가짜 웹사이트나 이메일을 통해 개인정보를 탈튀하는 사기 방식</div>
+</div>
+</div>
+
+
+<br>
+<div class="section">
+  <h2 id="section15">하</h2><div style="height: 0.8em;"></div>
+  <div class="icon-grid">
+      <div class="term"><b>하락장</b> 전체 시장이 지속적으로 하락하는 상황</div>
+    <div class="term"><b>하차</b> 해당 코인을 매도함</div>
+      <div class="term"><b>하드포크</b> 기존 체인과 호환되지 않는 블록체인 분기</div>
+    <div class="term"><b>핫월렛</b> 인터넷 연결된 지갑</div>
+     <div class="term"><b>해시 함수</b> 입력값을 고정된 길이의 값으로 변환하는 함수</div>
+    <div class="term"><b>호가창</b> 매수와 매도 대기 현황</div>
+    <div class="term"><b>호재</b> 시세에 긍정적인 뉴스</div>
+      <div class="term"><b>횡보장</b> 가격이 일정한 범위 내에서 움직이는 시장</div>
+    <div class="term"><b>현물거래</b> 실제 코인을 사고파는 거래</div>
+</div>
+</div>
+
+<br>
+
+<svg height="64px" width="64px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 573.231 573.231" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path style="fill:#A7C7CA;" d="M542.7,241.306c-1.674,25.737-7.957,50.212-18.051,72.615 c-11.639,25.892-28.351,49.002-48.873,68.07c-9.592,8.923-20.02,16.956-31.157,23.986c-29.702,18.759-64.413,30.295-101.673,32.174 c-3.566,0.18-7.158,0.27-10.763,0.27c-39.204,0-75.91-10.686-107.364-29.316c-13.622-8.06-26.252-17.626-37.672-28.454 c-26.355-24.939-46.26-56.611-56.997-92.274c-5.832-19.299-8.948-39.758-8.948-60.937l16.982-4.081 c62.302-14.922,125.917-22.389,189.519-22.389c69.19,0,138.367,8.832,205.805,26.471l-11.356,11.343 c-3.154,3.155-3.476,8.343-0.412,11.6c3.167,3.36,8.459,3.412,11.703,0.18L542.7,241.306z"></path> <path style="fill:#92B2B2;" d="M542.7,241.306c-1.674,25.737-7.957,50.212-18.051,72.615c-1.313,0.245-2.343,0.154-2.91-0.451 c-3.064-3.257-2.742-8.446,0.412-11.6l11.356-11.343c-129.431-33.848-265.223-35.251-395.324-4.081l-8.034,1.931 c-5.832-19.299-8.948-39.758-8.948-60.937l16.982-4.081c62.302-14.922,125.917-22.389,189.519-22.389 c69.19,0,138.367,8.832,205.805,26.471l-11.356,11.343c-3.154,3.155-3.476,8.343-0.412,11.6c3.167,3.36,8.459,3.412,11.703,0.18 L542.7,241.306z"></path> <path style="fill:#FFFFFF;" d="M491.445,332.811h57.508v12.875H478.57l0,0C478.57,338.575,484.334,332.811,491.445,332.811z"></path> <path style="fill:#92B2B2;" d="M342.943,438.132v0.013c-3.566,0.18-7.158,0.27-10.763,0.27c-39.204,0-75.91-10.686-107.364-29.316 c8.15-3.798,18.527-6.862,29.406-5.485c24.282,3.077,62.044,6.515,62.044,6.515l14.162-7.3 C330.429,402.829,341.283,416.361,342.943,438.132z"></path> <path style="fill:#A7C7CA;" d="M285.252,461.754h-62.976V442.67c0-22.003,17.837-39.841,39.841-39.841h68.309v13.753 C330.425,441.53,310.2,461.754,285.252,461.754z"></path> <path style="fill:#A7C7CA;" d="M140.037,370.991h-20.111v-5.332c0-22.003,17.837-39.841,39.841-39.841h25.444v0 C185.209,350.766,164.985,370.991,140.037,370.991z"></path> <path style="fill:#92B2B2;" d="M537.968,138.969L537.968,138.969c-19.475,0-35.263,15.788-35.263,35.263v131.737h70.525V174.232 C573.231,154.757,557.443,138.969,537.968,138.969z"></path> <circle style="fill:#A7C7CA;" cx="537.968" cy="305.969" r="35.263"></circle> <circle style="fill:#FFFFFF;" cx="537.968" cy="305.969" r="23.729"></circle> <circle style="fill:#4E4E4E;" cx="537.968" cy="305.969" r="13.344"></circle> <path style="fill:#92B2B2;" d="M40.496,120.076c-3.293-4.519,1.615-10.49,6.633-8.022c0.067,0.033,0.134,0.066,0.201,0.099 c21.578,10.646,40.226,24.85,55.593,41.568c25.606,27.861,42.064,62.676,47.739,99.52c-33.926,48.077-87.681,76.561-144.247,79.677 c-0.089,0.005-0.179,0.01-0.269,0.014c-6.263,0.319-8.541-8.083-3.011-11.042c29.189-15.619,54.53-39.007,72.563-68.989 C81.042,205.611,68.209,158.109,40.496,120.076z"></path> <path style="fill:#92B2B2;" d="M269.13,123.274l7.19,116.194h83.916c7.231-56.784-32.883-108.72-89.677-116.046 C270.081,123.36,269.607,123.328,269.13,123.274z"></path> </g> </g></svg>
+
+<!-- ✅ URL 복사 아이콘 버튼 시작 -->
+<div style="text-align: center; margin-top: 20px;">
+  <div id="copyUrlBtn" title="이 페이지 URL 복사" style="cursor: pointer; display: inline-block;">
+
+<svg height="75px" width="75px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 427.479 427.479" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path style="fill:#51CAF4;" d="M214.396,427.479h-11c0-22.658,5.655-34.109,11.124-45.183c5.137-10.399,9.987-20.222,9.987-40.311 c0-20.089-4.852-29.912-9.987-40.311c-5.469-11.074-11.124-22.524-11.124-45.182c0-22.658,5.655-34.109,11.124-45.183 c5.136-10.399,9.987-20.222,9.987-40.312c0-20.091-4.852-29.914-9.987-40.314c-5.469-11.075-11.124-22.526-11.124-45.185 s5.655-34.11,11.124-45.185c5.136-10.4,9.987-20.223,9.987-40.313h11c0,22.659-5.655,34.11-11.124,45.184 c-5.136,10.4-9.987,20.224-9.987,40.314s4.852,29.914,9.987,40.314c5.469,11.075,11.124,22.526,11.124,45.185 c0,22.658-5.655,34.109-11.124,45.183c-5.136,10.399-9.987,20.222-9.987,40.312c0,20.089,4.852,29.912,9.987,40.311 c5.469,11.074,11.124,22.524,11.124,45.182s-5.655,34.108-11.124,45.182C219.248,397.566,214.396,407.389,214.396,427.479z"></path> <path style="fill:#51CAF4;" d="M208.91,76.496L208.91,76.496c-29.822,0-53.997-24.175-53.997-53.997v0h0 C184.734,22.499,208.91,46.674,208.91,76.496L208.91,76.496z"></path> <path style="fill:#51CAF4;" d="M208.91,239.238L208.91,239.238c-29.822,0-53.997-24.175-53.997-53.997v0h0 C184.734,185.241,208.91,209.416,208.91,239.238L208.91,239.238z"></path> <path style="fill:#51CAF4;" d="M226.909,371.981L226.909,371.981c-29.822,0-53.997-24.175-53.997-53.997v0h0 C202.734,317.984,226.909,342.159,226.909,371.981L226.909,371.981z"></path> <path style="fill:#51CAF4;" d="M217.909,122.994L217.909,122.994c29.822,0,53.997-24.175,53.997-53.997v0h0 C242.085,68.996,217.909,93.172,217.909,122.994L217.909,122.994z"></path> <path style="fill:#51CAF4;" d="M217.909,285.736L217.909,285.736c29.822,0,53.997-24.175,53.997-53.997v0h0 C242.085,231.738,217.909,255.914,217.909,285.736L217.909,285.736z"></path> <path style="fill:#51CAF4;" d="M78.562,427.479h-11c0-22.658,5.655-34.108,11.124-45.183c5.136-10.399,9.987-20.222,9.987-40.311 c0-20.089-4.852-29.911-9.987-40.311c-5.469-11.074-11.124-22.524-11.124-45.182c0-22.658,5.655-34.109,11.124-45.183 c5.136-10.399,9.987-20.222,9.987-40.312c0-20.091-4.852-29.914-9.987-40.314c-5.469-11.075-11.124-22.526-11.124-45.185h11 c0,20.091,4.852,29.914,9.987,40.314c5.469,11.075,11.124,22.526,11.124,45.185c0,22.658-5.655,34.109-11.124,45.183 c-5.136,10.399-9.987,20.222-9.987,40.312c0,20.089,4.852,29.911,9.987,40.311c5.469,11.074,11.124,22.524,11.124,45.182 s-5.655,34.108-11.124,45.182C83.414,397.566,78.562,407.389,78.562,427.479z"></path> <path style="fill:#51CAF4;" d="M73.076,239.238L73.076,239.238c-29.822,0-53.997-24.175-53.997-53.997v0h0 C48.901,185.241,73.076,209.416,73.076,239.238L73.076,239.238z"></path> <path style="fill:#51CAF4;" d="M91.898,368.981L91.898,368.981c-29.822,0-53.997-24.175-53.997-53.997v0h0 C67.723,314.984,91.898,339.159,91.898,368.981L91.898,368.981z"></path> <path style="fill:#51CAF4;" d="M82.076,122.994L82.076,122.994c29.822,0,53.997-24.175,53.997-53.997v0h0 C106.251,68.996,82.076,93.172,82.076,122.994L82.076,122.994z"></path> <path style="fill:#51CAF4;" d="M82.076,285.736L82.076,285.736c29.822,0,53.997-24.175,53.997-53.997v0h0 C106.251,231.738,82.076,255.914,82.076,285.736L82.076,285.736z"></path> <path style="fill:#51CAF4;" d="M347.889,427.479h-11c0-22.658,5.655-34.108,11.124-45.183c5.137-10.399,9.987-20.222,9.987-40.311 c0-20.089-4.852-29.912-9.987-40.311c-5.469-11.074-11.124-22.524-11.124-45.182c0-22.658,5.655-34.109,11.124-45.183 c5.136-10.399,9.987-20.222,9.987-40.312h11c0,22.658-5.655,34.109-11.124,45.183c-5.136,10.399-9.987,20.222-9.987,40.312 c0,20.089,4.852,29.912,9.987,40.311c5.469,11.074,11.124,22.524,11.124,45.182s-5.655,34.108-11.124,45.182 C352.741,397.566,347.889,407.389,347.889,427.479z"></path> <path style="fill:#51CAF4;" d="M342.403,239.238L342.403,239.238c-29.822,0-53.997-24.175-53.997-53.997v0h0 C318.228,185.241,342.403,209.416,342.403,239.238L342.403,239.238z"></path> <path style="fill:#51CAF4;" d="M355.902,373.481L355.902,373.481c-29.822,0-53.997-24.175-53.997-53.997v0h0 C331.727,319.484,355.902,343.659,355.902,373.481L355.902,373.481z"></path> <path style="fill:#51CAF4;" d="M354.403,302.235L354.403,302.235c29.822,0,53.997-24.175,53.997-53.997v0h0 C378.578,248.237,354.403,272.413,354.403,302.235L354.403,302.235z"></path> </g> </g></svg>
+
+  </div>
+</div>
+
+
+<script>
+  document.getElementById('copyUrlBtn').addEventListener('click', function () {
+    const url = window.location.href;
+    navigator.clipboard.writeText(url).then(function () {
+      alert('✅ 페이지 URL이 복사되었습니다!');
+    }, function () {
+      alert('❌ URL 복사에 실패했습니다. 브라우저를 확인해주세요.');
+    });
+  });
+</script>
+
+<div class="note" style="text-align: center; margin-top: 0;">
+URL 복사
+</div>
+<!-- ✅ URL 복사 아이콘 버튼 종료 -->
+
+<br>
+<br>
+
+<script>
+  // 탭 클릭 시 'active' 클래스 재지정
+  document.querySelectorAll('.menu-tabs a').forEach(tab => {
+    tab.addEventListener('click', function () {
+      document.querySelectorAll('.menu-tabs a').forEach(el => el.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+</script>
+<script>
+  // 스크롤 시 현재 보이는 섹션에 따라 메뉴탭 하이라이트
+  window.addEventListener('scroll', () => {
+    const sections = document.querySelectorAll('.section');
+    const navLinks = document.querySelectorAll('.menu-tabs a');
+    const offset = 100;
+
+    let currentId = '';
+
+    sections.forEach(section => {
+      const rect = section.getBoundingClientRect();
+      if (rect.top <= offset && rect.bottom >= offset) {
+        currentId = section.querySelector('h2').id;
+      }
+    });
+
+    if (currentId) {
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === '#' + currentId) {
+          link.classList.add('active');
+        }
+      });
+    }
+  });
+</script>
+
+</div>
+</body>
+</html>

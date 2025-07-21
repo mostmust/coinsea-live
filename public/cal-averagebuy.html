@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>코인 물타기 계산기 | CoinSea</title>
+
+<!-- ✅ SEO 메타태그 -->
+<meta name="description" content="추가 매수 시 평균 매입단가가 어떻게 변하는지 자동으로 계산해주는 코인 물타기 계산기입니다. 직관적인 입력으로 쉽게 계산해보세요.">
+<meta name="keywords" content="코인 물타기 계산기, 평균단가 계산기, 추가매수 계산기, 코인 보유단가 계산, 물타기 평균가, 암호화폐 물타기, 가상자산 계산기">
+<meta name="author" content="코인씨(CoinSea)">
+<meta name="robots" content="index, follow">
+
+<!-- ✅ Open Graph (SNS 공유용) -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="코인 물타기 계산기 - 추가매수에 따른 평균단가 계산 | 코인씨">
+<meta property="og:description" content="평균단가, 총 매수 금액, 보유 수량을 자동으로 계산해보세요. 물타기 전략에 유용한 도구입니다.">
+<meta property="og:image" content="https://coinsea.co.kr/img/og-cal-averagebuy.webp">
+<meta property="og:url" content="https://coinsea.co.kr/cal-averagebuy.html">
+<meta property="og:site_name" content="코인씨">
+
+<!-- ✅ Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="코인 물타기 계산기 - 추가매수에 따른 평균단가 계산 | 코인씨">
+<meta name="twitter:description" content="코인 물타기로 평균단가를 낮추려 할 때 자동으로 결과를 확인해보세요. 실시간 계산 지원.">
+<meta name="twitter:image" content="https://coinsea.co.kr/img/og-cal-averagebuy.webp">
+
+
+<!-- ✅ Google Fonts 최적화 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet"></noscript>
+
+<!-- ✅ Font Awesome 최적화 -->
+<link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"></noscript>
+
+
+<!-- 가장 일반적인 파비콘 -->
+<link rel="icon" href="/favicon.ico" />
+
+<!-- 고해상도 디바이스 대응 -->
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon/android-icon-192x192.png" />
+
+<!-- 애플 터치용 최소 하나 -->
+<link rel="apple-touch-icon" href="/favicon/apple-icon-180x180.png" />
+
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: 'Nanum Gothic', sans-serif;
+      background: #fff;
+      color: #333;
+      padding: 20px;
+      margin: 0;
+    }
+    h2 {
+      font-size: 20px;
+      margin-bottom: 6px;
+    }
+    p {
+      font-size: 14px;
+      margin-bottom: 20px;
+      color: #666;
+    }
+    .container {
+      border: 1px solid #ccc;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .section {
+      padding: 20px;
+      border-bottom: 1px solid #ddd;
+    }
+    .section:last-child {
+      border-bottom: none;
+    }
+    .section-title {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .input-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .input-row input {
+      flex: 1;
+      padding: 10px;
+      font-size: 15px;
+      text-align: right;
+    }
+    .center-icon {
+      text-align: center;
+      font-size: 26px;
+      color: #f5b100;
+      background: #fff;
+      padding: 10px 0;
+    }
+    .result {
+      background: #3277b5;
+      color: white;
+      padding: 20px;
+    }
+    .result-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .result-box {
+      flex: 1;
+      min-width: 30%;
+      text-align: center;
+    }
+    .result-box b {
+      display: block;
+      margin-bottom: 5px;
+    }
+    .btns {
+      text-align: center;
+      margin-top: 20px;
+    }
+    .btns button {
+      padding: 10px 16px;
+      margin: 0 5px;
+      font-size: 14px;
+      background-color: #005bac;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .btns button:hover {
+      background-color: #003f7d;
+    }
+    .note {
+      font-size: 14px;
+      color: #555;
+      margin-top: 12px;
+    }
+
+.title-box {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.coupang-banner-wrapper {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.coupang-banner-wrapper iframe,
+.coupang-banner-wrapper div {
+  max-width: 100% !important;
+  height: auto !important;
+}
+
+ .content-wrapper {
+  max-width: 800px;       /* 최대 너비 설정 */
+  margin: 0 auto;         /* 가운데 정렬 */
+  padding: 3px;
+  text-align: left;       /* 내용은 좌측 정렬 */
+    }
+
+  </style>
+</head>
+<body>
+ <div class="content-wrapper">
+
+<div class="title-box">
+  <h2>코인 물타기 계산기</h2>
+  <p>수수료가 발생할 경우 결과값에 차이가 있을 수 있습니다.</p>
+</div>
+
+  <div class="container" id="capture-area">
+    <div class="section">
+      <div class="section-title">자산</div>
+      <div class="input-row">
+        <input type="text" id="avg1" placeholder="매수 평균가" />
+        <input type="text" id="qty1" placeholder="매수 수량" />
+        <input type="text" id="amt1" placeholder="매수 금액" readonly />
+      </div>
+    </div>
+
+    <div class="center-icon">＋</div>
+
+    <div class="section">
+      <div class="section-title">추가 매수</div>
+      <div class="input-row">
+        <input type="text" id="avg2" placeholder="단가" />
+        <input type="text" id="qty2" placeholder="매수 수량" />
+        <input type="text" id="amt2" placeholder="총 매수 금액" readonly />
+      </div>
+    </div>
+
+    <div class="result">
+      <div class="result-row">
+        <div class="result-box">
+          <b>매수 평균가</b>
+          <div id="resultAvg">0</div>
+        </div>
+        <div class="result-box">
+          <b>보유 수량</b>
+          <div id="resultQty">0</div>
+        </div>
+        <div class="result-box">
+          <b>매수 금액</b>
+          <div id="resultAmt">0</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="btns">
+    <button onclick="reset()">초기화</button>
+    <button onclick="saveImage()">이미지저장</button>
+    <button onclick="copyURL()">주소복사</button>
+  </div>
+
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+  <script>
+    const avg1El = document.getElementById("avg1");
+    const qty1El = document.getElementById("qty1");
+    const amt1El = document.getElementById("amt1");
+
+    const avg2El = document.getElementById("avg2");
+    const qty2El = document.getElementById("qty2");
+    const amt2El = document.getElementById("amt2");
+
+    const resultAvgEl = document.getElementById("resultAvg");
+    const resultQtyEl = document.getElementById("resultQty");
+    const resultAmtEl = document.getElementById("resultAmt");
+
+    function parseNum(val) {
+      return parseFloat(val.replace(/,/g, "")) || 0;
+    }
+
+    function formatNum(num) {
+      return isNaN(num) ? "0" : num.toLocaleString("ko-KR");
+    }
+
+    function autoCommaInput(el) {
+      el.addEventListener("input", () => {
+        const raw = el.value.replace(/,/g, '');
+        if (!/^\d*\.?\d*$/.test(raw)) return;
+        const num = parseFloat(raw);
+        el.value = isNaN(num) ? "" : formatNum(num);
+        update();
+        el.setSelectionRange(el.value.length, el.value.length);
+      });
+    }
+
+    [avg1El, qty1El, avg2El, qty2El].forEach(autoCommaInput);
+
+    function update() {
+      const avg1 = parseNum(avg1El.value);
+      const qty1 = parseNum(qty1El.value);
+      const avg2 = parseNum(avg2El.value);
+      const qty2 = parseNum(qty2El.value);
+
+      const amt1 = avg1 * qty1;
+      const amt2 = avg2 * qty2;
+
+      const totalQty = qty1 + qty2;
+      const totalAmt = amt1 + amt2;
+      const newAvg = totalQty ? totalAmt / totalQty : 0;
+
+      amt1El.value = formatNum(amt1);
+      amt2El.value = formatNum(amt2);
+      resultAvgEl.textContent = formatNum(Number(newAvg.toFixed(2)));
+      resultQtyEl.textContent = formatNum(totalQty);
+      resultAmtEl.textContent = formatNum(totalAmt);
+    }
+
+    function reset() {
+      [avg1El, qty1El, amt1El, avg2El, qty2El, amt2El].forEach(el => el.value = "");
+      [resultAvgEl, resultQtyEl, resultAmtEl].forEach(el => el.textContent = "0");
+    }
+
+    function saveImage() {
+      html2canvas(document.querySelector("#capture-area")).then(canvas => {
+        const link = document.createElement("a");
+        link.download = "avg-buy.png";
+        link.href = canvas.toDataURL();
+        link.click();
+      });
+    }
+
+    function copyURL() {
+      navigator.clipboard.writeText(window.location.href).then(() => {
+        alert("주소가 복사되었습니다!");
+      });
+    }
+  </script>
+
+<br>
+<br>
+<!-- ✅ URL 복사 아이콘 버튼 시작 -->
+<div style="text-align: center; margin-top: 20px;">
+  <div id="copyUrlBtn" title="이 페이지 URL 복사" style="cursor: pointer; display: inline-block;">
+
+<svg height="75px" width="75px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 427.479 427.479" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path style="fill:#51CAF4;" d="M214.396,427.479h-11c0-22.658,5.655-34.109,11.124-45.183c5.137-10.399,9.987-20.222,9.987-40.311 c0-20.089-4.852-29.912-9.987-40.311c-5.469-11.074-11.124-22.524-11.124-45.182c0-22.658,5.655-34.109,11.124-45.183 c5.136-10.399,9.987-20.222,9.987-40.312c0-20.091-4.852-29.914-9.987-40.314c-5.469-11.075-11.124-22.526-11.124-45.185 s5.655-34.11,11.124-45.185c5.136-10.4,9.987-20.223,9.987-40.313h11c0,22.659-5.655,34.11-11.124,45.184 c-5.136,10.4-9.987,20.224-9.987,40.314s4.852,29.914,9.987,40.314c5.469,11.075,11.124,22.526,11.124,45.185 c0,22.658-5.655,34.109-11.124,45.183c-5.136,10.399-9.987,20.222-9.987,40.312c0,20.089,4.852,29.912,9.987,40.311 c5.469,11.074,11.124,22.524,11.124,45.182s-5.655,34.108-11.124,45.182C219.248,397.566,214.396,407.389,214.396,427.479z"></path> <path style="fill:#51CAF4;" d="M208.91,76.496L208.91,76.496c-29.822,0-53.997-24.175-53.997-53.997v0h0 C184.734,22.499,208.91,46.674,208.91,76.496L208.91,76.496z"></path> <path style="fill:#51CAF4;" d="M208.91,239.238L208.91,239.238c-29.822,0-53.997-24.175-53.997-53.997v0h0 C184.734,185.241,208.91,209.416,208.91,239.238L208.91,239.238z"></path> <path style="fill:#51CAF4;" d="M226.909,371.981L226.909,371.981c-29.822,0-53.997-24.175-53.997-53.997v0h0 C202.734,317.984,226.909,342.159,226.909,371.981L226.909,371.981z"></path> <path style="fill:#51CAF4;" d="M217.909,122.994L217.909,122.994c29.822,0,53.997-24.175,53.997-53.997v0h0 C242.085,68.996,217.909,93.172,217.909,122.994L217.909,122.994z"></path> <path style="fill:#51CAF4;" d="M217.909,285.736L217.909,285.736c29.822,0,53.997-24.175,53.997-53.997v0h0 C242.085,231.738,217.909,255.914,217.909,285.736L217.909,285.736z"></path> <path style="fill:#51CAF4;" d="M78.562,427.479h-11c0-22.658,5.655-34.108,11.124-45.183c5.136-10.399,9.987-20.222,9.987-40.311 c0-20.089-4.852-29.911-9.987-40.311c-5.469-11.074-11.124-22.524-11.124-45.182c0-22.658,5.655-34.109,11.124-45.183 c5.136-10.399,9.987-20.222,9.987-40.312c0-20.091-4.852-29.914-9.987-40.314c-5.469-11.075-11.124-22.526-11.124-45.185h11 c0,20.091,4.852,29.914,9.987,40.314c5.469,11.075,11.124,22.526,11.124,45.185c0,22.658-5.655,34.109-11.124,45.183 c-5.136,10.399-9.987,20.222-9.987,40.312c0,20.089,4.852,29.911,9.987,40.311c5.469,11.074,11.124,22.524,11.124,45.182 s-5.655,34.108-11.124,45.182C83.414,397.566,78.562,407.389,78.562,427.479z"></path> <path style="fill:#51CAF4;" d="M73.076,239.238L73.076,239.238c-29.822,0-53.997-24.175-53.997-53.997v0h0 C48.901,185.241,73.076,209.416,73.076,239.238L73.076,239.238z"></path> <path style="fill:#51CAF4;" d="M91.898,368.981L91.898,368.981c-29.822,0-53.997-24.175-53.997-53.997v0h0 C67.723,314.984,91.898,339.159,91.898,368.981L91.898,368.981z"></path> <path style="fill:#51CAF4;" d="M82.076,122.994L82.076,122.994c29.822,0,53.997-24.175,53.997-53.997v0h0 C106.251,68.996,82.076,93.172,82.076,122.994L82.076,122.994z"></path> <path style="fill:#51CAF4;" d="M82.076,285.736L82.076,285.736c29.822,0,53.997-24.175,53.997-53.997v0h0 C106.251,231.738,82.076,255.914,82.076,285.736L82.076,285.736z"></path> <path style="fill:#51CAF4;" d="M347.889,427.479h-11c0-22.658,5.655-34.108,11.124-45.183c5.137-10.399,9.987-20.222,9.987-40.311 c0-20.089-4.852-29.912-9.987-40.311c-5.469-11.074-11.124-22.524-11.124-45.182c0-22.658,5.655-34.109,11.124-45.183 c5.136-10.399,9.987-20.222,9.987-40.312h11c0,22.658-5.655,34.109-11.124,45.183c-5.136,10.399-9.987,20.222-9.987,40.312 c0,20.089,4.852,29.912,9.987,40.311c5.469,11.074,11.124,22.524,11.124,45.182s-5.655,34.108-11.124,45.182 C352.741,397.566,347.889,407.389,347.889,427.479z"></path> <path style="fill:#51CAF4;" d="M342.403,239.238L342.403,239.238c-29.822,0-53.997-24.175-53.997-53.997v0h0 C318.228,185.241,342.403,209.416,342.403,239.238L342.403,239.238z"></path> <path style="fill:#51CAF4;" d="M355.902,373.481L355.902,373.481c-29.822,0-53.997-24.175-53.997-53.997v0h0 C331.727,319.484,355.902,343.659,355.902,373.481L355.902,373.481z"></path> <path style="fill:#51CAF4;" d="M354.403,302.235L354.403,302.235c29.822,0,53.997-24.175,53.997-53.997v0h0 C378.578,248.237,354.403,272.413,354.403,302.235L354.403,302.235z"></path> </g> </g></svg>
+
+  </div>
+</div>
+
+<script>
+  document.getElementById('copyUrlBtn').addEventListener('click', function () {
+    const url = window.location.href;
+    navigator.clipboard.writeText(url).then(function () {
+      alert('✅ 페이지 URL이 복사되었습니다!');
+    }, function () {
+      alert('❌ URL 복사에 실패했습니다. 브라우저를 확인해주세요.');
+    });
+  });
+</script>
+
+<div class="note" style="text-align: center; margin-top: 0;">
+URL 복사
+</div>
+<!-- ✅ URL 복사 아이콘 버튼 종료 -->
+<br>
+
+</div>
+
+
+<script> <!-- ■ 하단 일괄 공지 -->
+  document.addEventListener("DOMContentLoaded", function () {
+    fetch("notice-bottom.html")
+      .then(res => res.text())
+      .then(html => {
+        const tempDiv = document.createElement("div");
+        tempDiv.innerHTML = html;
+        document.body.appendChild(tempDiv); // ✅ body 맨 끝에 삽입
+      });
+  });
+</script>
+</body>
+</html>

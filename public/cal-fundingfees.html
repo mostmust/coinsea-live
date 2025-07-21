@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>펀딩비 계산기</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- ✅ SEO 메타태그 -->
+<meta name="description" content="바이낸스 실시간 펀딩비율 기반으로 롱·숏 포지션의 펀딩비를 자동 계산해보세요. 레버리지와 증거금만 입력하면 결과 확인 가능!">
+<meta name="keywords" content="펀딩비 계산기, 바이낸스 펀딩비, 선물 펀딩비 계산, 펀딩비율, 코인 펀딩비, 롱 숏 수수료, 펀딩 수수료, 가상자산 선물거래">
+<meta name="author" content="코인씨(CoinSea)">
+<meta name="robots" content="index, follow">
+
+<!-- ✅ Open Graph (SNS 공유용) -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="펀딩비 계산기 - 실시간 펀딩비율 기반 자동 계산 | 코인씨">
+<meta property="og:description" content="펀딩비율, 레버리지, 증거금을 입력하면 롱/숏 포지션의 펀딩비가 자동 계산됩니다. 실시간 Binance 데이터를 기반으로 합니다.">
+<meta property="og:image" content="https://coinsea.co.kr/img/og-cal-fundingfees.webp">
+<meta property="og:url" content="https://coinsea.co.kr/cal-fundingfees.html">
+<meta property="og:site_name" content="코인씨">
+
+<!-- ✅ Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="펀딩비 계산기 - 실시간 펀딩비율 기반 자동 계산 | 코인씨">
+<meta name="twitter:description" content="바이낸스 펀딩비 실시간 연동. 정확한 수수료 계산기로 롱과 숏의 수익·비용을 비교해보세요.">
+<meta name="twitter:image" content="https://coinsea.co.kr/img/og-cal-fundingfees.webp">
+
+
+<!-- ✅ Google Fonts 최적화 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet"></noscript>
+
+<!-- ✅ Font Awesome 최적화 -->
+<link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"></noscript>
+
+
+<!-- 가장 일반적인 파비콘 -->
+<link rel="icon" href="/favicon.ico" />
+
+<!-- 고해상도 디바이스 대응 -->
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon/android-icon-192x192.png" />
+
+<!-- 애플 터치용 최소 하나 -->
+<link rel="apple-touch-icon" href="/favicon/apple-icon-180x180.png" />
+
+<style>
+  body {
+    font-family: 'Nanum Gothic', sans-serif;
+    padding: 8px 10px;
+    background: #ffffff;
+    color: #333;
+  }
+
+  .container {
+    max-width: 480px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: none;
+  }
+
+ h2 {
+  text-align: center;
+  margin-top: 8px;
+  margin-bottom: 16px;
+}
+
+  label {
+    display: block;
+    margin-top: 12px;
+    font-weight: bold;
+  }
+
+  input,
+  select,
+  button,
+  .funding-rate,
+  .result {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 6px;
+    font-size: 16px;
+    box-sizing: border-box;  /* ✅ 핵심 수정 */
+  }
+
+  input,
+  select {
+    border: 1px solid #ccc;
+  }
+
+  button {
+    margin-top: 20px;
+    background: #2d8cf0;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background: #1c6fc5;
+  }
+
+  .funding-rate,
+  .result {
+    background: #f0f0f0;
+    text-align: center;
+  }
+
+  .note {
+    margin-top: 16px;
+    font-size: 14px;
+    color: #888;
+    text-align: center;
+  }
+
+.code-link {
+  display: block;
+  margin-top: 16px;
+  width: 100%;
+  padding: 12px;
+  background: #ff8c00; /* ✅ 여기서 배경색을 변경하면 됩니다 */
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: bold;
+  box-sizing: border-box;
+  transition: background 0.3s;
+}
+
+.code-link:hover {
+  background: #e07a00; /* ✅ 호버 시 색상도 변경 가능 */
+}
+  .content-wrapper {
+  max-width: 800px;       /* 최대 너비 설정 */
+  margin: 0 auto;         /* 가운데 정렬 */
+  padding: 5px;
+  text-align: left;       /* 내용은 좌측 정렬 */
+    }
+
+
+.coupang-banner-wrapper {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.coupang-banner-wrapper iframe,
+.coupang-banner-wrapper div {
+  max-width: 100% !important;
+  height: auto !important;
+}
+
+
+</style>
+  
+
+</head>
+<body>
+<div class="content-wrapper"> <!-- ■ 전체를 감싸는 DIV 시작 -->
+
+
+  <div class="container">
+    <h2>펀딩비 계산기</h2>
+<br>
+    <label for="coin">코인 선택</label>
+    <select id="coin" onchange="fetchFundingRate()">
+      <option value="BTCUSDT">비트코인 (BTC)</option>
+      <option value="ETHUSDT">이더리움 (ETH)</option>
+      <option value="XRPUSDT">리플 (XRP)</option>
+      <option value="SOLUSDT">솔라나 (SOL)</option>
+      <option value="TRXUSDT">트론 (TRX)</option>
+      <option value="DOGEUSDT">도지코인 (DOGE)</option>
+      <option value="ADAUSDT">에이다 (ADA)</option>
+    </select>
+
+    <div id="fundingRate" class="funding-rate">펀딩비율: -</div>
+<div style="text-align:center; color:#888; font-size:14px; margin-top:4px;">
+  * 바이낸스 거래소의 실시간 펀딩비율입니다.
+</div>
+<div style="height: 0.8em;"></div> 
+   <label for="leverage">레버리지 (1~125배)</label>
+    <input type="number" id="leverage" min="1" max="125" value="1">
+
+    <label for="margin">증거금 (USDT)</label>
+    <input type="text" id="margin" placeholder="예: 1,000">
+
+    <button onclick="calculateFundingFee()">펀딩비 계산</button>
+
+    <div id="result" class="result">펀딩비 계산 결과가 여기에 표시됩니다.</div>
+    <div class="note">* 실제 펀딩비는 상이할 수 있으니 공식홈페이지에서 확인바랍니다.</div>
+ 
+<br>
+<a href="code.html" class="code-link">수수료 할인코드 모음</a>
+ </div>
+
+
+
+  <script>
+    let currentFundingRate = 0;
+
+    document.getElementById('margin').addEventListener('input', function () {
+      const val = this.value.replace(/,/g, '').replace(/[^\d.]/g, '');
+      if (!isNaN(val)) {
+        this.value = Number(val).toLocaleString();
+      }
+    });
+
+    async function fetchFundingRate() {
+      const symbol = document.getElementById('coin').value;
+      try {
+        const res = await fetch(`https://fapi.binance.com/fapi/v1/premiumIndex?symbol=${symbol}`);
+        const data = await res.json();
+        currentFundingRate = parseFloat(data.lastFundingRate);
+        const percent = (currentFundingRate * 100).toFixed(4);
+        document.getElementById('fundingRate').innerText = `펀딩비율: ${percent}%`;
+      } catch (err) {
+        document.getElementById('fundingRate').innerText = '펀딩비율을 불러올 수 없습니다';
+        currentFundingRate = 0;
+      }
+    }
+
+    function calculateFundingFee() {
+      const leverage = parseFloat(document.getElementById('leverage').value);
+      const margin = parseFloat(document.getElementById('margin').value.replace(/,/g, ''));
+      if (isNaN(leverage) || isNaN(margin)) {
+        document.getElementById('result').innerText = '⚠ 유효한 숫자를 입력해주세요.';
+        return;
+      }
+      const fundingFee = margin * leverage * currentFundingRate;
+      const formatted = Math.abs(fundingFee).toLocaleString('en-US', { maximumFractionDigits: 6 });
+      let resultText = '';
+      if (fundingFee < 0) {
+        resultText = `📌 롱은 <strong>${formatted} USDT</strong>를 받고,<br>📌 숏은 <strong>${formatted} USDT</strong>를 지불합니다.`;
+      } else {
+        resultText = `📌 숏은 <strong>${formatted} USDT</strong>를 받고,<br>📌 롱은 <strong>${formatted} USDT</strong>를 지불합니다.`;
+      }
+      document.getElementById('result').innerHTML = resultText;
+    }
+
+    fetchFundingRate(); // 초기 실행 시 BTC 펀딩비 호출
+  </script>
+
+
+<br>
+<!-- ✅ URL 복사 아이콘 버튼 시작 -->
+<div style="text-align: center; margin-top: 20px;">
+  <div id="copyUrlBtn" title="이 페이지 URL 복사" style="cursor: pointer; display: inline-block;">
+
+<svg height="75px" width="75px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 427.479 427.479" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path style="fill:#51CAF4;" d="M214.396,427.479h-11c0-22.658,5.655-34.109,11.124-45.183c5.137-10.399,9.987-20.222,9.987-40.311 c0-20.089-4.852-29.912-9.987-40.311c-5.469-11.074-11.124-22.524-11.124-45.182c0-22.658,5.655-34.109,11.124-45.183 c5.136-10.399,9.987-20.222,9.987-40.312c0-20.091-4.852-29.914-9.987-40.314c-5.469-11.075-11.124-22.526-11.124-45.185 s5.655-34.11,11.124-45.185c5.136-10.4,9.987-20.223,9.987-40.313h11c0,22.659-5.655,34.11-11.124,45.184 c-5.136,10.4-9.987,20.224-9.987,40.314s4.852,29.914,9.987,40.314c5.469,11.075,11.124,22.526,11.124,45.185 c0,22.658-5.655,34.109-11.124,45.183c-5.136,10.399-9.987,20.222-9.987,40.312c0,20.089,4.852,29.912,9.987,40.311 c5.469,11.074,11.124,22.524,11.124,45.182s-5.655,34.108-11.124,45.182C219.248,397.566,214.396,407.389,214.396,427.479z"></path> <path style="fill:#51CAF4;" d="M208.91,76.496L208.91,76.496c-29.822,0-53.997-24.175-53.997-53.997v0h0 C184.734,22.499,208.91,46.674,208.91,76.496L208.91,76.496z"></path> <path style="fill:#51CAF4;" d="M208.91,239.238L208.91,239.238c-29.822,0-53.997-24.175-53.997-53.997v0h0 C184.734,185.241,208.91,209.416,208.91,239.238L208.91,239.238z"></path> <path style="fill:#51CAF4;" d="M226.909,371.981L226.909,371.981c-29.822,0-53.997-24.175-53.997-53.997v0h0 C202.734,317.984,226.909,342.159,226.909,371.981L226.909,371.981z"></path> <path style="fill:#51CAF4;" d="M217.909,122.994L217.909,122.994c29.822,0,53.997-24.175,53.997-53.997v0h0 C242.085,68.996,217.909,93.172,217.909,122.994L217.909,122.994z"></path> <path style="fill:#51CAF4;" d="M217.909,285.736L217.909,285.736c29.822,0,53.997-24.175,53.997-53.997v0h0 C242.085,231.738,217.909,255.914,217.909,285.736L217.909,285.736z"></path> <path style="fill:#51CAF4;" d="M78.562,427.479h-11c0-22.658,5.655-34.108,11.124-45.183c5.136-10.399,9.987-20.222,9.987-40.311 c0-20.089-4.852-29.911-9.987-40.311c-5.469-11.074-11.124-22.524-11.124-45.182c0-22.658,5.655-34.109,11.124-45.183 c5.136-10.399,9.987-20.222,9.987-40.312c0-20.091-4.852-29.914-9.987-40.314c-5.469-11.075-11.124-22.526-11.124-45.185h11 c0,20.091,4.852,29.914,9.987,40.314c5.469,11.075,11.124,22.526,11.124,45.185c0,22.658-5.655,34.109-11.124,45.183 c-5.136,10.399-9.987,20.222-9.987,40.312c0,20.089,4.852,29.911,9.987,40.311c5.469,11.074,11.124,22.524,11.124,45.182 s-5.655,34.108-11.124,45.182C83.414,397.566,78.562,407.389,78.562,427.479z"></path> <path style="fill:#51CAF4;" d="M73.076,239.238L73.076,239.238c-29.822,0-53.997-24.175-53.997-53.997v0h0 C48.901,185.241,73.076,209.416,73.076,239.238L73.076,239.238z"></path> <path style="fill:#51CAF4;" d="M91.898,368.981L91.898,368.981c-29.822,0-53.997-24.175-53.997-53.997v0h0 C67.723,314.984,91.898,339.159,91.898,368.981L91.898,368.981z"></path> <path style="fill:#51CAF4;" d="M82.076,122.994L82.076,122.994c29.822,0,53.997-24.175,53.997-53.997v0h0 C106.251,68.996,82.076,93.172,82.076,122.994L82.076,122.994z"></path> <path style="fill:#51CAF4;" d="M82.076,285.736L82.076,285.736c29.822,0,53.997-24.175,53.997-53.997v0h0 C106.251,231.738,82.076,255.914,82.076,285.736L82.076,285.736z"></path> <path style="fill:#51CAF4;" d="M347.889,427.479h-11c0-22.658,5.655-34.108,11.124-45.183c5.137-10.399,9.987-20.222,9.987-40.311 c0-20.089-4.852-29.912-9.987-40.311c-5.469-11.074-11.124-22.524-11.124-45.182c0-22.658,5.655-34.109,11.124-45.183 c5.136-10.399,9.987-20.222,9.987-40.312h11c0,22.658-5.655,34.109-11.124,45.183c-5.136,10.399-9.987,20.222-9.987,40.312 c0,20.089,4.852,29.912,9.987,40.311c5.469,11.074,11.124,22.524,11.124,45.182s-5.655,34.108-11.124,45.182 C352.741,397.566,347.889,407.389,347.889,427.479z"></path> <path style="fill:#51CAF4;" d="M342.403,239.238L342.403,239.238c-29.822,0-53.997-24.175-53.997-53.997v0h0 C318.228,185.241,342.403,209.416,342.403,239.238L342.403,239.238z"></path> <path style="fill:#51CAF4;" d="M355.902,373.481L355.902,373.481c-29.822,0-53.997-24.175-53.997-53.997v0h0 C331.727,319.484,355.902,343.659,355.902,373.481L355.902,373.481z"></path> <path style="fill:#51CAF4;" d="M354.403,302.235L354.403,302.235c29.822,0,53.997-24.175,53.997-53.997v0h0 C378.578,248.237,354.403,272.413,354.403,302.235L354.403,302.235z"></path> </g> </g></svg>
+
+  </div>
+</div>
+
+<script>
+  document.getElementById('copyUrlBtn').addEventListener('click', function () {
+    const url = window.location.href;
+    navigator.clipboard.writeText(url).then(function () {
+      alert('✅ 페이지 URL이 복사되었습니다!');
+    }, function () {
+      alert('❌ URL 복사에 실패했습니다. 브라우저를 확인해주세요.');
+    });
+  });
+</script>
+
+<div class="note" style="text-align: center; margin-top: 0;">
+URL 복사
+</div>
+<!-- ✅ URL 복사 아이콘 버튼 종료 -->
+
+<br>
+
+</div> <!-- ■ 전체를 감싸는 DIV 종료 -->
+
+<script> <!-- ■ 하단 일괄 공지 -->
+  document.addEventListener("DOMContentLoaded", function () {
+    fetch("notice-bottom.html")
+      .then(res => res.text())
+      .then(html => {
+        const tempDiv = document.createElement("div");
+        tempDiv.innerHTML = html;
+        document.body.appendChild(tempDiv); // ✅ body 맨 끝에 삽입
+      });
+  });
+</script>
+</body>
+</html>

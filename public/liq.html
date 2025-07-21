@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>강제청산에 대하여</title>
+
+  <meta property="og:image" content="https://coinsea.co.kr/img/og-liq.webp" />
+  <meta property="og:url" content="https://coinsea.co.kr/liq.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="ko_KR" />
+  <meta name="twitter:image" content="https://coinsea.co.kr/img/og-liq.webp" />
+
+<!-- SEO 메타태그 -->
+<meta name="title" content="강제청산이란? | 선물거래 청산 원리와 예시 | CoinSea" />
+<meta name="description" content="코인 선물거래에서 강제청산이 무엇인지, 왜 발생하며 어떻게 피할 수 있는지 쉽게 설명합니다. 레버리지와 증거금 개념도 함께 이해하세요." />
+<meta name="keywords" content="강제청산, 청산 뜻, 코인 강제청산, 레버리지 손실, 선물거래 위험, 증거금, 선물거래 기초, 선물거래 청산" />
+<meta name="author" content="CoinSea" />
+<meta name="robots" content="index, follow" />
+
+<!-- Open Graph (페이스북, 카카오톡 등) -->
+<meta property="og:title" content="강제청산이란? | 선물거래 청산 원리와 예시" />
+<meta property="og:description" content="레버리지 거래에서 손실이 커지면 거래소는 자동으로 강제청산을 진행합니다. 원리와 예시로 쉽게 설명한 안내 페이지입니다." />
+<meta property="og:site_name" content="CoinSea" />
+
+<!-- Twitter 카드 -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="강제청산이란? | 선물거래 청산 원리와 예시" />
+<meta name="twitter:description" content="코인 선물거래에서 강제청산이 발생하는 원리와 피하는 방법을 예시로 쉽게 설명한 페이지입니다." />
+
+<!-- ✅ Google Fonts 최적화 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet"></noscript>
+
+<!-- ✅ Font Awesome 최적화 -->
+<link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"></noscript>
+
+<!-- 가장 일반적인 파비콘 -->
+<link rel="icon" href="/favicon.ico" />
+
+<!-- 고해상도 디바이스 대응 -->
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon/android-icon-192x192.png" />
+
+<!-- 애플 터치용 최소 하나 -->
+<link rel="apple-touch-icon" href="/favicon/apple-icon-180x180.png" />
+
+<!-- ✅ 공통 스타일 -->
+<link rel="stylesheet" href="/css/common.css" />
+
+  <style>
+ .content-wrapper {
+  max-width: 800px;       /* 최대 너비 설정 */
+  margin: 0 auto;         /* 가운데 정렬 */
+  padding: 20px;
+  text-align: left;       /* 내용은 좌측 정렬 */
+    }
+
+    h1 { font-size: 24px; margin-bottom: 15px; }
+    p { margin-bottom: 15px; }
+
+
+
+    @media screen and (max-width: 600px) {
+      body { font-size: 15px; }
+      h1 { font-size: 22px; }
+    }
+
+  </style>
+
+</head>
+<body>
+
+  <div class="content-wrapper">
+
+    <div class="main-title">강제청산에 대하여</div>
+
+    <div class="body-text">
+      코인선물거래에서 강제청산이란 투자자의 손실이 증거금만큼 발생할 때, 거래소가 빌려준 자금의 손실을 막기 위해서 자금을 회수하는 절차입니다.
+    </div>
+
+<br>
+  <!-- 강제청산 설명 시작 -->
+  <div class="sub-title-box">강제청산을 좀 더 쉽게 설명을 하자면?</div>
+  <div class="body-text">
+    <strong>한 마디로!</strong><br>
+    <span style="color: #d9534f;">손해가 너무 커지기 전에 거래소가 자동으로 거래를 종료시키는 것</span>입니다.
+  </div>
+<br>
+  <div class="sub-title-box">쉽게 예를 들어볼게요</div>
+  <div class="body-text">
+    1. 당신은 비트코인이 <strong>오를 것</strong>이라고 예상하고 선물거래를 시작합니다. (이걸 <em>롱 포지션</em>이라고 해요)<br><br>
+    2. 가진 돈 10만 원으로 <strong>10배 레버리지</strong>를 걸면, 100만 원짜리 거래를 하게 돼요.<br><br>
+    3. 그런데 예상과 다르게 비트코인 가격이 <strong>떨어지면 손해</strong>가 나기 시작해요.<br><br>
+    4. 이 손해가 너무 커서 <strong>당신이 투자한 10만원이 거의 다 사라질 수준</strong>이 되면...<br><br>
+    5. 거래소가 자동으로 말합니다.<br>
+    👉 "<em>이 사람 돈 다 날리기 전에 우리가 먼저 거래를 종료해야겠다!</em>"<br><br>
+    ➤ <strong style="color:#d9534f;">이게 바로 강제청산이에요!</strong>
+  </div>
+
+<br>
+
+  <div class="sub-title-box">왜 거래소가 강제로 종료할까요?</div>
+  <div class="body-text">
+    거래소는 당신이 레버리지를 쓸 수 있도록 <strong>돈을 빌려준 것과 비슷해요.</strong> 그런데 만약 손해가 너무 커지면 <strong>빌려준 돈까지 못 돌려받을 수도 있죠.</strong><br><br>
+    그래서 거래소는 미리 정해진 위험 수준이 오면 <strong>강제로 거래를 종료</strong>해서 <span style="color:#d9534f;">손실이 더 커지지 않게 막는</span> 거예요.
+  </div>
+<br>
+
+    <div class="sub-title-box">강제청산을 당하면 어떻게 되나요?</div>
+    <div class="body-text">
+      강제청산은 증거금(투자금)만큼의 손실이 발생했다는 것을 의미합니다. 따라서 강제청산을 당하면 투자금은 0원이 되거나, 0원에 가깝게 됩니다. 
+    </div>
+<br>
+
+
+  <div class="sub-title-box">강제청산을 피하려면?</div>
+  <div class="body-text">
+    ✅ <strong>레버리지를 낮게</strong> 설정하세요.<br>
+    ✅ <strong>손절 라인</strong>을 미리 정해두세요.<br>
+    ✅ <strong>자신이 감당 가능한 수준의 자금만</strong> 투자하세요.<br><br>
+    선물거래는 큰 이익도 가능하지만, <strong>큰 손실</strong>도 항상 따라올 수 있다는 걸 잊지 마세요!
+  </div>
+  <!-- 강제청산 설명 종료 -->
+
+<br><br>
+
+<svg height="64px" width="64px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 414.822 414.822" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path style="fill:#5394F2;" d="M174.48,207.412L174.48,207.412l-40.983,0c-48.097,0-87.088-38.991-87.088-87.088v0h40.983 C135.489,120.324,174.48,159.314,174.48,207.412z"></path> <path style="fill:#5394F2;" d="M174.48,207.412L174.48,207.412l-40.983,0c-48.097,0-87.088,38.991-87.088,87.088v0h40.983 C135.489,294.5,174.48,255.509,174.48,207.412z"></path> <path style="fill:#3380DD;" d="M368.413,207.411c0,6.077-0.261,12.089-0.782,18.036h-0.772c-6.859,0-13.066,2.783-17.571,7.278 c-4.495,4.495-7.277,10.712-7.277,17.571h21.963c-7.315,34.787-23.34,66.354-45.694,92.328 c-38.035,44.205-94.385,72.199-157.278,72.199V0c62.893,0,119.242,27.994,157.278,72.199 C349.521,108.503,368.413,155.742,368.413,207.411z"></path> <path style="fill:#5394F2;" d="M368.413,207.411c0,6.077-0.261,12.089-0.782,18.036h-0.772c-6.859,0-13.066,2.783-17.571,7.278 c-4.495,4.495-7.277,10.712-7.277,17.571h21.963c-7.315,34.787-23.34,66.354-45.694,92.328 c-31.251-36.304-50.143-83.543-50.143-135.212s18.892-98.908,50.143-135.212C349.521,108.503,368.413,155.742,368.413,207.411z"></path> <path style="fill:#5394F2;" d="M258.33,303.684L258.33,303.684l-24.401,0c-28.637,0-51.851,23.215-51.851,51.851v0h24.401 C235.115,355.536,258.33,332.321,258.33,303.684z"></path> <g> <circle style="fill:#FFFFFF;" cx="312.512" cy="207.412" r="22.929"></circle> <circle style="fill:#4D4D4D;" cx="312.512" cy="207.412" r="14.029"></circle> </g> </g> </g></svg>
+
+<!-- ✅ URL 복사 아이콘 버튼 시작 -->
+<div style="text-align: center; margin-top: 20px;">
+  <div id="copyUrlBtn" title="이 페이지 URL 복사" style="cursor: pointer; display: inline-block;">
+
+<svg height="75px" width="75px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 427.479 427.479" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path style="fill:#51CAF4;" d="M214.396,427.479h-11c0-22.658,5.655-34.109,11.124-45.183c5.137-10.399,9.987-20.222,9.987-40.311 c0-20.089-4.852-29.912-9.987-40.311c-5.469-11.074-11.124-22.524-11.124-45.182c0-22.658,5.655-34.109,11.124-45.183 c5.136-10.399,9.987-20.222,9.987-40.312c0-20.091-4.852-29.914-9.987-40.314c-5.469-11.075-11.124-22.526-11.124-45.185 s5.655-34.11,11.124-45.185c5.136-10.4,9.987-20.223,9.987-40.313h11c0,22.659-5.655,34.11-11.124,45.184 c-5.136,10.4-9.987,20.224-9.987,40.314s4.852,29.914,9.987,40.314c5.469,11.075,11.124,22.526,11.124,45.185 c0,22.658-5.655,34.109-11.124,45.183c-5.136,10.399-9.987,20.222-9.987,40.312c0,20.089,4.852,29.912,9.987,40.311 c5.469,11.074,11.124,22.524,11.124,45.182s-5.655,34.108-11.124,45.182C219.248,397.566,214.396,407.389,214.396,427.479z"></path> <path style="fill:#51CAF4;" d="M208.91,76.496L208.91,76.496c-29.822,0-53.997-24.175-53.997-53.997v0h0 C184.734,22.499,208.91,46.674,208.91,76.496L208.91,76.496z"></path> <path style="fill:#51CAF4;" d="M208.91,239.238L208.91,239.238c-29.822,0-53.997-24.175-53.997-53.997v0h0 C184.734,185.241,208.91,209.416,208.91,239.238L208.91,239.238z"></path> <path style="fill:#51CAF4;" d="M226.909,371.981L226.909,371.981c-29.822,0-53.997-24.175-53.997-53.997v0h0 C202.734,317.984,226.909,342.159,226.909,371.981L226.909,371.981z"></path> <path style="fill:#51CAF4;" d="M217.909,122.994L217.909,122.994c29.822,0,53.997-24.175,53.997-53.997v0h0 C242.085,68.996,217.909,93.172,217.909,122.994L217.909,122.994z"></path> <path style="fill:#51CAF4;" d="M217.909,285.736L217.909,285.736c29.822,0,53.997-24.175,53.997-53.997v0h0 C242.085,231.738,217.909,255.914,217.909,285.736L217.909,285.736z"></path> <path style="fill:#51CAF4;" d="M78.562,427.479h-11c0-22.658,5.655-34.108,11.124-45.183c5.136-10.399,9.987-20.222,9.987-40.311 c0-20.089-4.852-29.911-9.987-40.311c-5.469-11.074-11.124-22.524-11.124-45.182c0-22.658,5.655-34.109,11.124-45.183 c5.136-10.399,9.987-20.222,9.987-40.312c0-20.091-4.852-29.914-9.987-40.314c-5.469-11.075-11.124-22.526-11.124-45.185h11 c0,20.091,4.852,29.914,9.987,40.314c5.469,11.075,11.124,22.526,11.124,45.185c0,22.658-5.655,34.109-11.124,45.183 c-5.136,10.399-9.987,20.222-9.987,40.312c0,20.089,4.852,29.911,9.987,40.311c5.469,11.074,11.124,22.524,11.124,45.182 s-5.655,34.108-11.124,45.182C83.414,397.566,78.562,407.389,78.562,427.479z"></path> <path style="fill:#51CAF4;" d="M73.076,239.238L73.076,239.238c-29.822,0-53.997-24.175-53.997-53.997v0h0 C48.901,185.241,73.076,209.416,73.076,239.238L73.076,239.238z"></path> <path style="fill:#51CAF4;" d="M91.898,368.981L91.898,368.981c-29.822,0-53.997-24.175-53.997-53.997v0h0 C67.723,314.984,91.898,339.159,91.898,368.981L91.898,368.981z"></path> <path style="fill:#51CAF4;" d="M82.076,122.994L82.076,122.994c29.822,0,53.997-24.175,53.997-53.997v0h0 C106.251,68.996,82.076,93.172,82.076,122.994L82.076,122.994z"></path> <path style="fill:#51CAF4;" d="M82.076,285.736L82.076,285.736c29.822,0,53.997-24.175,53.997-53.997v0h0 C106.251,231.738,82.076,255.914,82.076,285.736L82.076,285.736z"></path> <path style="fill:#51CAF4;" d="M347.889,427.479h-11c0-22.658,5.655-34.108,11.124-45.183c5.137-10.399,9.987-20.222,9.987-40.311 c0-20.089-4.852-29.912-9.987-40.311c-5.469-11.074-11.124-22.524-11.124-45.182c0-22.658,5.655-34.109,11.124-45.183 c5.136-10.399,9.987-20.222,9.987-40.312h11c0,22.658-5.655,34.109-11.124,45.183c-5.136,10.399-9.987,20.222-9.987,40.312 c0,20.089,4.852,29.912,9.987,40.311c5.469,11.074,11.124,22.524,11.124,45.182s-5.655,34.108-11.124,45.182 C352.741,397.566,347.889,407.389,347.889,427.479z"></path> <path style="fill:#51CAF4;" d="M342.403,239.238L342.403,239.238c-29.822,0-53.997-24.175-53.997-53.997v0h0 C318.228,185.241,342.403,209.416,342.403,239.238L342.403,239.238z"></path> <path style="fill:#51CAF4;" d="M355.902,373.481L355.902,373.481c-29.822,0-53.997-24.175-53.997-53.997v0h0 C331.727,319.484,355.902,343.659,355.902,373.481L355.902,373.481z"></path> <path style="fill:#51CAF4;" d="M354.403,302.235L354.403,302.235c29.822,0,53.997-24.175,53.997-53.997v0h0 C378.578,248.237,354.403,272.413,354.403,302.235L354.403,302.235z"></path> </g> </g></svg>
+
+  </div>
+</div>
+
+<script>
+  document.getElementById('copyUrlBtn').addEventListener('click', function () {
+    const url = window.location.href;
+    navigator.clipboard.writeText(url).then(function () {
+      alert('✅ 페이지 URL이 복사되었습니다!');
+    }, function () {
+      alert('❌ URL 복사에 실패했습니다. 브라우저를 확인해주세요.');
+    });
+  });
+</script>
+
+<div class="note" style="text-align: center; margin-top: 0;">
+URL 복사
+</div>
+<!-- ✅ URL 복사 아이콘 버튼 종료 -->
+
+<br>
+
+<script> <!-- ■ 하단 일괄 공지 -->
+  document.addEventListener("DOMContentLoaded", function () {
+    fetch("notice-bottom.html")
+      .then(res => res.text())
+      .then(html => {
+        const tempDiv = document.createElement("div");
+        tempDiv.innerHTML = html;
+        document.body.appendChild(tempDiv); // ✅ body 맨 끝에 삽입
+      });
+  });
+</script>
+
+
+</body>
+</html>

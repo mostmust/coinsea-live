@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>비트버니 | 걸으면 코인이 쌓이는 비트코인 리워드 앱</title>
+
+<!-- ✅ 검색엔진용 설명 -->
+<meta name="description" content="비트코인을 걸으며 적립하는 만보기 리워드 앱! 비트버니(BitBunny)로 걸음마다 코인을 적립하고, 암호화폐나 상품으로 교환하세요. 초보자도 쉽게 가입하고 시작할 수 있어요.">
+
+<!-- ✅ 검색 로봇 인식 허용 -->
+<meta name="robots" content="index, follow">
+
+<!-- ✅ Open Graph (SNS/카카오톡/네이버 블로그 등 공유 시) -->
+<meta property="og:title" content="비트코인 채굴! 비트버니 앱으로 걷고 코인 받자!" />
+<meta property="og:description" content="하루 만보 걸으면 100코인! 리워드를 암호화폐나 기프티콘으로 교환 가능한 비트버니 앱을 지금 설치해보세요." />
+<meta property="og:image" content="https://coinsea.co.kr/img/og-bitbunny.webp" />
+<meta property="og:url" content="https://coinsea.co.kr/bitbunny.html" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="ko_KR" />
+
+<!-- ✅ Twitter 카드 미리보기 -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="비트버니 앱으로 걷고 비트코인 적립하세요!" />
+<meta name="twitter:description" content="만보기, 출석체크, 퀴즈를 통해 매일 코인을 적립하고 다양한 보상으로 교환할 수 있는 리워드 앱입니다." />
+<meta name="twitter:image" content="https://coinsea.co.kr/img/og-bitbunny.webp" />
+
+
+<!-- ✅ Google Fonts 최적화 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet"></noscript>
+
+<!-- ✅ Font Awesome 최적화 -->
+<link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"></noscript>
+
+
+<!-- 가장 일반적인 파비콘 -->
+<link rel="icon" href="/favicon.ico" />
+
+<!-- 고해상도 디바이스 대응 -->
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon/android-icon-192x192.png" />
+
+<!-- 애플 터치용 최소 하나 -->
+<link rel="apple-touch-icon" href="/favicon/apple-icon-180x180.png" />
+
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      font-family: 'Nanum Gothic', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      background-color: #fff;
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    .content-wrapper {
+      max-width: 800px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+
+    h1 { font-size: 24px; margin-bottom: 15px; }
+    p { margin-bottom: 15px; }
+
+
+    @media screen and (max-width: 600px) {
+      body { font-size: 15px; }
+      h1 { font-size: 22px; }
+    }
+
+    /* ✅ 본문용 텍스트 스타일 */
+    .main-title {
+      font-size: 26px;
+      font-weight: bold;
+      margin-bottom: 25px;
+      position: relative;
+      display: inline-block;
+      z-index: 0;
+    }
+
+    .main-title::after {
+      content: '';
+      position: absolute;
+      left: -7.5%;
+      right: -7.5%;
+      bottom: 1px;
+      height: 39%;
+      background-color: #f8cf26;
+      z-index: -1;
+    }
+
+    .sub-title {
+      font-size: 20px;
+      font-weight: bold;
+      margin-top: 30px;
+      margin-bottom: 10px;
+      color: #222;
+    }
+
+    .body-text {
+      font-size: 16px;
+      line-height: 1.7;
+      margin-bottom: 15px;
+    }
+
+    .small-text {
+      font-size: 13px;
+      color: #777;
+    }
+
+    .note {
+      font-size: 14px;
+      color: #555;
+      margin-top: -20px;
+    }
+
+.coupang-banner-wrapper {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.coupang-banner-wrapper iframe,
+.coupang-banner-wrapper div {
+  max-width: 100% !important;
+  height: auto !important;
+}
+
+.sub-title-box {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  color: #222;
+  padding-left: 12px;
+  border-left: 6px solid #b30000; /* 빨간색 막대 */
+}
+.image-wrapper {
+      margin-bottom: 24px;
+      text-align: center;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+      border: 0px solid #ccc;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+  </style>
+
+</head>
+<body>
+
+<div class="content-wrapper"><!-- ■ 전체를 감싸는 DIV 시작 -->
+<div style="height: 0.7em;"></div>
+    <div class="main-title">비트버니로 코인모으기</div>
+
+    <div class="body-text">
+      비트코인으로 교환할 수 있는 만보기 리워드 앱 <strong>"비트버니"</strong>
+    </div>
+<div style="height: 0.8em;"></div>
+  <div class="image-wrapper"><img src="posting/bitbunny/bitbunny-00.webp" alt="bitbunny-00"></div>
+
+<div class="body-text">
+    비트버니는 만보기, 출석체크 등의 사용자가 앱을 통해 쉽게 접근할 수 있는 미션들을 수행하고 포인트를 적립하여, 이를 암호화폐로 교환할 수 있는 리워드 앱입니다.</div><br>
+ 
+  <div class="image-wrapper"><img src="posting/bitbunny/bitbunny-00-1.webp" alt="bitbunny-00-1"></div>
+<div class="body-text">적립한 코인을 코빗거래소를 통해 비트코인, 이더리움, 리플, 도지코인, 솔라나 코인으로 교환이 가능합니다.</div>
+  <div class="image-wrapper"><img src="posting/bitbunny/bitbunny-00-2.webp" alt="bitbunny-00-2"></div>
+<div class="body-text">또한 적립한 코인으로 메가, 이디야, 스타벅스, 빽다방, 롯데시네마, 도미노피자, KFC, 교촌치킨 등에서 상품으로 교환도 가능합니다.</div>
+  <div class="image-wrapper"><img src="posting/bitbunny/bitbunny-00-3.webp" alt="bitbunny-00-3" loading="lazy"></div>
+<div class="body-text">100걸음마다 1코인, 하루 최대 100코인을 적립받을 수 있습니다. ​</div>
+<br>
+  <div class="image-wrapper"><img src="posting/bitbunny/bitbunny-01.webp" alt="bitbunny-01" loading="lazy"></div>
+
+
+
+  <div class="image-wrapper"><img src="posting/bitbunny/bitbunny-01-1.webp" alt="bitbunny-01-1" loading="lazy"></div>
+
+  <div class="image-wrapper"><img src="posting/bitbunny/bitbunny-01-2.webp" alt="bitbunny-01-2" loading="lazy"></div>
+<br>
+
+<div class="coupang-banner-wrapper">
+<script src="https://ads-partners.coupang.com/g.js"></script>
+<script>
+	new PartnersCoupang.G({"id":882669,"template":"carousel","trackingCode":"AF5850075","width":"500","height":"250","tsource":""});
+</script>
+</div>
+<br>
+
+<div class="sub-title-box">비트버니(BitBunny) 가입 및 이용 방법</div><br>
+
+<div class="body-text"><strong>1</strong>. 아래 링크를 클릭하여 비트버니 앱을 설치합니다.</div>
+
+
+<div class="body-text"><a href="https://abr.ge/gmkxg3?code=DBAA58" target="_blank">
+    https://abr.ge/gmkxg3?code=DBAA58
+  </a>
+</div><br>
+
+<div class="body-text"><strong>2</strong>. 구글 플레이나 앱스토어에서 "설치"를 눌러서 앱을 설치합니다.</div>
+  <div class="image-wrapper"><img src="posting/bitbunny/bitbunny-02.webp" alt="bitbunny-02" loading="lazy"></div>
+<br><div class="body-text"><strong>3</strong>. 하단의 <strong>카카오로 3초만에 시작하기</strong>를 클릭합니다.</div>
+  <div class="image-wrapper"><img src="posting/bitbunny/bitbunny-03.webp" alt="bitbunny-03" loading="lazy"></div>
+<br><div class="body-text"><strong>4</strong>. 동의하기에 체크하시고 <strong>동의하고 계속하기</strong>를 클릭합니다.</div>
+  <div class="image-wrapper"><img src="posting/bitbunny/bitbunny-04.webp" alt="bitbunny-04" loading="lazy"></div>
+<br><div class="body-text"><strong>5</strong>. 이름과 휴대폰 번호를 입력후 <strong>확인</strong>을 클릭합니다.</div>
+  <div class="image-wrapper"><img src="posting/bitbunny/bitbunny-05.webp" alt="bitbunny-05" loading="lazy"></div>
+<br><div class="body-text"><strong>6</strong>. 통신사를 선택후 휴대폰 인증을 완료합니다.</div>
+ <div class="image-wrapper"><img src="posting/bitbunny/bitbunny-06.webp" alt="bitbunny-06" loading="lazy"></div>
+<br><div class="body-text"><strong>7</strong>. 비트버니 퀴즈가 나오는데 정답에 체크를 해주시면 됩니다.</div>
+
+<div class="body-text">걸음마다 생겨나는 코인을 적립하기 위해 눌러야 하는 것은? <strong>노란색 동전</strong></div>
+  <div class="image-wrapper"><img src="posting/bitbunny/bitbunny-07.webp" alt="bitbunny-07" loading="lazy"></div>
+<br><div class="body-text"><strong>8</strong>. 비트버니 코인을 열심히 모아서 교환하 수 있는 것은? </strong>암호화폐</strong></div>
+  <div class="image-wrapper"><img src="posting/bitbunny/bitbunny-08.webp" alt="bitbunny-08" loading="lazy"></div>
+<br><div class="body-text"><strong>9</strong>. 전체 메뉴에서 프로모션 코드에 입력할 수 있는 것은? <strong>친구초대코드</strong></div>
+  <div class="image-wrapper"><img src="posting/bitbunny/bitbunny-09.webp" alt="bitbunny-09" loading="lazy"></div>
+<br><div class="body-text"><strong>10</strong>. 질문에 대한 답변이 완료되면 3코인을 축하선물로 받습니다. <strong>좋아, 비트버니 시작하자!</strong>를 클릭합니다.</div>
+  <div class="image-wrapper"><img src="posting/bitbunny/bitbunny-10.webp" alt="bitbunny-10" loading="lazy"></div>
+<br><div class="body-text"><strong>11</strong>. 비트버니 메인화면이 나오는데 맨 위에 있는 <strong>노란색 동전을 클릭</strong>해서 코인을 받습니다. 그리고 오늘의 혜택에 있는 출석 체크와 오늘의 퀴즈를 통해서 코인을 받습니다.</div>
+
+<div class="body-text">걸으면서 코인을 적립! 출석체크로 코인을 적립! 퀴즈를 풀어서 코인을 적립할 수 있습니다.</div>
+  <div class="image-wrapper"><img src="posting/bitbunny/bitbunny-11.webp" alt="bitbunny-11" loading="lazy"></div>
+<br><div class="body-text">오늘의 퀴즈는 하루에 한번씩 새로운 퀴즈가 등장하는데 퀴즈의 정답을 맞히면 1코인부터 최대 100코인까지 랜덤으로 코인을 받을 수 있습니다. 혹시 퀴즈의 정답을 모르겠다면 초성 힌트를 확인해 보시기 바랍니다.</div>
+
+<div class="body-text">또한 맨 하단의 <strong>혜택</strong> 메뉴를 클릭하면 코인을 받을 수 있는 적립 가능한 미션이 상당히 많이 있으니 각각 클릭해서 코인을 적립받으시면 됩니다.</div>
+  <div class="image-wrapper"><img src="posting/bitbunny/bitbunny-11-1.webp" alt="bitbunny-11-1" loading="lazy"></div>
+<br><div class="body-text"><strong>12</strong>. <strong>프로모션 코드를 입력</strong>하면 500코인을 받을 수 있으니 반드시 하단의 '전체' 메뉴에서 프로모션 코드를 선택하여 입력하시기 바랍니다. <br>200걸음에 1코인이니까 무려 10만보를 걸어야 받을 수 있는 500코인이니 꼭 프로모션 코드를 입력하여 500코인을 획득하시기 바랍니다.</div>
+
+  <div class="image-wrapper"><img src="posting/bitbunny/bitbunny-11-2.webp" alt="bitbunny-11-2" loading="lazy"></div>
+<br><div class="body-text"><strong>13</strong>. 프로모션 코드에 아래 코드를 입력해주시면 코드가 적용되어 500코인을 받을 수 있습니다.</div>
+
+<div class="body-text"><strong>프로모션 코드 : <span style="color: red;">DBAA58</span></strong></div>
+  <div class="image-wrapper"><img src="posting/bitbunny/bitbunny-11-3.webp" alt="bitbunny-11-3" loading="lazy"></div>
+<br><div class="body-text"><strong>14</strong>. 만약 친구를 초대해서 코인을 추가로 받고 싶으시다면 맨 하단의 "전체" 메뉴를 클릭후 <strong>친구 초대</strong>를 클릭합니다.</div>
+  <div class="image-wrapper"><img src="posting/bitbunny/bitbunny-12.webp" alt="bitbunny-12" loading="lazy"></div>
+<br><div class="body-text"><strong>15</strong>. 나의 초대 코드를 복사하여 알려주거나, <strong>공유하기</strong> 버튼을 클릭하여 친구나 지인에게 링크를 보내주시면 되겠습니다.</div>
+  <div class="image-wrapper"><img src="posting/bitbunny/bitbunny-13.webp" alt="bitbunny-13" loading="lazy"></div>
+<div class="body-text">이상으로 걸으면서 수익이 쌓이는 비트버니의 소개와 가입 방법에 대해서 자세히 알아보았습니다. 비트버니와 함께 행복한 하루되시길 기원합니다.<br><strong>Good Luck~!</strong></div>
+  <div class="image-wrapper"><a href="https://abr.ge/gmkxg3?code=DBAA58" target="_blank" rel="noopener noreferrer"><img src="posting/bitbunny/bitbunny-14.webp" alt="bitbunny-14" loading="lazy"></a></div>
+
+    <div class="small-text">
+      * 자세한 정보는 비트버니 공식 홈페이지를 참고하시기 바랍니다.
+    </div>
+
+<br><br>
+<!-- ✅ URL 복사 아이콘 버튼 시작 -->
+<div style="text-align: center; margin-top: 20px;">
+  <div id="copyUrlBtn" title="이 페이지 URL 복사" style="cursor: pointer; display: inline-block;">
+
+<svg height="75px" width="75px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 427.479 427.479" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path style="fill:#51CAF4;" d="M214.396,427.479h-11c0-22.658,5.655-34.109,11.124-45.183c5.137-10.399,9.987-20.222,9.987-40.311 c0-20.089-4.852-29.912-9.987-40.311c-5.469-11.074-11.124-22.524-11.124-45.182c0-22.658,5.655-34.109,11.124-45.183 c5.136-10.399,9.987-20.222,9.987-40.312c0-20.091-4.852-29.914-9.987-40.314c-5.469-11.075-11.124-22.526-11.124-45.185 s5.655-34.11,11.124-45.185c5.136-10.4,9.987-20.223,9.987-40.313h11c0,22.659-5.655,34.11-11.124,45.184 c-5.136,10.4-9.987,20.224-9.987,40.314s4.852,29.914,9.987,40.314c5.469,11.075,11.124,22.526,11.124,45.185 c0,22.658-5.655,34.109-11.124,45.183c-5.136,10.399-9.987,20.222-9.987,40.312c0,20.089,4.852,29.912,9.987,40.311 c5.469,11.074,11.124,22.524,11.124,45.182s-5.655,34.108-11.124,45.182C219.248,397.566,214.396,407.389,214.396,427.479z"></path> <path style="fill:#51CAF4;" d="M208.91,76.496L208.91,76.496c-29.822,0-53.997-24.175-53.997-53.997v0h0 C184.734,22.499,208.91,46.674,208.91,76.496L208.91,76.496z"></path> <path style="fill:#51CAF4;" d="M208.91,239.238L208.91,239.238c-29.822,0-53.997-24.175-53.997-53.997v0h0 C184.734,185.241,208.91,209.416,208.91,239.238L208.91,239.238z"></path> <path style="fill:#51CAF4;" d="M226.909,371.981L226.909,371.981c-29.822,0-53.997-24.175-53.997-53.997v0h0 C202.734,317.984,226.909,342.159,226.909,371.981L226.909,371.981z"></path> <path style="fill:#51CAF4;" d="M217.909,122.994L217.909,122.994c29.822,0,53.997-24.175,53.997-53.997v0h0 C242.085,68.996,217.909,93.172,217.909,122.994L217.909,122.994z"></path> <path style="fill:#51CAF4;" d="M217.909,285.736L217.909,285.736c29.822,0,53.997-24.175,53.997-53.997v0h0 C242.085,231.738,217.909,255.914,217.909,285.736L217.909,285.736z"></path> <path style="fill:#51CAF4;" d="M78.562,427.479h-11c0-22.658,5.655-34.108,11.124-45.183c5.136-10.399,9.987-20.222,9.987-40.311 c0-20.089-4.852-29.911-9.987-40.311c-5.469-11.074-11.124-22.524-11.124-45.182c0-22.658,5.655-34.109,11.124-45.183 c5.136-10.399,9.987-20.222,9.987-40.312c0-20.091-4.852-29.914-9.987-40.314c-5.469-11.075-11.124-22.526-11.124-45.185h11 c0,20.091,4.852,29.914,9.987,40.314c5.469,11.075,11.124,22.526,11.124,45.185c0,22.658-5.655,34.109-11.124,45.183 c-5.136,10.399-9.987,20.222-9.987,40.312c0,20.089,4.852,29.911,9.987,40.311c5.469,11.074,11.124,22.524,11.124,45.182 s-5.655,34.108-11.124,45.182C83.414,397.566,78.562,407.389,78.562,427.479z"></path> <path style="fill:#51CAF4;" d="M73.076,239.238L73.076,239.238c-29.822,0-53.997-24.175-53.997-53.997v0h0 C48.901,185.241,73.076,209.416,73.076,239.238L73.076,239.238z"></path> <path style="fill:#51CAF4;" d="M91.898,368.981L91.898,368.981c-29.822,0-53.997-24.175-53.997-53.997v0h0 C67.723,314.984,91.898,339.159,91.898,368.981L91.898,368.981z"></path> <path style="fill:#51CAF4;" d="M82.076,122.994L82.076,122.994c29.822,0,53.997-24.175,53.997-53.997v0h0 C106.251,68.996,82.076,93.172,82.076,122.994L82.076,122.994z"></path> <path style="fill:#51CAF4;" d="M82.076,285.736L82.076,285.736c29.822,0,53.997-24.175,53.997-53.997v0h0 C106.251,231.738,82.076,255.914,82.076,285.736L82.076,285.736z"></path> <path style="fill:#51CAF4;" d="M347.889,427.479h-11c0-22.658,5.655-34.108,11.124-45.183c5.137-10.399,9.987-20.222,9.987-40.311 c0-20.089-4.852-29.912-9.987-40.311c-5.469-11.074-11.124-22.524-11.124-45.182c0-22.658,5.655-34.109,11.124-45.183 c5.136-10.399,9.987-20.222,9.987-40.312h11c0,22.658-5.655,34.109-11.124,45.183c-5.136,10.399-9.987,20.222-9.987,40.312 c0,20.089,4.852,29.912,9.987,40.311c5.469,11.074,11.124,22.524,11.124,45.182s-5.655,34.108-11.124,45.182 C352.741,397.566,347.889,407.389,347.889,427.479z"></path> <path style="fill:#51CAF4;" d="M342.403,239.238L342.403,239.238c-29.822,0-53.997-24.175-53.997-53.997v0h0 C318.228,185.241,342.403,209.416,342.403,239.238L342.403,239.238z"></path> <path style="fill:#51CAF4;" d="M355.902,373.481L355.902,373.481c-29.822,0-53.997-24.175-53.997-53.997v0h0 C331.727,319.484,355.902,343.659,355.902,373.481L355.902,373.481z"></path> <path style="fill:#51CAF4;" d="M354.403,302.235L354.403,302.235c29.822,0,53.997-24.175,53.997-53.997v0h0 C378.578,248.237,354.403,272.413,354.403,302.235L354.403,302.235z"></path> </g> </g></svg>
+
+  </div>
+</div>
+
+<script>
+  document.getElementById('copyUrlBtn').addEventListener('click', function () {
+    const url = window.location.href;
+    navigator.clipboard.writeText(url).then(function () {
+      alert('✅ 페이지 URL이 복사되었습니다!');
+    }, function () {
+      alert('❌ URL 복사에 실패했습니다. 브라우저를 확인해주세요.');
+    });
+  });
+</script>
+
+<div class="note" style="text-align: center; margin-top: 0;">
+URL 복사
+</div>
+<!-- ✅ URL 복사 아이콘 버튼 종료 -->
+
+<br>
+</div> <!-- ■ 전체를 감싸는 DIV 종료 -->
+
+<script> <!-- ■ 하단 일괄 공지 -->
+  document.addEventListener("DOMContentLoaded", function () {
+    fetch("notice-bottom.html")
+      .then(res => res.text())
+      .then(html => {
+        const tempDiv = document.createElement("div");
+        tempDiv.innerHTML = html;
+        document.body.appendChild(tempDiv); // ✅ body 맨 끝에 삽입
+      });
+  });
+</script>
+</body>
+</html>

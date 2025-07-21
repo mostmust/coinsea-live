@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>자연스러운 돌고래 애니메이션</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Nanum Gothic', sans-serif;
+      background: #ffffff;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .loading-container {
+      text-align: center;
+    }
+
+    .dolphin-splash {
+      width: 100px;
+      height: 100px;
+      animation: splashAndSwing 2.8s cubic-bezier(0.42, 0, 0.58, 1) infinite;
+      transform-origin: center bottom;
+    }
+
+    @keyframes splashAndSwing {
+      0%   { transform: translateY(0) rotate(0deg); }
+      20%  { transform: translateY(-22px) rotate(0deg); }     /* 부드럽게 위로 */
+      40%  { transform: translateY(0) rotate(0deg); }
+
+      55%  { transform: translateY(-12px) rotate(10deg); }    /* 오른쪽 튕기며 회전 */
+      65%  { transform: translateY(0) rotate(0deg); }
+
+      80%  { transform: translateY(-12px) rotate(-10deg); }   /* 왼쪽 튕기며 회전 */
+      100% { transform: translateY(0) rotate(0deg); }
+    }
+
+    .loading-text {
+      margin-top: 16px;
+      font-size: 16px;
+      color: #0077cc;
+      animation: blink 1.6s ease-in-out infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="loading-container">
+    <img src="img/wave.png" alt="로딩 중" class="dolphin-splash">
+    <div class="loading-text">페이지를 열심히 불러오는 중 ^^</div>
+  </div>
+
+</body>
+</html>

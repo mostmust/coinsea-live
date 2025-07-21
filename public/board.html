@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>공지사항</title>
+
+
+<!-- ✅ Google Fonts 최적화 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet"></noscript>
+
+<!-- ✅ Font Awesome 최적화 -->
+<link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"></noscript>
+
+
+<!-- 가장 일반적인 파비콘 -->
+<link rel="icon" href="/favicon.ico" />
+
+<!-- 고해상도 디바이스 대응 -->
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon/android-icon-192x192.png" />
+
+<!-- 애플 터치용 최소 하나 -->
+<link rel="apple-touch-icon" href="/favicon/apple-icon-180x180.png" />
+
+  <style>
+    body {
+      font-family: 'Nanum Gothic', sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #222;
+    }
+
+    .board-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .board-item {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      margin-bottom: 12px;
+      padding: 15px;
+      cursor: pointer;
+      transition: box-shadow 0.2s;
+    }
+
+    .board-item:hover {
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+
+    .board-title {
+      font-weight: bold;
+      font-size: 18px;
+      margin-bottom: 5px;
+    }
+
+    .board-summary {
+      color: #777;
+      font-size: 14px;
+    }
+
+    .board-content {
+      display: none;
+      margin-top: 12px;
+      font-size: 15px;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .board-item.active .board-content {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="board-container">
+    <h2>📋 공지사항</h2>
+
+    <div class="board-item">
+      <div class="board-title">[공지] 사이트 점검 안내</div>
+      <div class="board-summary">2025년 7월 10일(수) 오전 2시 ~ 4시</div>
+      <div class="board-content">
+        안녕하세요. 더 나은 서비스 제공을 위해 시스템 점검이 진행됩니다. 점검 시간 동안 사이트 이용이 제한될 수 있습니다.
+      </div>
+    </div>
+
+    <div class="board-item">
+      <div class="board-title">신규 기능 출시 안내</div>
+      <div class="board-summary">다크모드 및 모바일 UI 개선</div>
+      <div class="board-content">
+        신규 기능으로 다크모드가 추가되었습니다. 모바일에서의 UI도 개선되었으니 많은 이용 바랍니다.
+      </div>
+    </div>
+
+    <div class="board-item">
+      <div class="board-title">비트버니 제휴 이벤트 시작</div>
+      <div class="board-summary">참여 시 보상 지급</div>
+      <div class="board-content">
+        비트버니와의 제휴 이벤트가 시작되었습니다. 앱을 설치하고 이벤트에 참여하면 다양한 보상이 주어집니다.
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const items = document.querySelectorAll('.board-item');
+    items.forEach(item => {
+      item.addEventListener('click', () => {
+        items.forEach(i => i.classList.remove('active'));
+        item.classList.add('active');
+      });
+    });
+  </script>
+
+</body>
+</html>

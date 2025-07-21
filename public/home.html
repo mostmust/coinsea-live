@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ✅ SEO 기본 정보 -->
+  <meta name="description" content="국내외 암호화폐 거래소 비교, 가입 혜택, 선물거래 방법, 에어드랍 정보까지! 초보자도 쉽게 이해하는 코인 정보 사이트 코인씨(CoinSea).">
+
+  <!-- ✅ 검색 로봇 설정 -->
+  <meta name="robots" content="index, follow" />
+
+  <!-- ✅ Open Graph (카카오톡, 네이버 블로그 등 미리보기) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://coinsea.co.kr/home.html" />
+  <meta property="og:title" content="코인씨 CoinSea | 거래소 비교부터 선물가이드까지!" />
+  <meta property="og:description" content="업비트, 바이낸스, 비트겟, OKX 등 주요 거래소 비교와 선물거래 가이드, 김프, 펀딩비, 롱숏비율, 수수료 정보까지 한눈에 확인하세요!" />
+  <meta property="og:image" content="https://coinsea.co.kr/img/og-home.webp" />
+  <meta property="og:locale" content="ko_KR" />
+
+  <!-- ✅ Twitter 카드 -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="코인씨 CoinSea | 암호화폐 정보 종합 안내" />
+  <meta name="twitter:description" content="거래소 비교, 선물거래 가이드, 에어드랍 정보, 앱테크 등 코인 초보도 쉽게!" />
+  <meta name="twitter:image" content="https://coinsea.co.kr/img/og-home.webp" />
+
+  <!-- ✅ 사이트 제목 -->
+  <title>코인씨 CoinSea | 코인초보 가이드북</title>
+
+  <!-- ✅ Font Awesome 최적화 -->
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"></noscript>
+
+  <!-- 파비콘 -->
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon/android-icon-192x192.png" />
+  <link rel="apple-touch-icon" href="/favicon/apple-icon-180x180.png" />
+
+  <!-- ✅ 전체 통합 스타일 -->
+  <style>
+
+  @font-face {
+    font-family: 'Nanum Gothic';
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+    src: url('/font/NanumGothic-Regular.woff2') format('woff2'),
+         url('/font/NanumGothic-Regular.woff') format('woff');
+  }
+
+  @font-face {
+    font-family: 'Nanum Gothic';
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+    src: url('/font/NanumGothic-Bold.woff2') format('woff2'),
+         url('/font/NanumGothic-Bold.woff') format('woff');
+  }
+
+  @font-face {
+    font-family: 'Nanum Gothic';
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap;
+    src: url('/font/NanumGothic-ExtraBold.woff2') format('woff2'),
+         url('/font/NanumGothic-ExtraBold.woff') format('woff');
+  }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      font-family: 'Nanum Gothic', sans-serif;
+      font-size: 16px;
+      background-color: #fff;
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    .content-wrapper { 
+      padding: 20px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    h1 { font-size: 24px; margin-bottom: 15px; }
+    p { margin-bottom: 15px; }
+
+    .responsive-img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+      max-height: 280px;
+      width: 100%;
+      max-width: 542px;
+      margin-bottom: 10px;
+    }
+    .ad-frame-wrapper { padding: 0 16px; }
+    h2 {
+      font-size: 18px;
+      margin: 20px 0 10px;
+      padding-left: 10px;
+      border-left: 4px solid #444;
+      border-bottom: 1px solid #000;
+      padding-bottom: 6px;               /* 밑줄과 텍스트 사이 간격 */
+      line-height: 1.6;                  /* 박스 높이 증가 효과 */
+    }
+    .exchange-box {
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 10px;
+      margin-top: 0px;
+    }
+    .exchange-group {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: repeat(4, 1fr);
+      justify-items: center;
+    }
+    @media screen and (min-width: 768px) {
+      .exchange-group { grid-template-columns: repeat(6, 1fr); }
+    }
+    .exchange-item { text-align: center; }
+    .exchange-link {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .exchange-logo {
+      width: 50px;
+      height: 50px;
+      margin: 0 auto;
+      border-radius: 6px;
+      overflow: hidden;
+      background-color: #f1f1f1;
+      border: 1px solid #ccc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .exchange-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    .exchange-name {
+      margin-top: 6px;
+      font-size: 13px;
+    }
+    .main-title {
+      font-size: 26px;
+      font-weight: bold;
+      margin-bottom: 25px;
+      position: relative;
+      display: inline-block;
+      z-index: 0;
+      border-bottom: 2px solid #000;
+    }
+    .main-title::after {
+      content: '';
+      position: absolute;
+      left: -7.5%;
+      right: -7.5%;
+      bottom: 1px;
+      height: 39%;
+      background-color: #f8cf26;
+      z-index: -1;
+    }
+    .sub-title {
+      font-size: 20px;
+      font-weight: bold;
+      margin-top: 15px;
+      margin-bottom: 10px;
+      color: #222;
+    }
+    .body-text {
+      font-size: 16px;
+      line-height: 1.7;
+      margin-bottom: 15px;
+    }
+    .small-text {
+      font-size: 13px;
+      color: #777;
+    }
+    .note {
+      font-size: 14px;
+      color: #555;
+      margin-top: -20px;
+      line-height: 1.4;
+    }
+    .coupang-banner-wrapper {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: auto;
+      display: flex;
+      justify-content: center;
+    }
+    .coupang-banner-wrapper iframe {
+      max-width: 100% !important;
+      height: auto !important;
+    }
+    @media screen and (max-width: 600px) {
+      body { font-size: 15px; }
+      h1 { font-size: 22px; }
+    }
+    .custom-ticker-wrapper {
+      background: #fff;
+      color: #000;
+      overflow: hidden;
+      white-space: nowrap;
+      width: 100%;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+    .custom-ticker-move {
+      display: inline-block;
+      padding-left: 100%;
+      animation: scroll 40s linear infinite;
+    }
+    .custom-ticker-item {
+      display: inline-block;
+      margin: 0 30px;
+    }
+    @keyframes scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+    .up { color: red; }
+    .down { color: blue; }
+    img {
+      border-radius: 12px;
+    }
+    .section {
+      border: none;
+      background-color: #fff;
+      border-radius: 12px;
+      padding: 20px 16px 10px 16px;
+      margin: 0 auto 10px auto;
+      max-width: 800px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .section h2 {
+      font-size: 18px;
+      margin-top: 0;
+      margin-bottom: 16px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid #000;
+      scroll-margin-top: 85px;
+    }
+    .icon-grid {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: repeat(4, 1fr);
+    }
+    @media (min-width: 768px) {
+      .icon-grid {
+        grid-template-columns: repeat(6, 1fr);
+      }
+    }
+    .icon-item {
+      text-align: center;
+      font-size: 14px;
+    }
+    .icon-item img {
+      width: 36px;
+      height: 36px;
+      margin-bottom: 6px;
+      border-radius: 8px;
+    }
+    .icon-item:hover { color: orange; }
+    .icon-item:hover svg { stroke: orange; }
+    html { scroll-behavior: smooth; }
+    .main-posting-list {
+      margin: 6px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .post-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-bottom: 8px;
+    }
+    .post-item img {
+      width: 100px;
+      height: 70px;
+      object-fit: cover;
+      border-radius: 6px;
+      flex-shrink: 0;
+    }
+    .post-title {
+      font-size: 15px;
+      color: #222;
+      line-height: 1.4;
+      text-decoration: none;
+      flex: 1;
+    }
+    .post-title:hover { text-decoration: underline; }
+    @media (prefers-color-scheme: dark) {
+      .post-title { color: #eee; }
+      .post-item { border-bottom-color: #444; }
+    }
+
+    /* 썸네일 그리드 (PC 5개, 모바일 1개) */
+    .thumbnail-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      justify-content: center;
+    }
+    .thumbnail-item {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+      width: 100%;
+      max-width: 480px;
+      background: none;
+      border: none;
+      box-shadow: none;
+    }
+    .thumbnail-item img {
+      width: 100%;
+      height: auto;
+      max-width: 100%;
+      object-fit: cover;
+      border-radius: 6px;
+      flex-shrink: 0;
+    }
+    .thumbnail-item .post-title {
+      margin: 0;
+      font-size: 15px;
+      line-height: 1.4;
+      display: block;
+    }
+
+    /* PC: 1024px 이상에서 1줄에 5개, 썸네일 위/아래 구조 */
+    @media (min-width: 1024px) {
+      .thumbnail-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 20px;
+      }
+      .thumbnail-item {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+      }
+      .thumbnail-item img {
+        width: 100%;
+        height: auto;
+      }
+      .thumbnail-item .post-title {
+        margin: 0;
+      }
+    }
+
+    /* 모바일: 600px 이하에서 1줄에 1개, 썸네일-제목 가로(좌우) 배치 */
+    @media (max-width: 600px) {
+      .thumbnail-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        justify-content: flex-start;
+        align-items: stretch;
+      }
+      .thumbnail-item {
+        flex-direction: row;
+        align-items: center;
+        gap: 12px;
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+      }
+      .thumbnail-item img {
+        width: 90px;
+        height: 68px;
+        max-width: 90px;
+        object-fit: cover;
+        border-radius: 6px;
+        flex-shrink: 0;
+      }
+      .thumbnail-item .post-title {
+        margin: 0;
+        font-size: 15px;
+        line-height: 1.4;
+        word-break: break-all;
+        flex: 1;
+        display: block;
+      }
+    }
+
+    .thumbnail-item a {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .thumbnail-item a:hover {
+      opacity: 0.85;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+<!-- 시세 티커 (위/아래 여백 없이 전체 폭) 시작 -->
+<div class="custom-ticker-wrapper">
+  <div class="custom-ticker-move" id="tickerItems"></div>
+</div>
+<script defer>
+  async function fetchPrices() {
+    const tickerItems = document.getElementById('tickerItems');
+    const res1 = await fetch("https://api.binance.com/api/v3/ticker/price");
+    const res2 = await fetch("https://api.binance.com/api/v3/ticker/24hr");
+    const prices = await res1.json();
+    const changes = await res2.json();
+
+    const pairs = ['BTCUSDT', 'ETHUSDT', 'XRPUSDT', 'SOLUSDT', 'BNBUSDT'];
+    tickerItems.innerHTML = '';
+    pairs.forEach(pair => {
+      const price = prices.find(p => p.symbol === pair)?.price || '-';
+      const change = changes.find(c => c.symbol === pair)?.priceChangePercent || '0';
+      const isUp = parseFloat(change) >= 0;
+      const el = document.createElement('div');
+      el.className = 'custom-ticker-item';
+      el.innerHTML = `${pair.replace('USDT', '/USDT')}: ${parseFloat(price).toLocaleString(undefined, {maximumFractionDigits: 2})} USDT <span class='${isUp ? 'up' : 'down'}'>(${isUp ? '+' : ''}${parseFloat(change).toFixed(2)}%)</span>`;
+      tickerItems.appendChild(el);
+    });
+  }
+  fetchPrices();
+  setInterval(fetchPrices, 60000);
+</script>
+<!-- 시세 티커 종료 -->
+
+<div style="padding: 0 16px; text-align: center; margin: 0;">
+  <img src="img/howtocoin.webp"
+     alt="코인씨"
+     width="860"
+     height="168"
+     style="width:100%; max-width:860px; height:auto; display:block; margin:0 auto;">
+</div>
+
+<div class="content-wrapper">
+  <!-- ✅ 썸네일 리스트형 포스팅 시작 -->
+  <div class="thumbnail-grid">
+
+    <div class="thumbnail-item">
+      <a href="mainposting-why-bitcoin.html">
+        <img src="img/mainposting-why-bitcoin.webp" alt="비트코인 투자 이유">
+      </a>
+      <a href="mainposting-why-bitcoin.html" class="post-title">
+        왜 알트코인이 아닌 비트코인에 투자해야 할까?
+      </a>
+    </div>
+
+    <div class="thumbnail-item">
+      <a href="mainposting-kimchi-strategy.html">
+        <img src="img/mainposting-kimchi-strategy.webp" alt="김치프리미엄 전략">
+      </a>
+      <a href="mainposting-kimchi-strategy.html" class="post-title">
+        김치프리미엄과 역프리미엄 발생 시 투자 전략
+      </a>
+    </div>
+
+    <div class="thumbnail-item">
+      <a href="mainposting-futures-tips.html">
+        <img src="img/mainposting-futures-tips.webp" alt="선물거래 주의사항">
+      </a>
+      <a href="mainposting-futures-tips.html" class="post-title">
+        해외거래소 선물거래 주의사항과 초보자 전략
+      </a>
+    </div>
+
+    <div class="thumbnail-item">
+      <a href="mainposting-market-strategy.html">
+        <img src="img/mainposting-market-strategy.webp" alt="상승장 하락장 전략">
+      </a>
+      <a href="mainposting-market-strategy.html" class="post-title">
+        코인이 상승장일 때와 하락장일 때의 투자 전략
+      </a>
+    </div>
+
+    <div class="thumbnail-item">
+      <a href="mainposting-bitcoin-vs-gold-dollar.html">
+        <img src="img/mainposting-bitcoin-vs-gold-dollar.webp" alt="비트코인 금 달러 비교">
+      </a>
+      <a href="mainposting-bitcoin-vs-gold-dollar.html" class="post-title">
+        비트코인 vs 금 vs 달러, 어디에 투자할까?
+      </a>
+    </div>
+
+    <div class="thumbnail-item">
+      <a href="mainposting-ethereum.html">
+        <img src="img/mainposting-ethereum.webp" alt="이더리움">
+      </a>
+      <a href="mainposting-ethereum.html" class="post-title">
+        이더리움이란? 스마트 계약과 디앱의 세계
+      </a>
+    </div>
+
+    <div class="thumbnail-item">
+      <a href="mainposting-airdrop.html">
+        <img src="img/mainposting-airdrop.webp" alt="에어드랍이란?">
+      </a>
+      <a href="mainposting-airdrop.html" class="post-title">
+        에어드랍이란? 무료 코인 받는 방법과 주의사항
+      </a>
+    </div>
+
+    <div class="thumbnail-item">
+      <a href="mainposting-mining.html">
+        <img src="img/mainposting-mining.webp" loading="lazy" alt="코인채굴이란?">
+      </a>
+      <a href="mainposting-mining.html" class="post-title">
+        코인 채굴은 무엇이고 어떻게 하는 건가?
+      </a>
+    </div>
+
+    <div class="thumbnail-item">
+      <a href="mainposting-exchange-types.html">
+        <img src="img/mainposting-exchange-types.webp" loading="lazy" alt="CEX & DEX">
+      </a>
+      <a href="mainposting-exchange-types.html" class="post-title">
+        중앙화 거래소와 탈중앙화 거래소의 차이점
+      </a>
+    </div>
+
+    <div class="thumbnail-item">
+      <a href="mainposting-tax.html">
+        <img src="img/mainposting-tax.webp" loading="lazy" alt="코인세금">
+      </a>
+      <a href="mainposting-tax.html" class="post-title">
+        코인거래에도 세금이 붙나요?
+      </a>
+    </div>
+
+
+    <div class="thumbnail-item">
+      <a href="mainposting-dominance.html">
+        <img src="img/mainposting-dominance.webp" loading="lazy" alt="비트코인 도미넌스">
+      </a>
+      <a href="mainposting-dominance.html" class="post-title">
+        비트코인 도미넌스란 무엇인가?
+      </a>
+    </div>
+
+
+   <div class="thumbnail-item">
+      <a href="mainposting-exjoin.html">
+        <img src="img/mainposting-exjoin.webp" loading="lazy" alt="거래소 가입조건">
+      </a>
+      <a href="mainposting-exjoin.html" class="post-title">
+        국내 코인거래소에 가입하기 위한 조건은?
+      </a>
+    </div>
+
+
+   <div class="thumbnail-item">
+      <a href="mainposting-coin-scam-warning.html">
+        <img src="img/mainposting-coin-scam-warning.webp" loading="lazy" alt="코인사기 예방">
+      </a>
+      <a href="mainposting-coin-scam-warning.html" class="post-title">
+        코인사기 예방을 위한 사고 사례를 알아보자!
+      </a>
+    </div>
+
+
+   <div class="thumbnail-item">
+      <a href="mainposting-staking.html">
+        <img src="img/mainposting-staking.webp" loading="lazy" alt="스테이킹">
+      </a>
+      <a href="mainposting-staking.html" class="post-title">
+        코인 스테이킹이란 무엇인가?
+      </a>
+    </div>
+
+
+   <div class="thumbnail-item">
+      <a href="mainposting-withdraw-notice.html">
+        <img src="img/mainposting-withdraw-notice.webp" loading="lazy" alt="입출금 제한">
+      </a>
+      <a href="mainposting-withdraw-notice.html" class="post-title">
+        코인 입출금시 주의사항은 무엇인가?
+      </a>
+    </div>
+
+
+
+
+  </div>
+  <!-- ✅ 썸네일 리스트형 포스팅 종료 -->
+<br><br>
+   <!-- 코인 관련 정보 시작 -->
+
+    <h2>코인 관련 정보</h2>
+<div style="height: 0.5em;"></div>
+    <div class="body-text">
+코인 초보자를 위한 용어정리 및 주의사항, 이용절차, 가입조건 등을 확인할 수 있습니다.
+    </div>
+    
+<div class="section">
+<div class="icon-grid">
+
+<a href="mainposting-bitcoin.html" style="text-decoration: none; color: inherit;">
+      <div class="icon-item">
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bitcoin-icon lucide-bitcoin"><path d="M11.767 19.089c4.924.868 6.14-6.025 1.216-6.894m-1.216 6.894L5.86 18.047m5.908 1.042-.347 1.97m1.563-8.864c4.924.869 6.14-6.025 1.215-6.893m-1.215 6.893-3.94-.694m5.155-6.2L8.29 4.26m5.908 1.042.348-1.97M7.48 20.364l3.126-17.727"/></svg>
+        <div>비트코인이란?</div>
+      </div></a>
+
+<a href="gimp.html" style="text-decoration: none; color: inherit;">
+      <div class="icon-item">
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-badge-dollar-sign-icon lucide-badge-dollar-sign"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></svg>
+        <div>김프</div>
+      </div></a>
+
+<a href="fundingfees.html" style="text-decoration: none; color: inherit;">
+      <div class="icon-item">
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-banknote-arrow-up-icon lucide-banknote-arrow-up"><path d="M12 18H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5"/><path d="M18 12h.01"/><path d="M19 22v-6"/><path d="m22 19-3-3-3 3"/><path d="M6 12h.01"/><circle cx="12" cy="12" r="2"/></svg>
+        <div>펀딩비</div>
+      </div></a>
+
+<a href="liq.html" style="text-decoration: none; color: inherit;">
+      <div class="icon-item">
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-monitor-x-icon lucide-monitor-x"><path d="m14.5 12.5-5-5"/><path d="m9.5 12.5 5-5"/><rect width="20" height="14" x="2" y="3" rx="2"/><path d="M12 17v4"/><path d="M8 21h8"/></svg>
+        <div>강제청산</div>
+      </div></a>
+
+<a href="travelrule.html" style="text-decoration: none; color: inherit;">
+      <div class="icon-item">
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plane-icon lucide-plane"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg>
+        <div>트래블룰</div>
+      </div></a>
+
+
+<a href="word.html" style="text-decoration: none; color: inherit;">
+      <div class="icon-item">
+ <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-a-icon lucide-book-a"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20"/><path d="m8 13 4-7 4 7"/><path d="M9.1 11h5.7"/></svg>
+        <div>코인용어</div>
+      </div></a>
+
+
+<a href="txlookup.html" style="text-decoration: none; color: inherit;">
+      <div class="icon-item">
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-telescope-icon lucide-telescope"><path d="m10.065 12.493-6.18 1.318a.934.934 0 0 1-1.108-.702l-.537-2.15a1.07 1.07 0 0 1 .691-1.265l13.504-4.44"/><path d="m13.56 11.747 4.332-.924"/><path d="m16 21-3.105-6.21"/><path d="M16.485 5.94a2 2 0 0 1 1.455-2.425l1.09-.272a1 1 0 0 1 1.212.727l1.515 6.06a1 1 0 0 1-.727 1.213l-1.09.272a2 2 0 0 1-2.425-1.455z"/><path d="m6.158 8.633 1.114 4.456"/><path d="m8 21 3.105-6.21"/><circle cx="12" cy="13" r="2"/></svg>
+        <div>TXID 조회</div>
+      </div></a>
+
+
+<a href="point.html" style="text-decoration: none; color: inherit;">
+      <div class="icon-item">
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-boxes-icon lucide-boxes"><path d="M2.97 12.92A2 2 0 0 0 2 14.63v3.24a2 2 0 0 0 .97 1.71l3 1.8a2 2 0 0 0 2.06 0L12 19v-5.5l-5-3-4.03 2.42Z"/><path d="m7 16.5-4.74-2.85"/><path d="m7 16.5 5-3"/><path d="M7 16.5v5.17"/><path d="M12 13.5V19l3.97 2.38a2 2 0 0 0 2.06 0l3-1.8a2 2 0 0 0 .97-1.71v-3.24a2 2 0 0 0-.97-1.71L17 10.5l-5 3Z"/><path d="m17 16.5-5-3"/><path d="m17 16.5 4.74-2.85"/><path d="M17 16.5v5.17"/><path d="M7.97 4.42A2 2 0 0 0 7 6.13v4.37l5 3 5-3V6.13a2 2 0 0 0-.97-1.71l-3-1.8a2 2 0 0 0-2.06 0l-3 1.8Z"/><path d="M12 8 7.26 5.15"/><path d="m12 8 4.74-2.85"/><path d="M12 13.5V8"/></svg>
+        <div>해외거래소 이용절차</div>
+      </div></a>
+
+
+<a href="qna.html" style="text-decoration: none; color: inherit;">
+      <div class="icon-item">
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-question-mark-icon lucide-file-question-mark"><path d="M12 17h.01"/><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/><path d="M9.1 9a3 3 0 0 1 5.82 1c0 2-3 3-3 3"/></svg>
+        <div>자주묻는 질문들</div>
+      </div></a>
+
+
+<a href="notice.html" style="text-decoration: none; color: inherit;">
+      <div class="icon-item">
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-scroll-text-icon lucide-scroll-text"><path d="M15 12h-5"/><path d="M15 8h-5"/><path d="M19 17V5a2 2 0 0 0-2-2H4"/><path d="M8 21h12a2 2 0 0 0 2-2v-1a1 1 0 0 0-1-1H11a1 1 0 0 0-1 1v1a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v2a1 1 0 0 0 1 1h3"/></svg>
+        <div>거래소 공지모음</div>
+      </div></a>
+
+
+<a href="mainposting-auto-trading.html" style="text-decoration: none; color: inherit;">
+      <div class="icon-item">
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-tractor-icon lucide-tractor"><path d="m10 11 11 .9a1 1 0 0 1 .8 1.1l-.665 4.158a1 1 0 0 1-.988.842H20"/><path d="M16 18h-5"/><path d="M18 5a1 1 0 0 0-1 1v5.573"/><path d="M3 4h8.129a1 1 0 0 1 .99.863L13 11.246"/><path d="M4 11V4"/><path d="M7 15h.01"/><path d="M8 10.1V4"/><circle cx="18" cy="18" r="2"/><circle cx="7" cy="15" r="5"/></svg>
+        <div>자동매매</div>
+      </div></a>
+
+
+<a href="bithumb-auto.html" style="text-decoration: none; color: inherit;">
+      <div class="icon-item">
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-brain-circuit-icon lucide-brain-circuit"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M9 13a4.5 4.5 0 0 0 3-4"/><path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"/><path d="M3.477 10.896a4 4 0 0 1 .585-.396"/><path d="M6 18a4 4 0 0 1-1.967-.516"/><path d="M12 13h4"/><path d="M12 18h6a2 2 0 0 1 2 2v1"/><path d="M12 8h8"/><path d="M16 8V5a2 2 0 0 1 2-2"/><circle cx="16" cy="13" r=".5"/><circle cx="18" cy="3" r=".5"/><circle cx="20" cy="21" r=".5"/><circle cx="20" cy="8" r=".5"/></svg>
+        <div>빗썸 오토 트레이딩</div>
+      </div></a>
+
+
+<a href="cal-futuresfees.html" style="text-decoration: none; color: inherit;">
+      <div class="icon-item">
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calculator-icon lucide-calculator"><rect width="16" height="20" x="4" y="2" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="16" x2="16" y1="14" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></svg>
+        <div>선물수수료 계산</div>
+      </div></a>
+
+
+<a href="cal-fundingfees.html" style="text-decoration: none; color: inherit;">
+      <div class="icon-item">
+ <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-radical-icon lucide-square-radical"><path d="M7 12h2l2 5 2-10h4"/><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+        <div>펀딩비 계산</div>
+      </div></a>
+
+<a href="cal-bitcoin.html" style="text-decoration: none; color: inherit;">
+      <div class="icon-item">
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-diamond-plus-icon lucide-diamond-plus"><path d="M12 8v8"/><path d="M2.7 10.3a2.41 2.41 0 0 0 0 3.41l7.59 7.59a2.41 2.41 0 0 0 3.41 0l7.59-7.59a2.41 2.41 0 0 0 0-3.41L13.7 2.71a2.41 2.41 0 0 0-3.41 0z"/><path d="M8 12h8"/></svg>
+        <div>비트코인 계산기</div>
+      </div></a>
+
+
+<div class="icon-item">
+<a href="cal-futuresliq.html" style="text-decoration: none; color: inherit;">
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-siren-icon lucide-siren"><path d="M7 18v-6a5 5 0 1 1 10 0v6"/><path d="M5 21a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-1a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2z"/><path d="M21 12h1"/><path d="M18.5 4.5 18 5"/><path d="M2 12h1"/><path d="M12 2v1"/><path d="m4.929 4.929.707.707"/><path d="M12 12v6"/></svg>
+        <div>청산가 계산기</div>
+</a>      
+</div>
+
+
+<div class="icon-item">
+<a href="cal-koreaprofit.html" style="text-decoration: none; color: inherit;">
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-cannabis-icon lucide-cannabis"><path d="M12 22v-4"/><path d="M7 12c-1.5 0-4.5 1.5-5 3 3.5 1.5 6 1 6 1-1.5 1.5-2 3.5-2 5 2.5 0 4.5-1.5 6-3 1.5 1.5 3.5 3 6 3 0-1.5-.5-3.5-2-5 0 0 2.5.5 6-1-.5-1.5-3.5-3-5-3 1.5-1 4-4 4-6-2.5 0-5.5 1.5-7 3 0-2.5-.5-5-2-7-1.5 2-2 4.5-2 7-1.5-1.5-4.5-3-7-3 0 2 2.5 5 4 6"/></svg>
+        <div>현물 수익률 계산기</div>
+</a>      
+</div>
+
+
+<div class="icon-item">
+<a href="cal-futuresprofit.html" style="text-decoration: none; color: inherit;">
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-crown-icon lucide-crown"><path d="M11.562 3.266a.5.5 0 0 1 .876 0L15.39 8.87a1 1 0 0 0 1.516.294L21.183 5.5a.5.5 0 0 1 .798.519l-2.834 10.246a1 1 0 0 1-.956.734H5.81a1 1 0 0 1-.957-.734L2.02 6.02a.5.5 0 0 1 .798-.519l4.276 3.664a1 1 0 0 0 1.516-.294z"/><path d="M5 21h14"/></svg>
+        <div>선물 수익률 계산기</div>
+</a>      
+</div>
+
+
+        <!-- 추가 거래소는 동일한 구조로 이어서 삽입 -->
+      </div>
+    </div>
+
+    <!-- 코인 관련 정보 종료 -->
+
+
+<div style="text-align: center; margin-top: 30px;">
+ <img src="img/main-02.webp" alt="Luckies" style="max-width: 100%; height: auto;" />
+</div>
+
+<br><br>
+    <!-- 코인 사이트 시작 -->
+
+    <h2>코인 관련 사이트</h2>
+<div style="height: 0.5em;"></div>
+    <div class="body-text">
+코인관련 뉴스와 정보들을 확인할 수 있는 사이트들로 이용하시면 도움이 됩니다.
+    </div>
+
+<div class="section">
+<div class="icon-grid">
+
+<a href="https://coinness.com/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
+      <div class="icon-item">
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-newspaper-icon lucide-newspaper"><path d="M15 18h-5"/><path d="M18 14h-8"/><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-4 0v-9a2 2 0 0 1 2-2h2"/><rect width="8" height="4" x="10" y="6" rx="1"/></svg>
+        <div>코인니스</div>
+      </div></a>
+
+<a href="https://www.coindesk.com/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
+      <div class="icon-item">
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lamp-desk-icon lucide-lamp-desk"><path d="M10.293 2.293a1 1 0 0 1 1.414 0l2.5 2.5 5.994 1.227a1 1 0 0 1 .506 1.687l-7 7a1 1 0 0 1-1.687-.506l-1.227-5.994-2.5-2.5a1 1 0 0 1 0-1.414z"/><path d="m14.207 4.793-3.414 3.414"/><path d="M3 20a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v1a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/><path d="m9.086 6.5-4.793 4.793a1 1 0 0 0-.18 1.17L7 18"/></svg>
+        <div>코인데스크</div>
+      </div></a>
+
+<a href="https://xangle.io/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
+     <div class="icon-item">
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-flower-icon lucide-flower"><circle cx="12" cy="12" r="3"/><path d="M12 16.5A4.5 4.5 0 1 1 7.5 12 4.5 4.5 0 1 1 12 7.5a4.5 4.5 0 1 1 4.5 4.5 4.5 4.5 0 1 1-4.5 4.5"/><path d="M12 7.5V9"/><path d="M7.5 12H9"/><path d="M16.5 12H15"/><path d="M12 16.5V15"/><path d="m8 8 1.88 1.88"/><path d="M14.12 9.88 16 8"/><path d="m8 16 1.88-1.88"/><path d="M14.12 14.12 16 16"/></svg>
+        <div>쟁글</div>
+      </div></a>
+
+<a href="https://coinpan.com/coin_news" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
+     <div class="icon-item">
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users-icon lucide-users"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><path d="M16 3.128a4 4 0 0 1 0 7.744"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="9" cy="7" r="4"/></svg>
+        <div>코인판</div>
+      </div></a>
+
+<a href="https://kimpbot.com/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
+     <div class="icon-item">
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bot-message-square-icon lucide-bot-message-square"><path d="M12 6V2H8"/><path d="m8 18-4 4V8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2Z"/><path d="M2 12h2"/><path d="M9 11v2"/><path d="M15 11v2"/><path d="M20 12h2"/></svg>
+        <div>김프봇</div>
+      </div></a>
+
+<a href="https://coinmarketcap.com/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
+<div class="icon-item">
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-store-icon lucide-store"><path d="m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7"/><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4"/><path d="M2 7h20"/><path d="M22 7v3a2 2 0 0 1-2 2a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 16 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 12 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 8 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 4 12a2 2 0 0 1-2-2V7"/></svg>
+        <div>코인마켓캡</div>
+      </div></a>
+
+<a href="https://kr.tradingview.com/?aff_id=13709&offer_id=10" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
+<div class="icon-item">
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chart-candlestick-icon lucide-chart-candlestick"><path d="M9 5v4"/><rect width="4" height="6" x="7" y="9" rx="1"/><path d="M9 15v2"/><path d="M17 3v2"/><rect width="4" height="8" x="15" y="5" rx="1"/><path d="M17 13v3"/><path d="M3 3v16a2 2 0 0 0 2 2h16"/></svg>
+        <div>트래이딩뷰</div>
+      </div></a>
+
+<a href="https://www.tokenpost.kr/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
+<div class="icon-item">
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-type-icon lucide-file-type"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M9 13v-1h6v1"/><path d="M12 12v6"/><path d="M11 18h2"/></svg>
+        <div>토큰포스트</div>
+      </div></a>
+
+<a href="https://app.uniswap.org/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
+<div class="icon-item">
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-replace-icon lucide-replace"><path d="M14 4a2 2 0 0 1 2-2"/><path d="M16 10a2 2 0 0 1-2-2"/><path d="M20 2a2 2 0 0 1 2 2"/><path d="M22 8a2 2 0 0 1-2 2"/><path d="m3 7 3 3 3-3"/><path d="M6 10V5a3 3 0 0 1 3-3h1"/><rect x="2" y="14" width="8" height="8" rx="2"/></svg>
+        <div>유니스왑</div>
+      </div></a>
+
+<a href="https://kr.investing.com/crypto" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
+<div class="icon-item">
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-building-icon lucide-building"><rect width="16" height="20" x="4" y="2" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></svg>
+        <div>인베스팅닷컴</div>
+      </div></a>
+
+<a href="https://cryptoquant.com/ko/asset/btc/summary" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
+<div class="icon-item">
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-creative-commons-icon lucide-creative-commons"><circle cx="12" cy="12" r="10"/><path d="M10 9.3a2.8 2.8 0 0 0-3.5 1 3.1 3.1 0 0 0 0 3.4 2.7 2.7 0 0 0 3.5 1"/><path d="M17 9.3a2.8 2.8 0 0 0-3.5 1 3.1 3.1 0 0 0 0 3.4 2.7 2.7 0 0 0 3.5 1"/></svg>
+        <div>크립토퀀트</div>
+      </div></a>
+
+
+<a href="https://whale-alert.io/" style="text-decoration: none; color: inherit;" target="_blank">
+      <div class="icon-item">
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-fish-icon lucide-fish"><path d="M6.5 12c.94-3.46 4.94-6 8.5-6 3.56 0 6.06 2.54 7 6-.94 3.47-3.44 6-7 6s-7.56-2.53-8.5-6Z"/><path d="M18 12v.5"/><path d="M16 17.93a9.77 9.77 0 0 1 0-11.86"/><path d="M7 10.67C7 8 5.58 5.97 2.73 5.5c-1 1.5-1 5 .23 6.5-1.24 1.5-1.24 5-.23 6.5C5.58 18.03 7 16 7 13.33"/><path d="M10.46 7.26C10.2 5.88 9.17 4.24 8 3h5.8a2 2 0 0 1 1.98 1.67l.23 1.4"/><path d="m16.01 17.93-.23 1.4A2 2 0 0 1 13.8 21H9.5a5.96 5.96 0 0 0 1.49-3.98"/></svg>
+        <div>Whale Alert</div>
+      </div></a>
+
+
+<a href="https://www.coinglass.com/ko/BitcoinOpenInterest" style="text-decoration: none; color: inherit;" target="_blank">
+      <div class="icon-item">
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-package-open-icon lucide-package-open"><path d="M12 22v-9"/><path d="M15.17 2.21a1.67 1.67 0 0 1 1.63 0L21 4.57a1.93 1.93 0 0 1 0 3.36L8.82 14.79a1.655 1.655 0 0 1-1.64 0L3 12.43a1.93 1.93 0 0 1 0-3.36z"/><path d="M20 13v3.87a2.06 2.06 0 0 1-1.11 1.83l-6 3.08a1.93 1.93 0 0 1-1.78 0l-6-3.08A2.06 2.06 0 0 1 4 16.87V13"/><path d="M21 12.43a1.93 1.93 0 0 0 0-3.36L8.83 2.2a1.64 1.64 0 0 0-1.63 0L3 4.57a1.93 1.93 0 0 0 0 3.36l12.18 6.86a1.636 1.636 0 0 0 1.63 0z"/></svg>
+        <div>미결제약정</div>
+      </div></a>
+
+
+<a href="https://www.coinglass.com/ko/pro/futures/LiquidationHeatMap" style="text-decoration: none; color: inherit;" target="_blank">
+      <div class="icon-item">
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shield-x-icon lucide-shield-x"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m14.5 9.5-5 5"/><path d="m9.5 9.5 5 5"/></svg>
+        <div>청산히트맵</div>
+      </div></a>
+
+
+<a href="https://polymarket.com/" style="text-decoration: none; color: inherit;" target="_blank">
+      <div class="icon-item">
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-m-icon lucide-square-m"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M8 16V8l4 4 4-4v8"/></svg>
+        <div>Polymarket</div>
+      </div></a>
+
+
+<a href="https://www.coinglass.com/ko" style="text-decoration: none; color: inherit;" target="_blank">
+      <div class="icon-item">
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-glasses-icon lucide-glasses"><circle cx="6" cy="15" r="4"/><circle cx="18" cy="15" r="4"/><path d="M14 15a2 2 0 0 0-2-2 2 2 0 0 0-2 2"/><path d="M2.5 13 5 7c.7-1.3 1.4-2 3-2"/><path d="M21.5 13 19 7c-.7-1.3-1.5-2-3-2"/></svg>
+        <div>CoinGlass</div>
+      </div></a>
+
+
+<a href="https://www.coingecko.com/" style="text-decoration: none; color: inherit;" target="_blank">
+      <div class="icon-item">
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-worm-icon lucide-worm"><path d="m19 12-1.5 3"/><path d="M19.63 18.81 22 20"/><path d="M6.47 8.23a1.68 1.68 0 0 1 2.44 1.93l-.64 2.08a6.76 6.76 0 0 0 10.16 7.67l.42-.27a1 1 0 1 0-2.73-4.21l-.42.27a1.76 1.76 0 0 1-2.63-1.99l.64-2.08A6.66 6.66 0 0 0 3.94 3.9l-.7.4a1 1 0 1 0 2.55 4.34z"/></svg>
+        <div>코인게코</div>
+      </div></a>
+
+
+<a href="https://metamask.io/ko" style="text-decoration: none; color: inherit;" target="_blank">
+      <div class="icon-item">
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-squirrel-icon lucide-squirrel"><path d="M15.236 22a3 3 0 0 0-2.2-5"/><path d="M16 20a3 3 0 0 1 3-3h1a2 2 0 0 0 2-2v-2a4 4 0 0 0-4-4V4"/><path d="M18 13h.01"/><path d="M18 6a4 4 0 0 0-4 4 7 7 0 0 0-7 7c0-5 4-5 4-10.5a4.5 4.5 0 1 0-9 0 2.5 2.5 0 0 0 5 0C7 10 3 11 3 17c0 2.8 2.2 5 5 5h10"/></svg>
+        <div>메타마스크</div>
+      </div></a>
+
+        <!-- 추가 거래소는 동일한 구조로 이어서 삽입 -->
+      </div>
+    </div>
+
+<div style="text-align: center; margin-top: 30px;">
+ <img src="img/main-03.webp" alt="Site" style="max-width: 100%; height: auto;" />
+</div>
+
+<br><br>
+    <!-- 코인 사이트 종료 -->
+
+
+
+
+   <h2>돈이 되는 에어드랍 정보</h2>
+<div style="height: 0.5em;"></div>
+    <div class="body-text">
+휴대폰을 이용한 무료 코인 채굴, 무료 에어드랍, 돈이 되는 앱테크 등의 정보를 제공합니다.
+    </div>
+<div class="section">
+<div class="icon-grid">
+
+<a href="bitbunny.html" style="text-decoration: none; color: inherit;">     
+ <div class="icon-item">
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-rabbit-icon lucide-rabbit"><path d="M13 16a3 3 0 0 1 2.24 5"/><path d="M18 12h.01"/><path d="M18 21h-8a4 4 0 0 1-4-4 7 7 0 0 1 7-7h.2L9.6 6.4a1 1 0 1 1 2.8-2.8L15.8 7h.2c3.3 0 6 2.7 6 6v1a2 2 0 0 1-2 2h-1a3 3 0 0 0-3 3"/><path d="M20 8.54V4a2 2 0 1 0-4 0v3"/><path d="M7.612 12.524a3 3 0 1 0-1.6 4.3"/></svg>
+        <div>비트버니</div>
+      </div></a>
+
+<a href="luckies.html" style="text-decoration: none; color: inherit;">
+      <div class="icon-item">
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clover-icon lucide-clover"><path d="M16.17 7.83 2 22"/><path d="M4.02 12a2.827 2.827 0 1 1 3.81-4.17A2.827 2.827 0 1 1 12 4.02a2.827 2.827 0 1 1 4.17 3.81A2.827 2.827 0 1 1 19.98 12a2.827 2.827 0 1 1-3.81 4.17A2.827 2.827 0 1 1 12 19.98a2.827 2.827 0 1 1-4.17-3.81A1 1 0 1 1 4 12"/><path d="m7.83 7.83 8.34 8.34"/></svg>
+        <div>럭키즈</div>
+      </div></a>
+
+</div>
+</div>
+
+
+<div style="text-align: center; margin-top: 30px;">
+  <a href="https://link.lucki.es/d53z0d?invite_code=L6LRT" target="_blank">
+    <img src="img/luckies.webp" alt="Luckies" style="max-width: 100%; height: auto;" />
+  </a>
+</div>
+
+<br><br><br>
+
+<div class="note">
+* 가상자산은 고위험 상품으로 투자금의 전부 또는 일부 손실을 초래할 수 있습니다. 가상자산 거래시에는 가격 변동에 따른 원금 손실 위험이 있다는 점을 반드시 고려해 주시기 바랍니다. 파트너스 활동을 통해 일정액의 수수료를 제공받을 수 있습니다.
+</div>
+
+</body>
+</html>

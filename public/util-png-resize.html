@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PNG 이미지 압축</title>
+
+ <!-- ✅ SEO 및 Open Graph + Twitter 메타태그 -->
+<meta name="title" content="PNG 이미지 압축" />
+<meta name="description" content="용량이 큰 PNG 이미지를 빠르게 압축하고 미리보기와 ZIP 다운로드 기능을 지원합니다." />
+<meta name="keywords" content="PNG 압축, 이미지 최적화, PNG 줄이기, 이미지 용량 감소, PNG 용량 축소, PNG 웹 최적화" />
+<meta name="author" content="CoinSea" />
+<meta name="robots" content="index, follow" />
+
+<!-- ✅ Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="PNG 이미지 압축" />
+<meta property="og:description" content="용량이 큰 PNG 파일을 쉽고 빠르게 압축해보세요. ZIP으로도 저장 가능!" />
+<meta property="og:url" content="https://coinsea.co.kr/util-png-resize.html" />
+<meta property="og:image" content="https://coinsea.co.kr/img/og-util-png-resize.webp" />
+<meta property="og:site_name" content="코인씨" />
+<meta property="og:locale" content="ko_KR" />
+
+<!-- ✅ Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="PNG 이미지 압축" />
+<meta name="twitter:description" content="이미지 미리보기, 압축 다운로드까지 가능한 PNG 이미지 최적화 도구입니다." />
+<meta name="twitter:image" content="https://coinsea.co.kr/img/og-util-png-resize.webp" />
+
+
+<!-- ✅ Google Fonts 최적화 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet"></noscript>
+
+<!-- ✅ Font Awesome 최적화 -->
+<link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"></noscript>
+
+
+<!-- 가장 일반적인 파비콘 -->
+<link rel="icon" href="/favicon.ico" />
+
+<!-- 고해상도 디바이스 대응 -->
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon/android-icon-192x192.png" />
+
+<!-- 애플 터치용 최소 하나 -->
+<link rel="apple-touch-icon" href="/favicon/apple-icon-180x180.png" />
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
+
+  <style>
+    body {
+      font-family: 'Nanum Gothic', sans-serif;
+      text-align: center;
+      padding: 30px;
+      background-color: #ffffff;
+    }
+    h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    input[type="file"] {
+      margin-bottom: 20px;
+    }
+    .drop-zone {
+      border: 2px dashed #888;
+      padding: 40px;
+      margin: 20px 0;
+      background-color: #fafafa;
+      cursor: pointer;
+    }
+    .drop-zone.dragover {
+      background-color: #e0f7fa;
+    }
+    #downloadAllBtn {
+      margin-top: 20px;
+      display: none;
+      font-size: 16px;
+      font-weight: bold;
+      padding: 10px 20px;
+      background-color: #009688;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .preview-box {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+    .preview-item {
+      background: #fff;
+      border: 1px solid #ccc;
+      padding: 10px;
+      width: 200px;
+    }
+    .preview-item img {
+      max-width: 100%;
+    }
+
+    .wrapper {
+      border: 1px solid #ccc;
+      padding: 30px;
+      margin: 0 auto;
+      max-width: 960px;
+      box-sizing: border-box;
+    }
+  .content-wrapper {
+  max-width: 800px;       /* 최대 너비 설정 */
+  margin: 0 auto;         /* 가운데 정렬 */
+  padding: 0px;
+  text-align: left;       /* 내용은 좌측 정렬 */
+    }
+
+  </style>
+</head>
+<body>
+<div class="content-wrapper"> <!-- ■ 전체를 감싸는 DIV 시작 -->
+
+<div class="wrapper">
+  <h1>PNG 이미지 압축</h1>
+  <input type="file" id="fileInput" accept="image/png" multiple />
+  <div class="drop-zone" id="dropZone">여기로 PNG 이미지를 드래그하세요</div>
+  <div class="preview-box" id="previewBox"></div>
+  <button id="downloadAllBtn">압축된 이미지 ZIP 다운로드</button>
+</div>
+
+<canvas id="canvas" style="display: none;"></canvas>
+
+<script>
+  const fileInput = document.getElementById("fileInput");
+  const dropZone = document.getElementById("dropZone");
+  const previewBox = document.getElementById("previewBox");
+  const downloadAllBtn = document.getElementById("downloadAllBtn");
+  const canvas = document.getElementById("canvas");
+  const ctx = canvas.getContext("2d");
+
+  const zip = new JSZip();
+
+  function processFile(file, totalFiles, onProcessed) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      const img = new Image();
+      img.onload = function () {
+        canvas.width = img.width;
+        canvas.height = img.height;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0);
+
+        canvas.toBlob(blob => {
+          const fileName = file.name;
+
+          // 미리보기
+          const url = URL.createObjectURL(blob);
+          const item = document.createElement("div");
+          item.className = "preview-item";
+          const image = document.createElement("img");
+          image.src = url;
+          item.appendChild(image);
+          previewBox.appendChild(item);
+
+          // 1개일 경우: 직접 다운로드
+          if (totalFiles === 1) {
+            const link = document.createElement("a");
+            link.href = url;
+            link.download = fileName;
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+          } else {
+            // ZIP에 추가
+            zip.file(fileName, blob);
+            onProcessed();
+          }
+        }, "image/png", 0.8);
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function handleFiles(files) {
+    previewBox.innerHTML = "";
+    const validFiles = [...files].filter(file => file.type === "image/png");
+
+    if (validFiles.length === 0) return;
+
+    downloadAllBtn.style.display = "none";
+    zip.files = {}; // 기존 zip 초기화
+
+    if (validFiles.length === 1) {
+      processFile(validFiles[0], 1);
+    } else {
+      let processedCount = 0;
+      validFiles.forEach(file => {
+        processFile(file, validFiles.length, () => {
+          processedCount++;
+          if (processedCount === validFiles.length) {
+            downloadAllBtn.style.display = "inline-block";
+          }
+        });
+      });
+    }
+  }
+
+  fileInput.addEventListener("change", e => {
+    handleFiles(e.target.files);
+  });
+
+  dropZone.addEventListener("dragover", e => {
+    e.preventDefault();
+    dropZone.classList.add("dragover");
+  });
+
+  dropZone.addEventListener("dragleave", () => {
+    dropZone.classList.remove("dragover");
+  });
+
+  dropZone.addEventListener("drop", e => {
+    e.preventDefault();
+    dropZone.classList.remove("dragover");
+    handleFiles(e.dataTransfer.files);
+  });
+
+  downloadAllBtn.addEventListener("click", () => {
+    zip.generateAsync({ type: "blob" }).then(content => {
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(content);
+      link.download = "compressed_png_images.zip";
+      link.click();
+    });
+  });
+</script>
+
+</div> <!-- ■ 전체를 감싸는 DIV 종료 -->
+</body>
+</html>

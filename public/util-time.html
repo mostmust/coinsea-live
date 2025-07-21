@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UTC 계산기↗코인씨</title>
+
+<!-- ✅ SEO 및 Open Graph + Twitter 메타태그 -->
+<meta name="title" content="UTC 계산기 - 한국 시간 변환기" />
+<meta name="description" content="UTC(협정 세계시)와 한국 시간(KST)을 손쉽게 상호 변환할 수 있는 도구입니다. 시간대 계산을 빠르게 확인하세요." />
+<meta name="keywords" content="UTC 계산기, KST 변환기, 시간 변환, 세계 시간, 한국 시간, UTC to KST, KST to UTC" />
+<meta name="author" content="CoinSea" />
+<meta name="robots" content="index, follow" />
+
+<!-- ✅ Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="UTC 계산기 - 한국 시간 변환기" />
+<meta property="og:description" content="UTC와 한국 시간(KST)을 빠르게 변환하는 간편한 시간 계산 도구입니다." />
+<meta property="og:url" content="https://coinsea.co.kr/util-time.html" />
+<meta property="og:image" content="https://coinsea.co.kr/img/og-util-time.webp" />
+<meta property="og:site_name" content="코인씨" />
+<meta property="og:locale" content="ko_KR" />
+
+<!-- ✅ Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="UTC 계산기 - 한국 시간 변환기" />
+<meta name="twitter:description" content="UTC 기준 시간을 KST로, KST를 UTC로 변환하세요. 거래소 시간 확인용으로 유용합니다." />
+<meta name="twitter:image" content="https://coinsea.co.kr/img/og-util-time.webp" />
+
+
+
+<!-- ✅ Google Fonts 최적화 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet"></noscript>
+
+<!-- ✅ Font Awesome 최적화 -->
+<link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"></noscript>
+
+
+<!-- 가장 일반적인 파비콘 -->
+<link rel="icon" href="/favicon.ico" />
+
+<!-- 고해상도 디바이스 대응 -->
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon/android-icon-192x192.png" />
+
+<!-- 애플 터치용 최소 하나 -->
+<link rel="apple-touch-icon" href="/favicon/apple-icon-180x180.png" />
+
+
+<style>
+body {
+           font-family: 'Nanum Gothic', sans-serif;
+            margin: 20px;
+        }
+        .utc-to-kst {
+            max-width: 420px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .kst-to-utc {
+            max-width: 420px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+.coupang-banner-wrapper {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.coupang-banner-wrapper iframe,
+.coupang-banner-wrapper div {
+  max-width: 100% !important;
+  height: auto !important;
+}
+  .content-wrapper {
+  max-width: 800px;       /* 최대 너비 설정 */
+  margin: 0 auto;         /* 가운데 정렬 */
+  padding: 0px;
+  text-align: left;       /* 내용은 좌측 정렬 */
+    }
+
+    </style>
+</head>
+<body>
+<div class="content-wrapper"> <!-- ■ 전체를 감싸는 DIV 시작 -->
+
+    <div class="utc-to-kst">
+        <h1><font face="나눔스퀘어">UTC 시간 ▶ 한국 시간</font></h1>
+<font face="나눔스퀘어"><label for="utcToKorean">UTC 시간 입력 (시간 선택) :  </label>
+        <input type="time" id="utcToKorean" required>
+<button onclick="convertToKoreanTime()">변환</button>
+</font>        <h2><font face="나눔스퀘어">한국 시간:</font></h2>
+        <p id="koreanTime" class="result"><font face="나눔스퀘어"></font></p>
+    </div>
+
+
+<br>
+
+    <div class="kst-to-utc">
+        <h1><font face="나눔스퀘어">한국 시간 ▶ UTC 시간</font></h1>
+    <p><font face="나눔스퀘어"><label for="koreanToUtc">한국 시간 입력 (시간 선택) : </label>
+        <input type="time" id="koreanToUtc" required>
+<button onclick="convertToUtcTime()">변환</button>
+</font></p>
+        <h2><font face="나눔스퀘어">UTC 시간:</font></h2>
+        <p id="utcTime" class="result"><font face="나눔스퀘어"></font></p>
+    </div>
+	
+<font face="나눔스퀘어">    <script>
+        function convertToKoreanTime() {
+            const utcTimeInput = document.getElementById('utcToKorean').value;
+            if (!utcTimeInput) {
+                alert("UTC 시간을 입력하세요.");
+                return;
+            }
+
+            const [utcHours, utcMinutes] = utcTimeInput.split(':').map(Number);
+            let koreanHours = utcHours + 9;
+            let koreanMinutes = utcMinutes;
+
+            if (koreanHours >= 24) {
+                koreanHours -= 24;
+            }
+
+            const koreanTimeString = `${String(koreanHours).padStart(2, '0')}:${String(koreanMinutes).padStart(2, '0')}`;
+            document.getElementById('koreanTime').textContent = koreanTimeString;
+        }
+
+        function convertToUtcTime() {
+            const koreanTimeInput = document.getElementById('koreanToUtc').value;
+            if (!koreanTimeInput) {
+                alert("한국 시간을 입력하세요.");
+                return;
+            }
+
+            const [koreanHours, koreanMinutes] = koreanTimeInput.split(':').map(Number);
+            let utcHours = koreanHours - 9;
+            let utcMinutes = koreanMinutes;
+
+            if (utcHours < 0) {
+                utcHours += 24;
+            }
+
+            const utcTimeString = `${String(utcHours).padStart(2, '0')}:${String(utcMinutes).padStart(2, '0')}`;
+            document.getElementById('utcTime').textContent = utcTimeString;
+        }
+    </script>
+</font>
+
+
+</div> <!-- ■ 전체를 감싸는 DIV 종료 -->	
+</body>
+</html>

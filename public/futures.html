@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<!-- ✅ 기본 SEO용 메타태그 -->
+<meta name="title" content="코인 선물거래 따라하기 | 거래소별 실전 가이드">
+<meta name="description" content="바이비트, 바이낸스, 비트겟 등 주요 거래소에서 선물거래를 시작하는 방법을 단계별로 따라해 보세요. 수수료 할인코드와 실전 예시까지 포함된 가이드입니다.">
+<meta name="keywords" content="선물거래, 코인 선물, 바이비트, 바이낸스, 비트겟, OKX, MEXC, HTX, 빙엑스, 코인 거래소, 수수료 할인코드, 암호화폐 선물">
+<meta name="author" content="CoinSea">
+
+<!-- ✅ Open Graph (카카오톡, 네이버 블로그, 페이스북 등) -->
+<meta property="og:title" content="코인 선물거래 따라하기 | 거래소별 실전 가이드" />
+<meta property="og:description" content="바이비트, 바이낸스, 비트겟 등 주요 거래소에서 선물거래를 시작하는 방법을 단계별로 따라해 보세요. 수수료 할인코드와 실전 예시 포함!" />
+<meta property="og:image" content="https://coinsea.co.kr/img/og-futures.webp" />
+<meta property="og:url" content="https://coinsea.co.kr/futures.html" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="ko_KR" />
+
+<!-- ✅ Twitter Card 미리보기 -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="코인 선물거래 따라하기 | 주요 거래소 가이드" />
+<meta name="twitter:description" content="수수료 할인코드와 함께 거래소별 가입부터 실전 거래까지 쉽게 따라하는 선물거래 가이드입니다." />
+<meta name="twitter:image" content="https://coinsea.co.kr/img/og-futures.webp" />
+
+
+  <title>코인 선물거래 따라하기 | 주요 거래소 가이드</title>
+
+<!-- ✅ Google Fonts 최적화 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet"></noscript>
+
+<!-- ✅ Font Awesome 최적화 -->
+<link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"></noscript>
+
+
+ <!-- 가장 일반적인 파비콘 -->
+<link rel="icon" href="/favicon.ico" />
+
+<!-- 고해상도 디바이스 대응 -->
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon/android-icon-192x192.png" />
+
+<!-- 애플 터치용 최소 하나 -->
+<link rel="apple-touch-icon" href="/favicon/apple-icon-180x180.png" />
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      font-family: 'Nanum Gothic', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      background-color: #fff;
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    .main-title {
+      font-size: 26px;
+      font-weight: bold;
+      margin-bottom: 25px;
+      position: relative;
+      display: inline-block;
+      z-index: 0;
+    }
+
+    .main-title::after {
+      content: '';
+      position: absolute;
+      left: -7.5%;
+      right: -7.5%;
+      bottom: 1px;
+      height: 39%;
+      background-color: #f8cf26;
+      z-index: -1;
+    }
+
+     .content-wrapper {
+  max-width: 800px;       /* 최대 너비 설정 */
+  margin: 0 auto;         /* 가운데 정렬 */
+  padding: 20px;
+  text-align: left;       /* 내용은 좌측 정렬 */
+    }
+
+    .body-text { font-size: 16px; margin-bottom: 15px; }
+    .note { font-size: 14px; color: #555; }
+
+    .exchange-section {
+      background: #fff;
+      border: 1px solid #ababab;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      box-shadow: none;
+    }
+
+    .exchange-header {
+      padding: 15px 18px;
+      font-size: 17px;
+      font-weight: bold;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .exchange-header:hover { background-color: #f1f1f1; }
+    .exchange-content { display: none; padding: 15px 18px; }
+    .exchange-code {
+      background: #f2f2f2;
+      padding: 8px 12px;
+      margin-bottom: 12px;
+      border-left: 4px solid #009688;
+      color: #333;
+      font-size: 15px;
+    }
+
+    .steps-list {
+      list-style: none;
+      padding: 0;
+      margin-top: 10px;
+    }
+
+    .steps-list li {
+      display: flex;
+      align-items: center;
+      background-color: #f9f9f9;
+      padding: 10px 14px;
+      border-radius: 6px;
+      margin-bottom: 8px;
+      transition: background-color 0.2s ease, transform 0.1s ease;
+    }
+
+    .steps-list li:hover { background-color: #fff9cc; }
+    .steps-list li:active { background-color: #fff176; transform: scale(0.97); }
+    .steps-list li .number { font-weight: bold; margin-right: 10px; color: #546382; width: 24px; text-align: right; }
+    .steps-list li .text { flex: 1; }
+
+    .arrow { transition: transform 0.3s ease; font-size: 18px; }
+    .arrow.open { transform: rotate(90deg); }
+
+    .coupang-banner-wrapper {
+      width: 100%; max-width: 100%; overflow-x: auto;
+      display: flex; justify-content: center; margin-top: 30px;
+    }
+    .coupang-banner-wrapper iframe,
+    .coupang-banner-wrapper div {
+      max-width: 100% !important; height: auto !important;
+    }
+.steps-list li a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+  width: 100%;
+  height: 100%;
+}
+
+  </style>
+</head>
+<body>
+  <div class="content-wrapper">
+    <div class="main-title">코인 선물거래 방법</div>
+    <div class="body-text">거래소 이름을 클릭하시면 하단에 이용방법이 나타납니다. 수수료 할인코드를 이용해서 가입하시면 거래수수료가 할인되니 참고하시기 바랍니다.</div>
+<br>
+    <!-- 예시: 바이비트 -->
+    <div class="exchange-section">
+      <div class="exchange-header" onclick="toggleContent(this)">바이비트 선물거래 방법(앱)<span class="arrow">▶</span></div>
+      <div class="exchange-content">
+        <div class="exchange-code">바이비트 수수료 할인코드: <strong>74282</strong></div>
+        <ol class="steps-list">
+          <li><a href="https://blog.naver.com/coinjob/223147811226" target="_blank"><span class="number">1.</span><span class="text">회원가입 따라하기</span></a></li>
+          <li><a href="https://blog.naver.com/coinjob/223151353994" target="_blank"><span class="number">2.</span><span class="text">KYC 신분인증 따라하기</span></a></li>
+          <li><a href="https://blog.naver.com/coinjob/223766375902" target="_blank"><span class="number">3.</span><span class="text">출금주소 등록 따라하기</span></a></li>
+          <li><a href="https://blog.naver.com/coinjob/223596294438" target="_blank"><span class="number">4.</span><span class="text">USDT 입금 따라하기</span></a></li>
+          <li><a href="https://blog.naver.com/coinjob/223158975742" target="_blank"><span class="number">5.</span><span class="text">거래 메뉴 살펴보기</span></a></li>
+          <li><a href="https://blog.naver.com/coinjob/223151388997" target="_blank"><span class="number">6.</span><span class="text">실전 선물거래 따라하기</span></a></li>
+          <li><a href="https://blog.naver.com/coinjob/223596297389" target="_blank"><span class="number">7.</span><span class="text">USDT 출금 따라하기</span></a></li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- 추가 거래소는 동일한 구조로 복사해서 id, 이름, 내용만 바꾸면 됩니다 -->
+  <!-- 예시: 바이낸스 -->
+  <div id="binance" class="exchange-section">
+    <div class="exchange-header" onclick="toggleContent(this)">
+      바이낸스 선물거래 방법(앱)
+      <span class="arrow">▶</span>
+    </div>
+    <div class="exchange-content">
+      <div class="exchange-code">바이낸스 수수료 할인코드: <strong>66413748</strong></div>
+      <ol class="steps-list">
+        <li><a href="https://blog.naver.com/coinjob/223357701993" target="_blank"><span class="number">1.</span><span class="text">회원가입 따라하기</span></a></li>
+        <li><a href="https://blog.naver.com/coinjob/223358249915" target="_blank"><span class="number">2.</span><span class="text">KYC 신분인증 따라하기</span></a></li>
+        <li><a href="https://blog.naver.com/coinjob/223441421957" target="_blank"><span class="number">3.</span><span class="text">선물거래 활성화하기</span></a></li>
+        <li><a href="https://blog.naver.com/coinjob/223766388899" target="_blank"><span class="number">4.</span><span class="text">출금주소 등록 따라하기</span></a></li>
+        <li><a href="https://blog.naver.com/coinjob/223609327517" target="_blank"><span class="number">5.</span><span class="text">USDT 입금 따라하기</span></a></li>
+        <li><a href="https://blog.naver.com/coinjob/223152371256" target="_blank"><span class="number">6.</span><span class="text">거래 메뉴 살펴보기</span></a></li>
+        <li><a href="https://blog.naver.com/coinjob/223152372710" target="_blank"><span class="number">7.</span><span class="text">실전 선물거래 따라하기</span></a></li>
+        <li><a href="https://blog.naver.com/coinjob/223609636552" target="_blank"><span class="number">8.</span><span class="text">USDT 출금 따라하기</span></a></li>
+      </ol>
+    </div>
+  </div>
+
+   <div id="bitget" class="exchange-section">
+    <div class="exchange-header" onclick="toggleContent(this)">
+      비트겟 선물거래 방법(앱)
+      <span class="arrow">▶</span>
+    </div>
+    <div class="exchange-content">
+    <div class="exchange-code">비트겟 수수료 할인코드: <strong>ZQ7JAY</strong></div>
+    <ol class="steps-list">
+      <li><a href="https://blog.naver.com/coinjob/223150932757" target="_blank"><span class="number">1.</span><span class="text">회원가입 따라하기</span></a></li>
+      <li><a href="https://blog.naver.com/coinjob/223151132990" target="_blank"><span class="number">2.</span><span class="text">KYC 신분인증 따라하기</span></a></li>
+      <li><a href="https://blog.naver.com/coinjob/223766403185" target="_blank"><span class="number">3.</span><span class="text">출금주소 등록 따라하기</span></a></li>
+      <li><a href="https://blog.naver.com/coinjob/223600979768" target="_blank"><span class="number">4.</span><span class="text">USDT 입금 따라하기</span></a></li>
+      <li><a href="https://blog.naver.com/coinjob/223151188330" target="_blank"><span class="number">5.</span><span class="text">거래 메뉴 살펴보기</span></a></li>
+      <li><a href="https://blog.naver.com/coinjob/223151236038" target="_blank"><span class="number">6.</span><span class="text">실전 선물거래 따라하기</span></a></li>
+      <li><a href="https://blog.naver.com/coinjob/223600981007" target="_blank"><span class="number">7.</span><span class="text">USDT 출금 따라하기</span></a></li>
+    </ol>
+  </div>
+  </div>
+
+
+  <div id="okx" class="exchange-section">
+    <div class="exchange-header" onclick="toggleContent(this)">
+      OKX 선물거래 방법(앱)
+      <span class="arrow">▶</span>
+    </div>
+    <div class="exchange-content">
+    <div class="exchange-code">OKX 수수료 할인코드: <strong>CODE2030</strong></div>
+    <ol class="steps-list">
+      <li><a href="https://blog.naver.com/coinjob/223153283801" target="_blank"><span class="number">1.</span><span class="text">회원가입 따라하기</span></a></li>
+      <li><a href="https://blog.naver.com/coinjob/223153434986" target="_blank"><span class="number">2.</span><span class="text">KYC 신분인증 따라하기</span></a></li>
+      <li><a href="https://blog.naver.com/coinjob/223765274077" target="_blank"><span class="number">3.</span><span class="text">출금주소 등록 따라하기</span></a></li>
+      <li><a href="https://blog.naver.com/coinjob/223765489305" target="_blank"><span class="number">4.</span><span class="text">USDT 입금 따라하기</span></a></li>
+      <li><a href="https://blog.naver.com/coinjob/223154609604" target="_blank"><span class="number">5.</span><span class="text">거래 메뉴 살펴보기</span></a></li>
+      <li><a href="https://blog.naver.com/coinjob/223154610040" target="_blank"><span class="number">6.</span><span class="text">실전 선물거래 따라하기</span></a></li>
+      <li><a href="https://blog.naver.com/coinjob/223766714848" target="_blank"><span class="number">7.</span><span class="text">USDT 출금 따라하기</span></a></li>
+    </ol>
+  </div>
+  </div>
+
+
+  <div id="bingx" class="exchange-section">
+    <div class="exchange-header" onclick="toggleContent(this)">
+      빙엑스 선물거래 방법(앱)
+      <span class="arrow">▶</span>
+    </div>
+    <div class="exchange-content">
+    <div class="exchange-code">빙엑스 수수료 할인코드: <strong>VQU2ABROR</strong></div>
+    <ol class="steps-list">
+      <li><a href="https://blog.naver.com/coinjob/223341330804" target="_blank"><span class="number">1.</span><span class="text">회원가입 따라하기</span></a></li>
+      <li><a href="https://blog.naver.com/coinjob/223341382370" target="_blank"><span class="number">2.</span><span class="text">KYC 신분인증 따라하기</span></a></li>
+      <li><a href="https://blog.naver.com/coinjob/223863589328" target="_blank"><span class="number">3.</span><span class="text">출금주소 등록 따라하기</span></a></li>
+      <li><a href="https://blog.naver.com/coinjob/223863626863" target="_blank"><span class="number">4.</span><span class="text">USDT 입금 따라하기</span></a></li>
+      <li><a href="https://blog.naver.com/coinjob/223348512162" target="_blank"><span class="number">5.</span><span class="text">각종 설정 따라하기</span></a></li>
+      <li><a href="https://blog.naver.com/coinjob/223347655868" target="_blank"><span class="number">6.</span><span class="text">거래 메뉴 살펴보기</span></a></li>
+      <li><a href="https://blog.naver.com/coinjob/223346588445" target="_blank"><span class="number">7.</span><span class="text">실전 선물거래 따라하기</span></a></li>
+      <li><a href="https://blog.naver.com/coinjob/223858304742" target="_blank"><span class="number">8.</span><span class="text">USDT 출금 따라하기</span></a></li>
+    </ol>
+  </div>
+  </div>
+
+
+  <div id="htx" class="exchange-section">
+    <div class="exchange-header" onclick="toggleContent(this)">
+      HTX 선물거래 방법(앱)
+      <span class="arrow">▶</span>
+    </div>
+    <div class="exchange-content">
+    <div class="exchange-code">HTX 수수료 할인코드: <strong>gdxw6223</strong></div>
+    <ol class="steps-list">
+      <li><a href="https://blog.naver.com/coinjob/223153279573" target="_blank"><span class="number">1.</span><span class="text">회원가입 따라하기</span></a></li>
+      <li><a href="https://blog.naver.com/coinjob/223153281984" target="_blank"><span class="number">2.</span><span class="text">KYC 신분인증 따라하기</span></a></li>
+      <li><a href="https://blog.naver.com/coinjob/223766443622" target="_blank"><span class="number">3.</span><span class="text">출금주소 등록 따라하기</span></a></li>
+      <li><a href="https://blog.naver.com/coinjob/223155643055" target="_blank"><span class="number">4.</span><span class="text">코인 입금 따라하기</span></a></li>
+      <li><a href="https://blog.naver.com/coinjob/223155643483" target="_blank"><span class="number">5.</span><span class="text">USDT 교환 따라하기</span></a></li>
+      <li><a href="https://blog.naver.com/coinjob/223155643998" target="_blank"><span class="number">6.</span><span class="text">거래 메뉴 살펴보기</span></a></li>
+      <li><a href="https://blog.naver.com/coinjob/223155644900" target="_blank"><span class="number">7.</span><span class="text">실전 선물거래 따라하기</span></a></li>
+      <li><a href="https://blog.naver.com/coinjob/223155646215" target="_blank"><span class="number">8.</span><span class="text">USDT 출금 따라하기</span></a></li>
+    </ol>
+  </div>
+  </div>
+
+
+  <div id="mexc" class="exchange-section">
+    <div class="exchange-header" onclick="toggleContent(this)">
+      MEXC 선물거래 방법(앱)
+      <span class="arrow">▶</span>
+    </div>
+    <div class="exchange-content">
+    <div class="exchange-code">MEXC 수수료 할인코드: <strong>mexc-hero</strong></div>
+    <ol class="steps-list">
+      <li><a href="https://blog.naver.com/coinjob/223200121093" target="_blank"><span class="number">1.</span><span class="text">회원가입 따라하기</span></a></li>
+      <li><a href="https://blog.naver.com/coinjob/223200130218" target="_blank"><span class="number">2.</span><span class="text">KYC 신분인증 따라하기</span></a></li>
+      <li><a href="https://blog.naver.com/coinjob/223200153022" target="_blank"><span class="number">4.</span><span class="text">코인 입금 따라하기</span></a></li>
+      <li><a href="https://blog.naver.com/coinjob/223200159198" target="_blank"><span class="number">5.</span><span class="text">USDT 교환 따라하기</span></a></li>
+      <li><a href="https://blog.naver.com/coinjob/223200161030" target="_blank"><span class="number">6.</span><span class="text">거래 메뉴 살펴보기</span></a></li>
+      <li><a href="https://blog.naver.com/coinjob/223200162140" target="_blank"><span class="number">7.</span><span class="text">실전 선물거래 따라하기</span></a></li>
+      <li><a href="https://blog.naver.com/coinjob/223200163144" target="_blank"><span class="number">8.</span><span class="text">USDT 출금 따라하기</span></a></li>
+    </ol>
+  </div>
+  </div>
+
+ <br> <br>
+<!-- ✅ URL 복사 아이콘 버튼 시작 -->
+<div style="text-align: center; margin-top: 20px;">
+  <div id="copyUrlBtn" title="이 페이지 URL 복사" style="cursor: pointer; display: inline-block;">
+
+<svg height="75px" width="75px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 427.479 427.479" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path style="fill:#51CAF4;" d="M214.396,427.479h-11c0-22.658,5.655-34.109,11.124-45.183c5.137-10.399,9.987-20.222,9.987-40.311 c0-20.089-4.852-29.912-9.987-40.311c-5.469-11.074-11.124-22.524-11.124-45.182c0-22.658,5.655-34.109,11.124-45.183 c5.136-10.399,9.987-20.222,9.987-40.312c0-20.091-4.852-29.914-9.987-40.314c-5.469-11.075-11.124-22.526-11.124-45.185 s5.655-34.11,11.124-45.185c5.136-10.4,9.987-20.223,9.987-40.313h11c0,22.659-5.655,34.11-11.124,45.184 c-5.136,10.4-9.987,20.224-9.987,40.314s4.852,29.914,9.987,40.314c5.469,11.075,11.124,22.526,11.124,45.185 c0,22.658-5.655,34.109-11.124,45.183c-5.136,10.399-9.987,20.222-9.987,40.312c0,20.089,4.852,29.912,9.987,40.311 c5.469,11.074,11.124,22.524,11.124,45.182s-5.655,34.108-11.124,45.182C219.248,397.566,214.396,407.389,214.396,427.479z"></path> <path style="fill:#51CAF4;" d="M208.91,76.496L208.91,76.496c-29.822,0-53.997-24.175-53.997-53.997v0h0 C184.734,22.499,208.91,46.674,208.91,76.496L208.91,76.496z"></path> <path style="fill:#51CAF4;" d="M208.91,239.238L208.91,239.238c-29.822,0-53.997-24.175-53.997-53.997v0h0 C184.734,185.241,208.91,209.416,208.91,239.238L208.91,239.238z"></path> <path style="fill:#51CAF4;" d="M226.909,371.981L226.909,371.981c-29.822,0-53.997-24.175-53.997-53.997v0h0 C202.734,317.984,226.909,342.159,226.909,371.981L226.909,371.981z"></path> <path style="fill:#51CAF4;" d="M217.909,122.994L217.909,122.994c29.822,0,53.997-24.175,53.997-53.997v0h0 C242.085,68.996,217.909,93.172,217.909,122.994L217.909,122.994z"></path> <path style="fill:#51CAF4;" d="M217.909,285.736L217.909,285.736c29.822,0,53.997-24.175,53.997-53.997v0h0 C242.085,231.738,217.909,255.914,217.909,285.736L217.909,285.736z"></path> <path style="fill:#51CAF4;" d="M78.562,427.479h-11c0-22.658,5.655-34.108,11.124-45.183c5.136-10.399,9.987-20.222,9.987-40.311 c0-20.089-4.852-29.911-9.987-40.311c-5.469-11.074-11.124-22.524-11.124-45.182c0-22.658,5.655-34.109,11.124-45.183 c5.136-10.399,9.987-20.222,9.987-40.312c0-20.091-4.852-29.914-9.987-40.314c-5.469-11.075-11.124-22.526-11.124-45.185h11 c0,20.091,4.852,29.914,9.987,40.314c5.469,11.075,11.124,22.526,11.124,45.185c0,22.658-5.655,34.109-11.124,45.183 c-5.136,10.399-9.987,20.222-9.987,40.312c0,20.089,4.852,29.911,9.987,40.311c5.469,11.074,11.124,22.524,11.124,45.182 s-5.655,34.108-11.124,45.182C83.414,397.566,78.562,407.389,78.562,427.479z"></path> <path style="fill:#51CAF4;" d="M73.076,239.238L73.076,239.238c-29.822,0-53.997-24.175-53.997-53.997v0h0 C48.901,185.241,73.076,209.416,73.076,239.238L73.076,239.238z"></path> <path style="fill:#51CAF4;" d="M91.898,368.981L91.898,368.981c-29.822,0-53.997-24.175-53.997-53.997v0h0 C67.723,314.984,91.898,339.159,91.898,368.981L91.898,368.981z"></path> <path style="fill:#51CAF4;" d="M82.076,122.994L82.076,122.994c29.822,0,53.997-24.175,53.997-53.997v0h0 C106.251,68.996,82.076,93.172,82.076,122.994L82.076,122.994z"></path> <path style="fill:#51CAF4;" d="M82.076,285.736L82.076,285.736c29.822,0,53.997-24.175,53.997-53.997v0h0 C106.251,231.738,82.076,255.914,82.076,285.736L82.076,285.736z"></path> <path style="fill:#51CAF4;" d="M347.889,427.479h-11c0-22.658,5.655-34.108,11.124-45.183c5.137-10.399,9.987-20.222,9.987-40.311 c0-20.089-4.852-29.912-9.987-40.311c-5.469-11.074-11.124-22.524-11.124-45.182c0-22.658,5.655-34.109,11.124-45.183 c5.136-10.399,9.987-20.222,9.987-40.312h11c0,22.658-5.655,34.109-11.124,45.183c-5.136,10.399-9.987,20.222-9.987,40.312 c0,20.089,4.852,29.912,9.987,40.311c5.469,11.074,11.124,22.524,11.124,45.182s-5.655,34.108-11.124,45.182 C352.741,397.566,347.889,407.389,347.889,427.479z"></path> <path style="fill:#51CAF4;" d="M342.403,239.238L342.403,239.238c-29.822,0-53.997-24.175-53.997-53.997v0h0 C318.228,185.241,342.403,209.416,342.403,239.238L342.403,239.238z"></path> <path style="fill:#51CAF4;" d="M355.902,373.481L355.902,373.481c-29.822,0-53.997-24.175-53.997-53.997v0h0 C331.727,319.484,355.902,343.659,355.902,373.481L355.902,373.481z"></path> <path style="fill:#51CAF4;" d="M354.403,302.235L354.403,302.235c29.822,0,53.997-24.175,53.997-53.997v0h0 C378.578,248.237,354.403,272.413,354.403,302.235L354.403,302.235z"></path> </g> </g></svg>
+
+  </div>
+</div>
+
+<script>
+  document.getElementById('copyUrlBtn').addEventListener('click', function () {
+    const url = window.location.href;
+    navigator.clipboard.writeText(url).then(function () {
+      alert('✅ 페이지 URL이 복사되었습니다!');
+    }, function () {
+      alert('❌ URL 복사에 실패했습니다. 브라우저를 확인해주세요.');
+    });
+  });
+</script>
+
+<div class="note" style="text-align: center; margin-top: 0;">
+  이 페이지 URL 복사
+</div>
+<!-- ✅ URL 복사 아이콘 버튼 종료 -->
+ <br>
+
+  <script>
+    function toggleContent(header) {
+      const allContents = document.querySelectorAll('.exchange-content');
+      const allArrows = document.querySelectorAll('.arrow');
+      const content = header.nextElementSibling;
+      const arrow = header.querySelector(".arrow");
+      const isOpen = content.style.display === "block";
+      allContents.forEach(c => c.style.display = "none");
+      allArrows.forEach(a => a.classList.remove("open"));
+      if (!isOpen) {
+        content.style.display = "block";
+        arrow.classList.add("open");
+      }
+    }
+  </script>
+
+
+<script> <!-- ■ 하단 일괄 공지 -->
+  document.addEventListener("DOMContentLoaded", function () {
+    fetch("notice-bottom.html")
+      .then(res => res.text())
+      .then(html => {
+        const tempDiv = document.createElement("div");
+        tempDiv.innerHTML = html;
+        document.body.appendChild(tempDiv); // ✅ body 맨 끝에 삽입
+      });
+  });
+</script>
+</body>
+</html>

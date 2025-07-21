@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>거래소 롱/숏 비율</title>
+
+  <meta property="og:image" content="https://coinsea.co.kr/img/og-longshort.webp" />
+  <meta property="og:url" content="https://coinsea.co.kr/longshort.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="ko_KR" />
+  <meta name="twitter:image" content="https://coinsea.co.kr/img/og-longshort.webp" />
+
+<!-- SEO 메타태그 -->
+<meta name="title" content="롱숏 비율 실시간 분석 | 시장 심리 지표 보기 | CoinSea" />
+<meta name="description" content="바이낸스 롱/숏 비율 차트를 통해 시장 참가자들의 매수/매도 심리를 분석하고, 실전 예시를 통해 전략적으로 활용하는 방법을 확인하세요." />
+<meta name="keywords" content="롱숏 비율, 롱 숏 차트, 실시간 롱숏, 롱 숏 심리, 롱숏 심리지표, 바이낸스 롱숏 비율, long short ratio, 롱 포지션, 숏 포지션, 숏스퀴즈" />
+<meta name="author" content="CoinSea" />
+<meta name="robots" content="index, follow" />
+
+<!-- Open Graph (페이스북, 카카오톡 등 SNS 공유용) -->
+<meta property="og:title" content="롱숏 비율 실시간 분석 | 시장 심리 지표 보기" />
+<meta property="og:description" content="롱/숏 비율을 통해 시장 심리를 파악하고, 과거 롱/숏 과열 사례로 전략을 세워보세요. 실시간 차트 제공!" />
+<meta property="og:site_name" content="CoinSea" />
+
+<!-- Twitter 카드 -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="롱숏 비율 실시간 분석 | 시장 심리 지표 보기" />
+<meta name="twitter:description" content="롱이 많은가? 숏이 많은가? 실시간 비율을 통해 시장의 방향성과 심리를 확인하세요." />
+
+<!-- ✅ Font Awesome 최적화 -->
+<link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"></noscript>
+
+
+<!-- 가장 일반적인 파비콘 -->
+<link rel="icon" href="/favicon.ico" />
+
+<!-- 고해상도 디바이스 대응 -->
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon/android-icon-192x192.png" />
+
+<!-- 애플 터치용 최소 하나 -->
+<link rel="apple-touch-icon" href="/favicon/apple-icon-180x180.png" />
+
+<!-- ✅ 공통 스타일 -->
+<link rel="stylesheet" href="/css/common.css" />
+
+
+<style>
+ .content-wrapper {
+  max-width: 800px;       /* 최대 너비 설정 */
+  margin: 0 auto;         /* 가운데 정렬 */
+  padding: 20px;
+  text-align: left;       /* 내용은 좌측 정렬 */
+  }
+</style>
+
+</head>
+<body>
+
+  <div class="content-wrapper">
+
+    <div class="main-title">거래소 롱/숏 비율</div>
+
+    <div class="body-text">
+      롱/숏 비율 차트는 사람들이 오를 거라고 생각하는지? 내릴 거라고 생각하는지를 알려주는 심리지표입니다.
+    </div>
+
+<br>
+    <div class="sub-title-box">바이낸스 롱/숏 비율 차트</div>
+    <div class="small-text">
+      * 아래 차트는 바이낸스 거래소의 실시간 롱/숏 비율 차트이며, 3분 간격으로 자동 갱신됩니다.
+    </div>
+
+<br>
+
+<!-- 롱/숏 실시간 비율 시작 -->
+<div class="chart-container" style="width: 100%; height: 160px; position: relative;">
+  <canvas id="longShortChart"></canvas>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  let chart;
+
+  async function fetchLongShortRatio() {
+    const url = "https://fapi.binance.com/futures/data/globalLongShortAccountRatio?symbol=BTCUSDT&period=1h&limit=30";
+    const response = await fetch(url);
+    const data = await response.json();
+
+    const labels = data.map(item => {
+      const d = new Date(item.timestamp);
+      return `${d.getMonth() + 1}/${d.getDate()} ${d.getHours()}:00`;
+    });
+    const ratios = data.map(item => parseFloat(item.longShortRatio));
+
+    const ctx = document.getElementById('longShortChart').getContext('2d');
+
+    if (chart) chart.destroy();
+
+    chart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: '롱/숏 비율',
+          data: ratios,
+          borderWidth: 2,
+          fill: true,
+          tension: 0.3,
+          segment: {
+            borderColor: ctx => ctx.p0.parsed.y >= 1.0 ? 'green' : 'red',
+            backgroundColor: ctx => ctx.p0.parsed.y >= 1.0 ? 'rgba(0, 200, 0, 0.1)' : 'rgba(200, 0, 0, 0.1)'
+          }
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            beginAtZero: false,
+            title: {
+              display: true,
+              text: 'Long / Short 비율'
+            }
+          },
+          x: {
+            ticks: {
+              maxTicksLimit: 10
+            }
+          }
+        },
+        plugins: {
+          legend: {
+            display: true
+          },
+          tooltip: {
+            mode: 'index',
+            intersect: false
+          }
+        }
+      }
+    });
+  }
+
+  fetchLongShortRatio();
+  setInterval(fetchLongShortRatio, 180000); // 3분마다 갱신
+</script>
+<!-- 롱/숏 실시간 비율 종료 -->
+
+<br>
+
+<!-- 롱/숏 비율에 대한 초보자를 위한 설명 시작 -->
+<div class="sub-title-box">롱/숏 비율이란?</div>
+<div class="body-text">
+  <strong>롱(Long)</strong>은 가격이 오른다고 예상해서 매수하는 것, <strong>숏(Short)</strong>은 내린다고 예상해서 매도하는 포지션입니다.<br>
+  이 비율은 "사람들이 오를 거라고 생각하는지, 내릴 거라고 생각하는지"를 알려주는 심리 지표예요.
+</div>
+<div class="body-text">
+  일반적으로 <strong>롱/숏 비율이 1.0보다 크면 롱 우세</strong>, <strong>1.0보다 작으면 숏 우세</strong>로 해석합니다.<br>
+  모두가 한쪽으로 쏠릴수록 오히려 반대 방향으로 움직이는 경향이 있습니다. (심리전!)
+</div>
+<div class="body-text">
+  ✅ 롱이 너무 많으면 고래가 숏으로 급락 유도할 수 있고,<br>
+  ✅ 숏이 너무 많으면 반등으로 숏 청산이 일어날 수도 있어요.
+</div>
+<!-- 롱/숏 비율에 대한 초보자를 위한 설명 종료 -->
+
+
+
+<br>
+
+<!-- 롱/숏 비율이 어떻게 작용했는지 실제 시나리오 시작 -->
+<div class="sub-title-box">실전 시나리오 예시</div>
+<div class="body-text">
+  <strong>📉 시나리오 1: 롱 우세 후 급락</strong><br>
+  2023년 4월 초, 롱/숏 비율이 2.0 이상일 때 시장은 롱에 과열되어 있었고, 그 후 갑작스러운 하락으로 롱 포지션이 대량 청산되며 27,000달러로 급락했습니다.
+</div>
+<div class="body-text">
+  <strong>📈 시나리오 2: 숏 과열 후 반등</strong><br>
+  2022년 11월, FTX 사태로 공포가 심화되며 숏 비율이 0.6 이하로 내려갔고, 반대로 시장은 반등하며 17,000달러까지 상승. 숏 포지션이 청산되며 쇼트 스퀴즈 발생.
+</div>
+<div class="body-text">
+  <strong>➖ 시나리오 3: 롱/숏 균형 → 횡보</strong><br>
+  2024년 7월, 비트코인 가격이 29,500달러 부근에서 롱/숏 비율이 1.0에 가까운 균형 상태일 때, 수일간 방향 없는 횡보장이 이어졌습니다.
+</div>
+<!-- 롱/숏 비율이 어떻게 작용했는지 실제 시나리오 종료 -->
+
+
+<br><br>
+
+<svg height="64px" width="64px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 422.245 422.245" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path style="fill:#F9993A;" d="M362.313,256.502c-6.881,0.126-12.265,6.03-12.265,12.913v13.484 c0,16.304-12.759,30.103-29.056,30.587c-16.934,0.503-30.87-13.127-30.87-29.949V203V79c0-43.63-35.369-79-79-79h0 c-43.63,0-79,35.369-79,79v124v79.9c0,16.304-12.759,30.103-29.056,30.587c-16.934,0.503-30.87-13.126-30.87-29.949l0-14.122 c0-6.882-5.384-12.786-12.265-12.913c-7.011-0.129-12.735,5.516-12.735,12.498v13.702c0,30.162,23.951,55.331,54.109,55.791 c30.696,0.469,55.817-24.365,55.817-54.956V213.75c0-5.937,4.813-10.75,10.75-10.75h0c5.937,0,10.75,4.813,10.75,10.75v152.911 c0,16.611-13.25,30.528-29.861,30.584c-16.513,0.055-29.975-13.317-30.065-29.797c-0.037-6.855-5.574-12.628-12.43-12.666 c-6.936-0.038-12.571,5.573-12.571,12.5c0,30.591,25.121,55.425,55.817,54.956c30.158-0.46,54.109-25.629,54.109-55.791V210.5 c0-4.142,3.358-7.5,7.5-7.5h0c4.142,0,7.5,3.358,7.5,7.5v155.898c0,30.333,24.2,55.611,54.532,55.845 c30.365,0.234,55.168-24.288,55.392-54.548c0.049-6.626-4.962-12.402-11.571-12.879c-7.323-0.528-13.428,5.256-13.428,12.466 c0,16.823-13.936,30.452-30.87,29.949c-16.297-0.484-29.056-14.283-29.056-30.587V213.75c0-5.937,4.813-10.75,10.75-10.75h0 c5.937,0,10.75,4.813,10.75,10.75v68.953c0,30.162,23.951,55.331,54.109,55.791c30.696,0.468,55.817-24.366,55.817-54.956V269 C375.048,262.019,369.324,256.374,362.313,256.502z"></path> <g> <circle style="fill:#E2822B;" cx="260.119" cy="140" r="39.769"></circle> <circle style="fill:#FFFFFF;" cx="260.119" cy="140" r="25"></circle> <path style="fill:#4D4D4D;" d="M260.119,155L260.119,155c-3.038,0-5.5-2.462-5.5-5.5v-19c0-3.038,2.462-5.5,5.5-5.5h0 c3.038,0,5.5,2.462,5.5,5.5v19C265.619,152.538,263.157,155,260.119,155z"></path> </g> <g> <circle style="fill:#E2822B;" cx="159.622" cy="140" r="39.769"></circle> <circle style="fill:#FFFFFF;" cx="159.622" cy="140" r="25"></circle> <path style="fill:#4D4D4D;" d="M159.622,155L159.622,155c-3.038,0-5.5-2.462-5.5-5.5v-19c0-3.038,2.462-5.5,5.5-5.5h0 c3.038,0,5.5,2.462,5.5,5.5v19C165.122,152.538,162.66,155,159.622,155z"></path> </g> <circle style="fill:#E2822B;" cx="248.122" cy="42.5" r="10"></circle> <circle style="fill:#E2822B;" cx="157.122" cy="55.5" r="10"></circle> <circle style="fill:#E2822B;" cx="265.119" cy="61.5" r="5"></circle> <circle style="fill:#E2822B;" cx="169.122" cy="34.5" r="5"></circle> <circle style="fill:#E2822B;" cx="245.122" cy="67.5" r="5"></circle> </g> </g></svg>
+
+<!-- ✅ URL 복사 아이콘 버튼 시작 -->
+<div style="text-align: center; margin-top: 20px;">
+  <div id="copyUrlBtn" title="이 페이지 URL 복사" style="cursor: pointer; display: inline-block;">
+
+<svg height="75px" width="75px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 427.479 427.479" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path style="fill:#51CAF4;" d="M214.396,427.479h-11c0-22.658,5.655-34.109,11.124-45.183c5.137-10.399,9.987-20.222,9.987-40.311 c0-20.089-4.852-29.912-9.987-40.311c-5.469-11.074-11.124-22.524-11.124-45.182c0-22.658,5.655-34.109,11.124-45.183 c5.136-10.399,9.987-20.222,9.987-40.312c0-20.091-4.852-29.914-9.987-40.314c-5.469-11.075-11.124-22.526-11.124-45.185 s5.655-34.11,11.124-45.185c5.136-10.4,9.987-20.223,9.987-40.313h11c0,22.659-5.655,34.11-11.124,45.184 c-5.136,10.4-9.987,20.224-9.987,40.314s4.852,29.914,9.987,40.314c5.469,11.075,11.124,22.526,11.124,45.185 c0,22.658-5.655,34.109-11.124,45.183c-5.136,10.399-9.987,20.222-9.987,40.312c0,20.089,4.852,29.912,9.987,40.311 c5.469,11.074,11.124,22.524,11.124,45.182s-5.655,34.108-11.124,45.182C219.248,397.566,214.396,407.389,214.396,427.479z"></path> <path style="fill:#51CAF4;" d="M208.91,76.496L208.91,76.496c-29.822,0-53.997-24.175-53.997-53.997v0h0 C184.734,22.499,208.91,46.674,208.91,76.496L208.91,76.496z"></path> <path style="fill:#51CAF4;" d="M208.91,239.238L208.91,239.238c-29.822,0-53.997-24.175-53.997-53.997v0h0 C184.734,185.241,208.91,209.416,208.91,239.238L208.91,239.238z"></path> <path style="fill:#51CAF4;" d="M226.909,371.981L226.909,371.981c-29.822,0-53.997-24.175-53.997-53.997v0h0 C202.734,317.984,226.909,342.159,226.909,371.981L226.909,371.981z"></path> <path style="fill:#51CAF4;" d="M217.909,122.994L217.909,122.994c29.822,0,53.997-24.175,53.997-53.997v0h0 C242.085,68.996,217.909,93.172,217.909,122.994L217.909,122.994z"></path> <path style="fill:#51CAF4;" d="M217.909,285.736L217.909,285.736c29.822,0,53.997-24.175,53.997-53.997v0h0 C242.085,231.738,217.909,255.914,217.909,285.736L217.909,285.736z"></path> <path style="fill:#51CAF4;" d="M78.562,427.479h-11c0-22.658,5.655-34.108,11.124-45.183c5.136-10.399,9.987-20.222,9.987-40.311 c0-20.089-4.852-29.911-9.987-40.311c-5.469-11.074-11.124-22.524-11.124-45.182c0-22.658,5.655-34.109,11.124-45.183 c5.136-10.399,9.987-20.222,9.987-40.312c0-20.091-4.852-29.914-9.987-40.314c-5.469-11.075-11.124-22.526-11.124-45.185h11 c0,20.091,4.852,29.914,9.987,40.314c5.469,11.075,11.124,22.526,11.124,45.185c0,22.658-5.655,34.109-11.124,45.183 c-5.136,10.399-9.987,20.222-9.987,40.312c0,20.089,4.852,29.911,9.987,40.311c5.469,11.074,11.124,22.524,11.124,45.182 s-5.655,34.108-11.124,45.182C83.414,397.566,78.562,407.389,78.562,427.479z"></path> <path style="fill:#51CAF4;" d="M73.076,239.238L73.076,239.238c-29.822,0-53.997-24.175-53.997-53.997v0h0 C48.901,185.241,73.076,209.416,73.076,239.238L73.076,239.238z"></path> <path style="fill:#51CAF4;" d="M91.898,368.981L91.898,368.981c-29.822,0-53.997-24.175-53.997-53.997v0h0 C67.723,314.984,91.898,339.159,91.898,368.981L91.898,368.981z"></path> <path style="fill:#51CAF4;" d="M82.076,122.994L82.076,122.994c29.822,0,53.997-24.175,53.997-53.997v0h0 C106.251,68.996,82.076,93.172,82.076,122.994L82.076,122.994z"></path> <path style="fill:#51CAF4;" d="M82.076,285.736L82.076,285.736c29.822,0,53.997-24.175,53.997-53.997v0h0 C106.251,231.738,82.076,255.914,82.076,285.736L82.076,285.736z"></path> <path style="fill:#51CAF4;" d="M347.889,427.479h-11c0-22.658,5.655-34.108,11.124-45.183c5.137-10.399,9.987-20.222,9.987-40.311 c0-20.089-4.852-29.912-9.987-40.311c-5.469-11.074-11.124-22.524-11.124-45.182c0-22.658,5.655-34.109,11.124-45.183 c5.136-10.399,9.987-20.222,9.987-40.312h11c0,22.658-5.655,34.109-11.124,45.183c-5.136,10.399-9.987,20.222-9.987,40.312 c0,20.089,4.852,29.912,9.987,40.311c5.469,11.074,11.124,22.524,11.124,45.182s-5.655,34.108-11.124,45.182 C352.741,397.566,347.889,407.389,347.889,427.479z"></path> <path style="fill:#51CAF4;" d="M342.403,239.238L342.403,239.238c-29.822,0-53.997-24.175-53.997-53.997v0h0 C318.228,185.241,342.403,209.416,342.403,239.238L342.403,239.238z"></path> <path style="fill:#51CAF4;" d="M355.902,373.481L355.902,373.481c-29.822,0-53.997-24.175-53.997-53.997v0h0 C331.727,319.484,355.902,343.659,355.902,373.481L355.902,373.481z"></path> <path style="fill:#51CAF4;" d="M354.403,302.235L354.403,302.235c29.822,0,53.997-24.175,53.997-53.997v0h0 C378.578,248.237,354.403,272.413,354.403,302.235L354.403,302.235z"></path> </g> </g></svg>
+
+  </div>
+</div>
+
+<script>
+  document.getElementById('copyUrlBtn').addEventListener('click', function () {
+    const url = window.location.href;
+    navigator.clipboard.writeText(url).then(function () {
+      alert('✅ 페이지 URL이 복사되었습니다!');
+    }, function () {
+      alert('❌ URL 복사에 실패했습니다. 브라우저를 확인해주세요.');
+    });
+  });
+</script>
+
+<div class="note" style="text-align: center; margin-top: 0;">
+URL 복사
+</div>
+<!-- ✅ URL 복사 아이콘 버튼 종료 -->
+
+<br>
+
+
+<script> <!-- ■ 하단 일괄 공지 -->
+  document.addEventListener("DOMContentLoaded", function () {
+    fetch("notice-bottom.html")
+      .then(res => res.text())
+      .then(html => {
+        const tempDiv = document.createElement("div");
+        tempDiv.innerHTML = html;
+        document.body.appendChild(tempDiv); // ✅ body 맨 끝에 삽입
+      });
+  });
+</script>
+
+</div>
+</body>
+</html>

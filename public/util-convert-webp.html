@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>이미지 변환기 (PNG↔WebP)</title>
+
+<!-- ✅ SEO 및 Open Graph + Twitter 메타태그 -->
+<meta name="title" content="이미지 변환기 (PNG↔WebP) - 코인씨" />
+<meta name="description" content="PNG, JPG 이미지를 WebP로, 또는 WebP 이미지를 PNG로 빠르게 변환하세요. 설치 없이 웹에서 바로 이미지 포맷을 변환할 수 있습니다." />
+<meta name="keywords" content="WebP 변환기, PNG 변환기, 이미지 변환, JPG to WebP, WebP to PNG, 이미지 포맷 변환, 온라인 이미지 툴, 코인씨 도구" />
+<meta name="author" content="CoinSea" />
+<meta name="robots" content="index, follow" />
+
+<!-- ✅ Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="이미지 변환기 (PNG↔WebP) - 코인씨" />
+<meta property="og:description" content="설치 없이 간편하게 WebP와 PNG/JPG 간 이미지 포맷을 변환할 수 있는 온라인 도구입니다." />
+<meta property="og:url" content="https://coinsea.co.kr/util-convert-webp.html" />
+<meta property="og:image" content="https://coinsea.co.kr/img/og-util-convert-webp.webp" />
+<meta property="og:site_name" content="코인씨" />
+<meta property="og:locale" content="ko_KR" />
+
+<!-- ✅ Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="이미지 변환기 (PNG↔WebP) - 코인씨" />
+<meta name="twitter:description" content="PNG, JPG, WebP 이미지 변환을 브라우저에서 빠르게 실행할 수 있습니다." />
+<meta name="twitter:image" content="https://coinsea.co.kr/img/og-util-convert-webp.webp" />
+
+
+
+<!-- ✅ Google Fonts 최적화 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet"></noscript>
+
+<!-- ✅ Font Awesome 최적화 -->
+<link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"></noscript>
+
+
+<!-- 가장 일반적인 파비콘 -->
+<link rel="icon" href="/favicon.ico" />
+
+<!-- 고해상도 디바이스 대응 -->
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon/android-icon-192x192.png" />
+
+<!-- 애플 터치용 최소 하나 -->
+<link rel="apple-touch-icon" href="/favicon/apple-icon-180x180.png" />
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
+  <style>
+body {
+  font-family: 'Nanum Gothic', sans-serif;
+  padding: 20px;
+  background: #ffffff;
+  margin: 0;
+}
+
+    .converter-box {
+      background: #fff;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      padding: 16px;
+      margin-bottom: 24px;
+    }
+
+    .converter-title {
+      font-size: 18px;
+      font-weight: bold;
+      background: #333;
+      color: #fff;
+      padding: 12px;
+      border-radius: 6px 6px 0 0;
+      margin: -16px -16px 16px -16px;
+    }
+
+    .converter-description {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #555;
+    }
+
+    input[type="file"] {
+      display: block;
+      margin-top: 10px;
+    }
+
+    .download-all-btn {
+      margin-top: 12px;
+      padding: 10px 16px;
+      font-size: 14px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .result-links a {
+      display: block;
+      margin-top: 8px;
+      word-break: break-all;
+      font-size: 14px;
+    }
+
+    @media (max-width: 600px) {
+      .converter-title {
+        font-size: 16px;
+      }
+
+      .download-all-btn {
+        width: 100%;
+      }
+    }
+
+.coupang-banner-wrapper {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.coupang-banner-wrapper iframe,
+.coupang-banner-wrapper div {
+  max-width: 100% !important;
+  height: auto !important;
+}
+  .content-wrapper {
+  max-width: 800px;       /* 최대 너비 설정 */
+  margin: 0 auto;         /* 가운데 정렬 */
+  padding: 0px;
+  text-align: left;       /* 내용은 좌측 정렬 */
+    }
+
+  </style>
+</head>
+<body>
+<div class="content-wrapper"> <!-- ■ 전체를 감싸는 DIV 시작 -->
+
+
+<!-- PNG → WebP 변환기 -->
+<div class="converter-box">
+  <div class="converter-title">🟢 PNG/JPG → WebP 변환기</div>
+  <input type="file" id="toWebpInput" accept="image/png, image/jpeg" multiple>
+  <p class="converter-description">※ 이미지 크기 변경 없이 WebP로만 변환합니다.</p>
+  <button id="downloadAllWebp" class="download-all-btn" style="display:none;">모두 다운로드 (.zip)</button>
+  <div id="webpResult" class="result-links"></div>
+</div>
+
+<!-- WebP → PNG 변환기 -->
+<div class="converter-box">
+  <div class="converter-title">🔵 WebP → PNG 변환기</div>
+  <input type="file" id="toPngInput" accept="image/webp" multiple>
+  <p class="converter-description">※ WebP 파일을 PNG로 복원합니다. 해상도는 그대로 유지됩니다.</p>
+  <button id="downloadAllPng" class="download-all-btn" style="display:none;">모두 다운로드 (.zip)</button>
+  <div id="pngResult" class="result-links"></div>
+</div>
+
+
+
+
+<canvas id="canvas" style="display:none;"></canvas>
+
+<script>
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+
+let webpFiles = [];
+let pngFiles = [];
+
+// PNG → WebP
+document.getElementById('toWebpInput').addEventListener('change', async (e) => {
+  const files = e.target.files;
+  const result = document.getElementById('webpResult');
+  result.innerHTML = '';
+  webpFiles = [];
+
+  for (let file of files) {
+    const img = new Image();
+    img.src = URL.createObjectURL(file);
+    await img.decode();
+
+    canvas.width = img.width;
+    canvas.height = img.height;
+    ctx.drawImage(img, 0, 0);
+
+    await new Promise(resolve => {
+      canvas.toBlob((blob) => {
+        const fileName = file.name.replace(/\.(png|jpg|jpeg)$/i, '.webp');
+        webpFiles.push({ blob, fileName });
+
+        const link = document.createElement('a');
+        link.download = fileName;
+        link.href = URL.createObjectURL(blob);
+        link.textContent = `⬇️ ${link.download} 저장`;
+        result.appendChild(link);
+        resolve();
+      }, 'image/webp', 0.8);
+    });
+  }
+
+  if (webpFiles.length > 0) {
+    document.getElementById('downloadAllWebp').style.display = 'inline-block';
+  }
+});
+
+document.getElementById('downloadAllWebp').addEventListener('click', async () => {
+  const zip = new JSZip();
+  webpFiles.forEach(({ blob, fileName }) => {
+    zip.file(fileName, blob);
+  });
+
+  const content = await zip.generateAsync({ type: "blob" });
+  const url = URL.createObjectURL(content);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "converted_webp_images.zip";
+  a.click();
+  URL.revokeObjectURL(url);
+});
+
+// WebP → PNG
+document.getElementById('toPngInput').addEventListener('change', async (e) => {
+  const files = e.target.files;
+  const result = document.getElementById('pngResult');
+  result.innerHTML = '';
+  pngFiles = [];
+
+  for (let file of files) {
+    const img = new Image();
+    img.src = URL.createObjectURL(file);
+    await img.decode();
+
+    canvas.width = img.width;
+    canvas.height = img.height;
+    ctx.drawImage(img, 0, 0);
+
+    await new Promise(resolve => {
+      canvas.toBlob((blob) => {
+        const fileName = file.name.replace(/\.webp$/i, '.png');
+        pngFiles.push({ blob, fileName });
+
+        const link = document.createElement('a');
+        link.download = fileName;
+        link.href = URL.createObjectURL(blob);
+        link.textContent = `⬇️ ${link.download} 저장`;
+        result.appendChild(link);
+        resolve();
+      }, 'image/png');
+    });
+  }
+
+  if (pngFiles.length > 0) {
+    document.getElementById('downloadAllPng').style.display = 'inline-block';
+  }
+});
+
+document.getElementById('downloadAllPng').addEventListener('click', async () => {
+  const zip = new JSZip();
+  pngFiles.forEach(({ blob, fileName }) => {
+    zip.file(fileName, blob);
+  });
+
+  const content = await zip.generateAsync({ type: "blob" });
+  const url = URL.createObjectURL(content);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "converted_png_images.zip";
+  a.click();
+  URL.revokeObjectURL(url);
+});
+</script>
+
+</div> <!-- ■ 전체를 감싸는 DIV 종료 -->
+</body>
+</html>

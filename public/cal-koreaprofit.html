@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>코인 수익률 계산기 | CoinSea</title>
+
+  <!-- ✅ SEO 메타태그 -->
+  <meta name="description" content="매수단가, 매도단가, 수량을 입력하면 자동으로 수익률과 손익이 계산되는 코인 수익률 계산기입니다.">
+  <meta name="keywords" content="코인 수익률 계산기, 암호화폐 수익, 비트코인 손익 계산, CoinSea">
+  <meta name="robots" content="index, follow">
+
+  <!-- ✅ Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="코인 수익률 계산기 | CoinSea" />
+  <meta property="og:description" content="매수단가와 매도단가를 입력하면 자동으로 수익률을 계산해드립니다. 쉽고 간편하게 코인 수익을 확인하세요!" />
+  <meta property="og:image" content="https://coinsea.co.kr/img/og-cal-koreaprofit.webp" />
+  <meta property="og:url" content="https://coinsea.co.kr/cal-koreaprofit.html" />
+  <meta property="og:locale" content="ko_KR" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://coinsea.co.kr/img/og-cal-koreaprofit.webp" />
+
+<!-- ✅ Google Fonts 최적화 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet"></noscript>
+
+<!-- ✅ Font Awesome 최적화 -->
+<link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"></noscript>
+
+
+<!-- 가장 일반적인 파비콘 -->
+<link rel="icon" href="/favicon.ico" />
+
+<!-- 고해상도 디바이스 대응 -->
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon/android-icon-192x192.png" />
+
+<!-- 애플 터치용 최소 하나 -->
+<link rel="apple-touch-icon" href="/favicon/apple-icon-180x180.png" />
+
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: 'Nanum Gothic', sans-serif;
+      background: #fff;
+      color: #333;
+      padding: 20px;
+      margin: 0;
+    }
+    h2 {
+      font-size: 20px;
+      margin-bottom: 12px;
+      text-align: center;
+    }
+    p {
+      font-size: 14px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .box {
+      border: 1px solid #ccc;
+      padding: 20px;
+      max-width: 600px;
+      margin: 0 auto;
+      border-radius: 8px;
+    }
+    .row {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    input {
+      padding: 10px;
+      font-size: 16px;
+      width: 100%;
+      text-align: right;
+    }
+    .result {
+      margin-top: 20px;
+      font-size: 15px;
+    }
+    .result div {
+      margin-bottom: 6px;
+    }
+    .result b {
+      display: inline-block;
+      width: 80px;
+    }
+    .btns {
+      margin-top: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+    button {
+      padding: 10px 16px;
+      font-size: 14px;
+      cursor: pointer;
+      border: none;
+      background-color: #005bac;
+      color: #fff;
+      border-radius: 4px;
+    }
+    button:hover {
+      background-color: #004080;
+    }
+    @media (min-width: 600px) {
+      .row {
+        flex-direction: row;
+      }
+      .row > div {
+        flex: 1;
+      }
+    }
+    .note {
+      font-size: 14px;
+      color: #555;
+      margin-top: -20px;
+    }
+
+.coupang-banner-wrapper {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.coupang-banner-wrapper iframe,
+.coupang-banner-wrapper div {
+  max-width: 100% !important;
+  height: auto !important;
+}
+  .content-wrapper {
+  max-width: 800px;       /* 최대 너비 설정 */
+  margin: 0 auto;         /* 가운데 정렬 */
+  padding: 5px;
+  text-align: left;       /* 내용은 좌측 정렬 */
+    }
+
+  </style>
+</head>
+<body>
+<div class="content-wrapper"> <!-- ■ 전체를 감싸는 DIV 시작 -->
+
+  <h2>코인 수익률 계산기</h2>
+  <p style="line-height: 1.2; margin-bottom: 20px;">
+  매수단가, 매수수량, 매도단가를 입력하면<br>
+  수익률이 자동 계산됩니다.
+</p>
+
+  <div class="box" id="capture-area">
+    <div class="row">
+      <div><input type="text" id="buyPrice" placeholder="매수단가" /></div>
+      <div><input type="text" id="amount" placeholder="매수수량" /></div>
+      <div><input type="text" id="sellPrice" placeholder="매도단가" /></div>
+    </div>
+    <div class="result">
+      <div><b>매수금:</b> <span id="buyTotal">0</span></div>
+      <div><b>매도금:</b> <span id="sellTotal">0</span></div>
+      <div><b>수익률(%):</b> <span id="profitRate">0</span></div>
+      <div><b>손익:</b> <span id="profit">0</span></div>
+    </div>
+  </div>
+
+  <div class="btns">
+    <button onclick="reset()">초기화</button>
+    <button onclick="saveImage()">이미지저장</button>
+    <button onclick="copyURL()">주소복사</button>
+  </div>
+
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+  <script>
+    const buyPriceEl = document.getElementById("buyPrice");
+    const amountEl = document.getElementById("amount");
+    const sellPriceEl = document.getElementById("sellPrice");
+
+    const buyTotalEl = document.getElementById("buyTotal");
+    const sellTotalEl = document.getElementById("sellTotal");
+    const profitRateEl = document.getElementById("profitRate");
+    const profitEl = document.getElementById("profit");
+
+    function parseNumber(str) {
+      return parseFloat(str.replace(/,/g, "")) || 0;
+    }
+
+    function formatNumber(num) {
+      return isNaN(num) ? "" : num.toLocaleString("ko-KR");
+    }
+
+    function handleCommaInput(el) {
+      el.addEventListener("input", () => {
+        const cursorPos = el.selectionStart;
+        const raw = el.value.replace(/,/g, '');
+        if (!/^\d*\.?\d*$/.test(raw)) return;
+
+        const floatValue = parseFloat(raw);
+        const formatted = isNaN(floatValue) ? "" : formatNumber(floatValue);
+        el.value = formatted;
+
+        update();
+        // 커서 위치 끝으로 이동
+        el.setSelectionRange(el.value.length, el.value.length);
+      });
+    }
+
+    function update() {
+      const buyPrice = parseNumber(buyPriceEl.value);
+      const amount = parseNumber(amountEl.value);
+      const sellPrice = parseNumber(sellPriceEl.value);
+
+      const buyTotal = buyPrice * amount;
+      const sellTotal = sellPrice * amount;
+      const profit = sellTotal - buyTotal;
+      const profitRate = buyTotal ? ((profit / buyTotal) * 100).toFixed(2) : 0;
+
+      buyTotalEl.textContent = formatNumber(buyTotal);
+      sellTotalEl.textContent = formatNumber(sellTotal);
+      profitRateEl.textContent = profitRate;
+      profitEl.textContent = formatNumber(profit);
+    }
+
+    [buyPriceEl, amountEl, sellPriceEl].forEach(el => handleCommaInput(el));
+
+    function reset() {
+      buyPriceEl.value = "";
+      amountEl.value = "";
+      sellPriceEl.value = "";
+      update();
+    }
+
+    function saveImage() {
+      html2canvas(document.querySelector("#capture-area")).then(canvas => {
+        const link = document.createElement("a");
+        link.download = "coin-profit.png";
+        link.href = canvas.toDataURL();
+        link.click();
+      });
+    }
+
+    function copyURL() {
+      const url = window.location.href;
+      navigator.clipboard.writeText(url).then(() => {
+        alert("주소가 복사되었습니다!");
+      });
+    }
+  </script>
+
+<br><br><br>
+
+<!-- ✅ URL 복사 아이콘 버튼 시작 -->
+<div style="text-align: center; margin-top: 20px;">
+  <div id="copyUrlBtn" title="이 페이지 URL 복사" style="cursor: pointer; display: inline-block;">
+
+<svg height="75px" width="75px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 427.479 427.479" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path style="fill:#51CAF4;" d="M214.396,427.479h-11c0-22.658,5.655-34.109,11.124-45.183c5.137-10.399,9.987-20.222,9.987-40.311 c0-20.089-4.852-29.912-9.987-40.311c-5.469-11.074-11.124-22.524-11.124-45.182c0-22.658,5.655-34.109,11.124-45.183 c5.136-10.399,9.987-20.222,9.987-40.312c0-20.091-4.852-29.914-9.987-40.314c-5.469-11.075-11.124-22.526-11.124-45.185 s5.655-34.11,11.124-45.185c5.136-10.4,9.987-20.223,9.987-40.313h11c0,22.659-5.655,34.11-11.124,45.184 c-5.136,10.4-9.987,20.224-9.987,40.314s4.852,29.914,9.987,40.314c5.469,11.075,11.124,22.526,11.124,45.185 c0,22.658-5.655,34.109-11.124,45.183c-5.136,10.399-9.987,20.222-9.987,40.312c0,20.089,4.852,29.912,9.987,40.311 c5.469,11.074,11.124,22.524,11.124,45.182s-5.655,34.108-11.124,45.182C219.248,397.566,214.396,407.389,214.396,427.479z"></path> <path style="fill:#51CAF4;" d="M208.91,76.496L208.91,76.496c-29.822,0-53.997-24.175-53.997-53.997v0h0 C184.734,22.499,208.91,46.674,208.91,76.496L208.91,76.496z"></path> <path style="fill:#51CAF4;" d="M208.91,239.238L208.91,239.238c-29.822,0-53.997-24.175-53.997-53.997v0h0 C184.734,185.241,208.91,209.416,208.91,239.238L208.91,239.238z"></path> <path style="fill:#51CAF4;" d="M226.909,371.981L226.909,371.981c-29.822,0-53.997-24.175-53.997-53.997v0h0 C202.734,317.984,226.909,342.159,226.909,371.981L226.909,371.981z"></path> <path style="fill:#51CAF4;" d="M217.909,122.994L217.909,122.994c29.822,0,53.997-24.175,53.997-53.997v0h0 C242.085,68.996,217.909,93.172,217.909,122.994L217.909,122.994z"></path> <path style="fill:#51CAF4;" d="M217.909,285.736L217.909,285.736c29.822,0,53.997-24.175,53.997-53.997v0h0 C242.085,231.738,217.909,255.914,217.909,285.736L217.909,285.736z"></path> <path style="fill:#51CAF4;" d="M78.562,427.479h-11c0-22.658,5.655-34.108,11.124-45.183c5.136-10.399,9.987-20.222,9.987-40.311 c0-20.089-4.852-29.911-9.987-40.311c-5.469-11.074-11.124-22.524-11.124-45.182c0-22.658,5.655-34.109,11.124-45.183 c5.136-10.399,9.987-20.222,9.987-40.312c0-20.091-4.852-29.914-9.987-40.314c-5.469-11.075-11.124-22.526-11.124-45.185h11 c0,20.091,4.852,29.914,9.987,40.314c5.469,11.075,11.124,22.526,11.124,45.185c0,22.658-5.655,34.109-11.124,45.183 c-5.136,10.399-9.987,20.222-9.987,40.312c0,20.089,4.852,29.911,9.987,40.311c5.469,11.074,11.124,22.524,11.124,45.182 s-5.655,34.108-11.124,45.182C83.414,397.566,78.562,407.389,78.562,427.479z"></path> <path style="fill:#51CAF4;" d="M73.076,239.238L73.076,239.238c-29.822,0-53.997-24.175-53.997-53.997v0h0 C48.901,185.241,73.076,209.416,73.076,239.238L73.076,239.238z"></path> <path style="fill:#51CAF4;" d="M91.898,368.981L91.898,368.981c-29.822,0-53.997-24.175-53.997-53.997v0h0 C67.723,314.984,91.898,339.159,91.898,368.981L91.898,368.981z"></path> <path style="fill:#51CAF4;" d="M82.076,122.994L82.076,122.994c29.822,0,53.997-24.175,53.997-53.997v0h0 C106.251,68.996,82.076,93.172,82.076,122.994L82.076,122.994z"></path> <path style="fill:#51CAF4;" d="M82.076,285.736L82.076,285.736c29.822,0,53.997-24.175,53.997-53.997v0h0 C106.251,231.738,82.076,255.914,82.076,285.736L82.076,285.736z"></path> <path style="fill:#51CAF4;" d="M347.889,427.479h-11c0-22.658,5.655-34.108,11.124-45.183c5.137-10.399,9.987-20.222,9.987-40.311 c0-20.089-4.852-29.912-9.987-40.311c-5.469-11.074-11.124-22.524-11.124-45.182c0-22.658,5.655-34.109,11.124-45.183 c5.136-10.399,9.987-20.222,9.987-40.312h11c0,22.658-5.655,34.109-11.124,45.183c-5.136,10.399-9.987,20.222-9.987,40.312 c0,20.089,4.852,29.912,9.987,40.311c5.469,11.074,11.124,22.524,11.124,45.182s-5.655,34.108-11.124,45.182 C352.741,397.566,347.889,407.389,347.889,427.479z"></path> <path style="fill:#51CAF4;" d="M342.403,239.238L342.403,239.238c-29.822,0-53.997-24.175-53.997-53.997v0h0 C318.228,185.241,342.403,209.416,342.403,239.238L342.403,239.238z"></path> <path style="fill:#51CAF4;" d="M355.902,373.481L355.902,373.481c-29.822,0-53.997-24.175-53.997-53.997v0h0 C331.727,319.484,355.902,343.659,355.902,373.481L355.902,373.481z"></path> <path style="fill:#51CAF4;" d="M354.403,302.235L354.403,302.235c29.822,0,53.997-24.175,53.997-53.997v0h0 C378.578,248.237,354.403,272.413,354.403,302.235L354.403,302.235z"></path> </g> </g></svg>
+
+  </div>
+</div>
+
+<script>
+  document.getElementById('copyUrlBtn').addEventListener('click', function () {
+    const url = window.location.href;
+    navigator.clipboard.writeText(url).then(function () {
+      alert('✅ 페이지 URL이 복사되었습니다!');
+    }, function () {
+      alert('❌ URL 복사에 실패했습니다. 브라우저를 확인해주세요.');
+    });
+  });
+</script>
+
+<div class="note" style="text-align: center; margin-top: 0;">
+URL 복사
+</div>
+<!-- ✅ URL 복사 아이콘 버튼 종료 -->
+<br>
+
+
+
+</div> <!-- ■ 전체를 감싸는 DIV 종료 -->
+
+<script> <!-- ■ 하단 일괄 공지 -->
+  document.addEventListener("DOMContentLoaded", function () {
+    fetch("notice-bottom.html")
+      .then(res => res.text())
+      .then(html => {
+        const tempDiv = document.createElement("div");
+        tempDiv.innerHTML = html;
+        document.body.appendChild(tempDiv); // ✅ body 맨 끝에 삽입
+      });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>알아두면 좋은 유틸리티 모음</title>
+
+<!-- ✅ SEO 및 Open Graph + Twitter 메타태그 -->
+<meta name="title" content="알아두면 좋은 유틸리티 모음" />
+<meta name="description" content="환율 계산기부터 D-day 계산기, 이미지 변환, IP 확인 등 알아두면 유용한 다양한 웹 유틸리티 도구를 한눈에 확인하세요." />
+<meta name="keywords" content="유틸리티, 환율 계산기, 만나이 계산기, D-day 계산기, IP 확인, PNG 축소, WebP 변환, 파일명 변경, 코인씨" />
+<meta name="author" content="CoinSea" />
+<meta name="robots" content="index, follow" />
+
+<!-- ✅ Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="알아두면 좋은 유틸리티 모음" />
+<meta property="og:description" content="누구나 한번쯤 사용하는 유용한 도구들을 한 곳에 모았습니다. 지금 바로 확인하세요!" />
+<meta property="og:url" content="https://coinsea.co.kr/util-list.html" />
+<meta property="og:image" content="https://coinsea.co.kr/img/og-util-list.webp" />
+<meta property="og:site_name" content="코인씨" />
+<meta property="og:locale" content="ko_KR" />
+
+<!-- ✅ Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="알아두면 좋은 유틸리티 모음" />
+<meta name="twitter:description" content="환율, D-day, IP 확인, 이미지 변환 등 실생활에 유용한 무료 웹 유틸리티를 제공합니다." />
+<meta name="twitter:image" content="https://coinsea.co.kr/img/og-util-list.webp" />
+
+
+<!-- ✅ Google Fonts 최적화 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet"></noscript>
+
+<!-- ✅ Font Awesome 최적화 -->
+<link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"></noscript>
+
+
+<!-- 가장 일반적인 파비콘 -->
+<link rel="icon" href="/favicon.ico" />
+
+<!-- 고해상도 디바이스 대응 -->
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon/android-icon-192x192.png" />
+
+<!-- 애플 터치용 최소 하나 -->
+<link rel="apple-touch-icon" href="/favicon/apple-icon-180x180.png" />
+
+  <!-- 파비콘 생략 -->
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      font-family: 'Nanum Gothic', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      background-color: #fff;
+      color: #333;
+      overflow-x: hidden;
+    }
+
+  .content-wrapper {
+  max-width: 800px;       /* 최대 너비 설정 */
+  margin: 0 auto;         /* 가운데 정렬 */
+  padding: 0px;
+  text-align: left;       /* 내용은 좌측 정렬 */
+    }
+
+
+    h1 { font-size: 24px; margin-bottom: 15px; }
+    p { margin-bottom: 15px; }
+
+    a.post-link {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .post-list {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+
+    .thumbnail {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 4px;
+      flex-shrink: 0;
+      margin-right: 10px;
+      border: 1px solid #b9b9b9;
+    }
+
+    .text-content {
+      flex: 1;
+    }
+
+    .sub-title {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 4px;
+      color: #222;
+    }
+
+    .body-text {
+      font-size: 16px;
+      line-height: 1.7;
+      margin-bottom: 10px;
+      color: #555;
+    }
+
+    .main-title {
+      font-size: 26px;
+      font-weight: bold;
+      margin-bottom: 25px;
+      position: relative;
+      display: inline-block;
+      z-index: 0;
+    }
+
+    .main-title::after {
+      content: '';
+      position: absolute;
+      left: -7.5%;
+      right: -7.5%;
+      bottom: 1px;
+      height: 39%;
+      background-color: #f8cf26;
+      z-index: -1;
+    }
+
+    .note {
+      font-size: 14px;
+      color: #555;
+      margin-top: -20px;
+    }
+
+    .coupang-banner-wrapper {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: auto;
+      display: flex;
+      justify-content: center;
+    }
+
+    .coupang-banner-wrapper iframe,
+    .coupang-banner-wrapper div {
+      max-width: 100% !important;
+      height: auto !important;
+    }
+
+    @media screen and (max-width: 600px) {
+      body { font-size: 15px; }
+      h1 { font-size: 22px; }
+
+      .thumbnail {
+        width: 80px;
+        height: 80px;
+        margin-right: 8px;
+      }
+
+      .sub-title {
+        font-size: 18px;
+      }
+
+      .body-text {
+        font-size: 15px;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="content-wrapper">
+
+    <div class="main-title">알아두면 좋은 유틸리티</div>
+    <div class="body-text">누구나 한번쯤은 사용하게 되는 각종 유틸리티</div>
+<br><br>
+
+    <!-- ✅ 리스트들 -->
+    <a href="util-exchange.html" class="post-link">
+      <div class="post-list">
+        <img class="thumbnail" src="img/util-exchange.webp">
+        <div class="text-content">
+          <div class="sub-title">원/달러 환율 계산기</div>
+          <div class="body-text">코인의 시세(달러)를 빠르게<br>원화로 계산해보세요.</div>
+        </div>
+      </div>
+    </a>
+
+    <a href="util-time.html" class="post-link">
+      <div class="post-list">
+        <img class="thumbnail" src="img/util-time.webp">
+        <div class="text-content">
+          <div class="sub-title">UTC 시간 변환기</div>
+          <div class="body-text">코인 거래 시간이나 정해진 UTC 시간을<br>국내 시간으로 변환해보세요.</div>
+        </div>
+      </div>
+    </a>
+
+    <a href="util-age.html" class="post-link">
+      <div class="post-list">
+        <img class="thumbnail" src="img/util-age.webp" >
+        <div class="text-content">
+          <div class="sub-title">만나이 계산기</div>
+          <div class="body-text">내 나이가 몇이지?<br>만나이를 계산해보세요.</div>
+        </div>
+      </div>
+    </a>
+
+
+    <a href="util-dday.html" class="post-link">
+      <div class="post-list">
+        <img class="thumbnail" src="img/util-dday.webp" >
+        <div class="text-content">
+          <div class="sub-title">D-day 계산기</div>
+          <div class="body-text">코인 상장일까지 몇일이 남았나?<br>D-day 계산기를 이용해보세요.</div>
+        </div>
+      </div>
+    </a>
+
+
+    <a href="util-meter.html" class="post-link">
+      <div class="post-list">
+        <img class="thumbnail" src="img/util-meter.webp" >
+        <div class="text-content">
+          <div class="sub-title">평/ 제곱미터(㎡) 변환기</div>
+          <div class="body-text">코인해서 돈벌면 뭐 살건가요?<br>땅이나 주택살 때 필요한 평수 계산!</div>
+        </div>
+      </div>
+    </a>
+
+
+    <a href="util-ip.html" class="post-link">
+      <div class="post-list">
+        <img class="thumbnail" src="img/util-ip.webp" >
+        <div class="text-content">
+          <div class="sub-title">자신의 IP 확인하기</div>
+          <div class="body-text">내 아이피 주소는 어떻게 되지?<br>지금 당장 알아보세요.</div>
+        </div>
+      </div>
+    </a>
+
+
+    <a href="util-filename-exchange.html" class="post-link">
+      <div class="post-list">
+        <img class="thumbnail" src="img/util-filename-exchange.webp" >
+        <div class="text-content">
+          <div class="sub-title">파일명 일괄 변경기</div>
+          <div class="body-text">이제 단순 반복 작업은 그만!<br>파일명을 일괄 변경하세요.</div>
+        </div>
+      </div>
+    </a>
+
+
+    <a href="util-convert-webp.html" class="post-link">
+      <div class="post-list">
+        <img class="thumbnail" src="img/util-convert-webp.webp" >
+        <div class="text-content">
+          <div class="sub-title">PNG ↔ WebP 변환</div>
+          <div class="body-text">이미지를 다운 받았는데 Webp<br>Webp를 PNG로 변환하세요.</div>
+        </div>
+      </div>
+    </a>
+
+
+    <a href="util-png-resize.html" class="post-link">
+      <div class="post-list">
+        <img class="thumbnail" src="img/util-png-resize.webp" >
+        <div class="text-content">
+          <div class="sub-title">PNG 용량 축소</div>
+          <div class="body-text">이미지를 올리려는데 용량이 너무 커!<br>PNG 용량을 효율적으로 축소하세요.</div>
+        </div>
+      </div>
+    </a>
+
+<br>
+
+    <!-- ✅ URL 복사 버튼 -->
+    <div style="text-align: center; margin-top: 20px;">
+      <img src="img/url copy.png" alt="URL 복사버튼" id="copyUrlBtn"
+           style="cursor: pointer; width: 50px; height: 50px; margin-bottom: 4px;"
+           title="이 페이지 URL 복사" />
+    </div>
+
+    <script>
+      document.getElementById('copyUrlBtn').addEventListener('click', function () {
+        const url = window.location.href;
+        navigator.clipboard.writeText(url).then(function () {
+          alert('✅ 페이지 URL이 복사되었습니다!');
+        }, function () {
+          alert('❌ URL 복사에 실패했습니다. 브라우저를 확인해주세요.');
+        });
+      });
+    </script>
+
+    <div class="note" style="text-align: center; margin-top: 0;">
+      이 페이지 URL 복사
+    </div>
+
+    <br>
+
+
+
+
+  </div>
+</body>
+</html>

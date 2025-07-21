@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>비트코인 도미넌스 차트 - 코인씨</title>
+
+<!-- ✅ SEO 및 Open Graph 메타태그 -->
+<meta name="description" content="비트코인 도미넌스를 실시간 차트로 확인하고 시장의 흐름을 이해하세요. 비트코인의 시가총액 비율과 투자 심리 변화 파악.">
+<meta name="keywords" content="비트코인 도미넌스, BTC Dominance, 도미넌스 차트, 비트코인 시가총액, 암호화폐 시장 흐름, 알트코인 영향력, 코인씨">
+<meta name="author" content="코인씨(CoinSea)">
+<meta name="robots" content="index, follow">
+
+<!-- ✅ Open Graph (SNS 공유용) -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="비트코인 도미넌스 차트 - 코인씨">
+<meta property="og:description" content="비트코인 도미넌스를 실시간으로 확인하고 상승/하락에 따른 시장 심리를 파악해보세요.">
+<meta property="og:image" content="https://coinsea.co.kr/img/og-dominance.webp">
+<meta property="og:url" content="https://coinsea.co.kr/mainposting-dominance.html"> 
+<meta property="og:site_name" content="코인씨">
+
+
+<!-- ✅ Google Fonts 최적화 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet"></noscript>
+
+<!-- ✅ Font Awesome 최적화 -->
+<link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"></noscript>
+
+
+<!-- 가장 일반적인 파비콘 -->
+<link rel="icon" href="/favicon.ico" />
+
+<!-- 고해상도 디바이스 대응 -->
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon/android-icon-192x192.png" />
+
+<!-- 애플 터치용 최소 하나 -->
+<link rel="apple-touch-icon" href="/favicon/apple-icon-180x180.png" />
+
+<!-- ✅ 공통 스타일 -->
+<link rel="stylesheet" href="/css/common.css" />
+
+  <style>
+    .desc {
+      font-size: 15px;
+      text-align: center;
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+
+    .small-info {
+      font-size: 13px;
+      text-align: center;
+      color: #888;
+      margin-bottom: 20px;
+    }
+
+    .tradingview-widget-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+ .content-wrapper {
+  max-width: 800px;       /* 최대 너비 설정 */
+  margin: 0 auto;         /* 가운데 정렬 */
+  padding: 20px;
+  text-align: left;       /* 내용은 좌측 정렬 */
+    }
+
+  </style>
+</head>
+<body>
+<div class="content-wrapper"> <!-- ■ 전체를 감싸는 DIV 시작 -->
+
+<div class="main-title">비트코인 도미넌스</div>
+ <p><strong>"전체 암호화폐 시장에서 비트코인이 차지하는 비율"</strong>을 의미합니다.</p>
+<p>쉽게 말해, 도미넌스가 50%라면 전체 코인 시장의 절반이 비트코인이라는 뜻입니다.<br>
+예를 들어 전체 시장이 100조 원이면 그중 50조 원이 비트코인, 나머지 50조 원은 이더리움, 리플 같은 알트코인입니다.</p>
+<br>
+
+<div class="sub-title-box">비트코인 도미넌스 실시간 차트</div>
+ <div style="height: 0.8em;"></div>
+<div style="max-width: 800px; margin: 0 auto; line-height: 1.7; font-size: 15px;">
+    비트코인 도미넌스는 전체 암호화폐 시장에서 비트코인이 차지하는 시가총액 비율입니다.<br/>
+<div style="height: 0.8em;"></div>
+    도미넌스 상승은 알트코인 대비 비트코인의 영향력이 커지는 것을 의미합니다.
+  </div>
+<br>
+  <div class="small-info">
+    최근 업데이트: <span id="today-date"></span> · 매 5분마다 자동 갱신
+  </div>
+
+  <div class="tradingview-widget-container">
+    <div id="tradingview_dominance"></div>
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+    <script type="text/javascript">
+     new TradingView.widget({
+  "width": "100%",
+  "height": 200,                  // ✅ 높이 줄임
+  "symbol": "CRYPTOCAP:BTC.D",
+  "interval": "D",
+  "timezone": "Asia/Seoul",
+  "theme": "light",
+  "style": "3",                   // ✅ 라인차트
+  "locale": "ko",
+  "toolbar_bg": "#f1f3f6",
+  "enable_publishing": false,
+  "hide_top_toolbar": false,
+  "hide_legend": true,
+  "hide_volume": true,           // ✅ 거래량 제거
+  "save_image": false,
+  "container_id": "tradingview_dominance"
+});
+
+
+    </script>
+  </div>
+<br>
+
+
+<div class="sub-title-box">📈 도미넌스가 <u>100%에 가까워진다</u>는 건?</div>
+    <ul>
+      <li>시장에 <strong>비트코인만 살아있다</strong>는 의미에 가깝습니다.</li>
+      <li>알트코인의 영향력은 거의 없고, 투자자들이 전부 비트코인에만 집중하고 있다는 뜻입니다.</li>
+      <li>주로 암호화폐 시장 초창기이거나, 투자 심리가 매우 위축됐을 때 발생합니다.</li>
+    </ul>
+    <p><strong>비유하자면:</strong> 도미넌스 100%는 ‘비트코인만 믿고 가는 시장’입니다.</p>
+<br>
+
+<div class="sub-title-box">📉 도미넌스가 <u>0%에 가까워진다</u>는 건?</div>
+    <ul>
+      <li><strong>비트코인의 영향력이 거의 사라진 것</strong>을 의미합니다.</li>
+      <li>이론상 가능하지만 현실에선 거의 일어나지 않습니다.</li>
+      <li>알트코인이 비트코인보다 훨씬 더 큰 역할과 가치를 가지게 된 상태입니다.</li>
+    </ul>
+    <p><strong>비유하자면:</strong> 도미넌스 0%는 ‘비트코인이 잊힌 시장’입니다.</p>
+
+<br>
+
+<div class="sub-title-box">📊 실제로는?</div>
+    <ul>
+      <li>현재 도미넌스는 보통 <strong>40~55%</strong> 사이에서 움직입니다.</li>
+      <li>시장이 무서워지면 도미넌스가 올라가고 (비트코인으로 피신),</li>
+      <li>시장이 낙관적이면 도미넌스가 낮아집니다 (알트코인 투자 증가).</li>
+    </ul>
+<br>
+
+<div class="sub-title-box">🔍 핵심 요약</div>
+    <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+      <thead>
+        <tr style="background: #f1f1f1;">
+          <th style="padding: 8px; border: 1px solid #ccc;">도미넌스</th>
+          <th style="padding: 8px; border: 1px solid #ccc;">의미</th>
+          <th style="padding: 8px; border: 1px solid #ccc;">시장 심리</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="padding: 8px; border: 1px solid #ccc;">높을수록 ↑</td>
+          <td style="padding: 8px; border: 1px solid #ccc;">비트코인에 자금 집중</td>
+          <td style="padding: 8px; border: 1px solid #ccc;">보수적, 불안한 시장</td>
+        </tr>
+        <tr>
+          <td style="padding: 8px; border: 1px solid #ccc;">낮을수록 ↓</td>
+          <td style="padding: 8px; border: 1px solid #ccc;">알트코인에 자금 분산</td>
+          <td style="padding: 8px; border: 1px solid #ccc;">낙관적, 활기찬 시장</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- 비트코인 도미넌스 설명 종료 -->
+
+<br><br>
+
+
+<!-- ✅ URL 복사 아이콘 버튼 시작 -->
+<div style="text-align: center; margin-top: 20px;">
+  <div id="copyUrlBtn" title="이 페이지 URL 복사" style="cursor: pointer; display: inline-block;">
+
+<svg height="75px" width="75px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 427.479 427.479" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path style="fill:#51CAF4;" d="M214.396,427.479h-11c0-22.658,5.655-34.109,11.124-45.183c5.137-10.399,9.987-20.222,9.987-40.311 c0-20.089-4.852-29.912-9.987-40.311c-5.469-11.074-11.124-22.524-11.124-45.182c0-22.658,5.655-34.109,11.124-45.183 c5.136-10.399,9.987-20.222,9.987-40.312c0-20.091-4.852-29.914-9.987-40.314c-5.469-11.075-11.124-22.526-11.124-45.185 s5.655-34.11,11.124-45.185c5.136-10.4,9.987-20.223,9.987-40.313h11c0,22.659-5.655,34.11-11.124,45.184 c-5.136,10.4-9.987,20.224-9.987,40.314s4.852,29.914,9.987,40.314c5.469,11.075,11.124,22.526,11.124,45.185 c0,22.658-5.655,34.109-11.124,45.183c-5.136,10.399-9.987,20.222-9.987,40.312c0,20.089,4.852,29.912,9.987,40.311 c5.469,11.074,11.124,22.524,11.124,45.182s-5.655,34.108-11.124,45.182C219.248,397.566,214.396,407.389,214.396,427.479z"></path> <path style="fill:#51CAF4;" d="M208.91,76.496L208.91,76.496c-29.822,0-53.997-24.175-53.997-53.997v0h0 C184.734,22.499,208.91,46.674,208.91,76.496L208.91,76.496z"></path> <path style="fill:#51CAF4;" d="M208.91,239.238L208.91,239.238c-29.822,0-53.997-24.175-53.997-53.997v0h0 C184.734,185.241,208.91,209.416,208.91,239.238L208.91,239.238z"></path> <path style="fill:#51CAF4;" d="M226.909,371.981L226.909,371.981c-29.822,0-53.997-24.175-53.997-53.997v0h0 C202.734,317.984,226.909,342.159,226.909,371.981L226.909,371.981z"></path> <path style="fill:#51CAF4;" d="M217.909,122.994L217.909,122.994c29.822,0,53.997-24.175,53.997-53.997v0h0 C242.085,68.996,217.909,93.172,217.909,122.994L217.909,122.994z"></path> <path style="fill:#51CAF4;" d="M217.909,285.736L217.909,285.736c29.822,0,53.997-24.175,53.997-53.997v0h0 C242.085,231.738,217.909,255.914,217.909,285.736L217.909,285.736z"></path> <path style="fill:#51CAF4;" d="M78.562,427.479h-11c0-22.658,5.655-34.108,11.124-45.183c5.136-10.399,9.987-20.222,9.987-40.311 c0-20.089-4.852-29.911-9.987-40.311c-5.469-11.074-11.124-22.524-11.124-45.182c0-22.658,5.655-34.109,11.124-45.183 c5.136-10.399,9.987-20.222,9.987-40.312c0-20.091-4.852-29.914-9.987-40.314c-5.469-11.075-11.124-22.526-11.124-45.185h11 c0,20.091,4.852,29.914,9.987,40.314c5.469,11.075,11.124,22.526,11.124,45.185c0,22.658-5.655,34.109-11.124,45.183 c-5.136,10.399-9.987,20.222-9.987,40.312c0,20.089,4.852,29.911,9.987,40.311c5.469,11.074,11.124,22.524,11.124,45.182 s-5.655,34.108-11.124,45.182C83.414,397.566,78.562,407.389,78.562,427.479z"></path> <path style="fill:#51CAF4;" d="M73.076,239.238L73.076,239.238c-29.822,0-53.997-24.175-53.997-53.997v0h0 C48.901,185.241,73.076,209.416,73.076,239.238L73.076,239.238z"></path> <path style="fill:#51CAF4;" d="M91.898,368.981L91.898,368.981c-29.822,0-53.997-24.175-53.997-53.997v0h0 C67.723,314.984,91.898,339.159,91.898,368.981L91.898,368.981z"></path> <path style="fill:#51CAF4;" d="M82.076,122.994L82.076,122.994c29.822,0,53.997-24.175,53.997-53.997v0h0 C106.251,68.996,82.076,93.172,82.076,122.994L82.076,122.994z"></path> <path style="fill:#51CAF4;" d="M82.076,285.736L82.076,285.736c29.822,0,53.997-24.175,53.997-53.997v0h0 C106.251,231.738,82.076,255.914,82.076,285.736L82.076,285.736z"></path> <path style="fill:#51CAF4;" d="M347.889,427.479h-11c0-22.658,5.655-34.108,11.124-45.183c5.137-10.399,9.987-20.222,9.987-40.311 c0-20.089-4.852-29.912-9.987-40.311c-5.469-11.074-11.124-22.524-11.124-45.182c0-22.658,5.655-34.109,11.124-45.183 c5.136-10.399,9.987-20.222,9.987-40.312h11c0,22.658-5.655,34.109-11.124,45.183c-5.136,10.399-9.987,20.222-9.987,40.312 c0,20.089,4.852,29.912,9.987,40.311c5.469,11.074,11.124,22.524,11.124,45.182s-5.655,34.108-11.124,45.182 C352.741,397.566,347.889,407.389,347.889,427.479z"></path> <path style="fill:#51CAF4;" d="M342.403,239.238L342.403,239.238c-29.822,0-53.997-24.175-53.997-53.997v0h0 C318.228,185.241,342.403,209.416,342.403,239.238L342.403,239.238z"></path> <path style="fill:#51CAF4;" d="M355.902,373.481L355.902,373.481c-29.822,0-53.997-24.175-53.997-53.997v0h0 C331.727,319.484,355.902,343.659,355.902,373.481L355.902,373.481z"></path> <path style="fill:#51CAF4;" d="M354.403,302.235L354.403,302.235c29.822,0,53.997-24.175,53.997-53.997v0h0 C378.578,248.237,354.403,272.413,354.403,302.235L354.403,302.235z"></path> </g> </g></svg>
+
+  </div>
+</div>
+
+<script>
+  document.getElementById('copyUrlBtn').addEventListener('click', function () {
+    const url = window.location.href;
+    navigator.clipboard.writeText(url).then(function () {
+      alert('✅ 페이지 URL이 복사되었습니다!');
+    }, function () {
+      alert('❌ URL 복사에 실패했습니다. 브라우저를 확인해주세요.');
+    });
+  });
+</script>
+
+<div class="note" style="text-align: center; margin-top: 0;">
+URL 복사
+</div>
+<!-- ✅ URL 복사 아이콘 버튼 종료 -->
+
+  <script>
+    // 오늘 날짜 출력
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const dd = String(today.getDate()).padStart(2, '0');
+    document.getElementById('today-date').textContent = `${yyyy}-${mm}-${dd}`;
+  </script>
+
+</div> <!-- ■ 전체를 감싸는 DIV 종료 -->
+
+<br>
+<script> <!-- ■ 하단 일괄 공지 -->
+  document.addEventListener("DOMContentLoaded", function () {
+    fetch("notice-bottom.html")
+      .then(res => res.text())
+      .then(html => {
+        const tempDiv = document.createElement("div");
+        tempDiv.innerHTML = html;
+        document.body.appendChild(tempDiv); // ✅ body 맨 끝에 삽입
+      });
+  });
+</script>
+</body>
+</html>

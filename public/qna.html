@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>코인 관련 자주묻는 질문 총정리</title>
+
+<!-- ✅ SEO 및 Open Graph + Twitter 메타태그 -->
+<meta name="title" content="거래량 상위 30개 코인 실시간 시세 - 코인씨" />
+<meta name="description" content="바이낸스 기준 거래량 상위 30개 코인의 실시간 시세와 등락률을 확인하세요. 30초 간격으로 자동 업데이트됩니다." />
+<meta name="keywords" content="코인 시세, 실시간 코인가격, 바이낸스, USDT, 비트코인, 이더리움, 암호화폐 가격, 코인 거래량 순위, 코인씨 CoinSea" />
+<meta name="author" content="CoinSea" />
+<meta name="robots" content="index, follow" />
+
+<!-- ✅ Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="거래량 상위 30개 코인 실시간 시세 - 코인씨" />
+<meta property="og:description" content="실시간 코인 시세를 확인하고 거래량 상위 종목들의 시장 흐름을 한눈에 파악해보세요. 매 30초 자동 갱신." />
+<meta property="og:url" content="https://coinsea.co.kr/qna.html" />
+<meta property="og:image" content="https://coinsea.co.kr/img/og-qna.webp" />
+<meta property="og:site_name" content="코인씨" />
+<meta property="og:locale" content="ko_KR" />
+
+<!-- ✅ Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="거래량 상위 30개 코인 실시간 시세 - 코인씨" />
+<meta name="twitter:description" content="30초마다 자동 업데이트되는 거래량 상위 코인 시세 정보를 확인해보세요." />
+<meta name="twitter:image" content="https://coinsea.co.kr/img/og-qna.webp" />
+
+
+<!-- ✅ Google Fonts 최적화 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet"></noscript>
+
+<!-- ✅ Font Awesome 최적화 -->
+<link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"></noscript>
+
+
+<!-- 가장 일반적인 파비콘 -->
+<link rel="icon" href="/favicon.ico" />
+
+<!-- 고해상도 디바이스 대응 -->
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon/android-icon-192x192.png" />
+
+<!-- 애플 터치용 최소 하나 -->
+<link rel="apple-touch-icon" href="/favicon/apple-icon-180x180.png" />
+
+
+  <style>
+    body {
+      font-family: 'Nanum Gothic', sans-serif;
+      margin: 0;
+      padding: 5px;
+      background-color: #fff;
+      color: #333;
+    }
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+
+
+.menu-tabs {
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;      /* ✅ 중앙 정렬 */
+  gap: 12px;                    /* ✅ 항목 간 간격 */
+  padding: 15px 0 4px;          /* ✅ 위 여백 줄이기 (기존: 12px 0) */
+  font-weight: bold;
+  border-bottom: 2px solid #000;
+  width: 100%;
+  margin: 0;                    /* ✅ 좌우 여백 제거 */
+  box-sizing: border-box;
+}
+
+  .menu-tabs a {
+    color: #999;
+    text-decoration: none;
+    padding-bottom: 6px;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s ease;
+  }
+
+  .menu-tabs a.active {
+    color: #000; /* 선택된 탭의 색상 */
+    border-bottom: 3px solid #000; /* 두꺼운 밑줄 */
+  }
+
+.menu-tabs a:hover {
+  color: #000;
+}
+
+.section {
+  border: none;
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 0 auto 40px auto;
+  max-width: 800px;
+  width: 100%;
+  box-sizing: border-box;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+    .section h2 {
+      font-size: 18px;
+      margin-top: 0;       /* 위 여백 제거 */
+      margin-bottom: 16px; /* 아래 여백만 적절히 유지 */
+padding-bottom: 6px;
+  border-bottom: 1px solid #000; /* ✅ 검정 가로선 */
+scroll-margin-top: 85px; /* ✅ 고정된 메뉴 높이만큼 여유 공간 확보 */
+    }
+
+h2 {
+  scroll-margin-top: 85px;
+}
+
+    .icon-grid {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: repeat(4, 1fr); /* 기본: 모바일 4개 */
+    }
+
+    @media (min-width: 768px) {
+      .icon-grid {
+        grid-template-columns: repeat(6, 1fr); /* PC 6개 */
+      }
+    }
+
+    .icon-item {
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .icon-item img {
+      width: 36px;
+      height: 36px;
+      margin-bottom: 6px;
+border-radius: 8px; /* ← 사각형 모서리를 둥글게 */
+    }
+
+  .icon-item:hover {
+    color: orange;
+  }
+
+  .icon-item:hover svg {
+    stroke: orange;
+  }
+
+html {
+  scroll-behavior: smooth;
+}
+
+    .main-title {
+      font-size: 26px;
+      font-weight: bold;
+      margin-bottom: 25px;
+      position: relative;
+      display: inline-block;
+      z-index: 0;
+    }
+
+    .main-title::after {
+      content: '';
+      position: absolute;
+      left: -7.5%;
+      right: -7.5%;
+      bottom: 1px;
+      height: 39%;
+      background-color: #f8cf26;
+      z-index: -1;
+    }
+
+    .notice-box {
+      border: none;
+      background: none;
+      padding: 0;
+      margin-bottom: 12px;
+    }
+
+    .sub-title {
+      font-size: 16px;
+      font-weight: normal;
+      padding: 12px 0;
+      color: #111;
+      cursor: pointer;
+      position: relative;
+      transition: color 0.2s;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .sub-title::after {
+      content: "\25BC";
+      position: absolute;
+      right: 4px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 14px;
+      color: #888;
+      transition: transform 0.2s;
+    }
+
+    .notice-box.active .sub-title::after {
+      content: "\25B2";
+    }
+
+    .body-text {
+      display: none;
+      padding: 8px 0 12px 0;
+      font-size: 15px;
+      line-height: 1.7;
+      color: #1e81b9;
+    }
+
+    .notice-box.active .body-text {
+      display: block;
+    }
+
+    .note {
+      font-size: 14px;
+      color: #555;
+      text-align: left;
+      margin-top: 20px;
+    }
+
+
+.coupang-banner-wrapper {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.coupang-banner-wrapper iframe,
+.coupang-banner-wrapper div {
+  max-width: 100% !important;
+  height: auto !important;
+}
+  .content-wrapper {
+  max-width: 800px;       /* 최대 너비 설정 */
+  margin: 0 auto;         /* 가운데 정렬 */
+  padding: 0px;
+  text-align: left;       /* 내용은 좌측 정렬 */
+    }
+
+</style>
+</head>
+<body>
+<div class="content-wrapper"> <!-- ■ 전체를 감싸는 DIV 시작 -->
+
+  <!-- 상단 탭 -->
+  <div class="menu-tabs">
+    <a href="#section1" class="active">코인일반</a>
+    <a href="#section2">현물거래</a>
+    <a href="#section3">선물거래</a>
+  </div>
+
+<br>
+  <!-- ★섹션 1: 코인일반 문답 -->
+
+  <div class="section">
+    <h2  id="section1">코인일반 문답</h2><div style="height: 0.8em;"></div>
+   
+ <div class="notice-box">
+    <div class="sub-title">청소년도 코인을 할 수 있나요?</div>
+    <div class="body-text">
+      우리나라에서 청소년(만 19세 미만)은 법적으로 암호화폐(코인) 거래를 할 수 없습니다.
+<div style="height: 0.8em;"></div>
+      만 19세, 자신의 생일이 지난 다음날부터 거래소에 가입할 수 있습니다.
+    </div>
+  </div>
+
+  <div class="notice-box">
+    <div class="sub-title">국내거래소는 아무 은행이나 사용해도 되나요?</div>
+    <div class="body-text">
+      국내거래소는 지정된 은행이 있습니다. 반드시 지정 은행만 이용하셔야 합니다.
+<div style="height: 0.8em;"></div>
+      업비트-K뱅크, 빗썸-KB국민은행, 코인원-카카오뱅크, 코빗-신한은행, 고팍스-전북은행.
+    </div>
+  </div>
+
+  <div class="notice-box">
+    <div class="sub-title">코인 양도소득세는 언제 납부하나요?</div>
+    <div class="body-text">
+      코인 거래수익에 대한 양도소득세는 27년 1월로 유예되었습니다.<div style="height: 0.8em;"></div>
+27년 1월 1일부터 12월 31일까지의 수익이 250만원을 초과하면, 초과분에 대해서 22% 과세됩니다. 
+    </div>
+  </div>
+
+  <div class="notice-box">
+    <div class="sub-title">원화를 입금후, 언제 코인을 출금할 수 있나요?</div>
+    <div class="body-text">
+      원화입금이 처음이라면 72시간 후에 코인을 출금할 수 있습니다. 그리고 매번 원화 입금시마다 24시간의 출금제한이 있습니다.
+    </div>
+  </div>
+
+  <div class="notice-box">
+    <div class="sub-title">코인은 몇시까지 거래를 할 수 있나요?</div>
+    <div class="body-text">
+      코인은 휴일, 휴장이라는 것이 없고 365일, 24시간 거래가 이루어집니다.
+    </div>
+  </div>
+
+  <div class="notice-box">
+    <div class="sub-title">코인이 상장폐지되면 휴지조각이 되나요?</div>
+    <div class="body-text">
+      코인이 상장폐지되면 해당 거래소에서는 더 이상 거래를 할 수 없습니다.<div style="height: 0.8em;"></div>
+다만 코인은 이동이 자유로워서 아직 거래할 수 있는 곳이 있다면 그곳으로 옮겨서 계속 거래를 할 수 있습니다.<div style="height: 0.8em;"></div>
+이동할 수 있는 곳이 한군데도 없고, 거래소에서는 상폐되면 휴지조각과 마찬가지입니다.
+    </div>
+  </div>
+
+  <div class="notice-box">
+    <div class="sub-title">코인은 최대 변동폭이 몇퍼센트인가요?</div>
+    <div class="body-text">
+      코인은 상승이나 하락의 가격 제한 폭이 없습니다.<div style="height: 0.8em;"></div>
+하루에 50%가 하락하기도 하고, 하루에 200%가 상승하기도 합니다.
+    </div>
+  </div>
+
+<div class="notice-box">
+    <div class="sub-title">코인은 소액으로도 가능한가요?</div>
+    <div class="body-text">
+      코인의 최소 거래 가능 금액은 5천원입니다. 그 이상만 있으면 얼마든지 거래를 할 수 있습니다.
+    </div>
+  </div>
+
+  <div class="notice-box">
+    <div class="sub-title">코인은 하루에 몇번 사고 팔 수 있나요?</div>
+    <div class="body-text">
+      코인의 거래 회수 제한은 없습니다. 최소 거래금액인 5,000원 이상만 거래하시면 됩니다.
+    </div>
+  </div>
+
+  <div class="notice-box">
+    <div class="sub-title">다른 거래소로 옮겨서 거래를 할 수 있나요?</div>
+    <div class="body-text">
+      코인은 동일한 코인이 상장되어 있고, 동일한 네트워크를 사용한다면 얼마든지 옮겨서 매도나 거래를 할 수 있습니다.
+    </div>
+  </div>
+
+  <div class="notice-box">
+    <div class="sub-title">왜 거래소마다 코인의 가격이 다른가요?</div>
+    <div class="body-text">
+      코인은 주식과 달리 중앙기관이 존재하지 않습니다. 따라서 거래소별로 약간씩 가격 차이가 발생합니다.<div style="height: 0.8em;"></div>
+다만 코인은 이동이 자유롭고, 메이저 거래소 가격을 추종하다 보니 가격들이 비슷하게 유지됩니다.
+    </div>
+  </div>
+
+  <div class="notice-box">
+    <div class="sub-title">코인해서 손실이 발생하면 빚이 생기나요?</div>
+    <div class="body-text">
+      코인은 국내에서 하는 현물거래건, 해외에서 하는 선물거래건 투자금이 0원이 되면 끝이고 별도의 빚이 발생하지는 않습니다.
+    </div>
+  </div>
+
+  <div class="notice-box">
+    <div class="sub-title">알트코인이라고 따로 있나요?</div>
+    <div class="body-text">
+      비트코인을 제외한 모든 코인을 알트코인이라고 부릅니다.
+    </div>
+  </div>
+
+  <div class="notice-box">
+    <div class="sub-title">코인을 하면 신용등급이 하락하나요?</div>
+    <div class="body-text">
+      단지 코인을 한다고 해서 신용등급이 하락하지는 않습니다.<div style="height: 0.8em;"></div> 
+다만 코인거래를 하기 위해서 무리하게 대출 등을 진행하면 신용등급이 하락될 수 있습니다.
+    </div>
+  </div>
+
+  <div class="notice-box">
+    <div class="sub-title">코인은 전액 현금화하는데 몇일 걸리나요?</div>
+    <div class="body-text">
+      현재가보다 높은 가격으로 매도를 하는 것이 아니라면, 코인을 전액 현금화하려면 1분이면 충분합니다.<div style="height: 0.8em;"></div>
+참고로 주식은 전액 현금화하는데 2영업일이 소요됩니다.
+    </div>
+  </div>
+
+  <div class="notice-box">
+    <div class="sub-title">내 입금주소를 알면 코인을 빼갈 수 있나요?</div>
+    <div class="body-text">
+      코인의 입금주소는 택배로 예를 들자면, 자신의 집주소와 같습니다. 내 코인의 입금주소를 안다고 누군가 코인을 빼갈 수 있는 것은 아닙니다.<div style="height: 0.8em;"></div>
+다만 코인은 투명성이 원칙이라 내 코인의 입금주소를 안다면 과거 입출금 내역과 잔액을 파악할 수 있습니다.
+    </div>
+  </div>
+
+  <div class="notice-box">
+    <div class="sub-title">증정금을 받았는데 사용해도 되나요?</div>
+    <div class="body-text">
+      증정금은 이벤트 대상자에게 무료로 지급하는 것으로, 받았다면 마음대로 사용해도 됩니다.<div style="height: 0.8em;"></div>
+다만 거래소에서 30일 이후에 출금할 수 있다는 규정 등을 정해놓으니 해당 규정을 준수하시면 됩니다.
+    </div>
+  </div>
+
+  <div class="notice-box">
+    <div class="sub-title">최소 입금수량 미만으로 입금했어요?</div>
+    <div class="body-text">
+      최소 입금수량이 지정된 코인을 최소 입금 수량 미만으로 입금하시면 잔고에 반영되지 않으며 입금 취소도 불가합니다.<div style="height: 0.8em;"></div>
+최소 입금 수량 이상을 추가로 입금하시면 기존에 미반영된 건의 수량과 함께 입금 반영됩니다.
+    </div>
+  </div>
+
+  </div><!-- 섹센1을 감싸는 div로 지우면 안됨★ -->
+
+<div style="text-align: center;">
+<svg height="64px" width="64px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 441.296 441.296" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <path style="fill:#42D153;" d="M87.536,214.216L87.536,214.216l-28.012,0C26.65,214.217,0,187.566,0,154.692v0h28.012 C60.886,154.692,87.536,181.342,87.536,214.216z"></path> <path style="fill:#42D153;" d="M87.536,214.217L87.536,214.217l-28.012,0C26.65,214.217,0,240.867,0,273.741v0h28.012 C60.886,273.741,87.536,247.091,87.536,214.217z"></path> </g> <path style="fill:#42D153;" d="M65.58,214.217c71.933-48.892,116.046-103.729,203.024-103.729 c36.572,0,73.047,4.643,108.413,13.801l-15.785,53.122l-163.598,18.157L65.58,214.217z"></path> <path style="fill:#53F26D;" d="M416.376,226.776h18.09c-3.55,13.36-12.91,25.34-28.08,31.44c-0.52,0.21-1.04,0.41-1.57,0.6 c-12.05,4.4-24.27,8.19-36.6,11.39c-32.65,8.46-66.13,12.68-99.6,12.68c-46.7,0-93.41-8.22-137.83-24.66 c-29.7-10.99-58.39-25.66-85.37-44c96.3-65.46,214.2-84.11,322.82-55.99c12.32,3.19,24.54,6.98,36.59,11.38 c18.38,6.72,28.66,21.88,30.84,38.03h-0.16C424.945,207.646,416.376,216.216,416.376,226.776z"></path> <path style="fill:#92F49E;" d="M406.385,258.216c-0.52,0.21-1.04,0.41-1.57,0.6c-12.05,4.4-24.27,8.19-36.6,11.39 c-32.65,8.46-66.13,12.68-99.6,12.68c-46.7,0-93.41-8.22-137.83-24.66c76.28-28.24,159.27-32.23,237.45-11.99 c12.32,3.19,24.54,6.98,36.59,11.38C405.356,257.805,405.876,258.006,406.385,258.216z"></path> <path style="fill:#42D153;" d="M416.377,226.776h23.632c-3.507,12.263-12.305,23.186-26.374,28.701 c-14.898,5.844-30.061,10.754-45.416,14.728c-7.736-17.066-12.05-36.023-12.05-55.978c0-19.966,4.314-38.913,12.061-55.989 c15.355,3.974,30.518,8.873,45.416,14.717c16.311,6.397,25.534,20.073,27.649,34.694h-5.791 C424.942,207.649,416.377,216.214,416.377,226.776z"></path> <g> <circle style="fill:#FFFFFF;" cx="386.486" cy="209.433" r="18.752"></circle> <circle style="fill:#4D4D4D;" cx="386.486" cy="209.433" r="11.473"></circle> </g> <path style="fill:#42D153;" d="M241.185,330.808L241.185,330.808c-11.933-22.244-3.574-49.95,18.67-61.883l46.244-24.807l0,0 c11.933,22.244,3.574,49.95-18.671,61.883L241.185,330.808z"></path> </g> </g></svg>
+</div>
+
+  <!-- ★섹션 2: 현물거래 문답 -->
+  <div class="section">
+    <h2 id="section2">현물거래 문답</h2><div style="height: 0.8em;"></div>
+
+
+  <div class="notice-box">
+    <div class="sub-title">1억5천만원이 있어야 비트코인을 살 수 있나요?</div>
+    <div class="body-text">
+      코인은 소수점 이하 8자리까지 존재합니다. 그리고 국내에서 코인거래 최소금액은 5천원입니다.<div style="height: 0.8em;"></div>
+비트코인 1개가 1억5천만원이라면, 0.1개는 1,500만원, 0.01개는 150만원, 0.001개는 15만원... 이런식으로 소수점 이하로 최소 5천원 이상만 주문하시면 됩니다.
+    </div>
+  </div>
+
+  <div class="notice-box">
+    <div class="sub-title">원화를 출금하려는데 주소에는 무엇을 쓰나요?</div>
+    <div class="body-text">
+      코인에서 출금은 코인출금과 원화출금, 2가지가 있습니다.<div style="height: 0.8em;"></div>
+      코인출금은 외부로 코인을 보내는 것이고, 원화출금은 현금을 은행계좌로 출금하는 것입니다.
+<div style="height: 0.8em;"></div>
+출금시 주소를 입력하는 칸이 나온다면 그것은 코인의 출금입니다.
+<div style="height: 0.8em;"></div>
+원화를 출금하려면 우선 가지고 있는 코인을 마켓에서 매도한 후에 출금해야 합니다.
+    </div>
+  </div>
+
+  <div class="notice-box">
+    <div class="sub-title">주문을 했는데 1시간이 지나도 체결이 안되요?</div>
+    <div class="body-text">
+      코인거래는 지정가 주문과 시장가 주문이 있습니다.<div style="height: 0.8em;"></div>
+지정가 주문은 자신이 원하는 가격을 입력하여, 시세가 그 가격에 도달해야만 체결이 되는 방식입니다.<div style="height: 0.8em;"></div>
+시장가 주문은 가격에 상관없이 즉시 주문을 체결시키는 방식입니다.<div style="height: 0.8em;"></div>
+1시간이 지나도 체결이 안된다면 현재가보다 높은 가격으로 매도주문을 했거나, 현재가보다 낮은 가격으로 매수주문을 해서 그렇습니다.
+    </div>
+  </div>
+
+  <div class="notice-box">
+    <div class="sub-title">거래수수료는 어떻게 되나요?</div>
+    <div class="body-text">
+      국내거래소의 원화마켓은 지정가 주문과 시장가 주문의 수수료가 동일합니다.<div style="height: 0.8em;"></div>
+업비트: 0.05%, 빗썸: 0.04%, 코인원: 0.2%, 코빗: 0.1%, 고팍스: 0.2%<div style="height: 0.8em;"></div>
+다만 빗썸은 수수료 할인코드를 등록하지 않으면 0.25%로 업비트의 5배입니다.
+    </div>
+  </div>
+
+  <div class="notice-box">
+    <div class="sub-title">계정에 모르는 코인이 들어왔어요?</div>
+    <div class="body-text">
+      코인은 무료 에어드랍이라는 것이 있어서, 어떤 코인을 보유하고 있으면 새로 발행하는 코인을 무료로 나누주기도 합니다.<div style="height: 0.8em;"></div>
+예를 들면, 비트코인캐시가 비트코인을 보유하고 있던 사람들에게 무료로 나눠준 코인입니다.
+    </div>
+  </div>
+
+  <div class="notice-box">
+    <div class="sub-title">거래소에서 현금을 출금시 수수료는 어떻게 되나요?</div>
+    <div class="body-text">
+      국내거래소는 현금 출금시 1건당 1,000원의 수수료가 붙습니다.<div style="height: 0.8em;"></div>
+1만원을 출금해도 1,000원, 1억원을 출금해도 1,000원입니다.
+    </div>
+  </div>
+
+  <div class="notice-box">
+    <div class="sub-title">비트코인 출금수수료가 비싼데 어떤 코인으로 출금하나요? </div>
+    <div class="body-text">
+      국내거래소의 비트코인 출금수수료는 0.0009btc로 10만원이 넘어갑니다. 따라서 해외로 출금시에는 수수료가 저렴하고 전송속도가 빠른 리플이나 트론을 이용하는 것이 일반적입니다.<div style="height: 0.8em;"></div>
+리플은 0.4xrp인 1,200원 정도, 트론은 0.9trx인 350원 정도로 저렴합니다. 또한 트론 네트워크를 이용한 USDT의 출금수수료가 무료이므로 USDT로 출금을 하시면 됩니다.
+    </div>
+  </div>
+
+  <div class="notice-box">
+    <div class="sub-title">손절과 익절을 동시에 걸수는 없나요?</div>
+    <div class="body-text">
+      해외거래소는 TP(익절)과 SL(손절)을 동시에 걸수 있지만 국내거래소는 별로 어렵지도 않은 기능인데 아직까지 해당 기능을 지원하는 거래소가 없습니다.<div style="height: 0.8em;"></div>
+따라서 예약지정가로 손절만 걸거나, 익절만 걸어야 합니다.
+    </div>
+  </div>
+
+  <div class="notice-box">
+    <div class="sub-title">해외거래소 현물 코인중에 뒤에 x10이라고 된 것은 무엇인가요?</div>
+    <div class="body-text">
+      해외거래소의 현물 코인 뒤에 x5, x10이라고 되어 있는 코인들이 있습니다. 해외거래소는 현물거래와 마진거래가 하나의 차트를 이용하고, 선물거래만 별도의 차트를 이용합니다.<div style="height: 0.8em;"></div>예를 들어, ETHUSDT x10이라고 되어 있는 것은 이더리움(ETH) 현물거래와 10배 레버리지의 마진거래도 가능하다는 뜻입니다. 현물거래만 하시려면 해당 코인을 클릭하고 들어가서 Spot(현물거래) 탭에서 거래를 하시면 됩니다.
+    </div>
+  </div>
+
+  <div class="notice-box">
+    <div class="sub-title">BTC마켓에서 알트코인을 샀는데 BTC가 오르면 저도 이익인가요?</div>
+    <div class="body-text">
+      원화마켓, BTC마켓, USDT마켓은 어떤 것이 기축통화인지의 차이입니다. 원화마켓은 원화가 기축통화, BTC마켓은 비트코인이 기축통화, USDT마켓은 테더가 기축통화입니다.<div style="height: 0.8em;"></div>내가 산 코인의 시세가 올라야 이익이지, BTC나 USDT가 오른다고 이익이지는 않습니다. 비트코인이 3배 올라도 내가 산 코인이 50% 마이너스면, 그냥 50% 손실인 것입니다.
+    </div>
+  </div>
+
+  <div class="notice-box">
+    <div class="sub-title">시세 변동없이 해외거래소로 코인을 옮기기만 했는데 손실이 발생했어요?</div>
+    <div class="body-text">
+      국내거래소 코인의 가격이 해외거래소보다 비싼 현상을 김치프리미엄(김프)라고 합니다.<div style="height: 0.8em;"></div>만약 김프가 5%일 때, 국내에서 100만원을 해외로 출금하면 5%가 손실이 발생한 95만원이 됩니다. 또한 해외에서 100만원을 국내로 보내면 단지 이동만으로 105만원이 되어 5만원의 이익이 발생하기도 합니다. 이게 바로 김프입니다.
+    </div>
+  </div>
+
+
+    </div><!-- 섹센2를 감싸는 div로 지우면 안됨★ -->
+
+<div style="text-align: center;">
+<svg height="64px" width="64px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 441.215 441.215" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <path style="fill:#DB4545;" d="M94.78,307.715C42.31,307.507-0.208,264.65,0.001,212.18s43.065-94.987,95.535-94.779l-0.067,16.83 c-43.189-0.172-78.466,34.826-78.638,78.015s34.827,78.466,78.015,78.638L94.78,307.715z"></path> <path style="fill:#DB4545;" d="M345.679,308.712c52.47,0.208,95.326-42.309,95.535-94.779s-42.309-95.326-94.779-95.535 l-0.067,16.83c43.189,0.172,78.187,35.448,78.015,78.638s-35.449,78.187-78.638,78.015L345.679,308.712z"></path> <g> <path style="fill:#F74B4B;" d="M101.81,88.222c-23.651,23.464-23.803,61.658-0.339,85.309s61.658,23.803,85.309,0.339 l-42.485-42.824l42.824-42.485C163.655,64.909,125.461,64.758,101.81,88.222z"></path> <path style="fill:#F74B4B;" d="M340.393,89.169c-23.464-23.651-61.658-23.803-85.309-0.339l42.485,42.824l-42.824,42.485 c23.464,23.651,61.658,23.803,85.309,0.339C363.705,151.014,363.857,112.82,340.393,89.169z"></path> </g> </g> <g> <path style="fill:#DB4545;" d="M67.969,370.492L67.969,370.492l0-32.668h13.005v19.662 C80.974,364.67,75.152,370.492,67.969,370.492z"></path> <path style="fill:#DB4545;" d="M101.024,370.492L101.024,370.492l0-32.668h13.005v19.662 C114.03,364.67,108.207,370.492,101.024,370.492z"></path> <path style="fill:#DB4545;" d="M134.08,370.492L134.08,370.492l0-32.668h13.005v19.662 C147.085,364.67,141.262,370.492,134.08,370.492z"></path> </g> <g> <path style="fill:#DB4545;" d="M306.103,370.492L306.103,370.492c-7.183,0-13.005-5.823-13.005-13.005v-19.662h13.005V370.492z"></path> <path style="fill:#DB4545;" d="M339.158,370.492L339.158,370.492c-7.183,0-13.005-5.823-13.005-13.005v-19.662h13.005V370.492z"></path> <path style="fill:#DB4545;" d="M372.213,370.492L372.213,370.492c-7.183,0-13.005-5.823-13.005-13.005v-19.662h13.005V370.492z"></path> </g> <path style="fill:#F74B4B;" d="M372.211,343.776l-304.24-1.21c0.3-77.62,58.69-141.42,133.82-150.42c6.19-0.75,12.5-1.13,18.9-1.1 c5.79,0.02,11.5,0.37,17.12,1.03C313.741,200.876,372.53,265.546,372.211,343.776z"></path> <g> <g> <circle style="fill:#FFFFFF;" cx="197.393" cy="314.04" r="18.207"></circle> <circle style="fill:#4D4D4D;" cx="197.393" cy="314.04" r="11.14"></circle> </g> <g> <circle style="fill:#FFFFFF;" cx="243.869" cy="314.04" r="18.207"></circle> <circle style="fill:#4D4D4D;" cx="243.869" cy="314.04" r="11.14"></circle> </g> </g> <g> <path style="fill:#F74B4B;" d="M216.091,356.176L216.091,356.176c-6.075,0-11-4.925-11-11v-7h11V356.176z"></path> <path style="fill:#F74B4B;" d="M224.091,356.176L224.091,356.176l0-18h11v7C235.091,351.251,230.166,356.176,224.091,356.176z"></path> </g> <path style="fill:#DB4545;" d="M237.811,192.076l-18.02,82.1l-18-82.03c6.19-0.75,12.5-1.13,18.9-1.1 C226.481,191.066,232.191,191.416,237.811,192.076z"></path> </g> </g></svg>
+</div>
+
+  <!-- ★섹션 3: 선물거래 문답 -->
+  <div class="section">
+    <h2 id="section3">선물거래 문답</h2><div style="height: 0.8em;"></div>
+
+
+<div class="notice-box">
+    <div class="sub-title">국내에서 코인선물거래를 할 수 있나요?</div>
+    <div class="body-text">
+      국내에서는 코인선물거래가 금지되어 있어서 해외거래소를 이용해야 합니다. 바이낸스나 바이비트, 비트겟 등의 거래소를 이용하시면 됩니다.<div style="height: 0.8em;"></div>아래 메뉴중 "선물강좌" 버튼을 클릭하시면 거래소별 이용방법이 깔끔하게 정리되어 있으니 참고하시기 바랍니다.
+    </div>
+  </div>
+
+
+  <div class="notice-box">
+    <div class="sub-title">선물거래시 강제청산을 당하면 빚이 생기나요?</div>
+    <div class="body-text">
+      강제청산은 가지고 있던 증거금만큼의 손실이 발생해서 거래소에서 빌려준 자금을 회수하는 절차입니다. 따라서 강제청산을 당하면 투자금은 0원이 되거나, 0원에 가깝게 됩니다. 다만 강제청산을 당하면 투자금만 0원이 되고 별도의 빚이 발생하지는 않습니다.
+    </div>
+  </div>
+
+
+  <div class="notice-box">
+    <div class="sub-title">100배 레버리지로 거래면 수수료는 어떻게 되나요?</div>
+    <div class="body-text">
+      거래수수료는 지정가와 시장가가 있으며, 일반적으로 코인선물거래소의 시장가수수료율은 0.05% 내외입니다.<div style="height: 0.8em;"></div>코인거래수수료는 레버리지에 비례해서 부과되므로 100배 레버리지는 기본수수료의 100배입니다. 만약 시장가로 100배 레버리지를 하면 "거래수수료=100배×시장가수수료율(0.05%)"입니다.<div style="height: 0.8em;"></div>자세한 거래수수료 계산 방법은 좌측 상단의 메뉴 버튼을 누르면 "수수료 계산"이라고 메뉴가 있으니 참고하시기 바랍니다.
+    </div>
+  </div>
+
+
+  <div class="notice-box">
+    <div class="sub-title">선물거래 차트가 꼬였어요. 어떻게 해야 초기화할수 있나요?</div>
+    <div class="body-text">
+      차트 화면에서 마우스 오른쪽 버튼을 누르면 "Reset Chart"라는 기능이 있습니다. 그것을 클릭하면 차트가 초기화됩니다.
+    </div>
+  </div>
+
+
+  <div class="notice-box">
+    <div class="sub-title">펀딩비는 하루에 몇번 발생하나요?</div>
+    <div class="body-text">
+      펀딩비는 하루에 3번, 한국 시간으로 01시, 09시, 17시에 발생합니다. <div style="height: 0.8em;"></div>과도한 펀딩비가 예상된다면 펀딩비 발생시간 직전에 포지션을 종료하시고, 해당 시간이 지난 후 다시 포지션을 잡아도 됩니다.<div style="height: 0.8em;"></div>좌측 상단의 메뉴 버튼을 누르면 "펀딩비"라고 메뉴가 있으니 참고하시기 바랍니다.
+    </div>
+  </div>
+
+
+  <div class="notice-box">
+    <div class="sub-title">선물거래 수수료 할인은 어떻게 받을 수 있나요?</div>
+    <div class="body-text">
+      수수료 할인 방법은 여러가지가 있지만 대표적인 방법은 할인코드로 거래소에 가입을 하는 것입니다. 또한 거래소 코인(bnb, bgb, mx 등)으로 결제를 하면 수수료가 할인됩니다.<div style="height: 0.8em;"></div>거래소별 수수료 할인코드는 상단의 "할인코드"를 누르시면 나오니 참고하시기 바랍니다.
+    </div>
+  </div>
+
+
+  <div class="notice-box">
+    <div class="sub-title">교차모드에서 손실중인데 입금한 USDT가 사라졌어요?</div>
+    <div class="body-text">
+      거래방식은 교차(Cross)와 격리(Isolated)가 있는데 교차는 선물지갑의 사용가능한 자산 전체를 증거금으로 사용합니다. 그런데 손실중이라면 지갑의 자산을 자동으로 끌어다가 증거금으로 사용합니다. <div style="height: 0.8em;"></div>따라서 손실중에 입금을 하면 자동으로 USDT를 증거금으로 가져가 버리므로 증거금은 늘어났는데 사용가능한 자산은 0으로 표기됩니다.
+    </div>
+  </div>
+
+
+  <div class="notice-box">
+    <div class="sub-title">100배 레버리지면 100번중에 1번만 성공해도 되는거 아닌가요?</div>
+    <div class="body-text">
+      초보자 분들이 다들 그런 생각을 하고 선물거래에서 고배율 레버리지를 합니다. 그런데 100배 레버리지라는 것은 이론상 1%의 변동에 강제청산을 당하게 됩니다. 하루 24시간 거래에서 1%대의 변동이 몇번이나 발생할 거 같나요? 100번도 넘게 발생하기도 합니다. <div style="height: 0.8em;"></div>즉 100배 레버리지를 걸었는데 곧바로 원하는 방향으로 시세가 진행되는 것이 아니라면, 롱이건 숏이건 100이면 100! 전부 강제청산을 당한다고 생각하시기 바랍니다.
+    </div>
+  </div>
+
+
+  <div class="notice-box">
+    <div class="sub-title">바이낸스에 가입했는데 선물거래가 왜 안되요?</div>
+    <div class="body-text">
+      가입후 곧바로 선물거래를 할 수 있는 것이 아니라, 선물거래 화면으로 이동해서 하단의 선물거래 활성화를 해주셔야만 선물거래가 가능합니다.<div style="height: 0.8em;"></div>선물거래의 위험성에 대한 질문에 답을 하고, 인지하고 있다고 확인을 해주셔야 선물거래를 이용할 수 있습니다.
+    </div>
+  </div>
+
+
+  <div class="notice-box">
+    <div class="sub-title">MEXC에서 국내거래소로 출금할 수 있나요?</div>
+    <div class="body-text">
+      MEXC, BTCC, 쿠코인, 주멕스 등의 거래소는 불법영업행위 거래소로 분류되어 있으며, 금액 상관없이 국내거래소로 입출금이 금지되어 있습니다.<div style="height: 0.8em;"></div>해당 거래소를 이용하시려면 반드시 바이낸스, 바이비트, 비트겟과 같은 트래블룰 연동거래소를 경유해서 입출금하셔야 합니다.
+    </div>
+  </div>
+
+
+  <div class="notice-box">
+    <div class="sub-title">하나의 코인을 롱과 숏, 동시에 잡을수 있나요?</div>
+    <div class="body-text">
+      기본 설정은 롱이나, 숏, 하나의 방향만 잡을 수 있는 One-way 모드로 설정되어 있습니다. 따라서 양방향 거래를 하시려면 선물거래 설정 항목으로 이동해서 양방향인 Hedge 모드로 변경을 해주셔야 합니다.<div style="height: 0.8em;"></div>선물거래 화면 상단의 점 3개(...) 또는 톱니바퀴 아이콘을 클릭후, Preferences를 클릭후, Position mode를 Hedge Mode로 선택해주시면 됩니다.
+    </div>
+  </div>
+
+
+  <div class="notice-box">
+    <div class="sub-title">익절중인데도 강제청산을 당할 수 있나요?</div>
+    <div class="body-text">
+      강제청산은 원래 손실중에만 발생하지만 익절중인 경우에도 발생하기도 합니다. 포지션 탭을 보면 느낌표 표시나 빨간등 표시가 여러개 켜지는 경우가 있습니다.<div style="height: 0.8em;"></div>빨간색 느낌표는 롱이나 숏 포지션의 수가 압도적으로 많아서 포지션 정리시 해당 상승분이나 하락분 만큼의 수익을 지급해줄 수 없어서 미리 강제청산될 수 있다는 표시입니다.
+    </div>
+  </div>
+
+  <div class="notice-box">
+    <div class="sub-title">선물거래 목록중에 뒤에 날짜가 적혀있는 코인은 무엇인가요?</div>
+    <div class="body-text">
+      BTCUSDT 30-07-25 이런식으로 페어명 뒤에 날짜가 적혀있는 코인은 마감일이 정해져있는 선물거래입니다.<div style="height: 0.8em;"></div>일반적으로 무기한(Perpetual) 선물거래에서 거래를 하시면 됩니다.
+    </div>
+  </div>
+
+  <div class="notice-box">
+    <div class="sub-title">비밀번호(이메일, 휴대폰)를 변경했는데 출금이 안되요?</div>
+    <div class="body-text">
+      해외거래소는 개인정보의 보안설정을 변경한 경우, 사용자의 자금 보호를 위해 24시간 동안 코인의 출금이 제한됩니다.<div style="height: 0.8em;"></div>비밀번호, 이메일, 휴대폰번호, OTP 번호 등이 이에 해당합니다.
+    </div>
+  </div>
+
+
+  <div class="notice-box">
+    <div class="sub-title">증정금을 받았는데 어떻게 사용하나요?</div>
+    <div class="body-text">
+      대부분의 해외거래소는 증정금을 직접 코인으로 주기 보다는 거래수수료에 사용할 수 있는 수수료 차감용 리워드를 지급합니다.<div style="height: 0.8em;"></div>간혹 출금 가능한 코인으로 주는 경우를 제외하고는 수수료로 사용된다고 생각하시면 됩니다.
+    </div>
+  </div>
+
+
+
+  </div><!-- 섹센3을 감싸는 div로 지우면 안됨★ -->
+
+<div style="text-align: center;">
+<svg height="64px" width="64px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 460.833 460.833" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path style="fill:#D3B539;" d="M251.438,133.423l-11.401-44.209c-29.145-5.829-77.526,13.99-111.917,53.044 s45.466,54.21,45.466,54.21L251.438,133.423z"></path> <path style="fill:#F9D43A;" d="M402.525,295.77H72.243c0-48.777,19.772-92.926,51.726-124.88 c31.966-31.966,76.115-51.727,124.88-51.727c16.986,0,33.4,2.402,48.94,6.878c45.676,13.139,83.739,44.207,106.111,85.103 c-109.072-8.848-120.077,60.144-120.077,60.144h139.942l0.035,0.245C425.526,284.369,415.477,295.77,402.525,295.77z"></path> <g> <path style="fill:#D3B539;" d="M82.009,290.613L82.009,290.613l-15.621,15.621c-18.333,18.333-48.056,18.333-66.388,0l0,0 l15.621-15.621C33.953,272.28,63.676,272.28,82.009,290.613z"></path> <path style="fill:#D3B539;" d="M82.009,290.613L82.009,290.613l-15.621,15.621c-18.333,18.333-18.333,48.056,0,66.388l0,0 l15.621-15.621C100.342,338.669,100.342,308.946,82.009,290.613z"></path> </g> <path style="fill:#D3B539;" d="M224.373,253.804l-60.116-33.064c-5.879-3.234-13.163-2.374-18.128,2.14l-2.769,2.517 c-4.899,4.454-6.478,11.503-3.946,17.621l12.291,29.703c2.654,6.414,9.205,10.324,16.11,9.616l56.559-5.801V253.804z"></path> <path style="fill:#D3B539;" d="M402.525,295.77H273.845c-31.185-101.448,22.943-168.504,23.945-169.728 c45.676,13.139,83.739,44.207,106.111,85.103c-109.072-8.848-120.077,60.144-120.077,60.144h139.942l0.035,0.245 C425.526,284.369,415.477,295.77,402.525,295.77z"></path> <g> <circle style="fill:#FFFFFF;" cx="339.129" cy="167.845" r="14.192"></circle> <circle style="fill:#4D4D4D;" cx="339.129" cy="167.845" r="8.683"></circle> </g> <polygon style="fill:#D3B539;" points="395.055,210.589 395.67,236.688 381.681,206.96 "></polygon> <polygon style="fill:#D3B539;" points="403.94,273.549 421.959,254.66 410.831,285.572 "></polygon> <polygon style="fill:#D3B539;" points="379.241,273.549 397.261,254.66 386.133,285.572 "></polygon> <polygon style="fill:#D3B539;" points="354.543,273.549 372.563,254.66 361.434,285.572 "></polygon> <polygon style="fill:#D3B539;" points="329.845,273.549 347.865,254.66 336.736,285.572 "></polygon> <polygon style="fill:#D3B539;" points="305.146,273.549 323.166,254.66 312.038,285.572 "></polygon> <polygon style="fill:#D3B539;" points="369.991,208.84 370.606,234.939 356.616,205.211 "></polygon> <polygon style="fill:#D3B539;" points="342.598,210.721 348.321,236.193 328.772,209.786 "></polygon> <polygon style="fill:#D3B539;" points="316.795,220.72 327.776,244.405 303.084,222.731 "></polygon> <path style="fill:#D3B539;" d="M338.703,149.457l-5.403-4.443c0.486-0.59,12.107-14.569,31.368-24.731 c17.957-9.474,46.084-17.182,78.107-0.109l-3.291,6.172c-23.544-12.554-47.61-12.508-71.552,0.122 C349.902,135.982,338.813,149.323,338.703,149.457z"></path> <circle style="fill:#F74B4B;" cx="449.172" cy="126.69" r="11.658"></circle> </g> </g></svg>
+</div>
+
+<br>
+<br>
+
+<script>
+  // Q&A 토글 기능 - 오직 하나만 열림
+  document.querySelectorAll('.sub-title').forEach(title => {
+    title.addEventListener('click', () => {
+      const currentBox = title.closest('.notice-box');
+      const allBoxes = document.querySelectorAll('.notice-box');
+
+      allBoxes.forEach(box => {
+        if (box !== currentBox) {
+          box.classList.remove('active');  // 다른 건 닫기
+        }
+      });
+
+      // 현재 박스는 toggle (열려있으면 닫기 / 닫혀있으면 열기)
+      currentBox.classList.toggle('active');
+    });
+  });
+</script>
+
+<script>
+  document.querySelectorAll('.menu-tabs a').forEach(link => {
+    link.addEventListener('click', function (e) {
+      const targetId = this.getAttribute('href');
+      const targetEl = document.querySelector(targetId);
+
+      if (targetEl) {
+        e.preventDefault(); // 기본 앵커 이동 방지
+
+        // 탭 active 클래스 처리
+        document.querySelectorAll('.menu-tabs a').forEach(el => el.classList.remove('active'));
+        this.classList.add('active');
+
+        // 스크롤 위치 조정
+        const offset = 85; // 고정 메뉴 높이
+        const y = targetEl.getBoundingClientRect().top + window.pageYOffset - offset;
+
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
+    });
+  });
+</script>
+<script>
+  // 스크롤 시 현재 보이는 섹션에 따라 메뉴탭 하이라이트
+  window.addEventListener('scroll', () => {
+    const sections = document.querySelectorAll('.section');
+    const navLinks = document.querySelectorAll('.menu-tabs a');
+    const offset = 100;
+
+    let currentId = '';
+
+    sections.forEach(section => {
+      const rect = section.getBoundingClientRect();
+      if (rect.top <= offset && rect.bottom >= offset) {
+        currentId = section.querySelector('h2').id;
+      }
+    });
+
+    if (currentId) {
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === '#' + currentId) {
+          link.classList.add('active');
+        }
+      });
+    }
+  });
+</script>
+
+</div> <!-- ■ 전체를 감싸는 DIV 종료 -->
+</body>
+</html>

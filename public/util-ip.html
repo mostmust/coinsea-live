@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>본인IP 주소 확인 ↗코인씨</title>
+
+<!-- ✅ SEO 및 Open Graph + Twitter 메타태그 -->
+<meta name="title" content="본인IP 주소 ↗코인씨" />
+<meta name="description" content="현재 내 IP 주소를 간편하게 확인하세요. 웹 브라우저만으로도 공인 IP를 빠르게 조회할 수 있는 무료 도구입니다." />
+<meta name="keywords" content="IP주소 확인, 내 IP 주소, 본인 IP 확인, IP조회, 공인 IP, 코인씨, IP체크" />
+<meta name="author" content="CoinSea" />
+<meta name="robots" content="index, follow" />
+
+<!-- ✅ Open Graph (SNS 공유용) -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="본인IP 주소 ↗코인씨" />
+<meta property="og:description" content="내 컴퓨터 또는 스마트폰의 IP 주소를 지금 바로 확인해보세요!" />
+<meta property="og:url" content="https://coinsea.co.kr/util-ip.html" />
+<meta property="og:image" content="https://coinsea.co.kr/img/og-util-ip.webp" />
+<meta property="og:site_name" content="코인씨" />
+<meta property="og:locale" content="ko_KR" />
+
+<!-- ✅ Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="본인IP 주소 ↗코인씨" />
+<meta name="twitter:description" content="현재 접속 중인 내 공인 IP 주소를 실시간으로 확인해보세요." />
+<meta name="twitter:image" content="https://coinsea.co.kr/img/og-util-ip.webp" />
+
+
+
+<!-- ✅ Google Fonts 최적화 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet"></noscript>
+
+<!-- ✅ Font Awesome 최적화 -->
+<link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"></noscript>
+
+
+<!-- 가장 일반적인 파비콘 -->
+<link rel="icon" href="/favicon.ico" />
+
+<!-- 고해상도 디바이스 대응 -->
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon/android-icon-192x192.png" />
+
+<!-- 애플 터치용 최소 하나 -->
+<link rel="apple-touch-icon" href="/favicon/apple-icon-180x180.png" />
+
+
+  <style>
+    body {
+      font-family: 'Nanum Gothic', sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+
+.ip-box {
+  display: inline-block;
+  max-width: 90vw;                 /* 화면의 90%까지만 사용 */
+  width: 100%;                     /* 부모 요소에 맞게 */
+  max-width: 500px;                /* 최대 500px까지 */
+  padding: 20px 30px;
+  background-color: transparent;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-sizing: border-box;          /* 패딩 포함 폭 계산 */
+}
+
+
+    .ip-box h1 {
+      margin: 0 0 10px;
+      font-size: 1.5em;
+    }
+
+    #ip-address {
+      font-size: 1.2em;
+      color: #333;
+  /* ✅ 추가 스타일 */
+  background-color: #e0e0e0;  /* 회색 배경 */
+  padding: 10px 15px;         /* 내부 여백 */
+  border-radius: 5px;         /* 모서리 둥글게 */
+  display: inline-block;      /* 박스처럼 보이게 */
+  margin-top: 6px;            /* h1과의 간격 */
+    }
+
+    .coupang-banner-wrapper {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: auto;
+      display: flex;
+      justify-content: center;
+    }
+
+    .coupang-banner-wrapper iframe,
+    .coupang-banner-wrapper div {
+      max-width: 100% !important;
+      height: auto !important;
+    }
+  .content-wrapper {
+  max-width: 800px;       /* 최대 너비 설정 */
+  margin: 0 auto;         /* 가운데 정렬 */
+  padding: 0px;
+  text-align: left;       /* 내용은 좌측 정렬 */
+    }
+
+  </style>
+</head>
+<body>
+<div class="content-wrapper"> <!-- ■ 전체를 감싸는 DIV 시작 -->
+
+
+  <div class="ip-box">
+    <h1>당신의 IP 주소는?</h1>
+    <div id="ip-address">IP 주소를 가져오는 중...</div>
+  </div>
+  
+  
+  <script>
+    fetch('https://api.ipify.org?format=json')
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById('ip-address').textContent = `IP 주소는: ${data.ip}`;
+      })
+      .catch(error => {
+        console.error('Error fetching IP address:', error);
+        document.getElementById('ip-address').textContent = 'IP 주소를 가져올 수 없습니다.';
+      });
+  </script>
+
+
+</div> <!-- ■ 전체를 감싸는 DIV 종료 -->
+</body>
+</html>

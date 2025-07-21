@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>코인거래소별 공지사항 바로가기</title>
+
+<!-- ✅ SEO 및 Open Graph + Twitter 메타태그 -->
+<meta name="title" content="코인거래소별 공지사항 바로가기 - 코인씨" />
+<meta name="description" content="업비트, 빗썸, 코인원, 코빗, 고팍스, 바이낸스 등 주요 거래소의 공지사항을 한 페이지에서 빠르게 확인하세요." />
+<meta name="keywords" content="업비트, 빗썸, 코인원, 코빗, 고팍스, 바이낸스, 공지사항, 거래소 공지, 코인 공지, 코인씨, CoinSea, 암호화폐 거래소" />
+<meta name="author" content="CoinSea" />
+<meta name="robots" content="index, follow" />
+
+<!-- ✅ Open Graph (SNS 공유용) -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="코인거래소별 공지사항 바로가기 - 코인씨" />
+<meta property="og:description" content="국내외 주요 거래소들의 최신 공지사항을 한눈에 확인할 수 있는 링크 모음 페이지입니다." />
+<meta property="og:url" content="https://coinsea.co.kr/notice.html" />
+<meta property="og:image" content="https://coinsea.co.kr/img/og-notice.webp" />
+<meta property="og:site_name" content="코인씨 CoinSea" />
+<meta property="og:locale" content="ko_KR" />
+
+<!-- ✅ Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="코인거래소별 공지사항 바로가기 - 코인씨" />
+<meta name="twitter:description" content="업비트, 빗썸, 코인원, 고팍스, 바이낸스 등 주요 거래소 공지사항 링크를 빠르게 확인하세요." />
+<meta name="twitter:image" content="https://coinsea.co.kr/img/og-notice.webp" />
+
+
+<!-- ✅ Google Fonts 최적화 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet"></noscript>
+
+<!-- ✅ Font Awesome 최적화 -->
+<link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"></noscript>
+
+<!-- 가장 일반적인 파비콘 -->
+<link rel="icon" href="/favicon.ico" />
+
+<!-- 고해상도 디바이스 대응 -->
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon/android-icon-192x192.png" />
+
+<!-- 애플 터치용 최소 하나 -->
+<link rel="apple-touch-icon" href="/favicon/apple-icon-180x180.png" />
+
+<!-- ✅ 공통 스타일 -->
+<link rel="stylesheet" href="/css/common.css" />
+
+  <style>
+.menu-tabs {
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;      /* ✅ 중앙 정렬 */
+  gap: 12px;                    /* ✅ 항목 간 간격 */
+  padding: 6px 0 10px;          /* ✅ 위 여백 줄이기 (기존: 12px 0) */
+  font-weight: bold;
+  border-bottom: 3px double #000;
+  width: 100%;
+  margin: 0;                    /* ✅ 좌우 여백 제거 */
+  box-sizing: border-box;
+}
+
+
+.menu-tabs a {
+  color: #000;
+  text-decoration: none;
+}
+
+.menu-tabs a:hover {
+  color: #000;
+}
+
+.section {
+  border: none;
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 0 auto 40px auto;
+  max-width: 800px;
+  width: 100%;
+  box-sizing: border-box;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+    .section h2 {
+      font-size: 18px;
+      margin-top: 0;       /* 위 여백 제거 */
+      margin-bottom: 16px; /* 아래 여백만 적절히 유지 */
+padding-bottom: 6px;
+  border-bottom: 1px solid #000; /* ✅ 검정 가로선 */
+scroll-margin-top: 65px; /* ✅ 고정된 메뉴 높이만큼 여유 공간 확보 */
+    }
+
+h2 {
+  scroll-margin-top: 65px;
+}
+
+    .icon-grid {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: repeat(4, 1fr); /* 기본: 모바일 4개 */
+    }
+
+    @media (min-width: 768px) {
+      .icon-grid {
+        grid-template-columns: repeat(6, 1fr); /* PC 6개 */
+      }
+    }
+
+    .icon-item {
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .icon-item img {
+      width: 36px;
+      height: 36px;
+      margin-bottom: 6px;
+border-radius: 8px; /* ← 사각형 모서리를 둥글게 */
+    }
+
+  .icon-item:hover {
+    color: orange;
+  }
+
+  .icon-item:hover svg {
+    stroke: orange;
+  }
+
+html {
+  scroll-behavior: smooth;
+}
+
+ .content-wrapper {
+  max-width: 800px;       /* 최대 너비 설정 */
+  margin: 0 auto;         /* 가운데 정렬 */
+  padding: 20px;
+  text-align: left;       /* 내용은 좌측 정렬 */
+    }
+
+  </style>
+</head>
+<body>
+<div class="content-wrapper"> <!-- ■ 전체를 감싸는 DIV 시작 -->
+
+  <div class="section">
+ <h2  id="section1">거래소별 공지사항 모음</h2>
+    <div class="icon-grid">
+   
+<a href="https://upbit.com/service_center/notice" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
+<div class="icon-item">
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trending-up-icon lucide-trending-up"><path d="M16 7h6v6"/><path d="m22 7-8.5 8.5-5-5L2 17"/></svg>
+          <div>업비트</div>
+      </div></a>
+
+<a href="https://feed.bithumb.com/notice" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
+<div class="icon-item">
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bitcoin-icon lucide-bitcoin"><path d="M11.767 19.089c4.924.868 6.14-6.025 1.216-6.894m-1.216 6.894L5.86 18.047m5.908 1.042-.347 1.97m1.563-8.864c4.924.869 6.14-6.025 1.215-6.893m-1.215 6.893-3.94-.694m5.155-6.2L8.29 4.26m5.908 1.042.348-1.97M7.48 20.364l3.126-17.727"/></svg>
+          <div>빗썸</div>
+      </div>
+
+<a href="https://coinone.co.kr/info/notice" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
+<div class="icon-item">
+ <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-orbit-icon lucide-orbit"><path d="M20.341 6.484A10 10 0 0 1 10.266 21.85"/><path d="M3.659 17.516A10 10 0 0 1 13.74 2.152"/><circle cx="12" cy="12" r="3"/><circle cx="19" cy="5" r="2"/><circle cx="5" cy="19" r="2"/></svg>
+          <div>코인원</div>
+      </div>
+
+<a href="https://www.korbit.co.kr/notice/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
+<div class="icon-item">
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-dot-dashed-icon lucide-circle-dot-dashed"><path d="M10.1 2.18a9.93 9.93 0 0 1 3.8 0"/><path d="M17.6 3.71a9.95 9.95 0 0 1 2.69 2.7"/><path d="M21.82 10.1a9.93 9.93 0 0 1 0 3.8"/><path d="M20.29 17.6a9.95 9.95 0 0 1-2.7 2.69"/><path d="M13.9 21.82a9.94 9.94 0 0 1-3.8 0"/><path d="M6.4 20.29a9.95 9.95 0 0 1-2.69-2.7"/><path d="M2.18 13.9a9.93 9.93 0 0 1 0-3.8"/><path d="M3.71 6.4a9.95 9.95 0 0 1 2.7-2.69"/><circle cx="12" cy="12" r="1"/></svg>
+          <div>코빗</div>
+      </div>
+
+<a href="https://www.gopax.co.kr/notice" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
+<div class="icon-item">
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-swords-icon lucide-swords"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/><line x1="13" x2="19" y1="19" y2="13"/><line x1="16" x2="20" y1="16" y2="20"/><line x1="19" x2="21" y1="21" y2="19"/><polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5"/><line x1="5" x2="9" y1="14" y2="18"/><line x1="7" x2="4" y1="17" y2="20"/><line x1="3" x2="5" y1="19" y2="21"/></svg>
+          <div>고팍스</div>
+      </div>
+
+<a href="https://www.binance.com/en/support/announcement" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
+      <div class="icon-item">
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-codesandbox-icon lucide-codesandbox"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="7.5 4.21 12 6.81 16.5 4.21"/><polyline points="7.5 19.79 7.5 14.6 3 12"/><polyline points="21 12 16.5 14.6 16.5 19.79"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" x2="12" y1="22.08" y2="12"/></svg>
+          <div>바이낸스</div>
+      </div></a>
+
+<a href="https://announcements.bybit.com/en/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
+      <div class="icon-item">
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chart-candlestick-icon lucide-chart-candlestick"><path d="M9 5v4"/><rect width="4" height="6" x="7" y="9" rx="1"/><path d="M9 15v2"/><path d="M17 3v2"/><rect width="4" height="8" x="15" y="5" rx="1"/><path d="M17 13v3"/><path d="M3 3v16a2 2 0 0 0 2 2h16"/></svg>
+          <div>바이비트</div>
+      </div></a>
+
+<a href="https://www.bitget.com/asia/support/announcement-center" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
+      <div class="icon-item">
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-code-icon lucide-square-code"><path d="m10 9-3 3 3 3"/><path d="m14 15 3-3-3-3"/><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+          <div>비트겟</div>
+      </div></a>
+
+<a href="https://www.okx.com/help/category/announcements" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
+      <div class="icon-item">
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-vault-icon lucide-vault"><rect width="18" height="18" x="3" y="3" rx="2"/><circle cx="7.5" cy="7.5" r=".5" fill="currentColor"/><path d="m7.9 7.9 2.7 2.7"/><circle cx="16.5" cy="7.5" r=".5" fill="currentColor"/><path d="m13.4 10.6 2.7-2.7"/><circle cx="7.5" cy="16.5" r=".5" fill="currentColor"/><path d="m7.9 16.1 2.7-2.7"/><circle cx="16.5" cy="16.5" r=".5" fill="currentColor"/><path d="m13.4 13.4 2.7 2.7"/><circle cx="12" cy="12" r="2"/></svg>
+          <div>OKX</div>
+      </div></a>
+
+<a href="https://bingx.com/en/support/notice-center/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
+      <div class="icon-item">
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shuffle-icon lucide-shuffle"><path d="m18 14 4 4-4 4"/><path d="m18 2 4 4-4 4"/><path d="M2 18h1.973a4 4 0 0 0 3.3-1.7l5.454-8.6a4 4 0 0 1 3.3-1.7H22"/><path d="M2 6h1.972a4 4 0 0 1 3.6 2.2"/><path d="M22 18h-6.041a4 4 0 0 1-3.3-1.8l-.359-.45"/></svg>
+          <div>빙엑스</div>
+      </div></a>
+
+<a href="https://www.htx.com/support/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
+      <div class="icon-item">
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-flame-icon lucide-flame"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
+          <div>HTX</div>
+      </div></a>
+
+<a href="https://www.mexc.com/ko-KR/support/categories/360000254192" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
+      <div class="icon-item">
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mountain-snow-icon lucide-mountain-snow"><path d="m8 3 4 8 5-5 5 15H2L8 3z"/><path d="M4.14 15.08c2.62-1.57 5.24-1.43 7.86.42 2.74 1.94 5.49 2 8.23.19"/></svg>
+          <div>MEXC</div>
+      </div></a>
+
+  </div>
+</div>
+
+
+
+<br><br>
+
+<svg height="64px" width="64px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 441.215 441.215" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <path style="fill:#DB4545;" d="M94.78,307.715C42.31,307.507-0.208,264.65,0.001,212.18s43.065-94.987,95.535-94.779l-0.067,16.83 c-43.189-0.172-78.466,34.826-78.638,78.015s34.827,78.466,78.015,78.638L94.78,307.715z"></path> <path style="fill:#DB4545;" d="M345.679,308.712c52.47,0.208,95.326-42.309,95.535-94.779s-42.309-95.326-94.779-95.535 l-0.067,16.83c43.189,0.172,78.187,35.448,78.015,78.638s-35.449,78.187-78.638,78.015L345.679,308.712z"></path> <g> <path style="fill:#F74B4B;" d="M101.81,88.222c-23.651,23.464-23.803,61.658-0.339,85.309s61.658,23.803,85.309,0.339 l-42.485-42.824l42.824-42.485C163.655,64.909,125.461,64.758,101.81,88.222z"></path> <path style="fill:#F74B4B;" d="M340.393,89.169c-23.464-23.651-61.658-23.803-85.309-0.339l42.485,42.824l-42.824,42.485 c23.464,23.651,61.658,23.803,85.309,0.339C363.705,151.014,363.857,112.82,340.393,89.169z"></path> </g> </g> <g> <path style="fill:#DB4545;" d="M67.969,370.492L67.969,370.492l0-32.668h13.005v19.662 C80.974,364.67,75.152,370.492,67.969,370.492z"></path> <path style="fill:#DB4545;" d="M101.024,370.492L101.024,370.492l0-32.668h13.005v19.662 C114.03,364.67,108.207,370.492,101.024,370.492z"></path> <path style="fill:#DB4545;" d="M134.08,370.492L134.08,370.492l0-32.668h13.005v19.662 C147.085,364.67,141.262,370.492,134.08,370.492z"></path> </g> <g> <path style="fill:#DB4545;" d="M306.103,370.492L306.103,370.492c-7.183,0-13.005-5.823-13.005-13.005v-19.662h13.005V370.492z"></path> <path style="fill:#DB4545;" d="M339.158,370.492L339.158,370.492c-7.183,0-13.005-5.823-13.005-13.005v-19.662h13.005V370.492z"></path> <path style="fill:#DB4545;" d="M372.213,370.492L372.213,370.492c-7.183,0-13.005-5.823-13.005-13.005v-19.662h13.005V370.492z"></path> </g> <path style="fill:#F74B4B;" d="M372.211,343.776l-304.24-1.21c0.3-77.62,58.69-141.42,133.82-150.42c6.19-0.75,12.5-1.13,18.9-1.1 c5.79,0.02,11.5,0.37,17.12,1.03C313.741,200.876,372.53,265.546,372.211,343.776z"></path> <g> <g> <circle style="fill:#FFFFFF;" cx="197.393" cy="314.04" r="18.207"></circle> <circle style="fill:#4D4D4D;" cx="197.393" cy="314.04" r="11.14"></circle> </g> <g> <circle style="fill:#FFFFFF;" cx="243.869" cy="314.04" r="18.207"></circle> <circle style="fill:#4D4D4D;" cx="243.869" cy="314.04" r="11.14"></circle> </g> </g> <g> <path style="fill:#F74B4B;" d="M216.091,356.176L216.091,356.176c-6.075,0-11-4.925-11-11v-7h11V356.176z"></path> <path style="fill:#F74B4B;" d="M224.091,356.176L224.091,356.176l0-18h11v7C235.091,351.251,230.166,356.176,224.091,356.176z"></path> </g> <path style="fill:#DB4545;" d="M237.811,192.076l-18.02,82.1l-18-82.03c6.19-0.75,12.5-1.13,18.9-1.1 C226.481,191.066,232.191,191.416,237.811,192.076z"></path> </g> </g></svg>
+
+<!-- ✅ URL 복사 아이콘 버튼 시작 -->
+<div style="text-align: center; margin-top: 20px;">
+  <div id="copyUrlBtn" title="이 페이지 URL 복사" style="cursor: pointer; display: inline-block;">
+
+<svg height="75px" width="75px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 427.479 427.479" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path style="fill:#51CAF4;" d="M214.396,427.479h-11c0-22.658,5.655-34.109,11.124-45.183c5.137-10.399,9.987-20.222,9.987-40.311 c0-20.089-4.852-29.912-9.987-40.311c-5.469-11.074-11.124-22.524-11.124-45.182c0-22.658,5.655-34.109,11.124-45.183 c5.136-10.399,9.987-20.222,9.987-40.312c0-20.091-4.852-29.914-9.987-40.314c-5.469-11.075-11.124-22.526-11.124-45.185 s5.655-34.11,11.124-45.185c5.136-10.4,9.987-20.223,9.987-40.313h11c0,22.659-5.655,34.11-11.124,45.184 c-5.136,10.4-9.987,20.224-9.987,40.314s4.852,29.914,9.987,40.314c5.469,11.075,11.124,22.526,11.124,45.185 c0,22.658-5.655,34.109-11.124,45.183c-5.136,10.399-9.987,20.222-9.987,40.312c0,20.089,4.852,29.912,9.987,40.311 c5.469,11.074,11.124,22.524,11.124,45.182s-5.655,34.108-11.124,45.182C219.248,397.566,214.396,407.389,214.396,427.479z"></path> <path style="fill:#51CAF4;" d="M208.91,76.496L208.91,76.496c-29.822,0-53.997-24.175-53.997-53.997v0h0 C184.734,22.499,208.91,46.674,208.91,76.496L208.91,76.496z"></path> <path style="fill:#51CAF4;" d="M208.91,239.238L208.91,239.238c-29.822,0-53.997-24.175-53.997-53.997v0h0 C184.734,185.241,208.91,209.416,208.91,239.238L208.91,239.238z"></path> <path style="fill:#51CAF4;" d="M226.909,371.981L226.909,371.981c-29.822,0-53.997-24.175-53.997-53.997v0h0 C202.734,317.984,226.909,342.159,226.909,371.981L226.909,371.981z"></path> <path style="fill:#51CAF4;" d="M217.909,122.994L217.909,122.994c29.822,0,53.997-24.175,53.997-53.997v0h0 C242.085,68.996,217.909,93.172,217.909,122.994L217.909,122.994z"></path> <path style="fill:#51CAF4;" d="M217.909,285.736L217.909,285.736c29.822,0,53.997-24.175,53.997-53.997v0h0 C242.085,231.738,217.909,255.914,217.909,285.736L217.909,285.736z"></path> <path style="fill:#51CAF4;" d="M78.562,427.479h-11c0-22.658,5.655-34.108,11.124-45.183c5.136-10.399,9.987-20.222,9.987-40.311 c0-20.089-4.852-29.911-9.987-40.311c-5.469-11.074-11.124-22.524-11.124-45.182c0-22.658,5.655-34.109,11.124-45.183 c5.136-10.399,9.987-20.222,9.987-40.312c0-20.091-4.852-29.914-9.987-40.314c-5.469-11.075-11.124-22.526-11.124-45.185h11 c0,20.091,4.852,29.914,9.987,40.314c5.469,11.075,11.124,22.526,11.124,45.185c0,22.658-5.655,34.109-11.124,45.183 c-5.136,10.399-9.987,20.222-9.987,40.312c0,20.089,4.852,29.911,9.987,40.311c5.469,11.074,11.124,22.524,11.124,45.182 s-5.655,34.108-11.124,45.182C83.414,397.566,78.562,407.389,78.562,427.479z"></path> <path style="fill:#51CAF4;" d="M73.076,239.238L73.076,239.238c-29.822,0-53.997-24.175-53.997-53.997v0h0 C48.901,185.241,73.076,209.416,73.076,239.238L73.076,239.238z"></path> <path style="fill:#51CAF4;" d="M91.898,368.981L91.898,368.981c-29.822,0-53.997-24.175-53.997-53.997v0h0 C67.723,314.984,91.898,339.159,91.898,368.981L91.898,368.981z"></path> <path style="fill:#51CAF4;" d="M82.076,122.994L82.076,122.994c29.822,0,53.997-24.175,53.997-53.997v0h0 C106.251,68.996,82.076,93.172,82.076,122.994L82.076,122.994z"></path> <path style="fill:#51CAF4;" d="M82.076,285.736L82.076,285.736c29.822,0,53.997-24.175,53.997-53.997v0h0 C106.251,231.738,82.076,255.914,82.076,285.736L82.076,285.736z"></path> <path style="fill:#51CAF4;" d="M347.889,427.479h-11c0-22.658,5.655-34.108,11.124-45.183c5.137-10.399,9.987-20.222,9.987-40.311 c0-20.089-4.852-29.912-9.987-40.311c-5.469-11.074-11.124-22.524-11.124-45.182c0-22.658,5.655-34.109,11.124-45.183 c5.136-10.399,9.987-20.222,9.987-40.312h11c0,22.658-5.655,34.109-11.124,45.183c-5.136,10.399-9.987,20.222-9.987,40.312 c0,20.089,4.852,29.912,9.987,40.311c5.469,11.074,11.124,22.524,11.124,45.182s-5.655,34.108-11.124,45.182 C352.741,397.566,347.889,407.389,347.889,427.479z"></path> <path style="fill:#51CAF4;" d="M342.403,239.238L342.403,239.238c-29.822,0-53.997-24.175-53.997-53.997v0h0 C318.228,185.241,342.403,209.416,342.403,239.238L342.403,239.238z"></path> <path style="fill:#51CAF4;" d="M355.902,373.481L355.902,373.481c-29.822,0-53.997-24.175-53.997-53.997v0h0 C331.727,319.484,355.902,343.659,355.902,373.481L355.902,373.481z"></path> <path style="fill:#51CAF4;" d="M354.403,302.235L354.403,302.235c29.822,0,53.997-24.175,53.997-53.997v0h0 C378.578,248.237,354.403,272.413,354.403,302.235L354.403,302.235z"></path> </g> </g></svg>
+
+  </div>
+</div>
+
+<script>
+  document.getElementById('copyUrlBtn').addEventListener('click', function () {
+    const url = window.location.href;
+    navigator.clipboard.writeText(url).then(function () {
+      alert('✅ 페이지 URL이 복사되었습니다!');
+    }, function () {
+      alert('❌ URL 복사에 실패했습니다. 브라우저를 확인해주세요.');
+    });
+  });
+</script>
+
+<div class="note" style="text-align: center; margin-top: 0;">
+URL 복사
+</div>
+<!-- ✅ URL 복사 아이콘 버튼 종료 -->
+
+<br><br><br><br><br><br><br><br><br><br><br><br>
+
+</div> <!-- ■ 전체를 감싸는 DIV 종료 -->
+
+<script> <!-- ■ 하단 일괄 공지 -->
+  document.addEventListener("DOMContentLoaded", function () {
+    fetch("notice-bottom.html")
+      .then(res => res.text())
+      .then(html => {
+        const tempDiv = document.createElement("div");
+        tempDiv.innerHTML = html;
+        document.body.appendChild(tempDiv); // ✅ body 맨 끝에 삽입
+      });
+  });
+</script>
+</body>
+</html>

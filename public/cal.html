@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>코인 계산기 총정리</title>
+
+ <!-- ✅ SEO 메타태그 -->
+<meta name="description" content="실시간 김치 프리미엄을 확인하세요. 업비트, 코인게코, 환율 데이터를 바탕으로 자동 계산되는 정확한 김프 지표 제공. 다양한 코인 계산기까지 함께 이용해보세요.">
+<meta name="keywords" content="김치 프리미엄, 코인 김프, 비트코인 김프, 실시간 김프, 김프 계산기, 업비트 김프, 환율 계산, 코인 계산기, 선물 수수료, 펀딩비, 청산가">
+<meta name="author" content="코인씨(CoinSea)">
+<meta name="robots" content="index, follow">
+
+<!-- ✅ Open Graph (SNS 공유용) -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="실시간 김치 프리미엄 - 코인 계산기 총정리 | 코인씨">
+<meta property="og:description" content="업비트·코인게코 시세와 환율을 기반으로 실시간 김프를 확인하세요. 다양한 코인 계산기도 함께 제공됩니다.">
+<meta property="og:image" content="https://coinsea.co.kr/img/og-cal.webp">
+<meta property="og:url" content="https://coinsea.co.kr/cal.html">
+<meta property="og:site_name" content="코인씨">
+
+<!-- ✅ Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="실시간 김치 프리미엄 - 코인 계산기 총정리 | 코인씨">
+<meta name="twitter:description" content="실시간 김프를 확인하고 수수료·펀딩비·청산가 계산까지 한번에!">
+<meta name="twitter:image" content="https://coinsea.co.kr/img/og-cal.webp">
+
+
+<!-- ✅ Google Fonts 최적화 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet"></noscript>
+
+<!-- ✅ Font Awesome 최적화 -->
+<link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"></noscript>
+
+
+<!-- 가장 일반적인 파비콘 -->
+<link rel="icon" href="/favicon.ico" />
+
+<!-- 고해상도 디바이스 대응 -->
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon/android-icon-192x192.png" />
+
+<!-- 애플 터치용 최소 하나 -->
+<link rel="apple-touch-icon" href="/favicon/apple-icon-180x180.png" />
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      font-family: 'Nanum Gothic', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      background-color: #fff;
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    .content-wrapper {
+     max-width: 800px;       /* 최대 너비 설정 */
+  margin: 0 auto;         /* 가운데 정렬 */
+  padding: 20px;
+  text-align: left;       /* 내용은 좌측 정렬 */
+    }
+
+    h1 { font-size: 24px; margin-bottom: 15px; }
+    p { margin-bottom: 15px; }
+
+
+    .note {
+      font-size: 14px;
+      color: #555;
+      margin-top: -20px;
+    }
+
+.coupang-banner-wrapper {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.coupang-banner-wrapper iframe,
+.coupang-banner-wrapper div {
+  max-width: 100% !important;
+  height: auto !important;
+}
+
+   .kimchi-box {
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 16px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+
+    @media screen and (max-width: 600px) {
+      body { font-size: 15px; }
+ {
+        padding: 12px;
+      }
+      h1 { font-size: 22px; }
+    }
+     .kimchi-box {
+        padding: 12px;
+      }
+      .title {
+        font-size: 18px;
+font-weight: bold;
+      margin-bottom: 15px;
+      text-align: center;
+      }
+
+      .data-item {
+margin: 10px 0;
+        font-size: 15px;
+      }
+
+    /* ✅ 본문용 텍스트 스타일 */
+    .main-title {
+      font-size: 26px;
+      font-weight: bold;
+      margin-bottom: 25px;
+      margin-left: 10px;
+      position: relative;
+      display: inline-block;
+      z-index: 0;
+    }
+
+    .main-title::after {
+      content: '';
+      position: absolute;
+      left: -7.5%;
+      right: -7.5%;
+      bottom: 1px;
+      height: 39%;
+      background-color: #f8cf26;
+      z-index: -1;
+    }
+
+    .sub-title {
+      font-size: 20px;
+      font-weight: bold;
+      margin-top: 30px;
+      margin-bottom: 10px;
+      color: #222;
+    }
+
+    .body-text {
+      font-size: 16px;
+      line-height: 1.7;
+      margin-bottom: 15px;
+    }
+
+    .small-text {
+      font-size: 13px;
+      color: #777;
+    }
+
+.sub-title-box {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  color: #222;
+  padding-left: 12px;
+  border-left: 6px solid #546382; /* 빨간색 막대 */
+}
+
+
+img {
+  border-radius: 12px;
+}
+
+.note-center {
+  text-align: left;
+}
+.section {
+  border: none;
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  padding-top: 10px;    /* ✅ 여백 줄이기 */
+  margin-top: 0;        /* ✅ 필요 시 */
+  margin: 0 auto 10px auto;
+  max-width: 800px;
+  width: 100%;
+  box-sizing: border-box;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+    .section h2 {
+      font-size: 18px;
+      margin-top: 0;       /* 위 여백 제거 */
+      margin-bottom: 16px; /* 아래 여백만 적절히 유지 */
+padding-bottom: 6px;
+  border-bottom: 1px solid #000; /* ✅ 검정 가로선 */
+scroll-margin-top: 85px; /* ✅ 고정된 메뉴 높이만큼 여유 공간 확보 */
+    }
+
+    .icon-grid {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: repeat(4, 1fr); /* 기본: 모바일 4개 */
+    }
+
+    @media (min-width: 768px) {
+      .icon-grid {
+        grid-template-columns: repeat(6, 1fr); /* PC 6개 */
+      }
+    }
+
+    .icon-item {
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .icon-item img {
+      width: 36px;
+      height: 36px;
+      margin-bottom: 6px;
+border-radius: 8px; /* ← 사각형 모서리를 둥글게 */
+    }
+
+  .icon-item:hover {
+    color: orange;
+  }
+
+  .icon-item:hover svg {
+    stroke: orange;
+  }
+
+html {
+  scroll-behavior: smooth;
+}
+  </style>
+
+</head>
+<body>
+
+  <div class="content-wrapper">
+
+    <div class="main-title">코인 계산기 총정리</div>
+
+    <div class="body-text">
+      현물이나 선물거래시 수수료와 펀딩비, 강제청산가 등을 미리 계산해 보시면 도움이 됩니다.
+    </div><br>
+<div class="sub-title-box">김치 프리미엄</div>
+<div class="body-text" style="margin-bottom: 20px; font-size: 14px; color: #666;">
+  실시간 Binance USDⓢ-M 선물 기준, 30초마다 자동 갱신됩니다.
+</div>
+
+ <div class="kimchi-box" id="kimchiBox">
+    <div class="title">BTC 김치 프리미엄</div>
+    <div class="data-item"><span class="label">🌺 업비트 가격:</span> <span id="upbitPrice">로딩중...</span></div>
+    <div class="data-item"><span class="label">🌎 코인게코 가격 (KRW):</span> <span id="coingeckoPrice">로딩중...</span></div>
+    <div class="data-item"><span class="label">💰 환율:</span> <span id="exchangeRate">로딩중...</span></div>
+    <div class="data-item"><span class="label">🚀 김치 프리미엄:</span> <span id="kimchiPremium">계산중...</span></div>
+<div style="height: 0.8em;"></div>
+    <div class="update-time" id="updateTime">업데이트 시간: 로딩중...</div>
+  </div>
+<br>
+  <div class="note note-center">*5분 간격으로 자동 업데이트 됩니다.</div>
+
+
+
+<br>
+   <!-- 코인 계산기 시작 -->
+<div class="sub-title-box">코인 관련 계산기</div>
+<div class="body-text" style="margin-bottom: 20px; font-size: 14px; color: #666;">
+  수수료와 펀딩비, 그리고 수익, 청산가를 미리 계산해보세요.
+</div>
+ 
+<div class="section">
+<div class="icon-grid">
+
+<div class="icon-item">      
+<a href="cal-koreafees.html" style="text-decoration: none; color: inherit;">
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle-heart-icon lucide-message-circle-heart"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/><path d="M15.8 9.2a2.5 2.5 0 0 0-3.5 0l-.3.4-.35-.3a2.42 2.42 0 1 0-3.2 3.6l3.6 3.5 3.6-3.5c1.2-1.2 1.1-2.7.2-3.7"/></svg>
+        <div>국내수수료 계산기</div>
+</a>      
+</div>
+
+
+<div class="icon-item">
+<a href="cal-futuresfees.html" style="text-decoration: none; color: inherit;">
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shapes-icon lucide-shapes"><path d="M8.3 10a.7.7 0 0 1-.626-1.079L11.4 3a.7.7 0 0 1 1.198-.043L16.3 8.9a.7.7 0 0 1-.572 1.1Z"/><rect x="3" y="14" width="7" height="7" rx="1"/><circle cx="17.5" cy="17.5" r="3.5"/></svg>
+        <div>선물수수료 계산기</div>
+</a>      
+</div>
+
+<a href="cal-bitcoin.html" style="text-decoration: none; color: inherit;">
+      <div class="icon-item">
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-diamond-plus-icon lucide-diamond-plus"><path d="M12 8v8"/><path d="M2.7 10.3a2.41 2.41 0 0 0 0 3.41l7.59 7.59a2.41 2.41 0 0 0 3.41 0l7.59-7.59a2.41 2.41 0 0 0 0-3.41L13.7 2.71a2.41 2.41 0 0 0-3.41 0z"/><path d="M8 12h8"/></svg>
+        <div>비트코인 계산기</div>
+      </div></a>
+
+<div class="icon-item">
+<a href="cal-fundingfees.html" style="text-decoration: none; color: inherit;">
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-function-icon lucide-square-function"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><path d="M9 17c2 0 2.8-1 2.8-2.8V10c0-2 1-3.3 3.2-3"/><path d="M9 11.2h5.7"/></svg>
+        <div>선물펀딩비 계산기</div>
+</a>      
+</div>
+
+
+<div class="icon-item">      
+<a href="cal-avgprice.html" style="text-decoration: none; color: inherit;">
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chart-scatter-icon lucide-chart-scatter"><circle cx="7.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="18.5" cy="5.5" r=".5" fill="currentColor"/><circle cx="11.5" cy="11.5" r=".5" fill="currentColor"/><circle cx="7.5" cy="16.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="14.5" r=".5" fill="currentColor"/><path d="M3 3v16a2 2 0 0 0 2 2h16"/></svg>
+        <div>코인평단가 계산기</div>
+</a>      
+</div>
+
+        
+<div class="icon-item">
+<a href="cal-averagebuy.html" style="text-decoration: none; color: inherit;">
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-waves-icon lucide-waves"><path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/></svg>
+        <div>코인물타기 계산기</div>
+</a>      
+</div>
+
+
+<div class="icon-item">
+<a href="cal-futuresliq.html" style="text-decoration: none; color: inherit;">
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-siren-icon lucide-siren"><path d="M7 18v-6a5 5 0 1 1 10 0v6"/><path d="M5 21a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-1a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2z"/><path d="M21 12h1"/><path d="M18.5 4.5 18 5"/><path d="M2 12h1"/><path d="M12 2v1"/><path d="m4.929 4.929.707.707"/><path d="M12 12v6"/></svg>
+        <div>선물청산가 계산기</div>
+</a>      
+</div>
+
+
+<div class="icon-item">
+<a href="cal-koreaprofit.html" style="text-decoration: none; color: inherit;">
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-cannabis-icon lucide-cannabis"><path d="M12 22v-4"/><path d="M7 12c-1.5 0-4.5 1.5-5 3 3.5 1.5 6 1 6 1-1.5 1.5-2 3.5-2 5 2.5 0 4.5-1.5 6-3 1.5 1.5 3.5 3 6 3 0-1.5-.5-3.5-2-5 0 0 2.5.5 6-1-.5-1.5-3.5-3-5-3 1.5-1 4-4 4-6-2.5 0-5.5 1.5-7 3 0-2.5-.5-5-2-7-1.5 2-2 4.5-2 7-1.5-1.5-4.5-3-7-3 0 2 2.5 5 4 6"/></svg>
+        <div>현물수익률 계산기</div>
+</a>      
+</div>
+
+
+<div class="icon-item">
+<a href="cal-futuresprofit.html" style="text-decoration: none; color: inherit;">
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-crown-icon lucide-crown"><path d="M11.562 3.266a.5.5 0 0 1 .876 0L15.39 8.87a1 1 0 0 0 1.516.294L21.183 5.5a.5.5 0 0 1 .798.519l-2.834 10.246a1 1 0 0 1-.956.734H5.81a1 1 0 0 1-.957-.734L2.02 6.02a.5.5 0 0 1 .798-.519l4.276 3.664a1 1 0 0 0 1.516-.294z"/><path d="M5 21h14"/></svg>
+        <div>선물수익률 계산기</div>
+</a>      
+</div>
+
+
+
+        <!-- 추가 거래소는 동일한 구조로 이어서 삽입 -->
+      </div>
+    </div>
+
+    <!-- 코인 계산기 종료 -->
+
+<br>
+
+<!-- 펀딩비 & 시세 상위 10종목 시작 -->
+<div class="sub-title-box">상위 10개 종목 실시간 펀딩비 & 시세</div>
+<div class="body-text" style="margin-bottom: 20px; font-size: 14px; color: #666;">
+  실시간 Binance USDⓢ-M 선물 기준, 30초마다 자동 갱신됩니다.
+</div>
+
+<table style="width:100%; max-width:640px; margin:0 auto; border-collapse:collapse; font-size:15px;">
+  <thead>
+    <tr style="background:#f9f9f9;">
+      <th style="padding:8px; border:1px solid #ccc;">심볼</th>
+      <th style="padding:8px; border:1px solid #ccc;">시세 (USDT)</th>
+      <th style="padding:8px; border:1px solid #ccc;">펀딩비 (%)</th>
+    </tr>
+  </thead>
+  <tbody id="funding-table">
+    <tr><td colspan="3" style="text-align:center; padding:10px;">로딩 중...</td></tr>
+  </tbody>
+</table>
+
+<script>
+  const symbols = ['BTCUSDT','ETHUSDT','BNBUSDT','SOLUSDT','XRPUSDT','ADAUSDT','DOGEUSDT','DOTUSDT','LTCUSDT','LINKUSDT'];
+
+  async function fetchFundingAndPrice(sym) {
+    const fundRes = await fetch(`https://fapi.binance.com/fapi/v1/fundingRate?symbol=${sym}&limit=1`).then(r => r.json());
+    const priceRes = await fetch(`https://fapi.binance.com/fapi/v1/ticker/price?symbol=${sym}`).then(r => r.json());
+    return {
+      symbol: sym.replace("USDT", ""),
+      price: parseFloat(priceRes.price).toFixed(2),
+      fundingRate: (parseFloat(fundRes[0]?.fundingRate || 0) * 100).toFixed(4)
+    };
+  }
+
+  async function refreshFundingTable() {
+    const tbody = document.getElementById("funding-table");
+    tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; padding:10px;">불러오는 중...</td></tr>';
+    try {
+      const results = await Promise.all(symbols.map(s => fetchFundingAndPrice(s)));
+      tbody.innerHTML = results.map(row => `
+        <tr>
+          <td style='padding:8px; border:1px solid #ccc;'>${row.symbol}</td>
+          <td style='padding:8px; border:1px solid #ccc;'>${row.price}</td>
+          <td style='padding:8px; border:1px solid #ccc;'>${row.fundingRate}</td>
+        </tr>`).join('');
+    } catch (err) {
+      tbody.innerHTML = `<tr><td colspan="3" style="color:red; text-align:center; padding:10px;">오류 발생: ${err.message}</td></tr>`;
+    }
+  }
+
+  refreshFundingTable();
+  setInterval(refreshFundingTable, 30000);
+</script>
+<!-- 펀딩비 & 시세 상위 10종목 종료 -->
+
+<br>
+
+
+
+<br>
+<!-- ✅ URL 복사 아이콘 버튼 시작 -->
+<div style="text-align: center; margin-top: 20px;">
+  <div id="copyUrlBtn" title="이 페이지 URL 복사" style="cursor: pointer; display: inline-block;">
+    <!-- Lucide Share2 아이콘 -->
+    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"
+         fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"
+         class="lucide lucide-share-2">
+      <circle cx="18" cy="5" r="3"/>
+      <circle cx="6" cy="12" r="3"/>
+      <circle cx="18" cy="19" r="3"/>
+      <line x1="8.59" x2="15.42" y1="13.51" y2="17.49"/>
+      <line x1="15.41" x2="8.59" y1="6.51" y2="10.49"/>
+    </svg>
+  </div>
+</div>
+
+<script>
+  document.getElementById('copyUrlBtn').addEventListener('click', function () {
+    const url = window.location.href;
+    navigator.clipboard.writeText(url).then(function () {
+      alert('✅ 페이지 URL이 복사되었습니다!');
+    }, function () {
+      alert('❌ URL 복사에 실패했습니다. 브라우저를 확인해주세요.');
+    });
+  });
+</script>
+
+<div class="note" style="text-align: center; margin-top: 0;">
+  이 페이지 URL 복사
+</div>
+<!-- ✅ URL 복사 아이콘 버튼 종료 -->
+
+
+<br><br>
+
+
+ <script>
+    async function fetchData() {
+      try {
+        const [upbitRes, cgRes, fxRes] = await Promise.all([
+          fetch('https://api.upbit.com/v1/ticker?markets=KRW-BTC'),
+          fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd'),
+          fetch('https://api.exchangerate-api.com/v4/latest/USD')
+        ]);
+
+        const upbitData = await upbitRes.json();
+        const coingeckoData = await cgRes.json();
+        const fxData = await fxRes.json();
+
+        const upbitPriceKRW = upbitData[0].trade_price;
+        const btcPriceUSD = coingeckoData.bitcoin.usd;
+        const exchangeRate = fxData.rates.KRW;
+
+        const btcPriceKRW = btcPriceUSD * exchangeRate;
+        const kimchiPremium = ((upbitPriceKRW - btcPriceKRW) / btcPriceKRW) * 100;
+
+        document.getElementById('upbitPrice').textContent = upbitPriceKRW.toLocaleString() + ' 원';
+        document.getElementById('coingeckoPrice').textContent = btcPriceKRW.toLocaleString(undefined, { maximumFractionDigits: 0 }) + ' 원';
+        document.getElementById('exchangeRate').textContent = exchangeRate.toFixed(2) + ' 원/USD';
+        document.getElementById('kimchiPremium').textContent = kimchiPremium.toFixed(2) + ' %';
+
+        const now = new Date();
+        const timeString = now.toLocaleString('ko-KR', { hour12: false });
+        document.getElementById('updateTime').textContent = `마지막 업데이트: ${timeString}`;
+
+      } catch (err) {
+        document.getElementById('kimchiBox').innerHTML = '<div style="color:red;text-align:center;">데이터를 불러오는 데 실패했습니다.</div>';
+      }
+    }
+
+    fetchData();                          // 초기 실행
+    setInterval(fetchData, 300000);       // 5분마다 자동 업데이트 (300,000ms)
+  </script>
+
+
+<script> <!-- ■ 하단 일괄 공지 -->
+  document.addEventListener("DOMContentLoaded", function () {
+    fetch("notice-bottom.html")
+      .then(res => res.text())
+      .then(html => {
+        const tempDiv = document.createElement("div");
+        tempDiv.innerHTML = html;
+        document.body.appendChild(tempDiv); // ✅ body 맨 끝에 삽입
+      });
+  });
+</script>
+</body>
+</html>

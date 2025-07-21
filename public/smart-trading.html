@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>코인원 스마트 트레이딩</title>
+
+<!-- ✅ SEO 및 Open Graph + Twitter 메타태그 -->
+<meta name="title" content="코인원 스마트 트레이딩 - 자동 수익 창출" />
+<meta name="description" content="코인원 AI 스마트 트레이딩 기능을 활용하여 감정 없이 자동으로 수익을 창출하세요. 초보자도 쉽게 설정 가능한 자동 매매 봇을 경험해보세요." />
+<meta name="keywords" content="코인원, 스마트 트레이딩, AI 그리드 봇, 자동 매매, 코인 자동 수익, 자동 거래, 코인원 봇 설정, 초보자 코인 매매" />
+<meta name="author" content="CoinSea" />
+<meta name="robots" content="index, follow" />
+
+<!-- ✅ Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="코인원 스마트 트레이딩 - 자동 수익 창출" />
+<meta property="og:description" content="사람 대신 AI가 자동으로 거래를 진행해 수익을 추구하는 코인원 스마트 트레이딩 기능을 소개합니다." />
+<meta property="og:url" content="https://coinsea.co.kr/smart-trading.html" />
+<meta property="og:image" content="https://coinsea.co.kr/img/og-smart-trading.webp" />
+<meta property="og:site_name" content="코인씨" />
+<meta property="og:locale" content="ko_KR" />
+
+<!-- ✅ Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="코인원 스마트 트레이딩 - 자동 수익 창출" />
+<meta name="twitter:description" content="초보자도 설정만 하면 자동으로 매매하는 AI 트레이딩 기능, 지금 확인해보세요!" />
+<meta name="twitter:image" content="https://coinsea.co.kr/img/og-smart-trading.webp" />
+
+
+<!-- ✅ Google Fonts 최적화 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet"></noscript>
+
+<!-- ✅ Font Awesome 최적화 -->
+<link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"></noscript>
+
+
+<!-- 가장 일반적인 파비콘 -->
+<link rel="icon" href="/favicon.ico" />
+
+<!-- 고해상도 디바이스 대응 -->
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon/android-icon-192x192.png" />
+
+<!-- 애플 터치용 최소 하나 -->
+<link rel="apple-touch-icon" href="/favicon/apple-icon-180x180.png" />
+
+
+
+
+  <style>
+    body {
+      font-family: 'Nanum Gothic', sans-serif;
+      margin: 0;
+     padding-top: 1px;  /* 상단 여백만 10px */
+  padding-right: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+      background-color: #fff;
+      color: #333;
+    }
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+
+
+.menu-tabs {
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;      /* ✅ 중앙 정렬 */
+  gap: 12px;                    /* ✅ 항목 간 간격 */
+  padding: 15px 0 4px;          /* ✅ 위 여백 줄이기 (기존: 12px 0) */
+  font-weight: bold;
+  border-bottom: 2px solid #000;
+  width: 100%;
+  margin: 0;                    /* ✅ 좌우 여백 제거 */
+  box-sizing: border-box;
+}
+
+  .menu-tabs a {
+    color: #999;
+    text-decoration: none;
+    padding-bottom: 6px;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s ease;
+  }
+
+  .menu-tabs a.active {
+    color: #000; /* 선택된 탭의 색상 */
+    border-bottom: 3px solid #000; /* 두꺼운 밑줄 */
+  }
+
+.menu-tabs a:hover {
+  color: #000;
+}
+
+.section {
+  border: none;
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 0 auto 40px auto;
+  max-width: 800px;
+  width: 100%;
+  box-sizing: border-box;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+    .section h2 {
+      font-size: 18px;
+      margin-top: 0;       /* 위 여백 제거 */
+      margin-bottom: 16px; /* 아래 여백만 적절히 유지 */
+padding-bottom: 6px;
+  border-bottom: 1px solid #000; /* ✅ 검정 가로선 */
+scroll-margin-top: 85px; /* ✅ 고정된 메뉴 높이만큼 여유 공간 확보 */
+    }
+
+h2 {
+  scroll-margin-top: 85px;
+}
+
+    .icon-grid {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: repeat(4, 1fr); /* 기본: 모바일 4개 */
+    }
+
+    @media (min-width: 768px) {
+      .icon-grid {
+        grid-template-columns: repeat(6, 1fr); /* PC 6개 */
+      }
+    }
+
+    .icon-item {
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .icon-item img {
+      width: 36px;
+      height: 36px;
+      margin-bottom: 6px;
+border-radius: 8px; /* ← 사각형 모서리를 둥글게 */
+    }
+
+  .icon-item:hover {
+    color: orange;
+  }
+
+  .icon-item:hover svg {
+    stroke: orange;
+  }
+
+html {
+  scroll-behavior: smooth;
+}
+
+    .main-title {
+      font-size: 26px;
+      font-weight: bold;
+      margin-bottom: 25px;
+      position: relative;
+      display: inline-block;
+      z-index: 0;
+    }
+
+    .main-title::after {
+      content: '';
+      position: absolute;
+      left: -7.5%;
+      right: -7.5%;
+      bottom: 1px;
+      height: 39%;
+      background-color: #f8cf26;
+      z-index: -1;
+    }
+
+    .notice-box {
+      border: none;
+      background: none;
+      padding: 0;
+      margin-bottom: 12px;
+    }
+
+    .sub-title {
+      font-size: 16px;
+      font-weight: normal;
+      padding: 12px 0;
+      color: #111;
+      cursor: pointer;
+      position: relative;
+      transition: color 0.2s;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .sub-title::after {
+      content: "\25BC";
+      position: absolute;
+      right: 4px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 14px;
+      color: #888;
+      transition: transform 0.2s;
+    }
+
+    .notice-box.active .sub-title::after {
+      content: "\25B2";
+    }
+
+    .body-text {
+      display: none;
+      padding: 8px 0 12px 0;
+      font-size: 15px;
+      line-height: 1.7;
+      color: #1e81b9;
+    }
+
+    .notice-box.active .body-text {
+      display: block;
+    }
+
+    .note {
+      font-size: 14px;
+      color: #555;
+      text-align: left;
+      margin-top: 20px;
+    }
+
+
+.coupang-banner-wrapper {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.coupang-banner-wrapper iframe,
+.coupang-banner-wrapper div {
+  max-width: 100% !important;
+  height: auto !important;
+}
+
+
+    .feature-container {
+      max-width: 720px;
+      margin: 0 auto;
+padding: 0 10px;
+padding-right: 16px;
+    }
+
+    .feature {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 40px;
+      gap: 16px;
+    }
+
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      flex-shrink: 0;
+    }
+
+    .feature-text h3 {
+      font-size: 18px;
+      font-weight: bold;
+      margin: 0 0 6px 0;
+    }
+
+    .feature-text p {
+      font-size: 14px;
+      margin: 0;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 480px) {
+      .feature {
+        flex-direction: row;
+        align-items: flex-start;
+      }
+
+      .feature-icon {
+        width: 40px;
+        height: 40px;
+      }
+
+      .feature-text h3 {
+        font-size: 16px;
+      }
+
+      .feature-text p {
+        font-size: 13px;
+      }
+    }
+.responsive-image {
+      max-width: 100%;
+      width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+      max-width: 720px; /* ✅ 원본보다 커지지 않도록 제한 (예: 720px) */
+      border-radius: 10px; /* 선택사항: 둥근 모서리 */
+    }
+
+.exchange-button {
+      display: block;
+      width: 100%;
+      max-width: 360px;
+      margin: 30px auto;
+      padding: 16px 0;
+      background-color: #2979ff; /* 파란색 계열 */
+      color: #fff;
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .exchange-button:hover {
+      background-color: #1565c0;
+    }
+  .content-wrapper {
+  max-width: 800px;       /* 최대 너비 설정 */
+  margin: 0 auto;         /* 가운데 정렬 */
+  padding: 5px;
+  text-align: left;       /* 내용은 좌측 정렬 */
+    }
+
+</style>
+</head>
+<body>
+<div class="content-wrapper"> <!-- ■ 전체를 감싸는 DIV 시작 -->
+
+
+<img src="img/smart-trading-01.webp" alt="스마트 트레이딩" class="responsive-image" />
+<br>
+
+<div class="feature-container">
+
+  <div class="feature">
+<svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-dollar-sign-icon lucide-circle-dollar-sign"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></svg>
+    <div class="feature-text">
+      <h3>자동으로 수익을 창출합니다</h3>
+      <p>사람이 직접 매매하지 않아도 봇이 대신해서 수익을 추구합니다</p>
+    </div>
+  </div>
+
+  <div class="feature">
+<svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-settings-icon lucide-settings"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+    <div class="feature-text">
+      <h3>간단한 전략으로 쉽게 설정할 수 있습니다</h3>
+      <p>복잡한 분석이나 예측 없이, 미리 설정한 규칙에 따라 매매가 이루어지므로 초보자도 쉽게 설정할 수 있습니다</p>
+    </div>
+  </div>
+
+  <div class="feature">
+<svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-down-up-icon lucide-arrow-down-up"><path d="m3 16 4 4 4-4"/><path d="M7 20V4"/><path d="m21 8-4-4-4 4"/><path d="M17 4v16"/></svg>
+    <div class="feature-text">
+      <h3>시장 변동성을 활용합니다</h3>
+      <p>가격이 오르거나 내리는 것에 상관없이 일정한 수익을 목표로 거래하기 때문에, 시장의 변화가 유리하게 작용할 수 있습니다</p>
+    </div>
+  </div>
+
+  <div class="feature">
+<svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-smile-icon lucide-smile"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" x2="9.01" y1="9" y2="9"/><line x1="15" x2="15.01" y1="9" y2="9"/></svg>
+    <div class="feature-text">
+      <h3>감정을 배제한 거래를 할 수 있습니다</h3>
+      <p>AI 그리드는 감정적인 판단 없이 설정된 규칙대로만 거래하기 때문에, 인간의 감정에서 비롯된 실수를 줄이고 일관된 투자를 유지할 수 있습니다</p>
+    </div>
+  </div>
+
+</div>
+
+<a href="https://coinone.co.kr/user/signup?ref=412AQO4W" target="_blank" rel="noopener noreferrer" class="exchange-button">
+    코인원 거래소 바로가기
+  </a>
+<br>
+  <!-- ★섹션 1: 코인일반 문답 -->
+
+  <div class="section">
+    <h2  id="section1">자주 묻는 질문</h2><div style="height: 0.8em;"></div>
+   
+ <div class="notice-box">
+    <div class="sub-title">운영 중인 AI 그리드 목록은 어떻게 확인하나요?</div>
+    <div class="body-text">
+      사용 중인 AI 그리드 목록은 '자산 > 스마트 트레이딩' 메뉴에서 확인 가능합니다. 각 봇의 실시간 상태, 설정 정보, 수익률을 한눈에 볼 수 있습니다.
+    </div>
+  </div>
+
+
+  <div class="notice-box">
+    <div class="sub-title">AI 그리드 생성 시 잔고는 어떻게 관리되나요? 수익 확인은 어떻게 하나요?</div>
+    <div class="body-text">
+      AI 그리드에 사용된 잔고는 별도로 관리되며, AI 그리드가 수행한 모든 거래 내역과 누적 수익은 '자산 > 스마트 트레이딩' 메뉴에서 실시간으로 확인할 수 있습니다.
+</div>
+  </div>
+
+
+  <div class="notice-box">
+    <div class="sub-title">AI 그리드가 손실을 보는 상황은 어떤 경우인가요?</div>
+    <div class="body-text">
+      AI 그리드는 가격 변동성에 따라 수익을 창출하지만, 시장이 예상과 다르게 지속적으로 한 방향으로만 움직일 경우 손실이 발생할 수 있습니다. 예를 들어, 가격이 꾸준히 하락하면 구매한 자산의 가치가 하락해 손실이 증가할 수 있습니다.
+    </div>
+  </div>
+
+  <div class="notice-box">
+    <div class="sub-title">AI 그리드 생성 시 설정값은 직접 입력해야 하나요?</div>
+    <div class="body-text">
+      AI 그리드 생성 시 단기, 중기, 장기 전략 중 하나를 선택하시면, 시장 데이터에 기반한 설정 값이 자동으로 입력됩니다. 사용자는 투자금만 입력하면 손쉽게 AI그리드를 생성할 수 있습니다. 다만, 이는 과거 데이터를 바탕으로 한 추천 정보임을 고려하시고, 본인의 투자 성향과 시장 상황에 따라 조정하는 것이 중요합니다.
+    </div>
+  </div>
+
+  <div class="notice-box">
+    <div class="sub-title">AI 그리드의 단기/중기/장기 전략은 무엇이며, 각각의 차이점은 무엇인가요?</div>
+    <div class="body-text">
+      단기 전략: 비교적 짧은 기간 내 가격 변동성을 활용하는 전략으로, 짧은 시간 동안 빈번한 거래를 통해 빠른 수익 실현을 목표로 합니다. 변동성이 큰 시장에서 특히 효과적이며, 좁은 그리드 범위와 높은 거래 빈도가 특징입니다.
+<div style="height: 0.8em;"></div>
+중기 전략: 일정한 기간 동안의 중간 수준 변동성을 고려한 전략으로, 몇 주 단위의 중기 전략에 최적화되어 있습니다. 시장의 변동성을 고려하면서도 더 안정적인 수익을 기대할 수 있습니다.
+<div style="height: 0.8em;"></div>
+장기 전략: 장기적인 기간 동안 큰 가격 변동성을 활용하는 전략으로, 넓은 그리드 범위와 적은 거래 빈도를 통해 보다 높은 수익을 목표로 합니다. 시장의 장기 흐름을 활용하는 데 적합하며, 시간적 여유가 있는 투자자에게 추천됩니다.
+    </div>
+  </div>
+
+  <div class="notice-box">
+    <div class="sub-title">AI 그리드를 중간에 멈추면 어떻게 되나요?</div>
+    <div class="body-text">
+      AI 그리드를 중단하면 모든 미체결 주문이 자동으로 취소되며, 보유 중인 자산은 계정 잔고로 반환됩니다. 멈추기 전 현재의 수익 상태를 확인하고 종료 여부를 결정하는 것을 권장합니다.
+    </div>
+  </div>
+
+  <div class="notice-box">
+    <div class="sub-title">시장 가격이 그리드 범위를 벗어나면 어떻게 되나요?</div>
+    <div class="body-text">
+      시장 가격이 설정한 그리드 범위를 벗어나면 AI 그리드는 더 이상 거래를 실행하지 않습니다. 이 경우, 범위를 수정하거나 시장 상황이 다시 범위 내로 들어올 때까지 기다려야 합니다.
+    </div>
+  </div>
+
+<div class="notice-box">
+    <div class="sub-title">AI그리드 운영 중 설정을 수정할 수 있나요?</div>
+    <div class="body-text">
+      한번 생성한 스마트 트레이딩은 운영 중 수정이 불가능합니다. 새로운 설정을 원하시는 경우, 중단 후 새로 생성하시기 바랍니다.
+    </div>
+  </div>
+
+  <div class="notice-box">
+    <div class="sub-title">스마트 트레이딩 사용 시 수수료는 어떻게 부과되나요?</div>
+    <div class="body-text">
+      기본 수수료인 0.20%가 부과됩니다. 단, 프로모션이나 이벤트 및 정책에 따라 변동 될 수 있습니다.
+    </div>
+  </div>
+
+  <div class="notice-box">
+    <div class="sub-title">AI 그리드가 수익을 내지 못하면 어떻게 해야 하나요?</div>
+    <div class="body-text">
+      수익이 정체되거나 손실이 지속된다면, AI 그리드의 그리드 범위를 검토해 보세요. 경우에 따라 시장이 AI 그리드 전략에 적합하지 않을 수 있으니, 가격범위를 재설정하거나 거래 종목을 변경하는 것이 필요할 수 있습니다.
+    </div>
+  </div>
+
+  <div class="notice-box">
+    <div class="sub-title">AI 그리드와 관련된 주요 제한 사항은 무엇인가요?</div>
+    <div class="body-text">
+      AI 그리드 설정은 다음과 같은 제한 사항을 따릅니다. 설정할 수 있는 그리드 수는 최소 2개부터 최대 300개까지이며, 그리드의 가격 범위는 하단의 경우 현재가의 30%, 상단의 경우 현재가의 400%까지 사용자가 원하는 가격 범위 내에서 자유롭게 지정할 수 있습니다. 최소 투자 금액은 10,000원 이상으로, 설정한 그리드 수와 가상자산의 종류에 따라 필요 금액이 달라질 수 있습니다. 또한, 한 사람이 생성할 수 있는 AI 그리드의 개수는 최대 30개로 제한됩니다.
+    </div>
+  </div>
+
+  <div class="notice-box">
+    <div class="sub-title">AI 그리드 종료 시에 운영중이던 자산은 어떻게 처리되나요?</div>
+    <div class="body-text">
+      종료 시점에 운영중이던 자산 (원화 + 가상자산) 그대로 메인 포트폴리오로 자동 이전 처리 됩니다.
+    </div>
+  </div>
+
+  <div class="notice-box">
+    <div class="sub-title">AI 그리드에 적용되는 수수료는 어떻게 되나요? 얼리버드 적용이 되나요?</div>
+    <div class="body-text">
+      스마트 트레이딩 서비스에는 기본 0.20%의 수수료가 적용됩니다. 단, 이벤트/프로모션 등에 의해 일시적으로 변경될 수 있습니다. 그리고, 얼리버드 수수료 할인은 스마트 트레이딩 서비스에서 사용하실 수 없습니다.
+    </div>
+  </div>
+
+  </div><!-- 섹센1을 감싸는 div로 지우면 안됨★ -->
+
+<a href="https://coinone.co.kr/user/signup?ref=412AQO4W" target="_blank" rel="noopener noreferrer" class="exchange-button">
+    코인원 거래소 바로가기
+  </a>
+
+<script>
+  // Q&A 토글 기능 - 오직 하나만 열림
+  document.querySelectorAll('.sub-title').forEach(title => {
+    title.addEventListener('click', () => {
+      const currentBox = title.closest('.notice-box');
+      const allBoxes = document.querySelectorAll('.notice-box');
+
+      allBoxes.forEach(box => {
+        if (box !== currentBox) {
+          box.classList.remove('active');  // 다른 건 닫기
+        }
+      });
+
+      // 현재 박스는 toggle (열려있으면 닫기 / 닫혀있으면 열기)
+      currentBox.classList.toggle('active');
+    });
+  });
+</script>
+
+<script>
+  document.querySelectorAll('.menu-tabs a').forEach(link => {
+    link.addEventListener('click', function (e) {
+      const targetId = this.getAttribute('href');
+      const targetEl = document.querySelector(targetId);
+
+      if (targetEl) {
+        e.preventDefault(); // 기본 앵커 이동 방지
+
+        // 탭 active 클래스 처리
+        document.querySelectorAll('.menu-tabs a').forEach(el => el.classList.remove('active'));
+        this.classList.add('active');
+
+        // 스크롤 위치 조정
+        const offset = 85; // 고정 메뉴 높이
+        const y = targetEl.getBoundingClientRect().top + window.pageYOffset - offset;
+
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
+    });
+  });
+</script>
+<br><br>
+
+</div> <!-- ■ 전체를 감싸는 DIV 종료 -->
+
+
+<script> <!-- ■ 하단 일괄 공지 -->
+  document.addEventListener("DOMContentLoaded", function () {
+    fetch("notice-bottom.html")
+      .then(res => res.text())
+      .then(html => {
+        const tempDiv = document.createElement("div");
+        tempDiv.innerHTML = html;
+        document.body.appendChild(tempDiv); // ✅ body 맨 끝에 삽입
+      });
+  });
+</script>
+
+</body>
+</html>
