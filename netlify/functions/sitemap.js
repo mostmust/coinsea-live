@@ -49,6 +49,6 @@ exports.handler = async () => {
     },
     body: sitemap,
   };
+  
 };
-git commit --allow-empty -m "Trigger Netlify deploy"
-git push
+
