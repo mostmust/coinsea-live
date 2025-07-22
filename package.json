@@ -4,5 +4,6 @@
   "type": "commonjs",
   "dependencies": {
     "node-fetch": "^2.6.11"
+     "axios": "^1.6.0"
   }
 }
