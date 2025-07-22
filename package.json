@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "type": "commonjs",
   "dependencies": {
-    "node-fetch": "^2.6.11",
-    "axios": "^1.6.0"
+    "axios": "^1.6.0",
+    "node-fetch": "^2.6.11"
   }
 }
